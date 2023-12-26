@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -24,7 +25,9 @@ enableMocking().then(() => {
 		<React.StrictMode>
 			<QueryClientProvider client={queryClient}>
 				<RecoilRoot>
-					<App />
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
 				</RecoilRoot>
 				<ReactQueryDevtools />
 			</QueryClientProvider>
