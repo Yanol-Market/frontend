@@ -45,9 +45,21 @@
 		]
 	},
 	"devDependencies": {
+		"@emotion/styled": "^11.11.0",
+		"@types/styled-components": "^5.1.34",
+		"babel-plugin-macros": "^3.1.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.1.2",
 		"husky": "^8.0.3",
-		"lint-staged": "^15.2.0"
+		"lint-staged": "^15.2.0",
+		"styled-components": "^6.1.3",
+		"tailwind": "^4.0.0",
+		"tailwind-styled-components": "^2.2.0",
+		"twin.macro": "^3.4.0"
+	},
+	"babelMacros": {
+		"twin": {
+			"preset": "styled-components"
+		}
 	}
 }
