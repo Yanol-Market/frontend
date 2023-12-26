@@ -6,7 +6,29 @@ module.exports = {
 		'./node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
+		screens: {
+			sm: '360px',
+		},
+		extend: {
+			colors: {
+				main: '#F2AE00',
+				bgMain: '#FFF9EA',
+				alarmRed: '#D9340F',
+				alarmGreen: '#0FA254',
+				black: '#222222',
+				gray: '#bdbdbd',
+				borderGray: '#E5E5E5',
+				white: '#FFFFFF',
+			},
+			fontSize: {
+				headline1: '24px',
+				headline2: '20px',
+				body: '16px',
+				botton: '14px',
+				m: '12px',
+				sm: '10px',
+			},
+		},
 	},
 	plugins: [],
 };

@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
-import tw from 'twin.macro';
-
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './component/common/Layout';
+import { Main } from './pages/main';
 function App() {
 	return (
-		<div className="App">
-			<div className="text-yellow-500 p-8">Golden Ticket</div>
-			<TestDiv>Golden Ticket</TestDiv>
-		</div>
+		<>
+			<Routes>
+				<Route element={<Layout />}>
+					<Route path="/" element={<Main />} />
+				</Route>
+			</Routes>
+		</>
 	);
 }
 
 export default App;
-
-const TestDiv = tw.div`
-bg-pink-400 
-p-10 
-`;
