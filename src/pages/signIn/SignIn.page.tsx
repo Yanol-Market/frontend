@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function SignIn() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	return (
 		<div className="flex flex-col items-center w-full text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
@@ -9,12 +11,14 @@ export default function SignIn() {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
 					type="text"
 					placeholder="이메일"
+					onChange={(e) => setEmail(e.target.value)}
 				/>
 
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
 					placeholder="비밀번호"
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 
 				<div className="text-red text-sm text-left mt-1">
