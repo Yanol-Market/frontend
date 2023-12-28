@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function SignUp() {
 	const [password, setPassword] = useState(false);
 	return (
-		<div className="flex flex-col items-center w-full text-center">
+		<div className="flex flex-col items-center w-full text-center px-5">
 			<div className="mt-7">회원가입</div>
 			<form className="mt-10">
 				<input

@@ -1,10 +1,8 @@
 import React from 'react';
-// import tw from 'twin.macro';
-// import Logo from '/assets/images/logo.svg';
 
 export default function SignIn() {
 	return (
-		<div className="flex flex-col items-center w-full text-center">
+		<div className="flex flex-col items-center w-full text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
 			<form className="mt-[3.75rem] w-full">
 				<input
@@ -19,7 +17,7 @@ export default function SignIn() {
 					placeholder="비밀번호"
 				/>
 
-				<div className="text-sm text-left mt-1">
+				<div className="text-red text-sm text-left mt-1">
 					<p>이메일 및 비밀번호를 확인해주세요.</p>
 				</div>
 				<div>
@@ -60,9 +58,3 @@ export default function SignIn() {
 		</div>
 	);
 }
-
-// const StyledContainer = tw.div`
-//     flex-col
-//     w-full
-//     justify-center
-// `;
