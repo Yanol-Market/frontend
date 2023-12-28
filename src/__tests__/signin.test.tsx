@@ -1,13 +1,18 @@
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { SignIn } from '../pages/signIn';
+
 describe('로그인 테스트', () => {
 	test('렌더링 테스트', () => {
-		// expect(1).toBe(1);
-		const { debug } = render(<SignIn />);
-		debug();
+		render(<SignIn />);
 
-		// const loginTextEl = screen.getAllByAltText('로그인');
-		// expect(loginTextEl).toBeInTheDocument();
+		const loginTextEl = screen.getAllByText('로그인');
+
+		expect(loginTextEl.length).toBeGreaterThan(0);
+
+		loginTextEl.forEach((el) => {
+			expect(el).toBeInTheDocument();
+		});
 	});
 });
