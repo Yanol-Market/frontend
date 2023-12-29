@@ -9,6 +9,9 @@ export default function SignUp() {
 		formState: { errors, isSubmitting, isDirty, isValid },
 	} = useForm({ mode: 'onChange' });
 	const [password, setPassword] = useState(false);
+	const watchCheckboxFirst = watch('first-checkbox');
+	const watchCheckboxSecond = watch('second-checkbox');
+	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 	return (
 		<div className="flex flex-col items-center w-full text-center px-5">
 			<div className="mt-7">회원가입</div>
@@ -55,7 +58,8 @@ export default function SignUp() {
 						required: true,
 						pattern: {
 							value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
-							message: '숫자와 영문자 포함 최소 6자 이상 입력해주세요.',
+							message:
+								'비밀번호는 최소 6자 이상, 숫자와 영문자를 모두 포함해야 합니다.',
 						},
 					})}
 				/>
@@ -84,7 +88,12 @@ export default function SignUp() {
 						className="border border-borderGray mb-5 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
 						type="text"
 						placeholder="휴대폰 번호"
-						{...register('phoneNumber')}
+						{...register('phoneNumber', {
+							required: true,
+						})}
+						onChange={(e) => {
+							e.target.value = e.target.value.replace(/[^0-9]/g, '');
+						}}
 					/>
 					<button
 						type="button"
@@ -105,7 +114,8 @@ export default function SignUp() {
 					<input
 						className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
 						type="checkbox"
-						id="first-checkbox "
+						id="first-checkbox"
+						{...register('first-checkbox', { required: true })}
 					/>
 					<label htmlFor="first-checkbox" className="text-sm text-gray">
 						<span>(필수) 서비스 이용약관에 동의합니다.</span>
@@ -117,6 +127,7 @@ export default function SignUp() {
 						className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
 						type="checkbox"
 						id="second-checkbox"
+						{...register('second-checkbox', { required: true })}
 					/>
 					<label htmlFor="second-checkbox" className="text-sm text-gray">
 						<span>(필수) 개인정보 처리방침에 동의합니다.</span>
@@ -136,7 +147,12 @@ export default function SignUp() {
 			</div>
 			<button
 				type="button"
-				className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5 hover:bg-main hover:text-white"
+				className={`border ${
+					isButtonDisabled
+						? 'border-borderGray'
+						: 'border-borderGray bg-main text-white'
+				} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
+				disabled={isButtonDisabled}
 			>
 				<span className="mx-auto">가입하기</span>
 			</button>
