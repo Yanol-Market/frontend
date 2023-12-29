@@ -1,21 +1,28 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { getSignUp } from '../../apis/signup';
 
 export default function SignUp() {
 	const {
 		register,
-		// handleSubmit,
+		handleSubmit,
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
-	// const [password, setPassword] = useState(false);
+
+	const userName = watch('username');
+	const userNickName = watch('userNickName');
+	const userEmail = watch('email');
+	const userPassword = watch('password');
+	const userPhoneNumber = watch('phoneNumber');
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
+
 	return (
 		<div className="flex flex-col items-center w-full text-center px-5">
 			<div className="mt-7">회원가입</div>
-			<form className="mt-10">
+			<form className="mt-10" onSubmit={handleSubmit(getSignUp)}>
 				<input
 					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
 					type="text"
@@ -34,6 +41,9 @@ export default function SignUp() {
 					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
 					type="text"
 					placeholder="닉네임"
+					{...register('userNickName', {
+						required: true,
+					})}
 				/>
 
 				<input
@@ -108,54 +118,55 @@ export default function SignUp() {
 					placeholder="인증번호 입력"
 					{...register('authNumber')}
 				/>
+
+				<div className="flex flex-col mt-7 w-full">
+					<div className="flex flex-row mb-2">
+						<input
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							type="checkbox"
+							id="first-checkbox"
+							{...register('first-checkbox', { required: true })}
+						/>
+						<label htmlFor="first-checkbox" className="text-sm text-gray">
+							<span>(필수) 서비스 이용약관에 동의합니다.</span>
+							<span className="text-blue cursor-pointer">[전문보기]</span>
+						</label>
+					</div>
+					<div className="flex flex-row mb-2">
+						<input
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							type="checkbox"
+							id="second-checkbox"
+							{...register('second-checkbox', { required: true })}
+						/>
+						<label htmlFor="second-checkbox" className="text-sm text-gray">
+							<span>(필수) 개인정보 처리방침에 동의합니다.</span>
+							<span className="text-blue cursor-pointer">[전문보기]</span>
+						</label>
+					</div>
+					<div className="flex flex-row mb-2">
+						<input
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							type="checkbox"
+							id="third-checkbox"
+						/>
+						<label htmlFor="third-checkbox" className="text-sm text-gray">
+							<span>(선택) 문자 및 이메일 수신에 동의합니다.</span>
+						</label>
+					</div>
+				</div>
+				<button
+					type="submit"
+					className={`border ${
+						isButtonDisabled
+							? 'border-borderGray'
+							: 'border-borderGray bg-main text-white'
+					} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
+					disabled={isButtonDisabled}
+				>
+					<span className="mx-auto">가입하기</span>
+				</button>
 			</form>
-			<div className="flex flex-col mt-7 w-full">
-				<div className="flex flex-row mb-2">
-					<input
-						className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
-						type="checkbox"
-						id="first-checkbox"
-						{...register('first-checkbox', { required: true })}
-					/>
-					<label htmlFor="first-checkbox" className="text-sm text-gray">
-						<span>(필수) 서비스 이용약관에 동의합니다.</span>
-						<span className="text-blue cursor-pointer">[전문보기]</span>
-					</label>
-				</div>
-				<div className="flex flex-row mb-2">
-					<input
-						className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
-						type="checkbox"
-						id="second-checkbox"
-						{...register('second-checkbox', { required: true })}
-					/>
-					<label htmlFor="second-checkbox" className="text-sm text-gray">
-						<span>(필수) 개인정보 처리방침에 동의합니다.</span>
-						<span className="text-blue cursor-pointer">[전문보기]</span>
-					</label>
-				</div>
-				<div className="flex flex-row mb-2">
-					<input
-						className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
-						type="checkbox"
-						id="third-checkbox"
-					/>
-					<label htmlFor="third-checkbox" className="text-sm text-gray">
-						<span>(선택) 문자 및 이메일 수신에 동의합니다.</span>
-					</label>
-				</div>
-			</div>
-			<button
-				type="button"
-				className={`border ${
-					isButtonDisabled
-						? 'border-borderGray'
-						: 'border-borderGray bg-main text-white'
-				} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
-				disabled={isButtonDisabled}
-			>
-				<span className="mx-auto">가입하기</span>
-			</button>
 		</div>
 	);
 }
