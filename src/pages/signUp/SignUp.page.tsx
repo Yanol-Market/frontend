@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SignUp() {
 	const {
 		register,
-		handleSubmit,
+		// handleSubmit,
 		watch,
-		formState: { errors, isSubmitting, isDirty, isValid },
+		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
-	const [password, setPassword] = useState(false);
+	// const [password, setPassword] = useState(false);
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
