@@ -1,15 +1,11 @@
 import React from 'react';
-import tw from 'twin.macro';
+// import tw from 'twin.macro';
 // import Logo from '/assets/images/logo.svg';
 
 export default function SignIn() {
 	return (
-		<div className="Wraaper flex flex-col items-center w-full text-center">
-			<img
-				className="LogoImg mt-24"
-				src="/assets/images/mainLogo.svg"
-				alt="logo"
-			/>
+		<div className="flex flex-col items-center w-full text-center">
+			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
 			<form className="mt-[3.75rem] w-full">
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
@@ -23,7 +19,7 @@ export default function SignIn() {
 					placeholder="비밀번호"
 				/>
 
-				<div className="text-red text-sm text-left mt-1">
+				<div className="text-sm text-left mt-1">
 					<p>이메일 및 비밀번호를 확인해주세요.</p>
 				</div>
 				<div>
@@ -35,7 +31,7 @@ export default function SignIn() {
 					</p>
 				</div>
 			</form>
-			<div className="social-login w-full mt-[3.75rem]">
+			<div className="w-full mt-[3.75rem]">
 				<button className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m">
 					<img
 						className="ml-6"

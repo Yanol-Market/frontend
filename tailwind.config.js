@@ -21,6 +21,7 @@ module.exports = {
 				white: '#FFFFFF',
 				borderWhite: '#F5F5F5',
 				red: '#D9340F',
+				blue: '#2D05CD',
 			},
 			fontSize: {
 				headline1: '24px',
@@ -29,6 +30,10 @@ module.exports = {
 				botton: '14px',
 				m: '12px',
 				sm: '10px',
+			},
+			backgroundImage: {
+				checked: "url('pages/signUp/component/checked.svg')",
+				unchecked: "url('pages/signUp/component/unchecked.svg')",
 			},
 		},
 	},
