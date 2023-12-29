@@ -4,7 +4,8 @@ export const getSignUp = async (data: any) => {
 	try {
 		const res = await instance.post('/api/signup', data);
 		if (res) {
-			return res.data;
+			alert('회원가입 성공');
+			console.log(res.data);
 		}
 	} catch (err) {
 		console.error('회원가입 실패', err);

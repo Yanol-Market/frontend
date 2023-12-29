@@ -35,12 +35,13 @@ export const handlers = [
 		]);
 	}),
 	http.post('/api/signup', async ({ request }) => {
-		// const userInfo = await request.json();
-
-		return HttpResponse.json([
-			{
-				status: 201,
-			},
-		]);
+		const userInfo = await request.json();
+		if (userInfo) {
+			return HttpResponse.json([
+				{
+					status: 201,
+				},
+			]);
+		}
 	}),
 ];
