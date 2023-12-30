@@ -17,6 +17,7 @@ export default function SignUp() {
 	const userPhoneNumber = watch('phoneNumber');
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
+	const watchCheckboxThird = watch('third-checkbox-');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
 	return (
@@ -149,6 +150,7 @@ export default function SignUp() {
 							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
 							type="checkbox"
 							id="third-checkbox"
+							{...register('third-checkbox', { required: true })}
 						/>
 						<label htmlFor="third-checkbox" className="text-sm text-gray">
 							<span>(선택) 문자 및 이메일 수신에 동의합니다.</span>
