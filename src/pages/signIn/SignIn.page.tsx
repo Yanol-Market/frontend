@@ -61,25 +61,27 @@ export default function SignIn() {
 			<div className="w-full mt-[3.75rem]">
 				<button
 					type="button"
-					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m"
+					className="border border-borderGray bg-[#FF3478] flex items-center w-full h-11 rounded-xl text-gray text-m"
 				>
 					<img
 						className="ml-6"
 						src="/assets/images/yaLogo.svg"
 						alt="야놀자 로고"
 					/>
-					<span className="text-center w-2/3">야놀자로 로그인</span>
+					<span className="text-center w-2/3 text-white">야놀자로 로그인</span>
 				</button>
 				<button
 					type="button"
-					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
+					className="border border-borderGray bg-[#FEE500] flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
 				>
 					<img
 						className="ml-6"
 						src="/assets/images/kakaoTalkLogo.svg"
 						alt="카카오톡 로고"
 					/>
-					<span className="text-center w-2/3">카카오톡으로 로그인</span>
+					<span className="text-center w-2/3 text-[#222222]">
+						카카오톡으로 로그인
+					</span>
 				</button>
 				<button
 					type="button"
