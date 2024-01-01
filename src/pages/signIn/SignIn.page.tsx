@@ -5,6 +5,7 @@ import { getSignIn } from '../../apis/signin';
 import { useForm } from 'react-hook-form';
 
 export default function SignIn() {
+	const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REACT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 	const [inputEmail, setEmail] = useState('');
 	const [inputPassword, setPassword] = useState('');
 	// const navigate = useNavigate();
@@ -73,6 +74,9 @@ export default function SignIn() {
 				<button
 					type="button"
 					className="border border-borderGray bg-[#FEE500] flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
+					onClick={() => {
+						window.location.href = KAKAO_AUTH_URL;
+					}}
 				>
 					<img
 						className="ml-6"
