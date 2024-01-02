@@ -43,15 +43,25 @@ export default function ProfileEdit() {
 						<div className="flex flex-row justify-between font-bold">
 							<p className="text-botton">관심지역</p>
 						</div>
-						<input
+						<select
+							className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none"
+							name="관심 지역"
+						>
+							<option value="" selected hidden disabled>
+								관심 지역을 선택해주세요.
+							</option>
+							<option>하이</option>
+							<option>바이</option>
+						</select>
+						{/* <input
 							className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none"
 							type="text"
-							placeholder="원래 이름"
-						/>
+							placeholder="관심 지역을 선택해주세요."
+						/> */}
 					</div>
 					<button
 						type="submit"
-						className="mt-44 flex items-center w-full h-11 rounded-xl text-center text-m mt-5 bg-main text-white"
+						className="mt-44 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
 					>
 						<span className="mx-auto">가입하기</span>
 					</button>
