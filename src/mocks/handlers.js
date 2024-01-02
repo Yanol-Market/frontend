@@ -19,4 +19,29 @@ export const handlers = [
 			},
 		]);
 	}),
+	http.post('/api/login', async ({ request }) => {
+		const userInfo = await request.json();
+
+		return HttpResponse.json([
+			{
+				data: {
+					email: userInfo.email,
+					password: userInfo.password,
+					accessToken: 'myAccessToken',
+					refreshToken: 'myRefreshToken',
+				},
+				status: 201,
+			},
+		]);
+	}),
+	http.post('/api/signup', async ({ request }) => {
+		const userInfo = await request.json();
+		if (userInfo) {
+			return HttpResponse.json([
+				{
+					status: 201,
+				},
+			]);
+		}
+	}),
 ];
