@@ -6,11 +6,15 @@ module.exports = {
 		'./node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
+		fontFamily: {
+			pre : ["pretendard"],
+		},
 		screens: {
 			sm: '360px',
 		},
 		extend: {
 			colors: {
+				homeMain: '#FFEEC1',
 				main: '#F2AE00',
 				bgMain: '#FFF9EA',
 				alarmRed: '#D9340F',
