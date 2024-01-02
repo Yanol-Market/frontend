@@ -1,6 +1,7 @@
 import React from 'react';
 import { HomeContentTitle } from './HomeContentTitle';
 import { ProductItemSpecial } from '../Product/ProductItemSpecial';
+import { ProductListSpecial } from '../Product/ProductListSpecial';
 
 export const HomeContent = () => {
 	return (
@@ -13,7 +14,13 @@ export const HomeContent = () => {
 						desc="골든특가에서만 만날수 있는 가격"
 						src="to"
 					/>
-                    <ProductItemSpecial />
+                    <ProductListSpecial />
+					<HomeContentTitle
+						title="핫클릭 가장 많이 눌러본 상품"
+						img="assets/images/star.svg"
+						desc="골든특가에서만 만날수 있는 가격"
+						src="to"
+					/>
 				</div>
 			</div>
 		</div>
