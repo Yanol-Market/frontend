@@ -1,20 +1,16 @@
 import React from 'react';
-import tw from 'twin.macro';
 import { HomeHeader } from './component/HomeHeader/HomeHeader';
+import { HomeContent } from './component/HomeContent';
 
 
 export default function Main() {
 	return (
 		<>
 			<HomeHeader />
-			<div className="text-main text-headline1 font-bold py-10">메인</div>
-			<TestDiv>Golden-ticket</TestDiv>
+			<HomeContent />
+			
 		</>
 	);
 }
 
-const TestDiv = tw.div`
-bg-bgMain
-p-10 
-text-body
-`;
+
