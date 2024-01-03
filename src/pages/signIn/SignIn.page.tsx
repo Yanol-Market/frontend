@@ -33,6 +33,10 @@ const SignIn = () => {
 		mutation.mutate(data);
 	};
 
+	const handleSignUp = () => {
+		navigate('/signup');
+	};
+
 	return (
 		<div className="flex flex-col items-center w-full text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
@@ -110,6 +114,7 @@ const SignIn = () => {
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
+					onClick={handleSignUp}
 				>
 					<img
 						className="ml-6"
