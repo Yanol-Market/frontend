@@ -4,27 +4,27 @@ import { ProductListSpecial } from '../Product/ProductListSpecial';
 import { ProductListPopular } from '../Product/ProductListPopular';
 import { ProductListNew } from '../Product/ProductListNew';
 import { ProductListRental } from '../Product/ProductListRental';
-import { PlusButton } from '../PlusButton';
+
 
 export const HomeContent = () => {
 	return (
 		<div className="bg-homeMain overflow-hidden">
 			<div className=" bg-white pt-7 px-5 border-solid border-1 border-white-1 rounded-t-2xl pb-[15vh] h-[80vh] overflow-scroll">
 				<div className="">
-					<div className='mb-7'>
+					<div className="mb-7">
 						<HomeContentTitle
-							title="초특가보다 파격적인 골든 특가"
+							title="파격적인 골든특가를 만나보세요!"
 							img="assets/images/star.svg"
-							desc="골든특가에서만 만날수 있는 가격"
+							desc="골든티켓이 준비한 착한 가격"
 						/>
 						<ProductListSpecial />
 					</div>
 					<div className="mb-[42px] overflow-hidden">
 						<div className="mb-5">
 							<HomeContentTitle
-								title="핫클릭 가장 많이 눌러본 상품"
+								title="핫클릭 가장 많이 눌러봤어요"
 								img="assets/images/fire.svg"
-								desc="누구나 탐내고 있는 핫한 상품!"
+								desc="누구나 탐내고 있는 핫한 상품"
 							/>
 						</div>
 						<ProductListPopular />

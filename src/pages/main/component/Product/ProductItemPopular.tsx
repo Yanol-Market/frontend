@@ -7,8 +7,8 @@ export const ProductItemPopular = ({
 	product: ProductSpecialType;
 }) => {
 	return (
-		<div className=''>
-			<div className="w-[115px] h-[215px]">
+		<div className='w-[115px] h-[215px]'>
+			<div className="">
 				<div className="relative mb-2">
 					<img
 						className="w-[115px] h-[140px] rounded-[5px]"

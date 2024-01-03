@@ -10,7 +10,7 @@ module.exports = {
 			pre : ["pretendard"],
 		},
 		screens: {
-			sm: '360px',
+			sm: '375px',
 		},
 		extend: {
 			colors: {
@@ -35,7 +35,7 @@ module.exports = {
 				headline2: '20px',
 				headline3: '18px',
 				body: '16px',
-				botton: '14px',
+				lg: '14px',
 				m: '12px',
 				sm: '10px',
 			},

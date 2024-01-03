@@ -28,10 +28,10 @@ export const ProductItemNew = ({
 				<div className="flex-col w-full">
 
 					<div>
-						<p className="text-fontBlack font-pre text-botton font-normal">
+						<p className="text-fontBlack font-pre text-lg font-normal">
 							{product.name}
 						</p>
-						<p className="text-fontBlack font-pre text-botton font-normal">
+						<p className="text-fontBlack font-pre text-lg font-normal">
 							{product.option}
 						</p>
 					</div>
