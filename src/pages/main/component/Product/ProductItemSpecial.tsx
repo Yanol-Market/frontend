@@ -43,7 +43,7 @@ export const ProductItemSpecial = ({
 						<div className="flex">
 							<p className="text-descGray font-pre text-m mr-1">{product.marketPriceRatio}%</p>
 							<p className="text-descGray font-pre text-m line-through">
-								{product.marketPrice}
+								{product.marketPrice.toLocaleString()}
 							</p>
 							<p className="text-descGray font-pre text-m line-through">원</p>
 						</div>
@@ -53,7 +53,7 @@ export const ProductItemSpecial = ({
 						<div className="flex">
 							<p className="text-descGray font-pre text-m mr-1">{product.purchasePriceRatio}%</p>
 							<p className="text-descGray font-pre text-m line-through">
-								{product.purchasePrice}
+								{product.purchasePrice.toLocaleString()}
 							</p>
 							<p className="text-descGray font-pre text-m line-through">원</p>
 						</div>
@@ -64,7 +64,7 @@ export const ProductItemSpecial = ({
 						</p>
 						<div className="flex">
 							<p className="text-fontBlack font-pre text-m font-semibold">
-								{product.price}
+								{product.price.toLocaleString()}
 							</p>
 							<p className="text-fontBlack font-pre text-m font-semibold">원</p>
 						</div>

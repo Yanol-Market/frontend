@@ -21,7 +21,6 @@ export const ProductListSpecial = () => {
 	const fetchData = async () => {
 		const res = await getProducts();
         setProducts(res);
-		console.log(res);
 	};
 	useEffect(() => {
 		fetchData();
