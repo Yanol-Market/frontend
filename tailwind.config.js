@@ -7,7 +7,7 @@ module.exports = {
 	],
 	theme: {
 		screens: {
-			sm: '360px',
+			sm: '375px',
 		},
 		extend: {
 			colors: {
@@ -27,7 +27,7 @@ module.exports = {
 				headline1: '24px',
 				headline2: '20px',
 				body: '16px',
-				botton: '14px',
+				font: '14px',
 				m: '12px',
 				sm: '10px',
 			},
