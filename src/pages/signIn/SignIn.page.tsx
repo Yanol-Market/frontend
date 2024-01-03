@@ -1,18 +1,26 @@
 import { useMutation } from '@tanstack/react-query';
-import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getSignIn } from '../../apis/signin';
-// import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const SignIn = () => {
-	const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REACT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
-	const [inputEmail, setEmail] = useState('');
-	const [inputPassword, setPassword] = useState('');
-	// const navigate = useNavigate();
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors }, // isSubmitting, isDirty, isValid
+	} = useForm({ mode: 'onChange' });
+
+	const userid = watch('userid');
+	const userpassword = watch('userpassword');
+	// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REACT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
+
+	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
 		onSuccess(data) {
-			// navigate('/');
+			navigate('/');
 			console.log(data);
 		},
 		onError(err) {
@@ -21,31 +29,43 @@ const SignIn = () => {
 		},
 	});
 	const handleSignIn = async () => {
-		const data = { email: inputEmail, password: inputPassword };
+		const data = { email: userid, password: userpassword };
 		mutation.mutate(data);
 	};
 
 	return (
 		<div className="flex flex-col items-center w-full text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
-			<form className="mt-[3.75rem] w-full">
+			<form
+				className="mt-[3.75rem] w-full"
+				onSubmit={handleSubmit(handleSignIn)}
+			>
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
 					type="text"
 					placeholder="이메일"
-					onChange={(e) => setEmail(e.target.value)}
+					{...(register('userid'),
+					{
+						required: true,
+					})}
 				/>
 
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
 					placeholder="비밀번호"
-					onChange={(e) => setPassword(e.target.value)}
+					{...(register('userpassword'),
+					{
+						required: true,
+					})}
 				/>
-
-				<div className="text-red text-sm text-left mt-1">
-					<p>이메일 및 비밀번호를 확인해주세요.</p>
-				</div>
+				{errors.userpassword || errors.userid ? (
+					<div className="text-red text-sm text-left mt-1">
+						<p>이메일 및 비밀번호를 확인해주세요.</p>
+					</div>
+				) : (
+					''
+				)}
 				<div>
 					<button
 						type="button"
@@ -71,7 +91,7 @@ const SignIn = () => {
 					/>
 					<span className="text-center w-2/3 text-white">야놀자로 로그인</span>
 				</button>
-				<button
+				{/* <button
 					type="button"
 					className="border border-borderGray bg-[#FEE500] flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
 					onClick={() => {
@@ -86,7 +106,7 @@ const SignIn = () => {
 					<span className="text-center w-2/3 text-[#222222]">
 						카카오톡으로 로그인
 					</span>
-				</button>
+				</button> */}
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"

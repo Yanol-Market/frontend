@@ -19,7 +19,7 @@ export const handlers = [
 			},
 		]);
 	}),
-	http.post('/api/login', async ({ request }) => {
+	http.post('/api/signin', async ({ request }) => {
 		const userInfo = await request.json();
 
 		return HttpResponse.json([
