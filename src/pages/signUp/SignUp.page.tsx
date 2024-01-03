@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
 
-export default function SignUp() {
+const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
@@ -171,4 +171,6 @@ export default function SignUp() {
 			</form>
 		</div>
 	);
-}
+};
+
+export default SignUp;

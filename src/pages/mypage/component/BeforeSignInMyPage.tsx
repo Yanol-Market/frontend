@@ -1,5 +1,5 @@
 import React from 'react';
-export default function BeforeSignInMyPage() {
+const BeforeSignInMyPage = () => {
 	return (
 		<div className="flex flex-col items-center w-full text-center">
 			<div className="mt-8">마이페이지</div>
@@ -55,4 +55,6 @@ export default function BeforeSignInMyPage() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default BeforeSignInMyPage;

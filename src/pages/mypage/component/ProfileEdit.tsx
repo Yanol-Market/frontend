@@ -1,5 +1,6 @@
 import React from 'react';
-export default function ProfileEdit() {
+
+const ProfileEdit = () => {
 	return (
 		<div className="flex flex-col items-center w-full text-center">
 			<div className="mt-9 flex flex-row justify-start w-[90%]">
@@ -43,8 +44,9 @@ export default function ProfileEdit() {
 						<div className="flex flex-row justify-between font-bold">
 							<p className="text-botton">관심지역</p>
 						</div>
+
 						<select
-							className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none"
+							className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none text-gray"
 							name="관심 지역"
 						>
 							<option value="" selected hidden disabled>
@@ -53,11 +55,6 @@ export default function ProfileEdit() {
 							<option>하이</option>
 							<option>바이</option>
 						</select>
-						{/* <input
-							className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none"
-							type="text"
-							placeholder="관심 지역을 선택해주세요."
-						/> */}
 					</div>
 					<button
 						type="submit"
@@ -69,4 +66,6 @@ export default function ProfileEdit() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default ProfileEdit;

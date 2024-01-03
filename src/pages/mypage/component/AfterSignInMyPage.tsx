@@ -1,5 +1,5 @@
 import React from 'react';
-export default function AfterSignInMyPage() {
+const AfterSignInMyPage = () => {
 	return (
 		<div className="flex flex-col items-center w-full text-center">
 			<div className="mt-8">마이페이지</div>
@@ -72,4 +72,6 @@ export default function AfterSignInMyPage() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default AfterSignInMyPage;
