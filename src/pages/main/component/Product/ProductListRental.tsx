@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts } from '../../../../apis/home';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { ProductItemPopular } from './ProductItemPopular';
 import 'swiper/css';
+import { ProductItemRental } from './ProductItemRental';
 
 export type ProductSpecialType = {
 	productId: number;
@@ -18,7 +18,7 @@ export type ProductSpecialType = {
 	price: number;
 };
 
-export const ProductListPopular = () => {
+export const ProductListRental = () => {
 	const [products, setProducts] = useState<ProductSpecialType[]>();
 	const fetchData = async () => {
 		const res = await getProducts();
@@ -31,12 +31,12 @@ export const ProductListPopular = () => {
 		return <div>Loading...</div>;
 	}
 	return (
-		<div className='z-0 relative'>
-			<Swiper slidesPerView={2.5}>
-				<div className="bg-black text-start w-50">
+		<div className="z-0 relative">
+			<Swiper slidesPerView={2.5} spaceBetween={20} className="z-0">
+				<div className="z-50">
 					{products.map((item) => (
 						<SwiperSlide key={item.productId}>
-							<ProductItemPopular product={item} />
+							<ProductItemRental product={item} />
 						</SwiperSlide>
 					))}
 				</div>
