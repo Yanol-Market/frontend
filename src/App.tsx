@@ -6,6 +6,8 @@ import { Main } from './pages/main';
 import { SignIn } from './pages/signIn';
 import { SignUp } from './pages/signUp';
 import ProfileEdit from './pages/mypage/component/ProfileEdit';
+import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
+import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
 function App() {
 	return (
 		<>
@@ -14,6 +16,8 @@ function App() {
 					<Route path="/" element={<Main />} />
 					<Route path="/signin" element={<SignIn />} />
 					<Route path="/signup" element={<SignUp />} />
+					<Route path="/beforesignin" element={<BeforeSignInMyPage />} />
+					<Route path="/aftersignin" element={<AfterSignInMyPage />} />
 					<Route path="/profiledit" element={<ProfileEdit />} />
 				</Route>
 			</Routes>

@@ -20,13 +20,8 @@ const BeforeSignInMyPage = () => {
 			</div>
 			<div className="border border-[#F5F5F5] bg-[#F5F5F5] w-full h-2 mt-5"></div>
 			<div className="w-[90%] mt-5 flex flex-col">
-				<div className="flex flex-row justify-between mb-5">
-					<span>설정</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+				<div className="flex flex-row justify-between mb-1">
+					<span>서비스</span>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>공지사항</span>

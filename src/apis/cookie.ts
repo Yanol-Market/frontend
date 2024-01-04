@@ -1,4 +1,3 @@
-import { access } from 'fs';
 import { Cookies } from 'react-cookie';
 
 const cookies = new Cookies();
