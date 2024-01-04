@@ -19,7 +19,7 @@ const Header = ({ title }: propsType) => {
 						onClick={handleArrowBackClick}
 					/>
 				</div>
-				<div className=" pl-[20px] font-semibold text-font">{title}</div>
+				<div className="font-semibold text-font mx-auto">{title}</div>
 			</div>
 		</div>
 	);

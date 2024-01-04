@@ -8,6 +8,7 @@ import { SignUp } from './pages/signUp';
 import ProfileEdit from './pages/mypage/component/ProfileEdit';
 import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
+import InterestRegion from './pages/mypage/component/InterestRegion';
 function App() {
 	return (
 		<>
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/beforesignin" element={<BeforeSignInMyPage />} />
 					<Route path="/aftersignin" element={<AfterSignInMyPage />} />
 					<Route path="/profiledit" element={<ProfileEdit />} />
+					<Route path="/interestregion" element={<InterestRegion />} />
 				</Route>
 			</Routes>
 		</>

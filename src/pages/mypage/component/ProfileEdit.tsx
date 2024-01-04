@@ -25,7 +25,7 @@ const ProfileEdit = () => {
 							</button>
 						</div>
 						<input
-							className="w-full h-11 rounded-xl text-lg mt-2 bg-[#FAFAFA] pl-4 focus:outline-none"
+							className="w-full h-11 rounded-xl text-lg mt-2 bg-lightGray pl-4 focus:outline-none"
 							type="text"
 							placeholder="원래 이름"
 						/>
@@ -34,7 +34,7 @@ const ProfileEdit = () => {
 						<div className="flex flex-row justify-between font-bold">
 							<p className="text-lg">휴대폰 번호</p>
 						</div>
-						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-[#FAFAFA] pl-4 focus:outline-none">
+						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
 							<p className="pt-2 text-start text-gray">010-1234-5678</p>
 						</div>
 					</div>
