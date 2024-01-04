@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../../component/common/Header';
 import BottomSheet from './BottomSheet';
+import BottomSheetRegionContent from './BottomSheetRegionContent';
 
 const InterestRegion = () => {
 	const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -15,7 +16,13 @@ const InterestRegion = () => {
 	return (
 		<div className="flex flex-col justify-center">
 			<Header title={'관심 지역'} />
-			<BottomSheet isOpen={isBottomSheetOpen} onClose={closeBottomSheet} />
+			<BottomSheet
+				isOpen={isBottomSheetOpen}
+				onClose={closeBottomSheet}
+				viewHeight="calc(100vh * 0.7)"
+			>
+				<BottomSheetRegionContent />
+			</BottomSheet>
 			<div className="w-[90%] mx-auto mt-11 font-body font-medium">
 				<p>관심 지역을 설정해 두시면 알림을 보내드려요!</p>
 				<p>관심지역은 3개까지 추가 가능합니다.</p>

@@ -4,26 +4,42 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface bottomSheetProps {
 	isOpen: boolean;
 	onClose: () => void;
+	viewHeight: string;
+	children?: React.ReactNode;
 }
 
-const BottomSheet = ({ isOpen, onClose }: bottomSheetProps) => {
+const BottomSheet = ({
+	isOpen,
+	onClose,
+	viewHeight,
+	children,
+}: bottomSheetProps) => {
 	return (
 		<AnimatePresence>
 			{isOpen && (
-				<motion.div
-					initial={{ height: 0 }}
-					animate={isOpen ? { height: `calc(100vh * 0.7)` } : { height: 0 }}
-					exit={{ height: 0 }}
-					transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-					className="border fixed absolute bottom-0 left-0 right-0 bg-white p-4 max-w-[375px] mx-auto rounded-t-3xl"
-				>
-					<button
+				<>
+					<div
+						className="fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50 z-50"
 						onClick={onClose}
-						className="mt-4 bg-gray-200 hover:bg-gray-300 border absolute right-[1.2rem]"
+					></div>
+
+					<motion.div
+						initial={{ height: 0 }}
+						animate={isOpen ? { height: viewHeight } : { height: 0 }}
+						exit={{ height: 0 }}
+						transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+						className="absolute bottom-0 left-0 right-0 bg-white p-4 max-w-[375px] mx-auto rounded-t-3xl z-50 overflow-hidden"
 					>
-						닫기
-					</button>
-				</motion.div>
+						<img
+							src="/assets/images/closeModal.svg"
+							alt="바텀 시트 내리기"
+							onClick={onClose}
+							className="cursor-pointer mt-4 bg-gray-200 hover:bg-gray-300  absolute top-2 right-[1.2rem]"
+						/>
+
+						{children}
+					</motion.div>
+				</>
 			)}
 		</AnimatePresence>
 	);
