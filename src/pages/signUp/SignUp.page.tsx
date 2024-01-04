@@ -130,7 +130,9 @@ const SignUp = () => {
 						/>
 						<label htmlFor="first-checkbox" className="text-sm text-gray">
 							<span>(필수) 서비스 이용약관에 동의합니다.</span>
-							<span className="text-blue cursor-pointer">[전문보기]</span>
+							<span className="cursor-pointer hover:underline decoration-1">
+								[전문보기]
+							</span>
 						</label>
 					</div>
 					<div className="flex flex-row mb-2">
@@ -142,7 +144,9 @@ const SignUp = () => {
 						/>
 						<label htmlFor="second-checkbox" className="text-sm text-gray">
 							<span>(필수) 개인정보 처리방침에 동의합니다.</span>
-							<span className="text-blue cursor-pointer">[전문보기]</span>
+							<span className="cursor-pointer hover:underline decoration-1">
+								[전문보기]
+							</span>
 						</label>
 					</div>
 					<div className="flex flex-row mb-2">
