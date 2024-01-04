@@ -18,7 +18,7 @@ const Navigation = () => {
 				/>
 				<p className="text-center text-gray text-sm font-pre">홈</p>
 			</Link>
-			<Link to={'/'}>
+			<Link to={'/location'}>
 				<img
 					className="m-auto mb-2"
 					src={
