@@ -7,6 +7,7 @@ import { SignIn } from './pages/signIn';
 import { SignUp } from './pages/signUp';
 import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
+import { Alarm } from './pages/alarm';
 function App() {
 	return (
 		<>
@@ -17,6 +18,7 @@ function App() {
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/beforesignin" element={<BeforeSignInMyPage />} />
 					<Route path="/aftersignin" element={<AfterSignInMyPage />} />
+					<Route path="/alarm" element={<Alarm />} />
 					{/* 임시 */}
 				</Route>
 			</Routes>
