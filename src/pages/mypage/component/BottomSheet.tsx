@@ -27,7 +27,7 @@ const BottomSheet = ({
 						initial={{ height: 0 }}
 						animate={isOpen ? { height: viewHeight } : { height: 0 }}
 						exit={{ height: 0 }}
-						transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+						transition={{ type: 'anticipate', stiffness: 200, damping: 20 }}
 						className="absolute bottom-0 left-0 right-0 bg-white p-4 max-w-[375px] mx-auto rounded-t-3xl z-50 overflow-hidden"
 					>
 						<img
