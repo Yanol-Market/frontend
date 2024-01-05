@@ -4,7 +4,7 @@ import BottomSheet from '../../../component/common/BottomSheet/BottomSheet';
 import RemoveAccount from './RemoveAccount';
 
 const MyAccount = () => {
-	const [myAccount, setMyAccount] = useState();
+	// const [myAccount, setMyAccount] = useState();
 	const [isBottomSheetAccountOpen, setIsBottomSheetAccountOpen] =
 		useState(false);
 
