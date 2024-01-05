@@ -23,15 +23,15 @@ const Header = ({ title, handleArrowBackClick }: propsType) => {
 	const handleClick = handleArrowBackClick || defaultHandleArrowBackClick;
 
 	return (
-		<div className=" bg-white fixed left-0 top-0 w-[375px] h-[70px] z-20 m-auto relative">
-			<div className=" w-[375px] px-5  h-[70px]  flex  pt-[30px] ">
-				<div>
+		<div className=" bg-white left-0 top-0 w-[375px] h-[70px] z-20 m-auto relative">
+			<div className=" w-[375px] h-[70px]  flex">
+				<div className='my-auto cursor-pointer pl-5'>
 					<ArrowBackIosNewOutlinedIcon
 						sx={{ width: '14px', cursor: 'pointer' }}
 						onClick={handleClick}
 					/>
 				</div>
-				<div className=" pl-[20px] font-semibold text-font">{title}</div>
+				<div className="font-[500] text-font font-pre m-auto relative left-[-18px]">{title}</div>
 			</div>
 		</div>
 	);
