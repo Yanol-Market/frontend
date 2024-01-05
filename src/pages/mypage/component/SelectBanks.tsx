@@ -3,7 +3,7 @@ import { bankData } from '../../../data/bankData';
 
 const SelectBanks = () => {
 	return (
-		<div>
+		<div className="overflow-y-auto max-h-[100vh] scrollbar-hide">
 			<p className="text-center mb-7">은행 선택</p>
 			{bankData.map((bank) => (
 				<div key={bank.id} className="flex flex-row mb-5">

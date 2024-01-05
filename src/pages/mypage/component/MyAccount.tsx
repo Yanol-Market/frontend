@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from '../../../component/common/Header';
-import BottomSheet from './BottomSheet';
+import BottomSheet from '../../../component/common/BottomSheet/BottomSheet';
 import RemoveAccount from './RemoveAccount';
 
 const MyAccount = () => {
