@@ -18,7 +18,7 @@ function App() {
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/beforesignin" element={<BeforeSignInMyPage />} />
 					<Route path="/aftersignin" element={<AfterSignInMyPage />} />
-					<Route path="/localSearch" element={<LocalSearch />} />
+					<Route path="/location" element={<LocalSearch />} />
 					{/* 임시 */}
 				</Route>
 			</Routes>
