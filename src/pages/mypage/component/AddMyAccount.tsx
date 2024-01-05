@@ -56,7 +56,7 @@ const AddMyAccount = () => {
 							<p className="pt-2 text-start text-gray">홍길동</p>
 						</div>
 					</div>
-					<div className="mt-16">
+					<div className="mt-80">
 						<div className="flex flex-row mb-5">
 							<input
 								className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
@@ -74,7 +74,7 @@ const AddMyAccount = () => {
 						</div>
 						<button
 							type="button"
-							className="flex items-center text-center mx-auto w-full h-11 rounded-xl text-gray text-m bg-main"
+							className="flex items-center text-center mx-auto  w-full h-11 rounded-xl text-gray text-m bg-main"
 							onClick={openBottomSheetBank}
 						>
 							<p className="text-center mx-auto text-white">계좌 등록하기</p>

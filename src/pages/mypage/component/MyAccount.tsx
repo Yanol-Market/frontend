@@ -45,7 +45,7 @@ const MyAccount = () => {
 					</div>
 					<button
 						type="button"
-						className="flex items-center text-center mx-auto w-full h-11 rounded-xl text-gray text-m bg-main mt-16"
+						className="flex items-center text-center mx-auto mt-80 w-full h-11 rounded-xl text-gray text-m bg-main"
 					>
 						<p className="text-center mx-auto text-white">계좌 등록하기</p>
 					</button>
