@@ -10,6 +10,8 @@ import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
 import InterestRegion from './pages/mypage/component/InterestRegion';
 import { LocalSearch } from './pages/localSearch';
+import MyAccount from './pages/mypage/component/MyAccount';
+import AddMyAccount from './pages/mypage/component/AddMyAccount';
 function App() {
 	return (
 		<>
@@ -23,6 +25,8 @@ function App() {
 					<Route path="/profiledit" element={<ProfileEdit />} />
 					<Route path="/interestregion" element={<InterestRegion />} />
 					<Route path="/location" element={<LocalSearch />} />
+					<Route path="/mypage" element={<MyAccount />} />
+					<Route path="/addaccount" element={<AddMyAccount />} />
 					{/* 임시 */}
 				</Route>
 			</Routes>

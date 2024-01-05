@@ -7,7 +7,7 @@ module.exports = {
 	],
 	theme: {
 		fontFamily: {
-			pre : ["pretendard"],
+			pre: ['pretendard'],
 		},
 		screens: {
 			sm: '375px',
@@ -15,21 +15,22 @@ module.exports = {
 		extend: {
 			colors: {
 				homeMain: '#FFF3C5',
-				main: '#F2AE00',
-				bgMain: '#FFF9EA',
+				main: '#FFCC00',
+				subBtn: '#004EAF',
+				bgMain: '#FFFAEB',
 				alarmRed: '#D9340F',
 				alarmGreen: '#0FA254',
 				black: '#222222',
 				gray: '#bdbdbd',
-				descGray : '#828282',
+				descGray: '#828282',
 				borderGray: '#E5E5E5',
 				lightGray: '#FAFAFA',
 				white: '#FFFFFF',
 				borderWhite: '#F5F5F5',
 				red: '#D9340F',
 				blue: '#2D05CD',
-				dateBlue : '#004EAF',
-				fontBlack : '#222222',
+				dateBlue: '#004EAF',
+				fontBlack: '#222222',
 			},
 			fontSize: {
 				headline1: '24px',

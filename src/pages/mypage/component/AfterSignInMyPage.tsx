@@ -1,7 +1,7 @@
 import React from 'react';
 const AfterSignInMyPage = () => {
 	return (
-		<div className="flex flex-col items-center w-full text-center">
+		<div className="flex flex-col items-center w-full h-[100vh] text-center">
 			<div className="mt-8 font-medium">마이페이지</div>
 			<div className="mt-11 text-start w-[90%] text-[#828282]">
 				<div className="flex flex-row gap-6">

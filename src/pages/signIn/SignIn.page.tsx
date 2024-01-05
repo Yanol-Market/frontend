@@ -38,7 +38,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className="flex flex-col items-center w-full text-center px-5">
+		<div className="flex flex-col items-center w-full h-[100vh] text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"
