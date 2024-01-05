@@ -1,22 +1,34 @@
 import React from 'react';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import { useNavigate } from 'react-router-dom';
 
 interface propsType {
 	title: string | null;
+	handleArrowBackClick?: () => void; // handleArrowBackClick을 부모 컴포넌트에서 직접 제어
 }
 
-const Header = ({ title }: propsType) => {
-	const handleArrowBackClick = () => {
-		window.history.back();
+const Header = ({ title, handleArrowBackClick }: propsType) => {
+	const navigate = useNavigate();
+
+	// const handleArrowBackClick = () => {
+	// 	window.history.back();
+	// };
+
+	const defaultHandleArrowBackClick = () => {
+		navigate(-1); // React Router의 뒤로 가기
 	};
+	// 부모 컴포넌트에서 handleArrowBackClick이 전달되지 않은 경우
+	// 기본적으로 navigate(-1)을 수행하는 defaultHandleArrowBackClick 함수를 정의
+
+	const handleClick = handleArrowBackClick || defaultHandleArrowBackClick;
 
 	return (
 		<div className=" bg-white fixed left-0 top-0 w-[375px] h-[70px] z-20 m-auto relative">
 			<div className=" w-[375px] px-5  h-[70px]  flex  pt-[30px] ">
 				<div>
 					<ArrowBackIosNewOutlinedIcon
-						sx={{ width: '14px' }}
-						onClick={handleArrowBackClick}
+						sx={{ width: '14px', cursor: 'pointer' }}
+						onClick={handleClick}
 					/>
 				</div>
 				<div className=" pl-[20px] font-semibold text-font">{title}</div>
