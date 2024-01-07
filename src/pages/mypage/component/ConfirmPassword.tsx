@@ -11,7 +11,7 @@ const ConfirmPassword = () => {
 			</div>
 			<button
 				type="button"
-				className="flex items-center w-[90%] h-11 rounded-xl text-center text-m bg-main text-white"
+				className="flex items-center w-[90%] h-11 rounded-xl text-center text-m bg-main text-white cursor-pointer"
 			>
 				<span className="mx-auto">확인</span>
 			</button>

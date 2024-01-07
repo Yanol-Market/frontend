@@ -27,7 +27,7 @@ const EditPassword = () => {
 			<BottomSheet
 				isOpen={isBottomSheetPasswordOpen}
 				onClose={closeBottomSheetPassword}
-				viewHeight="calc(100vh * 0.3"
+				viewHeight="calc(100vh * 0.3)"
 			>
 				<NotConfirmedPassword />
 			</BottomSheet>
@@ -58,7 +58,7 @@ const EditPassword = () => {
 							</div>
 							<input
 								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="text"
+								type="password"
 								placeholder="새 비밀번호 입력(숫자 + 영문자, 6자 이상 20자 이내)"
 								{...register('newPassword', {
 									required: true,
@@ -85,11 +85,11 @@ const EditPassword = () => {
 							</div>
 							<input
 								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="text"
+								type="password"
 								placeholder="새 비밀번호를 다시 한 번 입력하세요."
 								{...register('newpasswordChecked', {
 									required: true,
-									validate: (value) => value === watch('passwnewPasswordord'),
+									validate: (value) => value === watch('newpasswordChecked'),
 								})}
 							/>
 							{errors.newpasswordChecked &&
