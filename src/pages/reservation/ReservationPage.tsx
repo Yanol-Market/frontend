@@ -19,7 +19,7 @@ const ReservationPage = () => {
 			<Total />
 			<Payment setPayment={setPayment} />
 			<div
-				className={`mx-[20px] my-[20px] h-[50px] text-center p-[15px] text-button ${
+				className={`mx-[20px] my-[20px] h-[50px] text-center p-[15px] text-lg ${
 					isDisabled ? 'text-white' : 'text-black'
 				} text-[#828282] rounded-[12px] ${
 					isDisabled ? 'bg-[#FFCC00]' : 'bg-[#e5e5e5]'

@@ -20,6 +20,9 @@ import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
 import ReservationPage from './pages/reservation/ReservationPage';
+import Complete from './pages/reservation/Complete';
+import Timeout from './pages/reservation/Timeout';
+import Failure from './pages/reservation/Failure';
 
 function App() {
 	return (
@@ -43,6 +46,9 @@ function App() {
 					<Route path="/withdrawl" element={<Withdrawl />} />
 					<Route path="/confirmwithdrawl" element={<ConfirmWithdrawl />} />
 					<Route path="/reservation" element={<ReservationPage />} />
+					<Route path="/reservation/complete" element={<Complete />} />
+					<Route path="/reservation/timeout" element={<Timeout />} />
+					<Route path="/reservation/failure" element={<Failure />} />
 				</Route>
 			</Routes>
 		</>

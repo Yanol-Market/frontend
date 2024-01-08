@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 interface TermSheetProps {
-	setTermSheet: React.Dispatch<React.SetStateAction<boolean>>;
+	setTermSheet: (value: boolean) => void;
 }
+
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
@@ -18,6 +19,13 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		if (areAnyFalse) {
 			setCheckAll(false);
 		}
+	}, [checkboxes]);
+
+	useEffect(() => {
+		const allChecked = Object.values(checkboxes).every(
+			(value) => value === true,
+		);
+		setCheckAll(allChecked);
 	}, [checkboxes]);
 
 	const checkAllCheckboxes = () => {
@@ -40,7 +48,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				className="absolute top-0 h-[100%] w-[100%] bg-black opacity-75"
 				onClick={() => setTermSheet(false)}
 			></div>
-			<div className="absolute bottom-0 h-[500px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
+			<div className="animate-slide-up absolute bottom-0 h-[500px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
 				<div className="m-[20px]">
 					<h2 className="p-[20px] mx-[15px] text-body font-semibold">
 						양도 안내사항
@@ -214,7 +222,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					<input
 						id="termAll"
 						type="checkbox"
-						onClick={checkAllCheckboxes}
+						onChange={checkAllCheckboxes}
 						className="hidden"
 						checked={checkAll}
 					/>
@@ -254,7 +262,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				<div className="m-[20px]">
 					<button
 						disabled={!checkAll}
-						className={`w-[100%] h-[50px] text-button ${
+						className={`w-[100%] h-[50px] text-lg ${
 							checkAll ? 'bg-[#FFCC00]' : 'bg-[#e5e5e5]'
 						} ${checkAll ? 'text-white' : 'text-[#828282]'} rounded-[12px]`}
 					>

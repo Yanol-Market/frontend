@@ -7,7 +7,7 @@ const productData: ProductData = {
 	productCondition: '디럭스 더블',
 	productAccommodation: '2인/최대 2인',
 	productStatus: '숙박',
-	price: '120,000원',
+	price: '210,000원',
 	checkIn: '2024-01-28(일) 15:00',
 	checkOut: '2024-01-30(화) 15:00',
 };
@@ -41,21 +41,17 @@ const Product = () => {
 						className="w-[80px] h-[80px]"
 					/>
 					<div className="w-[60%] px-[10px]">
-						<p className="text-button font-bold">{productData.productName}</p>
+						<p className="text-lg font-bold">{productData.productName}</p>
 						<div className="flex">
-							<p className="text-button pr-[8px]">
-								{productData.productCondition}
-							</p>
+							<p className="text-lg pr-[8px]">{productData.productCondition}</p>
 							<div className="flex items-center">
 								<div className="border-r-[1px] border-[#f5f5f5] h-[12px]"></div>
 							</div>
-							<p className="text-button pl-[8px]">
+							<p className="text-lg pl-[8px]">
 								{productData.productAccommodation}
 							</p>
 						</div>
-						<p className="text-button font-bold pt-[15px]">
-							{productData.price}
-						</p>
+						<p className="text-lg font-bold pt-[15px]">{productData.price}</p>
 					</div>
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center bg-[#fafafa] rounded-[10px] w-[35px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">

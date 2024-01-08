@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PurchaserInfo = () => {
+	const [saveInfo, setSaveInfo] = useState(false);
 	return (
 		<div className="p-[20px]">
 			<div className="pt-[10px] pb-[20px]">
@@ -13,29 +14,34 @@ const PurchaserInfo = () => {
 			</div>
 			<div>
 				<div className="pt-[10px]">
-					<p className="text-button font-medium">이름</p>
+					<p className="text-lg font-medium">이름</p>
 					<input
 						type="text"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-button m-[5px]"
+						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
 					/>
 				</div>
 				<div className="pt-[10px]">
-					<p className="text-button font-medium">전화번호</p>
+					<p className="text-lg font-medium">전화번호</p>
 					<input
 						type="text"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-button m-[5px]"
+						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
 					/>
 				</div>
 				<div className="pt-[10px]">
-					<p className="text-button font-medium">이메일</p>
+					<p className="text-lg font-medium">이메일</p>
 					<input
 						type="email"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-button m-[5px]"
+						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
 					/>
 				</div>
 			</div>
 			<div className="flex items-center">
-				<input id="check_btn" type="checkbox" className="hidden" />
+				<input
+					id="check_btn"
+					type="checkbox"
+					className="hidden"
+					onChange={(saveInfo) => !saveInfo}
+				/>
 
 				<label htmlFor="check_btn" className="cursor-pointer"></label>
 
