@@ -33,7 +33,7 @@ const InterestRegion = () => {
 					onClick={openBottomSheet}
 				>
 					<p>관심지역을 선택해주세요.</p>
-					<img src="/assets/images/bottomArrow.svg" alt="아래로 이동" />
+					<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
 				</div>
 			</div>
 		</div>
