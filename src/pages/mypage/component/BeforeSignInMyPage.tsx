@@ -20,7 +20,7 @@ const BeforeSignInMyPage = () => {
 			</div>
 			<div className="border border-[#F5F5F5] bg-[#F5F5F5] w-full h-2 mt-5"></div>
 			<div className="w-[90%] mt-5 flex flex-col text-lg">
-				<div className="flex flex-row justify-between mb-1">
+				<div className="flex flex-row justify-between mb-2">
 					<span className="font-semibold">서비스</span>
 				</div>
 				<div className="flex flex-row justify-between mb-5">

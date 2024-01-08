@@ -16,11 +16,11 @@ const InterestRegion = () => {
 	return (
 		<div>
 			<Header title="관심 지역" />
-			<div className="flex flex-col items-center h-[100vh]">
+			<div className="flex flex-col items-center h-screen">
 				<BottomSheet
 					isOpen={isBottomSheetOpen}
 					onClose={closeBottomSheet}
-					viewHeight="calc(100vh * 0.7)"
+					viewHeight="calc(100vh * 0.9)"
 				>
 					<BottomSheetRegionContent />
 				</BottomSheet>
@@ -30,10 +30,10 @@ const InterestRegion = () => {
 				</div>
 				<div
 					className="w-[90%] flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray"
-					onClick={openBottomSheet}
+					
 				>
 					<p>관심지역을 선택해주세요.</p>
-					<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
+					<img className="cursor-pointer" src="/assets/images/dropdownArrow.svg" alt="아래로 이동" onClick={openBottomSheet} />
 				</div>
 			</div>
 		</div>
