@@ -8,6 +8,9 @@ export interface Reservation {
 	totalAmount: string;
 	checkInDate: string;
 	checkOutDate: string;
+	checkInTime: string;
+	checkOutTime: string;
+	accommodationType: string;
 }
 
 interface ReservationItemProps {
@@ -59,7 +62,7 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 								: 'border-borderGray bg-[#FAFAFA]'
 						}`}
 					>
-						숙박
+						{reservation.accommodationType}
 					</p>
 				</div>
 				<p className="text-sm">{reservation.roomInfo}</p>
@@ -75,7 +78,7 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 						{/* 체크인 정보 */}
 						<div className="text-center">
 							<p className="font-semibold mb-[0.35rem]">체크인</p>
-							<p>{reservation.checkInDate}</p>
+							<p className="whitespace-pre">{`${reservation.checkInDate}  ${reservation.checkInTime}`}</p>
 						</div>
 					</div>
 					<div
@@ -87,7 +90,7 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 						{/* 체크아웃 정보 */}
 						<div className="text-center">
 							<p className="font-semibold mb-[0.35rem]">체크아웃</p>
-							<p>{reservation.checkOutDate}</p>
+							<p className="whitespace-pre">{`${reservation.checkOutDate}  ${reservation.checkOutTime}`}</p>
 						</div>
 					</div>
 				</div>
