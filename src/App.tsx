@@ -9,9 +9,8 @@ import ProfileEdit from './pages/mypage/component/ProfileEdit';
 import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
 import { Alarm } from './pages/alarm';
-
-import { LocalSearch } from './pages/localSearch';
 import InterestRegion from './pages/mypage/component/InterestRegion';
+import { LocalSearch } from './pages/localSearch';
 import MyAccount from './pages/mypage/component/MyAccount';
 import AddMyAccount from './pages/mypage/component/AddMyAccount';
 import ManageAccount from './pages/mypage/component/ManageAccount';
