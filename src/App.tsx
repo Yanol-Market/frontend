@@ -19,6 +19,7 @@ import EditPassword from './pages/mypage/component/EditPassword';
 import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
+import ReservationPage from './pages/reservation/ReservationPage';
 
 function App() {
 	return (
@@ -41,6 +42,7 @@ function App() {
 					<Route path="/confirmpassword" element={<ConfirmPassword />} />
 					<Route path="/withdrawl" element={<Withdrawl />} />
 					<Route path="/confirmwithdrawl" element={<ConfirmWithdrawl />} />
+					<Route path="/reservation" element={<ReservationPage />} />
 				</Route>
 			</Routes>
 		</>
