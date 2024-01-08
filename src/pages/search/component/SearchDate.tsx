@@ -89,7 +89,7 @@ export const SearchDate = () => {
 			onClick={() => {
 				setIsShow(true);
 			}}
-			className="flex relative w-[335px] h-[45px] bg-inputGray rounded-[12px] px-[15px] py-2"
+			className="flex relative w-[335px] h-[45px] bg-lightGray rounded-[12px] px-[15px] py-2"
 		>
 			<img
 				className="w-[12px] y-[12px] mr-[15px] relative bottom-1"

@@ -7,7 +7,7 @@ module.exports = {
 	],
 	theme: {
 		fontFamily: {
-			pre : ["pretendard"],
+			pre: ['pretendard'],
 		},
 		screens: {
 			sm: '375px',
@@ -16,21 +16,21 @@ module.exports = {
 			colors: {
 				homeMain: '#FFF3C5',
 				main: '#FFCC00',
-				bgMain: '#FFF9EA',
+				subBtn: '#004EAF',
+				bgMain: '#FFFAEB',
 				alarmRed: '#D9340F',
 				alarmGreen: '#0FA254',
 				black: '#222222',
 				gray: '#bdbdbd',
-				descGray : '#828282',
+				descGray: '#828282',
 				borderGray: '#E5E5E5',
-				inputGray : '#FAFAFA',
+				lightGray: '#FAFAFA',
 				white: '#FFFFFF',
 				borderWhite: '#F5F5F5',
 				red: '#D9340F',
 				blue: '#2D05CD',
-				dateBlue : '#004EAF',
-				fontBlack : '#222222',
-				
+				dateBlue: '#004EAF',
+				fontBlack: '#222222',
 			},
 			fontSize: {
 				headline1: '24px',
@@ -47,5 +47,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require('tailwind-scrollbar-hide')],
 };

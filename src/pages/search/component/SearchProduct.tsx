@@ -57,7 +57,7 @@ export const SearchProduct = () => {
 		}),
 	};
 	return (
-		<div className="flex relative w-[335px] h-[45px] bg-inputGray rounded-[12px] px-[15px] py-2">
+		<div className="flex relative w-[335px] h-[45px] bg-lightGray rounded-[12px] px-[15px] py-2">
 			<div className="relative bottom-1">
 				<Select
 					defaultValue={selectedOption}
