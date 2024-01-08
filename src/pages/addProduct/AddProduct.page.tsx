@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AddProductSelectionStep from './component/AddProductSelectionStep';
 import AddProductInfoInputStep from './component/AddProductInfoInputStep';
 import TermsAndPolicyAgreementStep from './component/TermsAndPolicyAgreementStep';
-import { Header } from '../../component/common/Header';
+import AddProductHeader from './component/AddProductHeader';
 
 const AddProductPage = () => {
 	const [currentStep, setCurrentStep] = useState(1);
@@ -34,7 +34,10 @@ const AddProductPage = () => {
 
 	return (
 		<>
-			<Header title="상품등록" handleArrowBackClick={handlePrevStep} />
+			<AddProductHeader
+				title="상품등록"
+				handleArrowBackClick={handlePrevStep}
+			/>
 			<div>
 				<div className="fixed flex px-5 bg-white">
 					{stepsCompleted.map((completed, index) => (

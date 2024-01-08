@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
 
-export default function SignUp() {
+const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
@@ -21,7 +21,7 @@ export default function SignUp() {
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
 	return (
-		<div className="flex flex-col items-center w-full text-center px-5">
+		<div className="flex flex-col items-center w-full h-[100vh] text-center px-5">
 			<div className="mt-7">회원가입</div>
 			<form className="mt-10" onSubmit={handleSubmit(getSignUp)}>
 				<input
@@ -130,7 +130,9 @@ export default function SignUp() {
 						/>
 						<label htmlFor="first-checkbox" className="text-sm text-gray">
 							<span>(필수) 서비스 이용약관에 동의합니다.</span>
-							<span className="text-blue cursor-pointer">[전문보기]</span>
+							<span className="cursor-pointer hover:underline decoration-1">
+								[전문보기]
+							</span>
 						</label>
 					</div>
 					<div className="flex flex-row mb-2">
@@ -142,7 +144,9 @@ export default function SignUp() {
 						/>
 						<label htmlFor="second-checkbox" className="text-sm text-gray">
 							<span>(필수) 개인정보 처리방침에 동의합니다.</span>
-							<span className="text-blue cursor-pointer">[전문보기]</span>
+							<span className="cursor-pointer hover:underline decoration-1">
+								[전문보기]
+							</span>
 						</label>
 					</div>
 					<div className="flex flex-row mb-2">
@@ -171,4 +175,6 @@ export default function SignUp() {
 			</form>
 		</div>
 	);
-}
+};
+
+export default SignUp;
