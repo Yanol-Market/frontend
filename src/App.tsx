@@ -8,6 +8,7 @@ import { SignUp } from './pages/signUp';
 import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
 import { LocalSearch } from './pages/localSearch';
+import { Search } from './pages/search';
 function App() {
 	return (
 		<>
@@ -19,6 +20,7 @@ function App() {
 					<Route path="/beforesignin" element={<BeforeSignInMyPage />} />
 					<Route path="/aftersignin" element={<AfterSignInMyPage />} />
 					<Route path="/location" element={<LocalSearch />} />
+					<Route path="/search" element={<Search />} />
 					{/* 임시 */}
 				</Route>
 			</Routes>
