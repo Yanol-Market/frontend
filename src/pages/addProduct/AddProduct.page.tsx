@@ -36,12 +36,12 @@ const AddProductPage = () => {
 		<>
 			<Header title="상품등록" handleArrowBackClick={handlePrevStep} />
 			<div>
-				<div className="flex place-content-center">
+				<div className="fixed flex px-5 bg-white">
 					{stepsCompleted.map((completed, index) => (
 						<div
 							key={index}
-							className={`rounded-md mb-[1.875rem] mt-[0.8125rem] ${
-								completed ? 'bg-main' : 'bg-borderGray'
+							className={`rounded-md mb-[1.875rem] mt-[4.8125rem] ${
+								completed ? 'bg-[#FFCC00]' : 'bg-borderGray'
 							}`}
 							style={{
 								width: '105px',

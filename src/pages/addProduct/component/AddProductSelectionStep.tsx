@@ -53,9 +53,6 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 		if (isLoggedIn) {
 			return (
 				<>
-					<h3 className="text-body ml-5 mt-[2.125rem] font-semibold">
-						나의 예약 내역
-					</h3>
 					{!hasReservations ? (
 						<>
 							<div className="flex">
@@ -66,11 +63,20 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 						</>
 					) : (
 						<div className="flex flex-col">
-							{reservations.map((reservation, index) => (
-								<ReservationItem key={index} reservation={reservation} />
-							))}
+							<div className="mt-[12rem] mb-[6rem]">
+								{reservations.map((reservation, index) => (
+									<ReservationItem
+										key={index}
+										reservation={reservation}
+										isSelected={false}
+										onClick={function (): void {
+											throw new Error('Function not implemented.');
+										}}
+									/>
+								))}
+							</div>
 							{/* 다음 버튼 밑으로 뒤에 컨텐츠 가림*/}
-							<div className="fixed bottom-0 w-[375px] bg-white h-10" />
+							<div className="fixed bottom-0 w-[375px] bg-white h-[5.5rem]" />
 							{/* 다음 버튼 */}
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
@@ -80,7 +86,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 								>
 									다음
 								</button>
-							</div>{' '}
+							</div>
 						</div>
 					)}
 				</>
@@ -119,8 +125,14 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 
 	return (
 		<div>
-			<h2 className="text-body ml-5 mb-4">판매 상품 선택</h2>
-			<div className="w-full h-[0.4375rem] bg-[#FAFAFA]" />
+			<div className="fixed top-[6rem] w-[375px] bg-white h-[7rem]" />
+
+			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">판매 상품 선택</h2>
+			<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-[#FAFAFA]" />
+			<h3 className="fixed top-[11rem] text-body ml-5 font-semibold">
+				나의 예약 내역
+			</h3>
+
 			{renderContent()}
 		</div>
 	);
