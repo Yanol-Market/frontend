@@ -26,8 +26,8 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 
 	return (
 		<div
-			className={`bg-white mx-5 mt-5 rounded-xl p-[0.9375rem] border ${
-				isSelected ? 'border-[#FFFAEB] bg-[#FFFAEB]' : 'border-borderGray '
+			className={` mx-5 mt-5 rounded-xl p-[0.9375rem] border ${
+				isSelected ? 'border-bgMain bg-bgMain' : 'border-borderGray bg-white'
 			}`}
 			onClick={handleClick}
 		>
