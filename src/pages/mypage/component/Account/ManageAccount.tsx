@@ -1,10 +1,29 @@
-import React from 'react';
-import { Header } from '../../../component/common/Header';
+import React, { useState } from 'react';
+import { Header } from '../../../../component/common/Header';
+import { BottomSheet } from '../../../../component/common/BottomSheet';
+import SignOutContent from '../SignOutContent';
 
 const ManageAccount = () => {
+	const [isBottomSheetSignOutOpen, setIsBottomSheetSignOutOpen] =
+		useState(false);
+
+	const openBottomSheetSignOut = () => {
+		setIsBottomSheetSignOutOpen(true);
+	};
+
+	const closeBottomSheetSignOut = () => {
+		setIsBottomSheetSignOutOpen(false);
+	};
 	return (
 		<div>
 			<Header title="계정 관리" />
+			<BottomSheet
+					isOpen={isBottomSheetSignOutOpen}
+					onClose={closeBottomSheetSignOut}
+					viewHeight="calc(100vh * 0.4)"
+				>
+					<SignOutContent />
+				</BottomSheet>
 			<div className="w-full h-[100vh] flex flex-col items-center">
 				<div className="w-[90%] mt-5 flex flex-col">
 					<div className="flex flex-row justify-between mb-5">
@@ -21,6 +40,7 @@ const ManageAccount = () => {
 							className="cursor-pointer"
 							src="/assets/images/rightArrowTab.svg"
 							alt="탭 이동"
+							onClick={openBottomSheetSignOut}
 						/>
 					</div>
 					<div className="flex flex-row justify-between mb-5">

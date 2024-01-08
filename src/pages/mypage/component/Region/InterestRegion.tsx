@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Header } from '../../../component/common/Header';
-import BottomSheet from '../../../component/common/BottomSheet/BottomSheet';
-import BottomSheetRegionContent from './BottomSheetRegionContent';
+import { Header } from '../../../../component/common/Header';
+import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
+import BottomSheetRegionContent from '../Content/BottomSheetRegionContent';
 
 const InterestRegion = () => {
 	const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);

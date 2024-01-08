@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '../../../component/common/Header';
+import { Header } from '../../../../component/common/Header';
 
 const ProfileEdit = () => {
 	return (

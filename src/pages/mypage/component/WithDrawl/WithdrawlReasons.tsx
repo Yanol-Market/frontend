@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { withdrawlReasonsData } from '../../../data/withdrawlReasonsData';
+import { withdrawlReasonsData } from '../../../../data/withdrawlReasonsData';
 
 const WithdrawlReasons = () => {
 	return (

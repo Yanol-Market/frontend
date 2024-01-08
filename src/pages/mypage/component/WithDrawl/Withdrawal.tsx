@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Header } from '../../../component/common/Header';
-import BottomSheet from '../../../component/common/BottomSheet/BottomSheet';
+import { Header } from '../../../../component/common/Header';
+import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import WithdrawlReasons from './WithdrawlReasons';
 
 const Withdrawl = () => {
@@ -48,7 +48,7 @@ const Withdrawl = () => {
 				</div>
 				<button
 					type="button"
-					className="flex items-center w-[90%] h-11 mx-auto mt-80 rounded-xl text-center text-m bg-main text-white"
+					className="flex items-center w-[90%] h-11 mt-40 mx-auto rounded-xl text-center text-m bg-main text-white"
 				>
 					<span className="mx-auto">탈퇴하기</span>
 				</button>
