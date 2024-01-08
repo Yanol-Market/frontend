@@ -5,7 +5,10 @@ const AfterSignInMyPage = () => {
 			<div className="mt-8 font-medium">마이페이지</div>
 			<div className="mt-11 text-start w-[90%] text-[#828282]">
 				<div className="flex flex-row gap-6">
-					<div className="rounded-full bg-main text-[#828282] w-16 h-16" />
+					<img
+						className="rounded-full text-[#828282] w-16 h-16"
+						src="/assets/images/profileImage.svg"
+					/>
 					<div className="mt-2 text-[#828282] flex flex-col">
 						<p className="text-headline2 text-black font-semibold">홍길동</p>
 						<div className="flex flex-row gap-1">

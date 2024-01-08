@@ -6,7 +6,7 @@ const ProfileEdit = () => {
 		<div>
 			<Header title="프로필 수정" />
 			<div className="flex flex-col items-center w-full h-[100vh] text-center">
-				<div className="border border-borderGray mt-11 rounded-full w-24 h-24" />
+				<img src="/assets/images/profileImage.svg" alt="기본 프로필 이미지" />
 				<div className="w-[90%] mt-14">
 					<form>
 						<div className="relative">
