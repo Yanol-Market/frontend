@@ -10,6 +10,7 @@ import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
 import InterestRegion from './pages/mypage/component/InterestRegion';
 import { LocalSearch } from './pages/localSearch';
+import { Search } from './pages/search';
 import MyAccount from './pages/mypage/component/MyAccount';
 import AddMyAccount from './pages/mypage/component/AddMyAccount';
 import ManageAccount from './pages/mypage/component/ManageAccount';
@@ -33,6 +34,7 @@ function App() {
 					<Route path="/interestregion" element={<InterestRegion />} />
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
+					<Route path="/search" element={<Search />} />
 					<Route path="/mypage" element={<MyAccount />} />
 					<Route path="/addaccount" element={<AddMyAccount />} />
 					<Route path="/manageaccount" element={<ManageAccount />} />
