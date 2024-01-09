@@ -1,7 +1,7 @@
 import React from 'react';
-import NewMessage from './component/NewMessage';
-import Message from './component/Message';
-import { Header } from '../../component/common/Header';
+import NewMessage from './NewMessage';
+// import Message from './component/Message';
+import { Header } from '../../../component/common/Header';
 
 const Alarm = () => {
 	return (
@@ -10,9 +10,9 @@ const Alarm = () => {
 			<NewMessage />
 			<NewMessage />
 			<NewMessage />
+			{/* <Message />
 			<Message />
-			<Message />
-			<Message />
+			<Message /> */}
 		</div>
 	);
 };
