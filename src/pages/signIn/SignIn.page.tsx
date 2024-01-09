@@ -14,7 +14,6 @@ const SignIn = () => {
 
 	const userid = watch('userid');
 	const userpassword = watch('userpassword');
-	// const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REACT_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
 	const navigate = useNavigate();
 	const mutation = useMutation({
@@ -38,7 +37,7 @@ const SignIn = () => {
 	};
 
 	return (
-		<div className="flex flex-col items-center w-full h-[100vh] text-center px-5">
+		<div className="flex flex-col items-center w-full h-screen text-center px-5">
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"
@@ -86,31 +85,18 @@ const SignIn = () => {
 			<div className="w-full mt-[3.75rem]">
 				<button
 					type="button"
-					className="border border-borderGray bg-[#FF3478] flex items-center w-full h-11 rounded-xl text-gray text-m"
+					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
 				>
 					<img
 						className="ml-6"
 						src="/assets/images/yaLogo.svg"
 						alt="야놀자 로고"
 					/>
-					<span className="text-center w-2/3 text-white">야놀자로 로그인</span>
-				</button>
-				{/* <button
-					type="button"
-					className="border border-borderGray bg-[#FEE500] flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
-					onClick={() => {
-						window.location.href = KAKAO_AUTH_URL;
-					}}
-				>
-					<img
-						className="ml-6"
-						src="/assets/images/kakaoTalkLogo.svg"
-						alt="카카오톡 로고"
-					/>
-					<span className="text-center w-2/3 text-[#222222]">
-						카카오톡으로 로그인
+					<span className="text-center w-2/3 ml-2 text-white">
+						야놀자로 로그인
 					</span>
-				</button> */}
+				</button>
+
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
@@ -121,7 +107,7 @@ const SignIn = () => {
 						src="/assets/images/emailLogo.svg"
 						alt="이메일 로고"
 					/>
-					<span className="text-center w-2/3">회원가입</span>
+					<span className="w-2/3 ml-2 text-center">회원가입</span>
 				</button>
 			</div>
 		</div>

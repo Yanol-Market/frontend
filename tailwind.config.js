@@ -31,6 +31,7 @@ module.exports = {
 				blue: '#2D05CD',
 				dateBlue: '#004EAF',
 				fontBlack: '#222222',
+				yaLogo: '#FF3478',
 			},
 			fontSize: {
 				headline1: '24px',

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Header } from '../../../component/common/Header';
-import BottomSheet from '../../../component/common/BottomSheet/BottomSheet';
+import { Header } from '../../../../component/common/Header';
+import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import WithdrawlReasons from './WithdrawlReasons';
+import { useNavigate } from 'react-router-dom';
 
 const Withdrawl = () => {
+	const navigate = useNavigate();
 	const [isBottomSheetOpenWithDrawl, setIsBottomSheetWithDrawlOpen] =
 		useState(false);
 
@@ -14,10 +16,14 @@ const Withdrawl = () => {
 	const closeBottomSheetWithDrawl = () => {
 		setIsBottomSheetWithDrawlOpen(false);
 	};
+
+	const withdrawlConfirmBtn = () => {
+		navigate('/member/withdrawl/confirm');
+	};
 	return (
 		<div>
 			<Header title="회원탈퇴" />
-			<div className="flex flex-col items-center h-[100vh]">
+			<div className="flex flex-col items-center h-screen">
 				<BottomSheet
 					isOpen={isBottomSheetOpenWithDrawl}
 					onClose={closeBottomSheetWithDrawl}
@@ -48,7 +54,8 @@ const Withdrawl = () => {
 				</div>
 				<button
 					type="button"
-					className="flex items-center w-[90%] h-11 mx-auto mt-80 rounded-xl text-center text-m bg-main text-white"
+					className="flex items-center w-[90%] h-11 mt-40 mx-auto rounded-xl text-center text-m bg-main text-white"
+					onClick={withdrawlConfirmBtn}
 				>
 					<span className="mx-auto">탈퇴하기</span>
 				</button>
