@@ -4,6 +4,7 @@ import StatusBar from './StatusBar';
 import Buyer from './Buyer';
 
 const Selling = () => {
+	// 판매중
 	return (
 		<div className="p-5">
 			<SalesProduct />

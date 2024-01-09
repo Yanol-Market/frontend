@@ -34,7 +34,10 @@ const SalesProduct = () => {
 						골든티켓 등록번호 {productData.registrationNumber}
 					</p>
 					<div>
-						<MoreVertIcon sx={{ width: '13px', color: '#BDBDBD' }} />
+						<MoreVertIcon
+							sx={{ width: '13px', color: '#BDBDBD' }}
+							className="cursor-pointer"
+						/>
 					</div>
 				</div>
 				<div className="flex">
