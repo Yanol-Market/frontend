@@ -46,6 +46,15 @@ module.exports = {
 				checked: "url('pages/signUp/component/checked.svg')",
 				unchecked: "url('pages/signUp/component/unchecked.svg')",
 			},
+			keyframes: {
+				slideUp: {
+					'0%': { transform: 'translateY(100%)' },
+					'100%': { transform: 'translateY(0)' },
+				},
+			},
+			animation: {
+				'slide-up': 'slideUp 0.5s ease-out forwards',
+			},
 		},
 	},
 	plugins: [require('tailwind-scrollbar-hide')],
