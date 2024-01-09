@@ -8,6 +8,7 @@ import { SignUp } from './pages/signUp';
 import ProfileEdit from './pages/mypage/component/ProfileEdit';
 import BeforeSignInMyPage from './pages/mypage/component/BeforeSignInMyPage';
 import AfterSignInMyPage from './pages/mypage/component/AfterSignInMyPage';
+import { Alarm } from './pages/alarm';
 import InterestRegion from './pages/mypage/component/InterestRegion';
 import { LocalSearch } from './pages/localSearch';
 import { Search } from './pages/search';
@@ -18,6 +19,10 @@ import EditPassword from './pages/mypage/component/EditPassword';
 import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
+import ReservationPage from './pages/reservation/ReservationPage';
+import Complete from './pages/reservation/Complete';
+import Timeout from './pages/reservation/Timeout';
+import Failure from './pages/reservation/Failure';
 import { Alarm } from './pages/alarm';
 
 function App() {
@@ -42,7 +47,10 @@ function App() {
 					<Route path="/confirmpassword" element={<ConfirmPassword />} />
 					<Route path="/withdrawl" element={<Withdrawl />} />
 					<Route path="/confirmwithdrawl" element={<ConfirmWithdrawl />} />
-					{/* 임시 */}
+					<Route path="/reservation" element={<ReservationPage />} />
+					<Route path="/reservation/complete" element={<Complete />} />
+					<Route path="/reservation/timeout" element={<Timeout />} />
+					<Route path="/reservation/failure" element={<Failure />} />
 				</Route>
 			</Routes>
 		</>
