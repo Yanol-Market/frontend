@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import RemoveAccount from '../RemoveAccount';
+import RemoveAccount from './RemoveAccount';
+import { useNavigate } from 'react-router-dom';
 
 const MyAccount = () => {
-	// const [myAccount, setMyAccount] = useState();
+	const navigate = useNavigate();
 	const [isBottomSheetAccountOpen, setIsBottomSheetAccountOpen] =
 		useState(false);
 
@@ -15,16 +16,20 @@ const MyAccount = () => {
 	const closeBottomSheetAccount = () => {
 		setIsBottomSheetAccountOpen(false);
 	};
+
+	const addAccountBtn = () => {
+		navigate('/myaccount/registration');
+	};
 	return (
 		<div>
 			<Header title="내 계좌" />
 			<BottomSheet
-					isOpen={isBottomSheetAccountOpen}
-					onClose={closeBottomSheetAccount}
-					viewHeight="calc(100vh * 0.4)"
-				>
-					<RemoveAccount />
-				</BottomSheet>
+				isOpen={isBottomSheetAccountOpen}
+				onClose={closeBottomSheetAccount}
+				viewHeight="calc(100vh * 0.4)"
+			>
+				<RemoveAccount />
+			</BottomSheet>
 			<div className="w-full h-screen flex flex-col items-center">
 				<div className="w-[90%]">
 					<div className="border border-main h-28 flex flex-col mt-9 mb-44 p-4 bg-bgMain rounded-xl">
@@ -43,14 +48,15 @@ const MyAccount = () => {
 							/>
 						</div>
 					</div>
-				
 				</div>
+
 				<button
-						type="button"
-						className="flex items-center text-center mx-auto mt-72 w-[90%] h-11 rounded-xl text-gray text-m bg-main"
-					>
-						<p className="text-center mx-auto text-white">계좌 등록하기</p>
-					</button>
+					type="button"
+					className="flex items-center text-center mx-auto mt-72 w-[90%] h-11 rounded-xl text-gray text-m bg-main"
+					onClick={addAccountBtn}
+				>
+					<p className="text-center mx-auto text-white">계좌 등록하기</p>
+				</button>
 			</div>
 		</div>
 	);

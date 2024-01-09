@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import { useForm } from 'react-hook-form';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
-import NotConfirmedPassword from '../NotConfirmedPassword';
+import NotConfirmedPassword from './NotConfirmedPassword';
 
 const EditPassword = () => {
 	const {
@@ -102,7 +102,7 @@ const EditPassword = () => {
 
 						<button
 							type="button"
-							className="mt-64 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
+							className="mt-72 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
 							onClick={openBottomSheetPassword}
 						>
 							<span className="mx-auto">비밀번호 변경하기</span>
