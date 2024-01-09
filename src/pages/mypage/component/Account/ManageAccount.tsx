@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
-import ContentTwoBtnPage from '../Content/ContentTwoBtnPage';
+import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
@@ -35,7 +35,7 @@ const ManageAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetSignOutOpen}
 				onClose={closeBottomSheetSignOut}
-				viewHeight="calc(100vh * 0.4)"
+				viewHeight="calc(100vh * 0.35)"
 			>
 				<ContentTwoBtnPage
 					title="로그아웃 하시겠습니까?"

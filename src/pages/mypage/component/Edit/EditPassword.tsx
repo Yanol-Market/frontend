@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import { useForm } from 'react-hook-form';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
-import ContentFailBtn from '../Content/ContentFailBtn';
+import ContentFailBtn from '../../../../component/common/BottomSheet/Content/ContentFailBtnPage';
 
 const EditPassword = () => {
 	const {

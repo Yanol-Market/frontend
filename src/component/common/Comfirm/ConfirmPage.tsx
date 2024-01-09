@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+/**
+ * @description 비밀번호 변경 완료 , 회원탈퇴 완료 페이지 공통 컴포넌트입니다.
+ * @param {title} Header 부분에 들어갈 제목입니다. string ex) 회원탈퇴
+ * @param {content} 중앙 부분에 들어갈 내용입니다. string
+ * @param {btnContent} 버튼 안에 들어갈 내용입니다. ex) 홈으로 , 확인 ..
+ * @param {link} 이 버튼을 클릭하면 어디로 갈 것인 지 url을 적을 수 있습니다. ex) '/mypage'
+ */
 interface ComfirmProps {
 	title: string;
 	content: string;

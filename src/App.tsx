@@ -15,7 +15,8 @@ import MyAccount from './pages/mypage/component/Account/MyAccount';
 import Withdrawl from './pages/mypage/component/WithDrawl/Withdrawal';
 import MyPage from './pages/mypage/MyPage.page';
 import InterestRegion from './pages/mypage/component/Region/InterestRegion';
-import ConfirmPage from './pages/mypage/component/Comfirm/ConfirmPage';
+import ConfirmPage from './component/common/Comfirm/ConfirmPage';
+import WishList from './pages/mypage/component/Wishes/WishList';
 
 function App() {
 	return (
@@ -29,6 +30,7 @@ function App() {
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/mypage" element={<MyPage />} />
 					<Route path="/mypage/editprofile" element={<ProfileEdit />} />
+					<Route path="/mypage/wishes" element={<WishList />} />
 					<Route path="/mypage/mylocations" element={<InterestRegion />} />
 					<Route path="/myaccount" element={<MyAccount />} />
 					<Route path="/myaccount/registration" element={<AddMyAccount />} />

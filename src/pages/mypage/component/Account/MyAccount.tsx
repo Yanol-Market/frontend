@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import { useNavigate } from 'react-router-dom';
-import ContentTwoBtnPage from '../Content/ContentTwoBtnPage';
+import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
