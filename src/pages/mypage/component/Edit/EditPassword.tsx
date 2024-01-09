@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import { useForm } from 'react-hook-form';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
-import NotConfirmedPassword from './NotConfirmedPassword';
+import ContentFailBtn from '../Content/ContentFailBtn';
 
 const EditPassword = () => {
 	const {
@@ -29,7 +29,11 @@ const EditPassword = () => {
 				onClose={closeBottomSheetPassword}
 				viewHeight="calc(100vh * 0.3)"
 			>
-				<NotConfirmedPassword />
+				<ContentFailBtn
+					title="현재 비밀번호를 다시 확인해주세요."
+					btn="네"
+					btnFunc={closeBottomSheetPassword}
+				/>
 			</BottomSheet>
 			<div className="flex flex-col items-center w-full h-[100vh] text-center">
 				<div className="w-[90%] mt-14">
