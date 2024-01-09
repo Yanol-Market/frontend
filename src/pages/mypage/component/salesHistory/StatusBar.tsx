@@ -22,7 +22,7 @@ const StatusBar = () => {
 export default StatusBar;
 
 const ClickRounded = tw.div`
-px-2 bg-main py-2 rounded-full
+px-2 bg-main py-2 rounded-full text-white
 `;
 
 const Rounded = tw.div`
