@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
-import SignOutContent from '../Content/SignOutContent';
 import { useNavigate } from 'react-router-dom';
+import ContentTwoBtnPage from '../Content/ContentTwoBtnPage';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
@@ -24,6 +24,11 @@ const ManageAccount = () => {
 	const withdrawlBtn = () => {
 		navigate('/member/withdrawl');
 	};
+
+	const signOutBtn = () => {
+		alert('로그아웃 완료');
+		navigate('/');
+	};
 	return (
 		<div>
 			<Header title="계정 관리" />
@@ -32,7 +37,13 @@ const ManageAccount = () => {
 				onClose={closeBottomSheetSignOut}
 				viewHeight="calc(100vh * 0.4)"
 			>
-				<SignOutContent />
+				<ContentTwoBtnPage
+					title="로그아웃 하시겠습니까?"
+					leftBtn="아니오"
+					rightBtn="네"
+					leftBtnFunc={closeBottomSheetSignOut}
+					rightBtnFunc={signOutBtn}
+				/>
 			</BottomSheet>
 			<div className="w-full h-[100vh] flex flex-col items-center">
 				<div className="w-[90%] mt-5 flex flex-col">

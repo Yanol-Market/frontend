@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import RemoveAccount from './RemoveAccount';
 import { useNavigate } from 'react-router-dom';
+import ContentTwoBtnPage from '../Content/ContentTwoBtnPage';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
@@ -20,6 +20,11 @@ const MyAccount = () => {
 	const addAccountBtn = () => {
 		navigate('/myaccount/registration');
 	};
+
+	const removeAccountBtn = () => {
+		alert('계좌 삭제 완료');
+		navigate('/mypage');
+	};
 	return (
 		<div>
 			<Header title="내 계좌" />
@@ -28,7 +33,13 @@ const MyAccount = () => {
 				onClose={closeBottomSheetAccount}
 				viewHeight="calc(100vh * 0.4)"
 			>
-				<RemoveAccount />
+				<ContentTwoBtnPage
+					title="계좌를 삭제하시겠습니까?"
+					leftBtn="아니오"
+					rightBtn="네"
+					leftBtnFunc={closeBottomSheetAccount}
+					rightBtnFunc={removeAccountBtn}
+				/>
 			</BottomSheet>
 			<div className="w-full h-screen flex flex-col items-center">
 				<div className="w-[90%]">

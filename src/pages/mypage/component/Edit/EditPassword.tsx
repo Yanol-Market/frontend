@@ -7,7 +7,7 @@ import NotConfirmedPassword from './NotConfirmedPassword';
 const EditPassword = () => {
 	const {
 		register,
-		handleSubmit,
+		// handleSubmit,
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
@@ -44,7 +44,7 @@ const EditPassword = () => {
 							</div>
 							<input
 								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="text"
+								type="password"
 								placeholder="현재 비밀번호를 입력하세요."
 							/>
 						</div>
