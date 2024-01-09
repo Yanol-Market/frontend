@@ -18,8 +18,8 @@ import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
 import { Alarm } from './pages/alarm';
-import PurchaseHistory from './pages/mypage/component/PurchaseHistory';
-import SalesHistory from './pages/mypage/component/SalesHistory';
+import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
+import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 
 function App() {
 	return (
