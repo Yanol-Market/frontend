@@ -1,7 +1,13 @@
 import React from 'react';
+import BuyProduct from './BuyProduct';
 
 const Sold = () => {
-	return <div>Sold</div>;
+	// 판매완료
+	return (
+		<div>
+			<BuyProduct />
+		</div>
+	);
 };
 
 export default Sold;
