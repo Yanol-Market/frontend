@@ -23,7 +23,8 @@ import ReservationPage from './pages/reservation/ReservationPage';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
-import { Alarm } from './pages/alarm';
+import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
+import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 
 function App() {
 	return (
@@ -47,10 +48,13 @@ function App() {
 					<Route path="/confirmpassword" element={<ConfirmPassword />} />
 					<Route path="/withdrawl" element={<Withdrawl />} />
 					<Route path="/confirmwithdrawl" element={<ConfirmWithdrawl />} />
+					<Route path="/sales" element={<SalesHistory />} />
+					<Route path="/purchase" element={<PurchaseHistory />} />
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />
+					{/* 임시 */}
 				</Route>
 			</Routes>
 		</>
