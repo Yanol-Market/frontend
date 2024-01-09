@@ -18,6 +18,8 @@ import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
 import { Alarm } from './pages/alarm';
+import PurchaseHistory from './pages/mypage/component/PurchaseHistory';
+import SalesHistory from './pages/mypage/component/SalesHistory';
 
 function App() {
 	return (
@@ -40,6 +42,8 @@ function App() {
 					<Route path="/confirmpassword" element={<ConfirmPassword />} />
 					<Route path="/withdrawl" element={<Withdrawl />} />
 					<Route path="/confirmwithdrawl" element={<ConfirmWithdrawl />} />
+					<Route path="/sales" element={<SalesHistory />} />
+					<Route path="/purchase" element={<PurchaseHistory />} />
 					{/* 임시 */}
 				</Route>
 			</Routes>
