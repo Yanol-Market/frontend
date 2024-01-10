@@ -33,14 +33,13 @@ const ProfileEdit = () => {
 								<p className="pt-2 text-start text-gray">010-1234-5678</p>
 							</div>
 						</div>
-						
+
 						<button
 							type="submit"
 							className="flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white mt-72"
 						>
 							<span className="mx-auto">변경사항 저장하기</span>
 						</button>
-						
 					</form>
 				</div>
 			</div>

@@ -8,6 +8,7 @@ const Sold = () => {
 		<div>
 			<BuyProduct />
 			{/* <SoldDetail /> */}
+			<SoldDetail />
 		</div>
 	);
 };
