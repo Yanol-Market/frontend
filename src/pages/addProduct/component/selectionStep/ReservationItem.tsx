@@ -23,7 +23,6 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 	const [isSelected, setIsSelected] = useState(false);
 
 	const handleClick = () => {
-		// 예약 항목을 클릭했을 때의 동작
 		setIsSelected(!isSelected);
 	};
 
@@ -34,20 +33,17 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 			}`}
 			onClick={handleClick}
 		>
-			{' '}
 			<div
 				className={`flex items-center justify-between ${
-					isSelected ? 'text-black' : 'text-[#828282]'
+					isSelected ? 'text-black' : 'text-descGray'
 				}`}
 			>
-				<p className="mr-2 text-sm ">
-					예약번호 {reservation.reservationNumber}
-				</p>
+				<p className="mr-2 text-sm">예약번호 {reservation.reservationNumber}</p>
 				<p className="text-sm">{reservation.reservationDate}</p>
 			</div>
 			<div
-				className={`border-b w-full  mt-2 mb-[0.8125rem] ${
-					isSelected ? 'text-[#FFF3C5]' : 'text-borderWhite'
+				className={`border-b w-full mt-2 mb-[0.8125rem] ${
+					isSelected ? 'text-homeMain' : 'text-borderWhite'
 				}`}
 			/>
 			<div className="flex flex-col">
@@ -58,8 +54,8 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 					<p
 						className={`text-sm border rounded-full px-[0.4rem] py-0.5  ${
 							isSelected
-								? 'border-[#FFF3C5] bg-[#FFF3C5]'
-								: 'border-borderGray bg-[#FAFAFA]'
+								? 'border-homeMain bg-homeMain'
+								: 'border-borderGray bg-lightGray'
 						}`}
 					>
 						{reservation.accommodationType}
@@ -70,8 +66,8 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 			<div className="flex items-end flex-col text-m">
 				<p className="mb-[0.625rem]">{reservation.totalAmount}</p>
 				<div
-					className={`items-center flex  w-full h-[3.875rem] rounded-md ${
-						isSelected ? 'bg-[#FFF3C5]' : 'bg-[#FAFAFA]'
+					className={`items-center flex w-full h-[3.875rem] rounded-md ${
+						isSelected ? 'bg-homeMain' : 'bg-lightGray'
 					}`}
 				>
 					<div className="flex-1">

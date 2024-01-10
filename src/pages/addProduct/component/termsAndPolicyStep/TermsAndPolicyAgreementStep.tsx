@@ -1,34 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CompletionScreen from '../CompletionScreen';
 
 interface Props {
-	onPrevStep: () => void;
+	onPrevStep?: () => void;
 	onComplete: () => void;
 }
 
-const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
+const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
 	const [agreed, setAgreed] = useState(false);
 	const [isCompleted, setIsCompleted] = useState(false);
 
-	const handleCheckboxChange = () => {
-		setAgreed(!agreed);
-		// 체크박스 클릭 시 isCompleted를 업데이트합니다.
-		setIsCompleted(!agreed);
-	};
-
 	const handleNextButtonClick = () => {
 		if (agreed) {
-			// "다음" 버튼 클릭 시에만 추가 처리를 할 수 있습니다.
-			// 예: 다음 화면으로 이동하는 등의 처리
-			// ...
-
-			// "다음" 버튼 클릭 시 isCompleted를 업데이트합니다.
 			setIsCompleted(true);
+		} else {
+			alert('약관에 동의해주세요!');
 		}
 	};
 
 	const handleCompleteButtonClick = () => {
-		// "완료" 버튼 클릭 시 onComplete를 호출합니다.
 		onComplete();
 	};
 
@@ -38,7 +28,7 @@ const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 				<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">
 					약관 및 정책 동의
 				</h2>
-				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-[#FAFAFA]" />
+				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray" />
 				<div className="flex flex-col h-screen text-black">
 					<h3 className="text-body font-semibold mt-[11rem] ml-5 my-5">
 						약관 및 정책
@@ -68,7 +58,7 @@ const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 						<div className="flex mb-3">
 							<input
 								type="checkbox"
-								className="mt-[0.15rem] appearance-none bg-[url('pages/addProduct/component/unchecked.svg')] w-4 h-4 mr-2 checked:bg-[url('pages/addProduct/component/checked.svg')]"
+								className="mt-[0.15rem] appearance-none bg-[url('pages/addProduct/component/termsAndPolicyStep/unchecked.svg')] w-4 h-4 mr-2 checked:bg-[url('pages/addProduct/component/termsAndPolicyStep/checked.svg')]"
 								checked={agreed}
 								onChange={() => setAgreed(!agreed)}
 							/>
@@ -82,13 +72,13 @@ const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 					</div>
 
 					{/* 다음 버튼 */}
-					<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
+					<div className="fixed bottom-7 left-0 right-0 flex justify-center">
 						<button
 							type="button"
 							className={`mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-lg ${
 								agreed
 									? 'text-white bg-main cursor-pointer'
-									: 'text-[#828282] cursor-not-allowed'
+									: 'text-descGray cursor-not-allowed'
 							}`}
 							onClick={
 								isCompleted ? handleCompleteButtonClick : handleNextButtonClick

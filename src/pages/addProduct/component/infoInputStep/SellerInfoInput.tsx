@@ -4,13 +4,10 @@ interface SellerInfoInputProps {
 	onSellerInfoChange: (info: string) => void;
 }
 
-const SellerInfoInput: React.FC<SellerInfoInputProps> = ({
-	onSellerInfoChange,
-}) => {
+const SellerInfoInput = ({ onSellerInfoChange }: SellerInfoInputProps) => {
 	const [sellerComment, setSellerComment] = useState<string>('');
 
 	const setSellerInfo = (info: string) => {
-		// 필요에 따라 상태 업데이트 로직 추가
 		onSellerInfoChange(info);
 	};
 	return (

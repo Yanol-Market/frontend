@@ -1,18 +1,19 @@
-// GoldenPriceDecision.tsx
 import React from 'react';
 
 interface GoldenPriceDecisionProps {
 	currentSellingPrice: number;
+	initialPurchasePrice: number;
 	onPriceChange: (newPrice: number) => void;
 }
 
-const GoldenPriceDecision: React.FC<GoldenPriceDecisionProps> = ({
+const GoldenPriceDecision = ({
 	currentSellingPrice,
+	initialPurchasePrice,
 	onPriceChange,
-}) => {
+}: GoldenPriceDecisionProps) => {
 	return (
 		<div>
-			<h3 className="text-body font-semibold text-black ">골든특가 결정</h3>
+			<h3 className="text-body font-semibold text-black">골든특가 결정</h3>
 			<p className="mt-3 text-m">
 				하단의 야놀자 판매가를 참고하여 판매 가격을 매겨주세요.
 			</p>
@@ -30,7 +31,7 @@ const GoldenPriceDecision: React.FC<GoldenPriceDecisionProps> = ({
 				</p>
 				<input
 					type="number"
-					placeholder="기존구매가 200,000"
+					placeholder={`기존구매가 ${initialPurchasePrice}`}
 					onChange={(e) => onPriceChange(Number(e.target.value))}
 					className="border-b border-borderGray outline-none ml-3 mt-1 w-[14.0625rem] text-center text-descGray pb-2"
 				/>

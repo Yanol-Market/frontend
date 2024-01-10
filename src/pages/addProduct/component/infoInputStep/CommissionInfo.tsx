@@ -23,13 +23,13 @@ const CommissionInfo: React.FC<CommissionInfoProps> = ({ desiredPrice }) => {
 					<span className="font-semibold">{desiredPrice}원</span>
 				</p>
 				<p className="flex justify-between mt-2">
-					<span>골든티켓 수수료</span>{' '}
+					<span>골든티켓 수수료</span>
 					<span className="font-semibold">
 						-{commissionAmount}원 ({commissionRate}%)
 					</span>
 				</p>
 				<p className="flex justify-between font-semibold text-dateBlue mt-2">
-					<span>예상 최종 정산액</span>{' '}
+					<span>예상 최종 정산액</span>
 					<span className="font-semibold">{finalSettlementAmount}원</span>
 				</p>
 			</div>

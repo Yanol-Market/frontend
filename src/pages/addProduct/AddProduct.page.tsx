@@ -46,12 +46,12 @@ const AddProductPage = () => {
 						<div
 							key={index}
 							className={`rounded-md mb-[1.875rem] mt-[4.8125rem] ${
-								completed ? 'bg-[#FFCC00]' : 'bg-borderGray'
+								completed ? 'bg-main' : 'bg-borderGray'
 							}`}
 							style={{
 								width: '105px',
 								height: '2px',
-								marginRight: index < stepsCompleted.length - 1 ? '10px' : '0', // 맨 끝 바에는 오른쪽 마진을 주지 않음
+								marginRight: index < stepsCompleted.length - 1 ? '10px' : '0', // 맨 끝 바에는 오른쪽 마진X
 							}}
 						/>
 					))}

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import ReservationItem, {
-	Reservation,
-} from '../addProductHeader/ReservationItem';
+import ReservationItem, { Reservation } from './ReservationItem';
 
 interface Props {
 	onNextStep: () => void;
 }
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
-	const hasReservations = true; // 예약 내역이 있는지 여부를 나타내는 변수
+	const [isLoggedIn] = useState(true);
+	const hasReservations = true; // 예약 내역 여부
 
 	const renderContent = () => {
 		const reservations: Reservation[] = [
-			// 예약 정보 배열
+			// 야놀자 예약 정보 배열
 			{
 				reservationNumber: 2312120123456,
 				reservationDate: '2024.01.01',
@@ -67,14 +65,16 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 		if (isLoggedIn) {
 			return (
 				<>
-					<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-[#FAFAFA]" />
+					{/* 회색 선 */}
+					<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray" />
+
 					<h3 className="fixed top-[11rem] text-body ml-5 font-semibold">
 						나의 예약 내역
 					</h3>
 					{!hasReservations ? (
 						<>
 							<div className="flex flex-col items-center h-screen">
-								<p className="mx-auto text-[14px] mt-[24.3125rem] text-[#828282]">
+								<p className="mx-auto text-[14px] mt-[24.3125rem] text-descGray">
 									양도 가능한 예약 내역이 없어요!
 								</p>
 							</div>
@@ -99,7 +99,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
 									type="button"
-									className="mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-[#828282] cursor-pointer text-lg"
+									className="mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-descGray cursor-pointer text-lg"
 									onClick={onNextStep}
 								>
 									다음
@@ -123,7 +123,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 					<div className="flex flex-col items-center flex-grow">
 						<button
 							type="button"
-							className="mx-auto bg-[#FF3478] w-[20.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
+							className="mx-auto bg-yaLogo w-[20.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
 						>
 							로그인
 						</button>
@@ -144,7 +144,6 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 		<div>
 			<div className="fixed top-[6rem] w-[375px] bg-white h-[7rem]" />
 			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">판매 상품 선택</h2>
-
 			{renderContent()}
 		</div>
 	);
