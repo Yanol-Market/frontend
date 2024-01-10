@@ -24,6 +24,8 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
+import Sold from './pages/mypage/component/salesHistory/Sold';
 
 function App() {
 	return (
@@ -36,8 +38,13 @@ function App() {
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/search" element={<Search />} />
-					<Route path="/sales" element={<SalesHistory />} />
+					<Route path="/sales" element={<SalesHistory />}>
+						<Route path="detail/:productId" element={<SoldDetail />} />
+					</Route>
+
 					<Route path="/purchase" element={<PurchaseHistory />} />
+					<Route path="/purchase/:productId" element={<PurchaseHistory />} />
+
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />

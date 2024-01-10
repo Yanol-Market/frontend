@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import Selling from './Selling';
 import Sold from './Sold';
+import { useNavigate } from 'react-router';
 
 const SalesHistory = () => {
 	const [currentTab, setCurrentTab] = useState('selling');
-
+	const navigate = useNavigate();
+	const sellingClick = () => {
+		setCurrentTab('selling');
+		navigate(`/sales`);
+	};
 	return (
 		<div>
 			<Header title={'판매내역'} />
@@ -16,7 +21,7 @@ const SalesHistory = () => {
 							? '  border-solid border-b-4 border-main font-semibold'
 							: null
 					} `}
-					onClick={() => setCurrentTab('selling')}
+					onClick={sellingClick}
 				>
 					판매중
 				</div>

@@ -1,10 +1,18 @@
 import React from 'react';
 import SalesProduct from './SalesProduct';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 const SoldDetail = () => {
+	const handleArrowBackClick = () => {
+		window.history.back();
+	};
+
 	return (
 		<div className="p-5">
+			<ArrowBackIosNewOutlinedIcon
+				sx={{ width: '14px' }}
+				onClick={handleArrowBackClick}
+			/>
 			<SalesProduct />
 			<div>
 				<div className="text-body py-4 font-bold ">거래 정보</div>{' '}
