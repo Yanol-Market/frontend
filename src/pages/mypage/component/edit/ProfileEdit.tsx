@@ -1,11 +1,11 @@
 import React from 'react';
-import { Header } from '../../../component/common/Header';
+import { Header } from '../../../../component/common/Header';
 
 const ProfileEdit = () => {
 	return (
 		<div>
 			<Header title="프로필 수정" />
-			<div className="flex flex-col items-center w-full h-[100vh] text-center">
+			<div className="flex flex-col items-center w-full h-screen text-center">
 				<img src="/assets/images/profileImage.svg" alt="기본 프로필 이미지" />
 				<div className="w-[90%] mt-14">
 					<form>
@@ -33,9 +33,10 @@ const ProfileEdit = () => {
 								<p className="pt-2 text-start text-gray">010-1234-5678</p>
 							</div>
 						</div>
+
 						<button
 							type="submit"
-							className="mt-44 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
+							className="flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white mt-72"
 						>
 							<span className="mx-auto">변경사항 저장하기</span>
 						</button>

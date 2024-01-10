@@ -12,8 +12,8 @@ const Header = ({ title }: propsType) => {
 
 	return (
 		<div className=" bg-white left-0 top-0 w-[375px] h-[70px] z-20 m-auto relative">
-			<div className=" w-[375px] h-[70px]  flex">
-				<div className="my-auto cursor-pointer pl-5">
+			<div className=" w-[375px] h-[70px]  flex pt-[25px]">
+				<div className="my-auto cursor-pointer pl-5 ">
 					<ArrowBackIosNewOutlinedIcon
 						sx={{ width: '14px' }}
 						onClick={handleArrowBackClick}

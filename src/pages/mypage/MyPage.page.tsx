@@ -1,10 +1,10 @@
 import React from 'react';
+import AfterSignInMyPage from './component/signIn/AfterSignInMyPage';
+import BeforeSignInMyPage from './component/signIn/BeforeSignInMyPage';
+
 const MyPage = () => {
-	return (
-		<div className="flex flex-col items-center w-full text-center px-5">
-			<h1>마이페이지</h1>
-		</div>
-	);
+	const accessToken = sessionStorage.getItem('accessToken'); // 추후 변경 예정
+	return accessToken ? <AfterSignInMyPage /> : <BeforeSignInMyPage />;
 };
 
 export default MyPage;
