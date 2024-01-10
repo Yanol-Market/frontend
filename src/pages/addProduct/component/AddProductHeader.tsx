@@ -10,10 +10,6 @@ interface propsType {
 const AddProductHeader = ({ title, handleArrowBackClick }: propsType) => {
 	const navigate = useNavigate();
 
-	// const handleArrowBackClick = () => {
-	// 	window.history.back();
-	// };
-
 	const defaultHandleArrowBackClick = () => {
 		navigate(-1); // React Router의 뒤로 가기
 	};

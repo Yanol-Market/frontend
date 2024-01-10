@@ -15,8 +15,6 @@ const AddProductInfoInputStep = ({ onPrevStep, onNextStep }: Props) => {
 		throw new Error('Function not implemented.');
 	}
 
-	// 필요한 로직 및 상태 관리
-
 	return (
 		<div>
 			<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem]" />

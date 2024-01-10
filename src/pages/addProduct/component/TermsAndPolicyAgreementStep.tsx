@@ -98,7 +98,7 @@ const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 						</button>
 					</div>
 					{/* 완료 화면 */}
-					{isCompleted && <CompletionScreen onPrevStep={onPrevStep} />}
+					{isCompleted && <CompletionScreen onComplete={onComplete} />}
 				</div>
 			</div>
 		</div>

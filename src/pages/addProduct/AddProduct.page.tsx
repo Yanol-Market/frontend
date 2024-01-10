@@ -24,7 +24,7 @@ const AddProductPage = () => {
 	};
 
 	const handleComplete = () => {
-		// 등록 완료 로직
+		alert('아직 연결해야 합니다!');
 	};
 
 	const stepsCompleted = Array(3).fill(false);
