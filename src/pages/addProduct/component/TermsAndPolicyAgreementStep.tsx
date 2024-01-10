@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import CompletionScreen from './CompletionScreen';
 
 interface Props {
 	onPrevStep: () => void;
@@ -7,6 +8,29 @@ interface Props {
 
 const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 	const [agreed, setAgreed] = useState(false);
+	const [isCompleted, setIsCompleted] = useState(false);
+
+	const handleCheckboxChange = () => {
+		setAgreed(!agreed);
+		// 체크박스 클릭 시 isCompleted를 업데이트합니다.
+		setIsCompleted(!agreed);
+	};
+
+	const handleNextButtonClick = () => {
+		if (agreed) {
+			// "다음" 버튼 클릭 시에만 추가 처리를 할 수 있습니다.
+			// 예: 다음 화면으로 이동하는 등의 처리
+			// ...
+
+			// "다음" 버튼 클릭 시 isCompleted를 업데이트합니다.
+			setIsCompleted(true);
+		}
+	};
+
+	const handleCompleteButtonClick = () => {
+		// "완료" 버튼 클릭 시 onComplete를 호출합니다.
+		onComplete();
+	};
 
 	return (
 		<div>
@@ -62,13 +86,19 @@ const TermsAndPolicyAgreementStep = ({ onPrevStep, onComplete }: Props) => {
 						<button
 							type="button"
 							className={`mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-lg ${
-								agreed ? 'text-white bg-main cursor-pointer' : 'text-[#828282]'
+								agreed
+									? 'text-white bg-main cursor-pointer'
+									: 'text-[#828282] cursor-not-allowed'
 							}`}
-							onClick={agreed ? onComplete : undefined}
+							onClick={
+								isCompleted ? handleCompleteButtonClick : handleNextButtonClick
+							}
 						>
-							다음
+							{agreed ? '완료' : '다음'}
 						</button>
 					</div>
+					{/* 완료 화면 */}
+					{isCompleted && <CompletionScreen onPrevStep={onPrevStep} />}
 				</div>
 			</div>
 		</div>
