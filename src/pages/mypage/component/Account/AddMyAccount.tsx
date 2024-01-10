@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import SelectBanks from '../Region/SelectBanks';
+import SelectBanks from '../region/SelectBanks';
 import { useForm } from 'react-hook-form';
 
 const AddMyAccount = () => {
@@ -11,8 +11,8 @@ const AddMyAccount = () => {
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
-	const watchAgreeCheckBox = watch('account-checkbox')
-	const isButtonDisabled = !(watchAgreeCheckBox);
+	const watchAgreeCheckBox = watch('account-checkbox');
+	const isButtonDisabled = !watchAgreeCheckBox;
 	const [isBottomSheetBankOpen, setIsBottomSheetBankOpen] = useState(false);
 
 	const openBottomSheetBank = () => {
@@ -44,7 +44,12 @@ const AddMyAccount = () => {
 							// onClick={openBottomSheet}
 						>
 							<p>은행을 선택해주세요.</p>
-							<img className="cursor-pointer" src="/assets/images/dropdownArrow.svg" alt="아래로 이동" onClick={openBottomSheetBank} />
+							<img
+								className="cursor-pointer"
+								src="/assets/images/dropdownArrow.svg"
+								alt="아래로 이동"
+								onClick={openBottomSheetBank}
+							/>
 						</div>
 					</div>
 					<div className="mt-7">
@@ -57,8 +62,8 @@ const AddMyAccount = () => {
 							placeholder="계좌 번호를 입력해주세요."
 							{...register('account-number', { required: true })}
 							onChange={(e) => {
-							e.target.value = e.target.value.replace(/[^0-9]/g, '');
-						}}
+								e.target.value = e.target.value.replace(/[^0-9]/g, '');
+							}}
 						/>
 					</div>
 					<div className="mt-7">
@@ -93,7 +98,6 @@ const AddMyAccount = () => {
 									: 'border-borderGray bg-main text-white'
 							} flex items-center text-center mx-auto  w-full h-11 rounded-xl text-gray text-m`}
 							disabled={isButtonDisabled}
-							
 						>
 							<p className="text-center mx-auto">계좌 등록하기</p>
 						</button>
