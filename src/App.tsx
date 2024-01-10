@@ -9,7 +9,10 @@ import ReservationPage from './pages/reservation/ReservationPage';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
+import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
+import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
+import { Search } from './pages/search';
 import { LocalSearch } from './pages/localSearch';
 import ConfirmPage from './component/common/Comfirm/ConfirmPage';
 import MyPage from './pages/mypage/MyPage.page';
@@ -32,6 +35,9 @@ function App() {
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
+					<Route path="/search" element={<Search />} />
+					<Route path="/sales" element={<SalesHistory />} />
+					<Route path="/purchase" element={<PurchaseHistory />} />
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
@@ -55,6 +61,7 @@ function App() {
 							/>
 						}
 					/>
+
 					<Route path="/member/withdrawl" element={<Withdrawl />} />
 					<Route
 						path="/member/withdrawl/confirm"
