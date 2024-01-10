@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import ReservationItem, { Reservation } from './ReservationItem';
+import ReservationItem, {
+	Reservation,
+} from '../addProductHeader/ReservationItem';
 
 interface Props {
 	onNextStep: () => void;

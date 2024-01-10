@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AddProductSelectionStep from './component/AddProductSelectionStep';
-import AddProductInfoInputStep from './component/AddProductInfoInputStep';
-import TermsAndPolicyAgreementStep from './component/TermsAndPolicyAgreementStep';
+import AddProductSelectionStep from './component/selectionStep/AddProductSelectionStep';
+import AddProductInfoInputStep from './component/infoInputStep/AddProductInfoInputStep';
+import TermsAndPolicyAgreementStep from './component/termsAndPolicyStep/TermsAndPolicyAgreementStep';
 import AddProductHeader from './component/AddProductHeader';
 
 const AddProductPage = () => {

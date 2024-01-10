@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CompletionScreen from './CompletionScreen';
+import CompletionScreen from '../CompletionScreen';
 
 interface Props {
 	onPrevStep: () => void;
