@@ -21,7 +21,7 @@ const SignUp = () => {
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
 	return (
-		<div className="flex flex-col items-center w-full h-[100vh] text-center px-5">
+		<div className="flex flex-col items-center w-full h-screen text-center px-5">
 			<div className="mt-7">회원가입</div>
 			<form className="mt-10" onSubmit={handleSubmit(getSignUp)}>
 				<input

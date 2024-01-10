@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Header } from '../../../component/common/Header';
+import { Header } from '../../../../component/common/Header';
 import { useForm } from 'react-hook-form';
-import { BottomSheet } from '../../../component/common/BottomSheet';
-import NotConfirmedPassword from './NotConfirmedPassword';
+import { BottomSheet } from '../../../../component/common/BottomSheet';
+import ContentFailBtn from '../../../../component/common/BottomSheet/Content/ContentFailBtnPage';
 
 const EditPassword = () => {
 	const {
 		register,
-		handleSubmit,
+		// handleSubmit,
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
@@ -29,7 +29,11 @@ const EditPassword = () => {
 				onClose={closeBottomSheetPassword}
 				viewHeight="calc(100vh * 0.3)"
 			>
-				<NotConfirmedPassword />
+				<ContentFailBtn
+					title="현재 비밀번호를 다시 확인해주세요."
+					btn="네"
+					btnFunc={closeBottomSheetPassword}
+				/>
 			</BottomSheet>
 			<div className="flex flex-col items-center w-full h-[100vh] text-center">
 				<div className="w-[90%] mt-14">
@@ -38,13 +42,13 @@ const EditPassword = () => {
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">현재 비밀번호</p>
 								<img
-									className="absolute cursor-pointer right-3 top-[2.5rem]"
+									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
 									src="/assets/images/typePassword.svg"
 								/>
 							</div>
 							<input
 								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="text"
+								type="password"
 								placeholder="현재 비밀번호를 입력하세요."
 							/>
 						</div>
@@ -52,7 +56,7 @@ const EditPassword = () => {
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">새 비밀번호</p>
 								<img
-									className="absolute cursor-pointer right-3 top-[2.5rem]"
+									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
 									src="/assets/images/typePassword.svg"
 								/>
 							</div>
@@ -79,7 +83,7 @@ const EditPassword = () => {
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">새 비밀번호 확인</p>
 								<img
-									className="absolute cursor-pointer right-3 top-[2.5rem]"
+									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
 									src="/assets/images/typePassword.svg"
 								/>
 							</div>
@@ -89,12 +93,12 @@ const EditPassword = () => {
 								placeholder="새 비밀번호를 다시 한 번 입력하세요."
 								{...register('newpasswordChecked', {
 									required: true,
-									validate: (value) => value === watch('newpasswordChecked'),
+									validate: (value) => value === watch('newPassword'),
 								})}
 							/>
 							{errors.newpasswordChecked &&
 								errors.newpasswordChecked?.type === 'validate' && (
-									<div className="text-sm text-red mb-4 text-start">
+									<div className="text-sm text-red text-start">
 										입력한 비밀번호와 다릅니다
 									</div>
 								)}
@@ -102,7 +106,7 @@ const EditPassword = () => {
 
 						<button
 							type="button"
-							className="mt-44 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
+							className="mt-72 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
 							onClick={openBottomSheetPassword}
 						>
 							<span className="mx-auto">비밀번호 변경하기</span>
