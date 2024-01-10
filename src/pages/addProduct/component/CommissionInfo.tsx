@@ -6,7 +6,7 @@ interface CommissionInfoProps {
 
 const CommissionInfo: React.FC<CommissionInfoProps> = ({ desiredPrice }) => {
 	// 골든티켓 수수료율
-	const commissionRate = 8;
+	const commissionRate = 5;
 
 	// 골든티켓 수수료 계산
 	const commissionAmount = (desiredPrice * commissionRate) / 100;

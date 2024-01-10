@@ -20,11 +20,13 @@ const AddProductPage = () => {
 			const prevStep = currentStep - 1;
 			setCurrentStep(prevStep);
 			navigate(`/addproduct/${prevStep}`);
+		} else {
+			navigate('/');
 		}
 	};
 
 	const handleComplete = () => {
-		alert('아직 연결해야 합니다!');
+		navigate('/');
 	};
 
 	const stepsCompleted = Array(3).fill(false);
