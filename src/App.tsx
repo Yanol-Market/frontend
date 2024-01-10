@@ -19,8 +19,8 @@ import MyAccount from './pages/mypage/component/account/MyAccount';
 import EditPassword from './pages/mypage/component/edit/EditPassword';
 import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
-import WishList from './pages/mypage/component/Wishes/WishList';
-import Withdrawl from './pages/mypage/component/WithDrawl/Withdrawal';
+import WishList from './pages/mypage/component/wishes/WishList';
+import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 
 function App() {
 	return (
