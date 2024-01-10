@@ -23,7 +23,6 @@ import ReservationPage from './pages/reservation/ReservationPage';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
-import { Alarm } from './pages/alarm';
 
 function App() {
 	return (
