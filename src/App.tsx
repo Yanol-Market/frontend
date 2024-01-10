@@ -13,14 +13,14 @@ import { Alarm } from './pages/alarm';
 import { LocalSearch } from './pages/localSearch';
 import ConfirmPage from './component/common/Comfirm/ConfirmPage';
 import MyPage from './pages/mypage/MyPage.page';
-import AddMyAccount from './pages/mypage/component/Account/AddMyAccount';
-import ManageAccount from './pages/mypage/component/Account/ManageAccount';
-import MyAccount from './pages/mypage/component/Account/MyAccount';
-import EditPassword from './pages/mypage/component/Edit/EditPassword';
-import ProfileEdit from './pages/mypage/component/Edit/ProfileEdit';
-import InterestRegion from './pages/mypage/component/Region/InterestRegion';
-import WishList from './pages/mypage/component/Wishes/WishList';
-import Withdrawl from './pages/mypage/component/WithDrawl/Withdrawal';
+import AddMyAccount from './pages/mypage/component/account/AddMyAccount';
+import ManageAccount from './pages/mypage/component/account/ManageAccount';
+import MyAccount from './pages/mypage/component/account/MyAccount';
+import EditPassword from './pages/mypage/component/edit/EditPassword';
+import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
+import InterestRegion from './pages/mypage/component/region/InterestRegion';
+import WishList from './pages/mypage/component/wishes/WishList';
+import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 
 function App() {
 	return (

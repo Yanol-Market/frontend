@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 	const {
@@ -19,6 +21,34 @@ const SignUp = () => {
 	const watchCheckboxSecond = watch('second-checkbox');
 	const watchCheckboxThird = watch('third-checkbox-');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
+
+	const navigate = useNavigate();
+	const mutation = useMutation({
+		mutationFn: getSignUp,
+		onSuccess(data) {
+			console.log(data);
+			alert('회원가입 완료');
+			navigate('/');
+		},
+		onError(err) {
+			console.error(err);
+			throw new Error('로그인 실패');
+		},
+	});
+
+	const handleSignUp = async () => {
+		const data = {
+			name: userName,
+			nickname: userNickName,
+			email: userEmail,
+			password: userPassword,
+			phoneNumber: userPhoneNumber,
+			marketing: watchCheckboxThird,
+		};
+		if (data) {
+			mutation.mutate(data);
+		}
+	};
 
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
@@ -162,13 +192,14 @@ const SignUp = () => {
 					</div>
 				</div>
 				<button
-					type="submit"
+					type="button"
 					className={`border ${
 						isButtonDisabled
 							? 'border-borderGray'
 							: 'border-borderGray bg-main text-white'
 					} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
 					disabled={isButtonDisabled}
+					onClick={handleSignUp}
 				>
 					<span className="mx-auto">가입하기</span>
 				</button>

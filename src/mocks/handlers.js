@@ -24,17 +24,26 @@ export const handlers = [
 		const userInfo = await request.json();
 		const randomAccessToken = uuidv4();
 		const randomRefreshToken = uuidv4();
-		return HttpResponse.json([
-			{
-				data: {
-					grantType: 'Bearer',
-					accessToken: randomAccessToken,
-					refreshToken: randomRefreshToken,
-					expiresIn: 3600,
+		if (userInfo.email != 'error@naver.com') {
+			return HttpResponse.json([
+				{
+					data: {
+						grantType: 'Bearer',
+						accessToken: randomAccessToken,
+						refreshToken: randomRefreshToken,
+						expiresIn: 3600,
+					},
+					status: 'SUCCESS',
 				},
-				status: 'SUCCESS',
-			},
-		]);
+			]);
+		} else {
+			return HttpResponse.error([
+				{
+					status: 404,
+					message: '로그인 실패',
+				},
+			]);
+		}
 	}),
 	http.post('/api/signup', async ({ request }) => {
 		const userInfo = await request.json();
@@ -51,8 +60,12 @@ export const handlers = [
 			]);
 		}
 	}),
-	http.get('/api/products', () => {
-		return HttpResponse.json(products);
+	http.post('/api/signout', async ({ request }) => {
+		return HttpResponse.json([
+			{
+				status: 'SUCCESS',
+			},
+		]);
 	}),
 ];
 
