@@ -12,6 +12,7 @@ import Failure from './pages/reservation/Failure';
 import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
 import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
+import { Search } from './pages/search';
 import { LocalSearch } from './pages/localSearch';
 import ConfirmPage from './component/common/Comfirm/ConfirmPage';
 import MyPage from './pages/mypage/MyPage.page';
@@ -60,6 +61,7 @@ function App() {
 							/>
 						}
 					/>
+
 					<Route path="/member/withdrawl" element={<Withdrawl />} />
 					<Route
 						path="/member/withdrawl/confirm"
@@ -72,7 +74,6 @@ function App() {
 							/>
 						}
 					/>
-
 				</Route>
 			</Routes>
 		</>
