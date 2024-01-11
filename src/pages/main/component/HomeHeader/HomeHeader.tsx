@@ -10,7 +10,7 @@ export const HomeHeader = () => {
 				<HeaderInfo />
 			</div>
 			<div>
-				<SearchBar />
+				<SearchBar src={'/search'} text={'당신이 원하는 지역과 날짜의 숙소를 찾아보세요!'} />
 			</div>
 		</header>
 	);

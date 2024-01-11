@@ -19,6 +19,7 @@ import ConfirmPassword from './pages/mypage/component/ConfirmPassword';
 import Withdrawl from './pages/mypage/component/Withdrawal';
 import ConfirmWithdrawl from './pages/mypage/component/ConfirmWithdrawl';
 import { Alarm } from './pages/alarm';
+import { SearchResult } from './pages/searchResult';
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/search" element={<Search />} />
+					<Route path="/searchResult" element={<SearchResult />} />
 					<Route path="/mypage" element={<MyAccount />} />
 					<Route path="/addaccount" element={<AddMyAccount />} />
 					<Route path="/manageaccount" element={<ManageAccount />} />
