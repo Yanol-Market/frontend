@@ -1,13 +1,14 @@
 import React from 'react';
-import BuyProduct from '../salesHistory/BuyProduct';
 import { useLocation, Outlet } from 'react-router-dom';
+import BoughtProd from './BoughtProd';
 
+// 구매완료 - purchase
 const Bought = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	// 구매완료
+
 	return (
-		<div> {currentPath === '/purchase' ? <BuyProduct /> : <Outlet />}</div>
+		<div> {currentPath === '/purchase' ? <BoughtProd /> : <Outlet />}</div>
 	);
 };
 
