@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useLocation } from 'react-router-dom';
+import { BottomSheet } from '../../../../component/common/BottomSheet';
+import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 
 const productData: ProductData = {
 	registrationNumber: 202401051119,
@@ -26,18 +29,55 @@ interface ProductData {
 }
 
 const SalesProduct = () => {
+	const location = useLocation();
+	const currentPath = location.pathname;
+
+	const [bottom, setBottom] = useState(false);
+
+	const openBottom = () => {
+		setBottom(true);
+	};
+
+	const closeBottom = () => {
+		setBottom(false);
+	};
+
+	// 구매중 - 구매 상품 삭제 API
+	const dltProduct = () => {
+		console.log('상품 삭제 완료');
+		closeBottom();
+	};
+	console.log(currentPath);
 	return (
 		<>
 			<div>
-				<div className="pb-5 flex justify-between">
+				<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
+					<ContentTwoBtnPage
+						title="구매 정보를 삭제하시겠습니까?"
+						leftBtn="취소"
+						rightBtn="삭제"
+						leftBtnFunc={closeBottom}
+						rightBtnFunc={dltProduct}
+					/>
+				</BottomSheet>
+				<div className="pb-5 flex justify-between items-center">
 					<p className="text-sm pt-[8px]">
 						골든티켓 등록번호 {productData.registrationNumber}
 					</p>
 					<div>
-						<MoreVertIcon
-							sx={{ width: '13px', color: '#BDBDBD' }}
-							className="cursor-pointer"
-						/>
+						{currentPath === '/purchase' ? (
+							<img
+								src="/assets/images/delete.svg"
+								alt="삭제하기"
+								className="cursor-pointer"
+								onClick={openBottom}
+							/>
+						) : (
+							<MoreVertIcon
+								sx={{ width: '13px', color: '#BDBDBD' }}
+								className="cursor-pointer"
+							/>
+						)}
 					</div>
 				</div>
 				<div className="flex">
@@ -60,7 +100,13 @@ const SalesProduct = () => {
 						<p className="text-lg font-bold pt-[15px]">{productData.price}</p>
 					</div>
 					<div className="text-sm">
-						<div className="flex flex-col justify-center items-center bg-lightGray rounded-[10px] w-[35px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">
+						<div
+							className={`flex flex-col justify-center items-center rounded-[10px] w-[35px] h-[20px] p-[5px] text-center ${
+								currentPath === '/purchase'
+									? 'bg-homeMain'
+									: 'bg-lightGray border-[1px] border-[#e0e0e0]'
+							}`}
+						>
 							<p className="">{productData.productStatus}</p>
 						</div>
 					</div>
