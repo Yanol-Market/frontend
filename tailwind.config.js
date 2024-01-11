@@ -33,6 +33,7 @@ module.exports = {
 				fontBlack: '#222222',
 				gray50: '#E0E0E0',
 				yaLogo: '#FF3478',
+				gradientStart: '#FFE266',
 			},
 			fontSize: {
 				headline1: '24px',

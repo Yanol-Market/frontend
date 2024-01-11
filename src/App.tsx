@@ -26,12 +26,14 @@ import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import { YaSignIn } from './pages/yaSignIn';
+import Splash from './pages/splash/Splash.page';
 
 function App() {
 	return (
 		<>
 			<Routes>
 				<Route element={<Layout />}>
+					<Route path="/splash" element={<Splash />} />
 					<Route path="/" element={<Main />} />
 					<Route path="/signin" element={<SignIn />} />
 					<Route path="/yasignin" element={<YaSignIn />} />

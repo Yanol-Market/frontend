@@ -48,7 +48,7 @@ const YaSignIn = () => {
 
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
-			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
+			<img className="mt-24" src="/assets/images/yanoljaLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"
 				onSubmit={handleSubmit(handleSignIn)}
@@ -93,21 +93,7 @@ const YaSignIn = () => {
 					</p>
 				</div>
 			</form>
-			<div className="w-full mt-[3.75rem]">
-				<button
-					type="button"
-					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
-					onClick={handleSignUp}
-				>
-					<img
-						className="ml-6"
-						src="/assets/images/yaLogo.svg"
-						alt="야놀자 로고"
-					/>
-					<span className="text-center w-2/3 ml-2 text-white">
-						야놀자로 로그인
-					</span>
-				</button>
+			<div className="w-full mt-[4.75rem]">
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
