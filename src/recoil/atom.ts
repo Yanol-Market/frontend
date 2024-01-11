@@ -13,5 +13,7 @@ export const checkedState = atom({
 	default: 0,
 });
 
-
-export {};
+export const checkedListState = atom({
+	key: 'checkedListState',
+	default: [] as string[],
+});

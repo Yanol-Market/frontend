@@ -47,6 +47,8 @@ module.exports = {
 			backgroundImage: {
 				checked: "url('pages/signUp/component/checked.svg')",
 				unchecked: "url('pages/signUp/component/unchecked.svg')",
+				selected: "url('pages/mypage/component/region/plusRegion.svg')",
+				unselected: "url('pages/mypage/component/region/removeRegion.svg')",
 			},
 			keyframes: {
 				slideUp: {
