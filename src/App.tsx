@@ -26,6 +26,7 @@ import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
 import Sold from './pages/mypage/component/salesHistory/Sold';
+import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
 
 function App() {
 	return (
@@ -43,7 +44,7 @@ function App() {
 					</Route>
 
 					<Route path="/purchase" element={<PurchaseHistory />} />
-					<Route path="/purchase/:productId" element={<PurchaseHistory />} />
+					<Route path="/purchase/:productId" element={<PurchaseDetail />} />
 
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />
