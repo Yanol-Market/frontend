@@ -3,6 +3,7 @@ import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { deleteCookie } from '../../../../apis/cookie';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
@@ -26,6 +27,7 @@ const ManageAccount = () => {
 	};
 
 	const signOutBtn = () => {
+		deleteCookie();
 		alert('로그아웃 완료');
 		navigate('/');
 	};

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const BeforeSignInMyPage = () => {
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center">
@@ -11,11 +12,13 @@ const BeforeSignInMyPage = () => {
 				</p>
 				<div className="mt-2 text-headline2 text-black flex flex-row gap-1 h-6">
 					<span>로그인 하기</span>
-					<img
-						className="cursor-pointer mt-1 h-5"
-						src="/assets/images/rightArrow.svg"
-						alt="로그인 가기"
-					/>
+					<Link to="/signin">
+						<img
+							className="cursor-pointer mt-1 h-5"
+							src="/assets/images/rightArrow.svg"
+							alt="로그인 하기"
+						/>
+					</Link>
 				</div>
 			</div>
 			<div className="border border-borderWhite bg-borderWhite w-full h-2 mt-5"></div>

@@ -54,7 +54,7 @@ const Navigation = () => {
 				/>
 				<p className="text-center text-gray text-sm font-pre">나의거래</p>
 			</Link>
-			<Link to={'/'}>
+			<Link to={'/mypage'}>
 				<img
 					className="m-auto mb-2"
 					src={
