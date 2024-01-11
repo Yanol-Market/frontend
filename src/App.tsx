@@ -9,6 +9,7 @@ import ReservationPage from './pages/reservation/ReservationPage';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
+import { AddProduct } from './pages/addProduct';
 import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
 import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
@@ -76,6 +77,7 @@ function App() {
 							/>
 						}
 					/>
+					<Route path="/addproduct/*" element={<AddProduct />} />
 				</Route>
 			</Routes>
 		</>
