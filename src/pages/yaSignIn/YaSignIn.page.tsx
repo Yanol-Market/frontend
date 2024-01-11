@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { getSignIn } from '../../apis/signin';
 import { setCookie } from '../../apis/cookie';
 
-const SignIn = () => {
+const YaSignIn = () => {
 	const {
 		register,
 		handleSubmit,
@@ -14,9 +14,8 @@ const SignIn = () => {
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 
-	const userId = watch('userid');
-	const userPassword = watch('userpassword');
-	console.log(userId);
+	const yaUserId = watch('yauserid');
+	const yaUserPassword = watch('yauserpassword');
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
@@ -34,7 +33,7 @@ const SignIn = () => {
 		},
 	});
 	const handleSignIn = async () => {
-		const data = { email: userId, password: userPassword };
+		const data = { email: yaUserId, password: yaUserPassword };
 
 		if (data.email === 'error@naver.com') {
 			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
@@ -58,7 +57,7 @@ const SignIn = () => {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
 					type="text"
 					placeholder="이메일"
-					{...register('userid', {
+					{...register('yauserid', {
 						required: true,
 					})}
 				/>
@@ -66,7 +65,7 @@ const SignIn = () => {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
 					placeholder="비밀번호"
-					{...register('userpassword', {
+					{...register('yauserpassword', {
 						required: true,
 					})}
 				/>
@@ -81,10 +80,12 @@ const SignIn = () => {
 				<div>
 					<button
 						type="button"
-						className="border w-full h-11 rounded-xl mt-6 bg-main text-white text-m cursor-pointer"
+						className="border w-full h-11 rounded-xl mt-6 bg-yaLogo text-white text-m cursor-pointer"
 						onClick={handleSignIn}
 					>
-						로그인
+						<span className="text-center w-2/3 ml-2 text-white">
+							야놀자로 로그인
+						</span>
 					</button>
 
 					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
@@ -124,4 +125,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default YaSignIn;

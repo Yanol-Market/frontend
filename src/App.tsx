@@ -24,6 +24,7 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import { YaSignIn } from './pages/yaSignIn';
 
 function App() {
 	return (
@@ -32,6 +33,7 @@ function App() {
 				<Route element={<Layout />}>
 					<Route path="/" element={<Main />} />
 					<Route path="/signin" element={<SignIn />} />
+					<Route path="/yasignin" element={<YaSignIn />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
