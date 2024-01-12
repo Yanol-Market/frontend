@@ -49,6 +49,8 @@ module.exports = {
 				unchecked: "url('pages/signUp/component/unchecked.svg')",
 				selected: "url('pages/mypage/component/region/plusRegion.svg')",
 				unselected: "url('pages/mypage/component/region/removeRegion.svg')",
+				typePassword: "url('pages/mypage/component/edit/typePassword.svg')",
+				typeText: "url('pages/mypage/component/edit/typeText.svg')",
 			},
 			keyframes: {
 				slideUp: {
