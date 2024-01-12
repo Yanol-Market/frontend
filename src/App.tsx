@@ -43,8 +43,9 @@ function App() {
 						<Route path="detail/:productId" element={<SoldDetail />} />
 					</Route>
 
-					<Route path="/purchase" element={<PurchaseHistory />} />
-					<Route path="/purchase/:productId" element={<PurchaseDetail />} />
+					<Route path="/purchase" element={<PurchaseHistory />}>
+						<Route path="detail/:productId" element={<PurchaseDetail />} />
+					</Route>
 
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />

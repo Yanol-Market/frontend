@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useLocation } from 'react-router-dom';
 
 const Buyer = () => {
-	const [click, setClick] = useState(true);
+	const [click, setClick] = useState(false);
 	const location = useLocation();
 	const currentPath = location.pathname;
 	return (
@@ -33,7 +33,7 @@ const Buyer = () => {
 				)}
 			</div>
 			{click ? null : (
-				<div className="border-borderGray border px-5 py-4 mt-2 flex items-center  justify-between rounded-lg">
+				<div className="border-borderGray border px-5 py-3 mt-2 flex items-center  justify-between rounded-lg">
 					<div className="flex items-center">
 						<div>
 							<img src="/assets/images/userDefault.svg" alt="userDefault" />

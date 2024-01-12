@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
-import BoughtProd from './BoughtProd';
+
+import BoughtListProd from './BoughtListProd';
 
 // 구매완료 - purchase
 const Bought = () => {
@@ -8,7 +9,7 @@ const Bought = () => {
 	const currentPath = location.pathname;
 
 	return (
-		<div> {currentPath === '/purchase' ? <BoughtProd /> : <Outlet />}</div>
+		<div> {currentPath === '/purchase' ? <BoughtListProd /> : <Outlet />}</div>
 	);
 };
 

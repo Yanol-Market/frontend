@@ -1,34 +1,41 @@
 import React, { useState } from 'react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useLocation } from 'react-router-dom';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const productData: ProductData = {
+	productId: '545487548754',
 	registrationNumber: 202401051119,
 	image: '/assets/images/reserveRoom.svg',
 	productName: '에코그린 리조트 호텔',
 	productCondition: '디럭스 더블',
 	productAccommodation: '2인/최대 2인',
 	productStatus: '숙박',
+	transactionStatus: '판매완료',
 	price: '210,000원',
 	checkIn: '2024-01-28(일) 15:00',
 	checkOut: '2024-01-30(화) 15:00',
 };
 
 interface ProductData {
+	productId: string;
 	registrationNumber: number;
 	image: string;
 	productName: string;
 	productCondition: string;
 	productAccommodation: string;
 	productStatus: string;
+	transactionStatus: string;
 	price: string;
 	checkIn: string;
 	checkOut: string;
 }
 
-const SalesProduct = () => {
+// 판매완료 리스트
+const SoldListProd = () => {
+	const navigate = useNavigate();
 	const location = useLocation();
 	const currentPath = location.pathname;
 
@@ -42,42 +49,44 @@ const SalesProduct = () => {
 		setBottom(false);
 	};
 
-	// 구매중 - 구매 상품 삭제 API
-	const dltProduct = () => {
-		console.log('상품 삭제 완료');
+	// 판매 완료 - 판매완료 상품 삭제 API
+	const delSalesProd = () => {
+		console.log('판매완료 상품 삭제 완료');
 		closeBottom();
 	};
-	console.log(currentPath);
+
+	// 판매 완료 상세 클릭 (만료, 완료 나누기)
+	const detailClick = (productId: string) => {
+		if (currentPath === '/sales') {
+			console.log('클릭');
+			navigate(`/sales/detail/${productId}`);
+		}
+	};
+
 	return (
 		<>
-			<div>
-				<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
-					<ContentTwoBtnPage
-						title="구매 정보를 삭제하시겠습니까?"
-						leftBtn="취소"
-						rightBtn="삭제"
-						leftBtnFunc={closeBottom}
-						rightBtnFunc={dltProduct}
-					/>
-				</BottomSheet>
-				<div className="pb-5 flex justify-between items-center">
-					<p className="text-sm pt-[8px]">
+			<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
+				<ContentTwoBtnPage
+					title="판매 정보를 삭제하시겠습니까?"
+					leftBtn="취소"
+					rightBtn="삭제"
+					leftBtnFunc={closeBottom}
+					rightBtnFunc={delSalesProd}
+				/>
+			</BottomSheet>
+
+			<div className="p-5">
+				<div className="pb-5 flex justify-between items-center ">
+					<p className="text-sm ">
 						골든티켓 등록번호 {productData.registrationNumber}
 					</p>
 					<div>
-						{currentPath === '/purchase' ? (
-							<img
-								src="/assets/images/delete.svg"
-								alt="삭제하기"
-								className="cursor-pointer"
-								onClick={openBottom}
-							/>
-						) : (
-							<MoreVertIcon
-								sx={{ width: '13px', color: '#BDBDBD' }}
-								className="cursor-pointer"
-							/>
-						)}
+						<img
+							src="/assets/images/delete.svg"
+							alt="삭제하기"
+							className="cursor-pointer"
+							onClick={openBottom}
+						/>
 					</div>
 				</div>
 				<div className="flex">
@@ -99,32 +108,25 @@ const SalesProduct = () => {
 						</div>
 						<p className="text-lg font-bold pt-[15px]">{productData.price}</p>
 					</div>
-					<div className="text-sm">
-						<div
-							className={`flex flex-col justify-center items-center rounded-[10px] w-[35px] h-[20px] p-[5px] text-center ${
-								currentPath === '/purchase'
-									? 'bg-homeMain'
-									: 'bg-lightGray border-[1px] border-[#e0e0e0]'
-							}`}
-						>
-							<p className="">{productData.productStatus}</p>
+					<div className="">
+						<div className=" text-sm flex flex-col items-centertext-center justify-between h-[80px]">
+							<p className="flex items-center justify-center  bg-main text-white rounded-[10px] w-[55px] h-[20px] p-[5px] ">
+								{productData.transactionStatus}
+							</p>
+							<div className="flex justify-end">
+								<ArrowForwardIosIcon
+									sx={{ width: '15px' }}
+									className="cursor-pointer"
+									onClick={() => detailClick(productData.productId)}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div className="mt-[20px] mb-[10px] flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px]">
-					<div>
-						<p className="font-bold mb-[5px]">체크인</p>
-						<p>{productData.checkIn}</p>
-					</div>
-					<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
-					<div>
-						<p className="font-bold mb-[5px]">체크아웃</p>
-						<p>{productData.checkOut}</p>
-					</div>
-				</div>
 			</div>
+			<div className="border-b border-borderGray"></div>
 		</>
 	);
 };
 
-export default SalesProduct;
+export default SoldListProd;

@@ -1,19 +1,50 @@
-import React from 'react';
-import SalesProduct from './SalesProduct';
+import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import { BottomSheet } from '../../../../component/common/BottomSheet';
+import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import CardProd from './CardProd';
+
 const SoldDetail = () => {
-	const handleArrowBackClick = () => {
-		window.history.back();
+	const [bottom, setBottom] = useState(false);
+
+	const openBottom = () => {
+		setBottom(true);
+	};
+
+	const closeBottom = () => {
+		setBottom(false);
+	};
+
+	// 판매완료 상세 - 판매완료 삭제 API
+	const dltProduct = () => {
+		console.log('판매 완료 상품 삭제 완료');
+		closeBottom();
 	};
 
 	return (
 		<div className="p-5">
-			<ArrowBackIosNewOutlinedIcon
-				sx={{ width: '14px' }}
-				onClick={handleArrowBackClick}
-			/>
-			<SalesProduct />
+			<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
+				<ContentTwoBtnPage
+					title="판매 정보를 삭제하시겠습니까?"
+					leftBtn="취소"
+					rightBtn="삭제"
+					leftBtnFunc={closeBottom}
+					rightBtnFunc={dltProduct}
+				/>
+			</BottomSheet>
+			<div className="pb-5 flex justify-between items-center">
+				<p className="text-sm ">골든티켓 등록번호 4568784156165</p>
+				<div>
+					<img
+						src="/assets/images/delete.svg"
+						alt="삭제하기"
+						className="cursor-pointer"
+						onClick={openBottom}
+					/>
+				</div>
+			</div>
+
+			<CardProd />
 			<div>
 				<div className="text-body py-4 font-bold ">거래 정보</div>{' '}
 				<div className="flex justify-between items-center text-lg pb-2">
