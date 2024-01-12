@@ -7,8 +7,6 @@ const Layout = () => {
 	const currentPath = location.pathname;
 	const { productId } = useParams();
 
-	console.log(productId);
-
 	const navPages = ['/main', '/location', '/', '/purchase', '/sales'];
 
 	if (productId) {
