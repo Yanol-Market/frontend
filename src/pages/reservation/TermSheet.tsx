@@ -52,7 +52,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		}
 	};
 
-	function callback(response: RequestPayResponse) {
+	const callback = (response: RequestPayResponse) => {
 		const { error_msg } = response;
 
 		if (error_msg) {
@@ -60,7 +60,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		} else {
 			alert('결제 성공');
 		}
-	}
+	};
 
 	const checkAllCheckboxes = () => {
 		const updatedCheckboxes = { ...checkboxes };
