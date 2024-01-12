@@ -44,18 +44,18 @@ const PurchaseHistory = () => {
 						/>
 						{/* 공지 알람 */}
 						{open && (
-							<div className="absolute top-4 left-[54px] w-[220px] h-[150px] bg-homeMain px-4 py-2 rounded-lg shadow-md">
+							<div className="absolute top-4 left-[54px] w-[220px] h-[150px] bg-homeMain p-2 rounded-lg shadow-md">
 								<div className="w-full flex items-end justify-end ">
 									<CloseIcon
-										sx={{ width: '16px', color: '#BDBDBD' }}
+										sx={{ width: '18px', color: '#BDBDBD' }}
 										onClick={handleClose}
 									/>{' '}
 								</div>
 
-								<p className="text-lg font-semibold leading-relaxed">
+								<p className="text-lg font-semibold pb-1 px-2">
 									구매 중인 상품이 보이지 않나요?
 								</p>
-								<div className="text-m font-extralight leading-relaxed">
+								<div className="text-m font-extralight leading-relaxed px-2">
 									<p>거래가 취소 되었거나, 상품이 다른 분께</p>
 									<p>예약 혹은 판매 되었을 수 있어요.</p>
 									<p>거래 내역을 확인하시려면 화면 하단의</p>
