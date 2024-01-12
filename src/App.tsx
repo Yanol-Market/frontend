@@ -13,6 +13,7 @@ import { AddProduct } from './pages/addProduct';
 import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
 import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
+import { SearchResult } from './pages/searchResult';
 import { Search } from './pages/search';
 import { LocalSearch } from './pages/localSearch';
 import ConfirmPage from './component/common/Comfirm/ConfirmPage';
@@ -25,6 +26,7 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import { Products } from './pages/products';
 
 function App() {
 	return (
@@ -37,6 +39,13 @@ function App() {
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/search" element={<Search />} />
+					<Route path="/searchResult" element={<SearchResult />} />
+					<Route path="/mypage" element={<MyAccount />} />
+					<Route path="/addaccount" element={<AddMyAccount />} />
+					<Route path="/manageaccount" element={<ManageAccount />} />
+					<Route path="/editpassword" element={<EditPassword />} />
+					<Route path="/withdrawl" element={<Withdrawl />} />
+					{/* 임시 */}
 					<Route path="/sales" element={<SalesHistory />} />
 					<Route path="/purchase" element={<PurchaseHistory />} />
 					<Route path="/reservation" element={<ReservationPage />} />
@@ -51,6 +60,7 @@ function App() {
 					<Route path="/myaccount/registration" element={<AddMyAccount />} />
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
+					<Route path="/product/:id" element={<Products />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={
