@@ -22,7 +22,7 @@ const Selling = () => {
 	return (
 		<div className="p-5">
 			<BottomSheet isOpen={Bottom} onClose={closeBottom} viewHeight="160px">
-				<SellingBottom />
+				<SellingBottom setBottom={setBottom} />
 			</BottomSheet>
 
 			<div className="pb-4 flex justify-between items-center">

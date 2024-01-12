@@ -53,7 +53,7 @@ const Buyer = () => {
 					</div>
 				</div>
 			)}
-			<div className=" border-b-2 border-borderGray pt-3"></div>
+			{/* <div className=" border-b-[1px] border-borderGray pt-3"></div> */}
 		</div>
 	);
 };
