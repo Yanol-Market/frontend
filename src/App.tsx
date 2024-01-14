@@ -28,6 +28,7 @@ import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
 import Sold from './pages/mypage/component/salesHistory/Sold';
 import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
+import { EditProd } from './pages/editProd';
 
 function App() {
 	return (
@@ -85,6 +86,8 @@ function App() {
 						}
 					/>
 					<Route path="/addproduct/*" element={<AddProduct />} />
+
+					<Route path="/edit/:productId" element={<EditProd />} />
 				</Route>
 			</Routes>
 		</>
