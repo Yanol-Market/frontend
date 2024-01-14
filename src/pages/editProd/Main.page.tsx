@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Header } from '../../component/common/Header';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import GoldenPriceInfo from './GoldenPriceInfo';
-import SellerMessage from './SellerMessage';
-import FeeInfo from './FeeInfo';
+import GoldenPriceInfo from './component/GoldenPriceInfo';
+import SellerMessage from './component/SellerMessage';
+import FeeInfo from './component/FeeInfo';
 
 const EditProd = () => {
 	const { productId } = useParams();
