@@ -6,6 +6,11 @@ import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SellingBottom from './SellingBottom';
 
+const data = {
+	productId: 548789754,
+	goldenPrice: 200000,
+	yanoljaPrice: 100000,
+};
 // 판매중
 const Selling = () => {
 	const [Bottom, setBottom] = useState(false);
@@ -22,7 +27,12 @@ const Selling = () => {
 	return (
 		<div className="p-5">
 			<BottomSheet isOpen={Bottom} onClose={closeBottom} viewHeight="160px">
-				<SellingBottom setBottom={setBottom} />
+				<SellingBottom
+					setBottom={setBottom}
+					productId={data.productId}
+					yanoljaPrice={data.yanoljaPrice}
+					goldenPrice={data.goldenPrice}
+				/>
 			</BottomSheet>
 
 			<div className="pb-4 flex justify-between items-center">
