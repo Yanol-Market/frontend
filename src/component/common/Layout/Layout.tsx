@@ -5,8 +5,17 @@ import Navigation from '../Navigation/Navigation';
 const Layout = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const navPages = ['/main', '/location', '/', '/purchase', '/sales'];
+	const navPages = [
+		'/main',
+		'/location',
+		'/',
+		'/purchase',
+		'/sales',
+		'/chatList',
+	];
 	const isNavPage = navPages.includes(currentPath);
+	console.log('Is Nav Page:', isNavPage);
+
 	return (
 		<div className="bg-borderGray min-h-screen relative">
 			<div className="bg-white max-w-[375px] min-h-screen m-auto top-0 left-0 overflow-x-clip sm:w-[375px]">

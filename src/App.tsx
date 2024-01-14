@@ -25,6 +25,7 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import { ChatList } from './pages/chatList';
 
 function App() {
 	return (
@@ -76,6 +77,7 @@ function App() {
 						}
 					/>
 					<Route path="/addproduct/*" element={<AddProduct />} />
+					<Route path="/chatList" element={<ChatList />} />
 				</Route>
 			</Routes>
 		</>
