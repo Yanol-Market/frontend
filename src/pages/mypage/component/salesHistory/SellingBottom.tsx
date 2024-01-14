@@ -7,14 +7,14 @@ interface SellingBottomProps {
 	setBottom: React.Dispatch<React.SetStateAction<boolean>>;
 	productId: number;
 	yanoljaPrice: number;
-	goldenPrice: number;
+	originPrice: number;
 }
 
 const SellingBottom = ({
 	setBottom,
 	productId,
 	yanoljaPrice,
-	goldenPrice,
+	originPrice,
 }: SellingBottomProps) => {
 	const navigate = useNavigate();
 	const [isBottom, setIsBottom] = useState(false);
@@ -35,13 +35,12 @@ const SellingBottom = ({
 		setBottom(false); /* 수정하기, 삭제하기 바텀시트 */
 	};
 
-	console.log('yanoljaPrice', yanoljaPrice);
 	// 수정하기 페이지로 이동
 	const handleEdit = () => {
 		navigate(
-			`/edit/${productId}?yanoljaPrice=${yanoljaPrice}&goldenPrice=${goldenPrice}`,
+			`/edit/${productId}?yanoljaPrice=${yanoljaPrice}&originPrice=${originPrice}`,
 		);
-		console.log('판매중 상품 수정 완료');
+		console.log('판매중 상품 수정');
 	};
 	return (
 		<>

@@ -10,6 +10,7 @@ const data = {
 	productId: 548789754,
 	goldenPrice: 200000,
 	yanoljaPrice: 100000,
+	originPrice: 200000,
 };
 // 판매중
 const Selling = () => {
@@ -17,7 +18,7 @@ const Selling = () => {
 
 	const openBottom = () => {
 		setBottom(true);
-		console.log('duffla');
+		console.log('오픈');
 	};
 
 	const closeBottom = () => {
@@ -31,7 +32,7 @@ const Selling = () => {
 					setBottom={setBottom}
 					productId={data.productId}
 					yanoljaPrice={data.yanoljaPrice}
-					goldenPrice={data.goldenPrice}
+					originPrice={data.originPrice}
 				/>
 			</BottomSheet>
 
