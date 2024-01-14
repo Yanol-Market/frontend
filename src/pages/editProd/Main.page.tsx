@@ -18,6 +18,7 @@ const EditProd = () => {
 	// 수정 API 연결
 	const handleEdit = () => {
 		console.log('상품 수정 완료 ');
+		navigate(`/edit/completion/${productId}`);
 	};
 	return (
 		<div>

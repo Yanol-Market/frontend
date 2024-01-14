@@ -29,6 +29,7 @@ import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
 import Sold from './pages/mypage/component/salesHistory/Sold';
 import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
 import { EditProd } from './pages/editProd';
+import CompletionEdit from './pages/editProd/component/CompletionEdit';
 
 function App() {
 	return (
@@ -88,6 +89,10 @@ function App() {
 					<Route path="/addproduct/*" element={<AddProduct />} />
 
 					<Route path="/edit/:productId" element={<EditProd />} />
+					<Route
+						path="/edit/completion/:productId"
+						element={<CompletionEdit />}
+					/>
 				</Route>
 			</Routes>
 		</>
