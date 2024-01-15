@@ -13,6 +13,7 @@ import { AddProduct } from './pages/addProduct';
 import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
 import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
+import { SearchResult } from './pages/searchResult';
 import { Search } from './pages/search';
 import { LocalSearch } from './pages/localSearch';
 import ConfirmPage from './component/common/Comfirm/ConfirmPage';
@@ -37,6 +38,13 @@ function App() {
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/search" element={<Search />} />
+					<Route path="/searchResult" element={<SearchResult />} />
+					<Route path="/mypage" element={<MyAccount />} />
+					<Route path="/addaccount" element={<AddMyAccount />} />
+					<Route path="/manageaccount" element={<ManageAccount />} />
+					<Route path="/editpassword" element={<EditPassword />} />
+					<Route path="/withdrawl" element={<Withdrawl />} />
+					{/* 임시 */}
 					<Route path="/sales" element={<SalesHistory />} />
 					<Route path="/purchase" element={<PurchaseHistory />} />
 					<Route path="/reservation" element={<ReservationPage />} />
