@@ -29,6 +29,8 @@ import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
 import Sold from './pages/mypage/component/salesHistory/Sold';
 import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
+import { EditProd } from './pages/editProd';
+import CompletionEdit from './pages/editProd/component/CompletionEdit';
 import { ChatList } from './pages/chatList';
 import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
@@ -119,6 +121,11 @@ function App() {
 						}
 					/>
 					<Route path="/addproduct/*" element={<AddProduct />} />
+					<Route path="/edit/:productId" element={<EditProd />} />
+					<Route
+						path="/edit/completion/:productId"
+						element={<CompletionEdit />}
+					/>
 					<Route path="/chatList" element={<ChatList />} />
 				</Route>
 			</Routes>

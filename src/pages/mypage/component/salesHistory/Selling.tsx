@@ -6,13 +6,19 @@ import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SellingBottom from './SellingBottom';
 
+const data = {
+	productId: 548789754,
+	goldenPrice: 200000,
+	yanoljaPrice: 100000,
+	originPrice: 200000,
+};
 // 판매중
 const Selling = () => {
 	const [Bottom, setBottom] = useState(false);
 
 	const openBottom = () => {
 		setBottom(true);
-		console.log('duffla');
+		console.log('오픈');
 	};
 
 	const closeBottom = () => {
@@ -22,7 +28,12 @@ const Selling = () => {
 	return (
 		<div className="p-5">
 			<BottomSheet isOpen={Bottom} onClose={closeBottom} viewHeight="160px">
-				<SellingBottom setBottom={setBottom} />
+				<SellingBottom
+					setBottom={setBottom}
+					productId={data.productId}
+					yanoljaPrice={data.yanoljaPrice}
+					originPrice={data.originPrice}
+				/>
 			</BottomSheet>
 
 			<div className="pb-4 flex justify-between items-center">

@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { useNavigate } from 'react-router';
 
 interface SellingBottomProps {
 	setBottom: React.Dispatch<React.SetStateAction<boolean>>;
+	productId: number;
+	yanoljaPrice: number;
+	originPrice: number;
 }
 
-const SellingBottom = ({ setBottom }: SellingBottomProps) => {
+const SellingBottom = ({
+	setBottom,
+	productId,
+	yanoljaPrice,
+	originPrice,
+}: SellingBottomProps) => {
+	const navigate = useNavigate();
 	const [isBottom, setIsBottom] = useState(false);
 
 	const closeBottom = () => {
@@ -27,7 +37,10 @@ const SellingBottom = ({ setBottom }: SellingBottomProps) => {
 
 	// 수정하기 페이지로 이동
 	const handleEdit = () => {
-		console.log('판매중 상품 수정 완료');
+		navigate(
+			`/edit/${productId}?yanoljaPrice=${yanoljaPrice}&originPrice=${originPrice}`,
+		);
+		console.log('판매중 상품 수정');
 	};
 	return (
 		<>
