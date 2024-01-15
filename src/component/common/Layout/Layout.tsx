@@ -1,10 +1,17 @@
 import React from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 
 const Layout = () => {
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const { productId } = useParams();
+
+	if (productId) {
+		navPages.push(`/purchase/detail/${productId}`);
+		navPages.push(`/sales/detail/${productId}`);
+	}
+
 	const navPages = [
 		'/main',
 		'/location',
@@ -13,6 +20,7 @@ const Layout = () => {
 		'/sales',
 		'/chatList',
 	];
+
 	const isNavPage = navPages.includes(currentPath);
 	return (
 		<div className="bg-borderGray min-h-screen relative">

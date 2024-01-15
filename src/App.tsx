@@ -26,6 +26,9 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
+import Sold from './pages/mypage/component/salesHistory/Sold';
+import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
 import { ChatList } from './pages/chatList';
 import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
@@ -45,6 +48,12 @@ function App() {
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
 					<Route path="/search" element={<Search />} />
+					<Route path="/sales" element={<SalesHistory />}>
+						<Route path="detail/:productId" element={<SoldDetail />} />
+					</Route>
+					<Route path="/purchase" element={<PurchaseHistory />}>
+						<Route path="detail/:productId" element={<PurchaseDetail />} />
+					</Route>
 					<Route path="/searchResult" element={<SearchResult />} />
 					<Route path="/mypage" element={<MyAccount />} />
 					<Route path="/addaccount" element={<AddMyAccount />} />

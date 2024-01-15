@@ -1,13 +1,27 @@
 import React from 'react';
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 interface propsType {
 	title: string | null;
 }
 
 const Header = ({ title }: propsType) => {
+	const navigate = useNavigate();
+	const location = useLocation();
+	const currentPath = location.pathname;
+
+	const moveMyPage = ['/sales', '/purchase'];
+
+	const isMoveMyPage = moveMyPage.includes(currentPath);
+
 	const handleArrowBackClick = () => {
-		window.history.back();
+		if (isMoveMyPage) {
+			navigate(`/mypage`);
+		} else {
+			window.history.back();
+		}
 	};
 
 	return (

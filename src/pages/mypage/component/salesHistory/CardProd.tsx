@@ -1,5 +1,5 @@
-import React from 'react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const productData: ProductData = {
 	registrationNumber: 202401051119,
@@ -25,21 +25,14 @@ interface ProductData {
 	checkOut: string;
 }
 
-const SalesProduct = () => {
+const CardProd = () => {
+	const location = useLocation();
+	const currentPath = location.pathname;
+
+	console.log(currentPath);
 	return (
 		<>
 			<div>
-				<div className="pb-5 flex justify-between">
-					<p className="text-sm pt-[8px]">
-						골든티켓 등록번호 {productData.registrationNumber}
-					</p>
-					<div>
-						<MoreVertIcon
-							sx={{ width: '13px', color: '#BDBDBD' }}
-							className="cursor-pointer"
-						/>
-					</div>
-				</div>
 				<div className="flex">
 					<img
 						src={productData.image}
@@ -60,7 +53,7 @@ const SalesProduct = () => {
 						<p className="text-lg font-bold pt-[15px]">{productData.price}</p>
 					</div>
 					<div className="text-sm">
-						<div className="flex flex-col justify-center items-center bg-lightGray rounded-[10px] w-[35px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">
+						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] bg-lightGray border-[1px] border-[#e0e0e0] w-[35px] h-[20px] p-[5px] text-center ">
 							<p className="">{productData.productStatus}</p>
 						</div>
 					</div>
@@ -81,4 +74,4 @@ const SalesProduct = () => {
 	);
 };
 
-export default SalesProduct;
+export default CardProd;
