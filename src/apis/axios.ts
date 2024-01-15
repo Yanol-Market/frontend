@@ -2,9 +2,10 @@ import axios from 'axios';
 import { getCookie } from './cookie';
 
 const instance = axios.create({
-	baseURL: 'http://localhost:3000',
+	baseURL: 'https://golden-ticket.site',
 	headers: {
 		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': 'http://localhost:3000',
 	},
 });
 

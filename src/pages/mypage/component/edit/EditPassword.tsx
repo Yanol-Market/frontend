@@ -14,6 +14,12 @@ const EditPassword = () => {
 	const [isBottomSheetPasswordOpen, setIsBottomSheetPasswordOpen] =
 		useState(false);
 
+	const currentPasswordCheckBox = watch('currentPasswordBox');
+	const currentPasswordText = watch('currentPassword');
+	const newPasswordText = watch('newPassword');
+	const newPasswordCheckBox = watch('newPasswordBox');
+	const newPassWordConfirmCheckBox = watch('newPasswordConfirmBox');
+	const newPassWordConfirmText = watch('newPassWordConfirm');
 	const openBottomSheetPassword = () => {
 		setIsBottomSheetPasswordOpen(true);
 	};
@@ -41,28 +47,45 @@ const EditPassword = () => {
 						<div className="relative">
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">현재 비밀번호</p>
-								<img
-									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
-									src="/assets/images/typePassword.svg"
+								<input
+									type="checkbox"
+									className="appearance-none bg-no-repeat bg-typePassword w-5 h-5 absolute cursor-pointer right-3 top-[2.6rem] checked:bg-typeText"
+									{...register('currentPasswordBox', {
+										required: true,
+									})}
 								/>
 							</div>
 							<input
-								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="password"
+								className={`w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none ${
+									errors.currentPassword && currentPasswordText
+										? 'border border-red'
+										: ''
+								}`}
+								type={currentPasswordCheckBox ? 'type' : 'password'}
 								placeholder="현재 비밀번호를 입력하세요."
+								{...register('currentPassword', {
+									required: true,
+								})}
 							/>
 						</div>
 						<div className="relative mt-8">
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">새 비밀번호</p>
-								<img
-									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
-									src="/assets/images/typePassword.svg"
+								<input
+									type="checkbox"
+									className="appearance-none bg-no-repeat bg-typePassword w-5 h-5 absolute cursor-pointer right-3 top-[2.6rem] checked:bg-typeText"
+									{...register('newPasswordBox', {
+										required: true,
+									})}
 								/>
 							</div>
 							<input
-								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="password"
+								className={`w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none ${
+									errors.newPassword && newPasswordText
+										? 'border border-red'
+										: 'border-none'
+								}`}
+								type={newPasswordCheckBox ? 'type' : 'password'}
 								placeholder="새 비밀번호 입력(숫자 + 영문자, 6자 이상 20자 이내)"
 								{...register('newPassword', {
 									required: true,
@@ -73,7 +96,7 @@ const EditPassword = () => {
 									},
 								})}
 							/>
-							{errors.newPassword && errors.newPassword.type === 'pattern' && (
+							{errors.newPassword && (
 								<div className="text-sm text-red mb-4 text-start">
 									{errors.newPassword.message as string}
 								</div>
@@ -82,22 +105,29 @@ const EditPassword = () => {
 						<div className="relative mt-8">
 							<div className="flex flex-row justify-between font-bold">
 								<p className="text-lg">새 비밀번호 확인</p>
-								<img
-									className="absolute cursor-pointer right-3 top-[2.6rem] w-4 h-4"
-									src="/assets/images/typePassword.svg"
+								<input
+									type="checkbox"
+									className="appearance-none bg-no-repeat bg-typePassword w-5 h-5 absolute cursor-pointer right-3 top-[2.6rem] checked:bg-typeText"
+									{...register('newPasswordConfirmBox', {
+										required: true,
+									})}
 								/>
 							</div>
 							<input
-								className="w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none"
-								type="password"
+								className={`w-full h-11 rounded-xl text-m mt-2 bg-lightGray pl-4 focus:outline-none ${
+									errors.newPassWordConfirm && newPassWordConfirmText
+										? 'border border-red'
+										: 'border-none'
+								}`}
+								type={newPassWordConfirmCheckBox ? 'type' : 'password'}
 								placeholder="새 비밀번호를 다시 한 번 입력하세요."
-								{...register('newpasswordChecked', {
+								{...register('newPassWordConfirm', {
 									required: true,
 									validate: (value) => value === watch('newPassword'),
 								})}
 							/>
-							{errors.newpasswordChecked &&
-								errors.newpasswordChecked?.type === 'validate' && (
+							{errors.newPassWordConfirm &&
+								errors.newPassWordConfirm?.type === 'validate' && (
 									<div className="text-sm text-red text-start">
 										입력한 비밀번호와 다릅니다
 									</div>

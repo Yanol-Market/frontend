@@ -19,7 +19,7 @@ const Payment: React.FC<PaymentProps> = ({ setPayment }) => {
 				/>
 				<label
 					htmlFor="credit"
-					className="flex flex-col justify-center w-[45%] h-[50px] border-[1px] border-[#e5e5e5] rounded-[12px] text-[#828282] bg-[#FAFAFA] hover:bg-[#FFF3C5] hover:text-black hover:font-semibold hover:border-[#FFF3C5]"
+					className="flex flex-col justify-center w-[45%] h-[50px] border-[1px] border-[#e5e5e5] rounded-[12px] text-[#828282] bg-[#FAFAFA] hover:bg-[#FFF3C5] hover:text-black hover:font-semibold hover:border-[#FFF3C5] cursor-pointer"
 				>
 					카드결제
 				</label>

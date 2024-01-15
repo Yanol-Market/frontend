@@ -33,6 +33,7 @@ module.exports = {
 				fontBlack: '#222222',
 				gray50: '#E0E0E0',
 				yaLogo: '#FF3478',
+				gradientStart: '#FFE266',
 			},
 			fontSize: {
 				headline1: '24px',
@@ -46,6 +47,10 @@ module.exports = {
 			backgroundImage: {
 				checked: "url('pages/signUp/component/checked.svg')",
 				unchecked: "url('pages/signUp/component/unchecked.svg')",
+				selected: "url('pages/mypage/component/region/plusRegion.svg')",
+				unselected: "url('pages/mypage/component/region/removeRegion.svg')",
+				typePassword: "url('pages/mypage/component/edit/typePassword.svg')",
+				typeText: "url('pages/mypage/component/edit/typeText.svg')",
 			},
 			keyframes: {
 				slideUp: {

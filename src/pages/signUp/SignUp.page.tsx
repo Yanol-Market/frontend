@@ -167,7 +167,7 @@ const SignUp = () => {
 					</div>
 					<div className="flex flex-row mb-2">
 						<input
-							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"
 							type="checkbox"
 							id="second-checkbox"
 							{...register('second-checkbox', { required: true })}
@@ -181,7 +181,7 @@ const SignUp = () => {
 					</div>
 					<div className="flex flex-row mb-2">
 						<input
-							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							className="appearance-none bg-unchecked w-4 h-4 mr-1 checked:bg-checked cursor-pointer"
 							type="checkbox"
 							id="third-checkbox"
 							{...register('third-checkbox', { required: true })}
