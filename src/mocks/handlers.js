@@ -87,7 +87,7 @@ export const handlers = [
 			},
 			{
 				productId: 2,
-				name: '블루 하와이 리조트',
+				name: '블루 하와이아아아 리조트',
 				option: '트윈룸 오션뷰',
 				checkIn: '2022-12-31 23:59:59',
 				checkOut: '2022-12-31 23:59:59',

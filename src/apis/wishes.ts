@@ -1,8 +1,8 @@
-import instance from './axios';
+import { instanceTest } from './axios';
 
 export const getWishes = async () => {
 	try {
-		const res = await instance.get('api/wishes');
+		const res = await instanceTest.get('api/wishes');
 		if (res) {
 			return res.data;
 		}

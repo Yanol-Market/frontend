@@ -20,7 +20,7 @@ const InterestRegion = () => {
 	return (
 		<div>
 			<Header title="관심 지역" />
-			<div className="flex flex-col items-center h-screen">
+			<div className="flex flex-col items-center">
 				<BottomSheet
 					isOpen={isBottomSheetOpen}
 					onClose={closeBottomSheet}

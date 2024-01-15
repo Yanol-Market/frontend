@@ -26,7 +26,6 @@ export const ProductItemNew = ({
 			</div>
 			<div className="flex flex-col w-[60%] justify-between ml-4">
 				<div className="flex-col w-full">
-
 					<div>
 						<p className="text-fontBlack font-pre text-lg font-normal">
 							{product.name}
