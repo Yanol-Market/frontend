@@ -4,6 +4,7 @@ import PurchaserInfo from './PurchaserInfo';
 import Total from './Total';
 import Payment from './Payment';
 import TermSheet from './TermSheet';
+import { Header } from '../../component/common/Header';
 
 const ReservationPage = () => {
 	const [payment, setPayment] = useState('');
@@ -14,6 +15,7 @@ const ReservationPage = () => {
 
 	return (
 		<div className="relative">
+			<Header title="결제하기" />
 			<Product />
 			<PurchaserInfo />
 			<Total />

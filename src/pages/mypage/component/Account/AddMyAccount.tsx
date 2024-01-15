@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import SelectBanks from '../region/SelectBanks';
+import SelectBanks from '../Region/SelectBanks';
 import { useForm } from 'react-hook-form';
 
 const AddMyAccount = () => {
