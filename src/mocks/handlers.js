@@ -20,6 +20,9 @@ export const handlers = [
 			},
 		]);
 	}),
+	http.get('/api/products', () => {
+		return HttpResponse.json(products);
+	}),
 	http.post('/api/signin', async ({ request }) => {
 		const userInfo = await request.json();
 		const randomAccessToken = uuidv4();

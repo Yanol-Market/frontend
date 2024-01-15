@@ -26,6 +26,7 @@ import ProfileEdit from './pages/mypage/component/edit/ProfileEdit';
 import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
+import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
 import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
@@ -82,6 +83,7 @@ function App() {
 					<Route path="/myaccount/registration" element={<AddMyAccount />} />
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
+					<Route path="/product/:id" element={<Products />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={
