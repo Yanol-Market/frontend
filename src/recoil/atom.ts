@@ -13,5 +13,18 @@ export const checkedState = atom({
 	default: 0,
 });
 
+export const checkedListState = atom({
+	key: 'checkedListState',
+	default: [] as string[],
+});
 
-export {};
+export interface SelectBanksProps {
+	id: number;
+	bankName: string;
+	image: string;
+}
+
+export const checkedBankState = atom<SelectBanksProps | null>({
+	key: 'checkedBankState',
+	default: null,
+});

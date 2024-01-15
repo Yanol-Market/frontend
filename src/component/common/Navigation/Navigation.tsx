@@ -34,7 +34,7 @@ const Navigation = () => {
 				<img
 					className="m-auto mb-2"
 					src={
-						currentPath === '/write'
+						currentPath === '/addproduct'
 							? '/assets/images/writeLogoActive.svg'
 							: '/assets/images/writeLogo.svg'
 					}
@@ -42,12 +42,12 @@ const Navigation = () => {
 				/>
 				<p className="text-center text-gray font-pre text-sm">상품등록</p>
 			</Link>
-			<Link to={'/'}>
+			<Link to={'/chatList'}>
 				<img
 					className="m-auto mb-2"
 					src={
-						currentPath === '/list'
-							? '/assets/images/listLogoActive.svg'
+						currentPath === '/chatList'
+							? '/assets/images/chatLogoActive.svg'
 							: '/assets/images/chatLogo.svg'
 					}
 					alt="listLogo"

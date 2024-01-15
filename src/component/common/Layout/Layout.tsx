@@ -7,12 +7,19 @@ const Layout = () => {
 	const currentPath = location.pathname;
 	const { productId } = useParams();
 
-	const navPages = ['/main', '/location', '/', '/purchase', '/sales'];
-
 	if (productId) {
 		navPages.push(`/purchase/detail/${productId}`);
 		navPages.push(`/sales/detail/${productId}`);
 	}
+
+	const navPages = [
+		'/main',
+		'/location',
+		'/',
+		'/purchase',
+		'/sales',
+		'/chatList',
+	];
 
 	const isNavPage = navPages.includes(currentPath);
 	return (
