@@ -28,24 +28,28 @@ const BeforeSignInMyPage = () => {
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>공지사항</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/announcement">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>이용가이드</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/guide">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between">
 					<span>서비스 이용약관 및 정책</span>
 					<img
-						className="cursor-pointer"
+						className="cursor-pointer mt-1"
 						src="/assets/images/rightArrowTab.svg"
 						alt="탭 이동"
 					/>

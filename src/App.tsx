@@ -27,14 +27,19 @@ import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import { Products } from './pages/products';
+import { YaSignIn } from './pages/yaSignIn';
+import Splash from './pages/splash/Splash.page';
+import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
 
 function App() {
 	return (
 		<>
 			<Routes>
 				<Route element={<Layout />}>
+					<Route path="/splash" element={<Splash />} />
 					<Route path="/" element={<Main />} />
 					<Route path="/signin" element={<SignIn />} />
+					<Route path="/yasignin" element={<YaSignIn />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/alarm" element={<Alarm />} />
 					<Route path="/location" element={<LocalSearch />} />
@@ -53,6 +58,24 @@ function App() {
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />
 					<Route path="/mypage" element={<MyPage />} />
+					<Route
+						path="/mypage/announcement"
+						element={
+							<NotFoundContent
+								title="공지사항"
+								content="공지사항이 없습니다."
+							/>
+						}
+					/>
+					<Route
+						path="/mypage/guide"
+						element={
+							<NotFoundContent
+								title="이용가이드"
+								content="페이지 준비중입니다."
+							/>
+						}
+					/>
 					<Route path="/mypage/editprofile" element={<ProfileEdit />} />
 					<Route path="/mypage/wishes" element={<WishList />} />
 					<Route path="/mypage/mylocations" element={<InterestRegion />} />

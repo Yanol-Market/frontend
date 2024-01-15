@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { getSignIn } from '../../apis/signin';
 import { setCookie } from '../../apis/cookie';
 
-const SignIn = () => {
+const YaSignIn = () => {
 	const {
 		register,
 		handleSubmit,
@@ -14,16 +14,17 @@ const SignIn = () => {
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 
-	const userId = watch('userid');
-	const userPassword = watch('userpassword');
-	// console.log(userId);
+	const yaUserId = watch('yauserid');
+	const yaUserPassword = watch('yauserpassword');
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
 		onSuccess(data) {
-			const { accessToken, refreshToken } = data.data;
+			console.log(data);
+			const { accessToken, refreshToken } = data[0].data;
 			setCookie('accessToken', accessToken, { path: '/' });
 			setCookie('refreshToken', refreshToken, { path: '/' });
+
 			navigate('/');
 		},
 		onError(err) {
@@ -31,8 +32,8 @@ const SignIn = () => {
 			throw new Error('로그인 실패');
 		},
 	});
-	const handleSignIn = () => {
-		const data = { email: userId, password: userPassword };
+	const handleSignIn = async () => {
+		const data = { email: yaUserId, password: yaUserPassword };
 
 		if (data.email === 'error@naver.com') {
 			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
@@ -47,7 +48,7 @@ const SignIn = () => {
 
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
-			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
+			<img className="mt-24" src="/assets/images/yanoljaLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"
 				onSubmit={handleSubmit(handleSignIn)}
@@ -56,7 +57,7 @@ const SignIn = () => {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
 					type="text"
 					placeholder="이메일"
-					{...register('userid', {
+					{...register('yauserid', {
 						required: true,
 					})}
 				/>
@@ -64,7 +65,7 @@ const SignIn = () => {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
 					placeholder="비밀번호"
-					{...register('userpassword', {
+					{...register('yauserpassword', {
 						required: true,
 					})}
 				/>
@@ -79,10 +80,12 @@ const SignIn = () => {
 				<div>
 					<button
 						type="button"
-						className="border w-full h-11 rounded-xl mt-6 bg-main text-white text-m cursor-pointer"
+						className="border w-full h-11 rounded-xl mt-6 bg-yaLogo text-white text-m cursor-pointer"
 						onClick={handleSignIn}
 					>
-						로그인
+						<span className="text-center w-2/3 ml-2 text-white">
+							야놀자로 로그인
+						</span>
 					</button>
 
 					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
@@ -90,21 +93,7 @@ const SignIn = () => {
 					</p>
 				</div>
 			</form>
-			<div className="w-full mt-[3.75rem]">
-				<button
-					type="button"
-					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
-					onClick={handleSignUp}
-				>
-					<img
-						className="ml-6"
-						src="/assets/images/yaLogo.svg"
-						alt="야놀자 로고"
-					/>
-					<span className="text-center w-2/3 ml-2 text-white">
-						야놀자로 로그인
-					</span>
-				</button>
+			<div className="w-full mt-[4.75rem]">
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
@@ -122,4 +111,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default YaSignIn;

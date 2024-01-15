@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { RequestPayParams, RequestPayResponse } from '../../type/portone';
 
 interface TermSheetProps {
 	setTermSheet: (value: boolean) => void;
@@ -10,6 +11,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		term2: false,
 		term3: false,
 	});
+	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 
 	const [checkAll, setCheckAll] = useState(false);
 
@@ -27,6 +29,38 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		);
 		setCheckAll(allChecked);
 	}, [checkboxes]);
+
+	const handlePayment = () => {
+		if (!window.IMP) return;
+
+		if (impCode) {
+			window.IMP.init(impCode);
+			const data: RequestPayParams = {
+				pg: 'html5_inicis.INIBillTst',
+				pay_method: 'card',
+				merchant_uid: `mid_${new Date().getTime()}`,
+				amount: 1000220,
+				name: '아임포트 결제 테스트 카드',
+				buyer_name: '골든티켓',
+				buyer_tel: '01012341234',
+				buyer_email: 'example@example.com',
+				buyer_addr: '신사동 661-16',
+				buyer_postcode: '06018',
+			};
+
+			window.IMP.request_pay(data, callback);
+		}
+	};
+
+	const callback = (response: RequestPayResponse) => {
+		const { error_msg } = response;
+
+		if (error_msg) {
+			alert(`결제 실패: ${error_msg}`);
+		} else {
+			alert('결제 성공');
+		}
+	};
 
 	const checkAllCheckboxes = () => {
 		const updatedCheckboxes = { ...checkboxes };
@@ -265,6 +299,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 						className={`w-[100%] h-[50px] text-lg ${
 							checkAll ? 'bg-[#FFCC00]' : 'bg-[#e5e5e5]'
 						} ${checkAll ? 'text-white' : 'text-[#828282]'} rounded-[12px]`}
+						onClick={handlePayment}
 					>
 						결제하기
 					</button>
