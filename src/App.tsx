@@ -27,7 +27,6 @@ import InterestRegion from './pages/mypage/component/region/InterestRegion';
 import WishList from './pages/mypage/component/wishes/WishList';
 import Withdrawl from './pages/mypage/component/withDrawl/Withdrawal';
 import SoldDetail from './pages/mypage/component/salesHistory/SoldDetail';
-import Sold from './pages/mypage/component/salesHistory/Sold';
 import PurchaseDetail from './pages/mypage/component/purchaseHistory/PurchaseDetail';
 import { EditProd } from './pages/editProd';
 import CompletionEdit from './pages/editProd/component/CompletionEdit';
