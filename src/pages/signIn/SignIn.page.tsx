@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
 import React from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { getSignIn } from '../../apis/signin';
 import { useForm } from 'react-hook-form';
+import { getSignIn } from '../../apis/signin';
 import { setCookie } from '../../apis/cookie';
 
 const SignIn = () => {
@@ -16,16 +16,14 @@ const SignIn = () => {
 
 	const userId = watch('userid');
 	const userPassword = watch('userpassword');
-
+	// console.log(userId);
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
 		onSuccess(data) {
-			console.log(data);
-			const { accessToken, refreshToken } = data[0].data;
+			const { accessToken, refreshToken } = data.data;
 			setCookie('accessToken', accessToken, { path: '/' });
 			setCookie('refreshToken', refreshToken, { path: '/' });
-
 			navigate('/');
 		},
 		onError(err) {
@@ -33,7 +31,7 @@ const SignIn = () => {
 			throw new Error('로그인 실패');
 		},
 	});
-	const handleSignIn = async () => {
+	const handleSignIn = () => {
 		const data = { email: userId, password: userPassword };
 
 		if (data.email === 'error@naver.com') {
@@ -62,7 +60,6 @@ const SignIn = () => {
 						required: true,
 					})}
 				/>
-
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
@@ -71,6 +68,7 @@ const SignIn = () => {
 						required: true,
 					})}
 				/>
+
 				{errors.emailError ? (
 					<div className="text-red text-sm text-left mt-1">
 						<p>{errors.emailError.message as string}</p>
@@ -86,6 +84,7 @@ const SignIn = () => {
 					>
 						로그인
 					</button>
+
 					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
 						비밀번호를 잊으셨나요?
 					</p>
@@ -95,6 +94,7 @@ const SignIn = () => {
 				<button
 					type="button"
 					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
+					onClick={handleSignUp}
 				>
 					<img
 						className="ml-6"
@@ -105,7 +105,6 @@ const SignIn = () => {
 						야놀자로 로그인
 					</span>
 				</button>
-
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"

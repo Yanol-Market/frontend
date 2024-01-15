@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SelectBanks from '../region/SelectBanks';
+import { useRecoilValue } from 'recoil';
+import { checkedBankState } from '../../../../recoil/atom';
 
 const AddMyAccount = () => {
 	const {
@@ -13,6 +15,7 @@ const AddMyAccount = () => {
 	} = useForm({ mode: 'onChange' });
 	const watchAgreeCheckBox = watch('account-checkbox');
 	const isButtonDisabled = !watchAgreeCheckBox;
+	const selectedBank = useRecoilValue(checkedBankState);
 	const [isBottomSheetBankOpen, setIsBottomSheetBankOpen] = useState(false);
 
 	const openBottomSheetBank = () => {
@@ -43,7 +46,19 @@ const AddMyAccount = () => {
 							className="flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray"
 							// onClick={openBottomSheet}
 						>
-							<p>은행을 선택해주세요.</p>
+							{selectedBank ? (
+								<div className="flex flex-row gap-2 cursor-default">
+									<img
+										className="w-8 h-8"
+										src={selectedBank.image}
+										alt="은행 이미지"
+									/>
+									<p className="mt-1 text-black">{selectedBank.bankName}</p>
+								</div>
+							) : (
+								<p>은행을 선택해주세요.</p>
+							)}
+
 							<img
 								className="cursor-pointer"
 								src="/assets/images/dropdownArrow.svg"

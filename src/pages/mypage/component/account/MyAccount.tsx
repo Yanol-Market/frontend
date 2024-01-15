@@ -3,9 +3,13 @@ import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { useRecoilValue } from 'recoil';
+import { checkedBankState } from '../../../../recoil/atom';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
+	const selectedBank = useRecoilValue(checkedBankState);
+	console.log(selectedBank);
 	const [isBottomSheetAccountOpen, setIsBottomSheetAccountOpen] =
 		useState(false);
 
@@ -44,13 +48,17 @@ const MyAccount = () => {
 			<div className="w-full h-screen flex flex-col items-center">
 				<div className="w-[90%]">
 					<div className="border border-main h-28 flex flex-col mt-9 mb-44 p-4 bg-bgMain rounded-xl">
-						<p className="font-bold mb-3">홍길동</p>
-						<div className="flex flex-row">
-							<img src="/assets/images/banks/nh.svg" alt="농협은행" />
-							<span>농협은행</span>
+						<p className="text-body font-bold mb-3">홍길동</p>
+						<div className="flex flex-row gap-2">
+							<img
+								className="w-4 h-4"
+								src={selectedBank?.image}
+								alt="선택한 은행"
+							/>
+							<span className="text-m">{selectedBank?.bankName}</span>
 						</div>
 						<div className="flex flex-row justify-between">
-							<p>1234567890112233</p>
+							<p className="text-lg">1234567890112233</p>
 							<img
 								className="cursor-pointer"
 								src="/assets/images/trashCan.svg"
