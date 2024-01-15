@@ -27,18 +27,20 @@ describe('마이페이지 테스트', () => {
 			);
 		});
 	});
-	test('내 계좌 삭제 버튼 클릭 시 모달창이 잘 열리는 지 확인합니다.', async () => {
-		render(
-			<MemoryRouter>
-				<MyAccount />
-			</MemoryRouter>,
-		);
-		const removeBtn = screen.getByAltText('쓰레기통');
-		userEvent.click(removeBtn);
+	test('내 계좌 삭제 버튼 클릭 시 모달창이 잘 열리는 지 확인합니다.', () => {
+		act(async () => {
+			render(
+				<MemoryRouter>
+					<MyAccount />
+				</MemoryRouter>,
+			);
+			const removeBtn = screen.getByAltText('쓰레기통');
+			userEvent.click(removeBtn);
 
-		await waitFor(() => {
-			const removeModalText = screen.getByText('계좌를 삭제하시겠습니까?');
-			expect(removeModalText).toBeInTheDocument();
+			await waitFor(() => {
+				const removeModalText = screen.getByText('계좌를 삭제하시겠습니까?');
+				expect(removeModalText).toBeInTheDocument();
+			});
 		});
 	});
 });

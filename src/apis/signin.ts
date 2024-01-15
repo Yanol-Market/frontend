@@ -5,7 +5,7 @@ export interface ISignIn {
 }
 export const getSignIn = async (data: ISignIn) => {
 	try {
-		const res = await instance.post('/api/signin', data);
+		const res = await instance.post('/login', data);
 		return res.data;
 	} catch (err) {
 		console.error('로그인 실패', err);

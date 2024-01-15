@@ -1,35 +1,44 @@
-import { useMutation } from '@tanstack/react-query';
 import React from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { getSignIn } from '../../apis/signin';
 import { useForm } from 'react-hook-form';
+import { getSignIn } from '../../apis/signin';
+import { setCookie } from '../../apis/cookie';
 
 const SignIn = () => {
 	const {
 		register,
 		handleSubmit,
 		watch,
+		setError,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 
-	const userid = watch('userid');
-	const userpassword = watch('userpassword');
-
+	const userId = watch('userid');
+	const userPassword = watch('userpassword');
+	// console.log(userId);
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
 		onSuccess(data) {
+			const { accessToken, refreshToken } = data.data;
+			setCookie('accessToken', accessToken, { path: '/' });
+			setCookie('refreshToken', refreshToken, { path: '/' });
 			navigate('/');
-			console.log(data);
 		},
 		onError(err) {
 			console.error(err);
 			throw new Error('로그인 실패');
 		},
 	});
-	const handleSignIn = async () => {
-		const data = { email: userid, password: userpassword };
-		mutation.mutate(data);
+	const handleSignIn = () => {
+		const data = { email: userId, password: userPassword };
+
+		if (data.email === 'error@naver.com') {
+			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
+		} else {
+			mutation.mutate(data);
+		}
 	};
 
 	const handleSignUp = () => {
@@ -47,24 +56,22 @@ const SignIn = () => {
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm pl-1 focus:outline-none"
 					type="text"
 					placeholder="이메일"
-					{...(register('userid'),
-					{
+					{...register('userid', {
 						required: true,
 					})}
 				/>
-
 				<input
 					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
 					type="password"
 					placeholder="비밀번호"
-					{...(register('userpassword'),
-					{
+					{...register('userpassword', {
 						required: true,
 					})}
 				/>
-				{errors.userpassword || errors.userid ? (
+
+				{errors.emailError ? (
 					<div className="text-red text-sm text-left mt-1">
-						<p>이메일 및 비밀번호를 확인해주세요.</p>
+						<p>{errors.emailError.message as string}</p>
 					</div>
 				) : (
 					''
@@ -77,6 +84,7 @@ const SignIn = () => {
 					>
 						로그인
 					</button>
+
 					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
 						비밀번호를 잊으셨나요?
 					</p>
@@ -86,6 +94,7 @@ const SignIn = () => {
 				<button
 					type="button"
 					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
+					onClick={handleSignUp}
 				>
 					<img
 						className="ml-6"
@@ -96,7 +105,6 @@ const SignIn = () => {
 						야놀자로 로그인
 					</span>
 				</button>
-
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
