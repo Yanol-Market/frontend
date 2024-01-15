@@ -32,33 +32,39 @@ const AfterSignInMyPage = () => {
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>판매내역</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/sales">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>구매내역</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/purchase">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>찜한 상품</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/wishes">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>관심지역</span>
 					<Link to="/mypage/mylocations">
 						<img
-							className="cursor-pointer"
+							className="cursor-pointer mt-1"
 							src="/assets/images/rightArrowTab.svg"
 							alt="탭 이동"
 						/>
@@ -71,7 +77,7 @@ const AfterSignInMyPage = () => {
 					<span>내 계좌</span>
 					<Link to="/myaccount">
 						<img
-							className="cursor-pointer"
+							className="cursor-pointer mt-1"
 							src="/assets/images/rightArrowTab.svg"
 							alt="탭 이동"
 						/>
@@ -81,7 +87,7 @@ const AfterSignInMyPage = () => {
 					<span>계정관리</span>
 					<Link to="/member">
 						<img
-							className="cursor-pointer"
+							className="cursor-pointer mt-1"
 							src="/assets/images/rightArrowTab.svg"
 							alt="탭 이동"
 						/>
@@ -92,27 +98,33 @@ const AfterSignInMyPage = () => {
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>공지사항</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/announcement">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
 					<span>이용가이드</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/guide">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 				<div className="flex flex-row justify-between">
 					<span>서비스 이용약관 및 정책</span>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/rightArrowTab.svg"
-						alt="탭 이동"
-					/>
+					<Link to="/mypage/guide">
+						<img
+							className="cursor-pointer mt-1"
+							src="/assets/images/rightArrowTab.svg"
+							alt="탭 이동"
+						/>
+					</Link>
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import BottomSheetRegionContent from '../Content/BottomSheetRegionContent';
+import BottomSheetRegionContent from '../content/BottomSheetRegionContent';
+import { useRecoilValue } from 'recoil';
+import { checkedListState } from '../../../../recoil/atom';
 
 const InterestRegion = () => {
+	const selectedList = useRecoilValue(checkedListState);
+	console.log(selectedList);
 	const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
 	const openBottomSheet = () => {
@@ -22,7 +26,7 @@ const InterestRegion = () => {
 					onClose={closeBottomSheet}
 					viewHeight="calc(100vh * 0.9)"
 				>
-					<BottomSheetRegionContent />
+					<BottomSheetRegionContent onClick={closeBottomSheet} />
 				</BottomSheet>
 				<div className="w-[90%] mx-auto mt-11 font-body font-medium">
 					<p>관심 지역을 설정해 두시면 알림을 보내드려요!</p>
@@ -37,6 +41,15 @@ const InterestRegion = () => {
 						onClick={openBottomSheet}
 					/>
 				</div>
+				{selectedList &&
+					selectedList.map((selectedRegion, index) => (
+						<div
+							key={index}
+							className="w-[90%] h-12 bg-homeMain mt-5 rounded-xl p-3"
+						>
+							<p className="text-center">{selectedRegion}</p>
+						</div>
+					))}
 			</div>
 		</div>
 	);
