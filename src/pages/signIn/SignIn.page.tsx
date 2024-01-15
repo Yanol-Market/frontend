@@ -16,16 +16,14 @@ const SignIn = () => {
 
 	const userId = watch('userid');
 	const userPassword = watch('userpassword');
-	console.log(userId);
+	// console.log(userId);
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
 		onSuccess(data) {
-			console.log(data);
-			const { accessToken, refreshToken } = data[0].data;
+			const { accessToken, refreshToken } = data.data;
 			setCookie('accessToken', accessToken, { path: '/' });
 			setCookie('refreshToken', refreshToken, { path: '/' });
-
 			navigate('/');
 		},
 		onError(err) {
@@ -33,7 +31,7 @@ const SignIn = () => {
 			throw new Error('로그인 실패');
 		},
 	});
-	const handleSignIn = async () => {
+	const handleSignIn = () => {
 		const data = { email: userId, password: userPassword };
 
 		if (data.email === 'error@naver.com') {
