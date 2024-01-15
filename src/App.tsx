@@ -56,18 +56,18 @@ function App() {
 						<Route path="detail/:productId" element={<PurchaseDetail />} />
 					</Route>
 					<Route path="/searchResult" element={<SearchResult />} />
-					<Route path="/mypage" element={<MyAccount />} />
-					<Route path="/addaccount" element={<AddMyAccount />} />
-					<Route path="/manageaccount" element={<ManageAccount />} />
-					<Route path="/editpassword" element={<EditPassword />} />
-					<Route path="/withdrawl" element={<Withdrawl />} />
-					{/* 임시 */}
-					<Route path="/sales" element={<SalesHistory />} />
-					<Route path="/purchase" element={<PurchaseHistory />} />
 					<Route path="/reservation" element={<ReservationPage />} />
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />
+					<Route path="/product/:id" element={<Products />} />
+					<Route path="/addproduct/*" element={<AddProduct />} />
+					<Route path="/edit/:productId" element={<EditProd />} />
+					<Route
+						path="/edit/completion/:productId"
+						element={<CompletionEdit />}
+					/>
+					<Route path="/chatList" element={<ChatList />} />
 					<Route path="/mypage" element={<MyPage />} />
 					<Route
 						path="/mypage/announcement"
@@ -94,7 +94,6 @@ function App() {
 					<Route path="/myaccount/registration" element={<AddMyAccount />} />
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
-					<Route path="/product/:id" element={<Products />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={
@@ -119,13 +118,6 @@ function App() {
 							/>
 						}
 					/>
-					<Route path="/addproduct/*" element={<AddProduct />} />
-					<Route path="/edit/:productId" element={<EditProd />} />
-					<Route
-						path="/edit/completion/:productId"
-						element={<CompletionEdit />}
-					/>
-					<Route path="/chatList" element={<ChatList />} />
 				</Route>
 			</Routes>
 		</>
