@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductData } from './ChatPage';
+import { ProductData } from '.';
 
 const ProductInfo: React.FC<{ productData: ProductData }> = ({
 	productData,

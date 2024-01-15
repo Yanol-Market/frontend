@@ -5,7 +5,7 @@ import { Layout } from './component/common/Layout';
 import { Main } from './pages/main';
 import { SignIn } from './pages/signIn';
 import { SignUp } from './pages/signUp';
-import ReservationPage from './pages/reservation/ReservationPage';
+import ReservationPage from './pages/reservation';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
@@ -24,7 +24,7 @@ import InterestRegion from './pages/mypage/component/Region/InterestRegion';
 import WishList from './pages/mypage/component/Wishes/WishList';
 import Withdrawl from './pages/mypage/component/WithDrawl/Withdrawal';
 import { Search } from '@mui/icons-material';
-import ChatPage from './pages/chat/ChatPage';
+import ChatPage from './pages/chat';
 
 function App() {
 	return (
