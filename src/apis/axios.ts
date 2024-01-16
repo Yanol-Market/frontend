@@ -27,11 +27,11 @@ instanceTest.interceptors.request.use((config) => {
 	return config;
 });
 
-// instance.interceptors.request.use((config) => {
-// 	const accessToken = getCookie('accessToken');
-// 	if (accessToken) {
-// 		config.headers['Authorization'] = `Bearer ${accessToken}`;
-// 	}
+instance.interceptors.request.use((config) => {
+	const accessToken = getCookie('accessToken');
+	if (accessToken) {
+		config.headers['Authorization'] = `Bearer ${accessToken}`;
+	}
 
-// 	return config;
-// });
+	return config;
+});
