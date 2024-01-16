@@ -1,9 +1,9 @@
 import { instance } from './axios';
-export interface ISignIn {
+export interface SignInProps {
 	email: string;
 	password: string;
 }
-export const getSignIn = async (data: ISignIn) => {
+export const getSignIn = async (data: SignInProps) => {
 	try {
 		const res = await instance.post('/login', data);
 		return res.data;

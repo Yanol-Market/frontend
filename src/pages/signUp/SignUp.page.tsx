@@ -19,7 +19,7 @@ const SignUp = () => {
 	const userPhoneNumber = watch('phoneNumber');
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
-	const watchCheckboxThird = watch('third-checkbox-');
+	const watchCheckboxThird = watch('third-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
 	const navigate = useNavigate();
@@ -27,7 +27,6 @@ const SignUp = () => {
 		mutationFn: getSignUp,
 		onSuccess(data) {
 			console.log(data);
-			alert('회원가입 완료');
 			navigate('/');
 		},
 		onError(err) {
@@ -36,24 +35,27 @@ const SignUp = () => {
 		},
 	});
 
-	const handleSignUp = async () => {
+	const handleSignUp = () => {
 		const data = {
 			name: userName,
 			nickname: userNickName,
 			email: userEmail,
 			password: userPassword,
 			phoneNumber: userPhoneNumber,
-			marketing: watchCheckboxThird,
+			agreement: {
+				isMarketing: watchCheckboxThird,
+			},
 		};
 		if (data) {
 			mutation.mutate(data);
+			console.log(data);
 		}
 	};
 
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
 			<div className="mt-7">회원가입</div>
-			<form className="mt-10" onSubmit={handleSubmit(getSignUp)}>
+			<form className="mt-10" onSubmit={handleSubmit(handleSignUp)}>
 				<input
 					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
 					type="text"
