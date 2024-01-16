@@ -88,5 +88,8 @@
 	},
 	"msw": {
 		"workerDirectory": "public"
+	},
+	"optionalDependencies": {
+		"fsevents": "*"
 	}
 }
