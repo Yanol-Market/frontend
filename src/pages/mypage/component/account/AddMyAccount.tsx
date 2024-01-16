@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
+
 import SelectBanks from '../region/SelectBanks';
 import { useRecoilValue } from 'recoil';
 import { checkedBankState } from '../../../../recoil/atom';
