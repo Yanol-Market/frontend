@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
+
 import BottomSheetRegionContent from '../content/BottomSheetRegionContent';
 import { useRecoilValue } from 'recoil';
 import { checkedListState } from '../../../../recoil/atom';
@@ -20,7 +21,7 @@ const InterestRegion = () => {
 	return (
 		<div>
 			<Header title="관심 지역" />
-			<div className="flex flex-col items-center h-screen">
+			<div className="flex flex-col items-center">
 				<BottomSheet
 					isOpen={isBottomSheetOpen}
 					onClose={closeBottomSheet}

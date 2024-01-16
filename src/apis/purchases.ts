@@ -1,4 +1,4 @@
-import instance from './axios';
+import { instance } from './axios';
 
 // 구매내역-구매중 조회 API
 export const getPurchases = async () => {

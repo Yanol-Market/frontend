@@ -10,18 +10,17 @@ const WishList = () => {
 		queryKey: ['wishes'],
 		queryFn: getWishes,
 	});
-
+	console.log(data);
 	return (
-		<>
+		<div>
 			<Header title="찜한 상품" />
-
 			{data &&
 				data.map((item: ProductSpecialType) => (
 					<div key={item.productId} className="w-[95%] mt-11 mb-7 mx-auto">
 						<ProductItemNew key={item.productId} product={item} />
 					</div>
 				))}
-		</>
+		</div>
 	);
 };
 

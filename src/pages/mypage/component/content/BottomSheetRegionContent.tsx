@@ -27,7 +27,7 @@ const BottomSheetRegionContent = ({
 	return (
 		<div className="flex flex-col justify-center">
 			<p className="text-center mb-7">관심지역 선택</p>
-			<div>
+			<div className="">
 				{regionData &&
 					regionData.map((regions) => (
 						<div
