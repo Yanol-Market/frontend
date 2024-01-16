@@ -24,8 +24,8 @@ const SignUp = () => {
 	const watchCheckboxThird = watch('third-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
-	const [isNickNameAvailable, setIsNickNameAvailable] = useState(true);
-	const [isEmailAvailable, setIsEmailAvailable] = useState(true);
+	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
+	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
 
 	const navigate = useNavigate();
 	const mutation = useMutation({
@@ -67,10 +67,10 @@ const SignUp = () => {
 	};
 	useEffect(() => {
 		if (userNickName === '') {
-			setIsNickNameAvailable(true);
+			setIsNickNameAvailable(null);
 		}
 		if (userEmail === '') {
-			setIsEmailAvailable(true);
+			setIsEmailAvailable(null);
 		}
 	}, [userNickName, userEmail]);
 	return (
@@ -96,10 +96,14 @@ const SignUp = () => {
 				)}
 				<div className="relative mb-2">
 					<input
-						className={`border ${
-							isNickNameAvailable ? 'border-borderGray' : 'border-green'
+						className={`border border-borderGray ${
+							userNickName &&
+							isNickNameAvailable !== null &&
+							(isNickNameAvailable ? 'border-green' : 'border-borderGray')
 						} w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
-							userNickName && errors.userNickName ? 'border border-red' : ''
+							userNickName && errors.userNickName && !isNickNameAvailable
+								? 'border border-red'
+								: ''
 						}`}
 						type="text"
 						placeholder="닉네임"
@@ -120,17 +124,31 @@ const SignUp = () => {
 						중복 확인
 					</button>
 				</div>
-				{errors.userNickName && (
-					<div className="text-sm text-red mb-4 text-start">
-						{errors.userNickName.message as string}
+
+				{isNickNameAvailable === null ? (
+					<div className="text-sm mb-4 text-start text-red">
+						{errors?.userNickName?.message as string}
+					</div>
+				) : isNickNameAvailable ? (
+					<div className="text-sm mb-4 text-start text-red">
+						이미 사용 중인 닉네임입니다.
+					</div>
+				) : (
+					<div className="text-sm mb-4 text-start text-green">
+						사용 가능한 닉네임입니다.
 					</div>
 				)}
+
 				<div className="relative">
 					<input
 						className={`border ${
-							isEmailAvailable ? 'border-borderGray' : 'border-green'
-						}  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none ${
-							userEmail && errors.email ? 'border border-red' : ''
+							userEmail && isEmailAvailable !== null && !isEmailAvailable
+								? 'border-green'
+								: 'border-borderGray'
+						} w-full h-11 rounded-xl text-m  pl-2 focus:outline-none ${
+							userEmail && errors.userEmail && !isEmailAvailable
+								? 'border border-red'
+								: ''
 						}`}
 						type="text"
 						placeholder="이메일"
@@ -150,9 +168,17 @@ const SignUp = () => {
 						중복 확인
 					</button>
 				</div>
-				{errors.email && (
-					<div className="text-sm text-red mb-2 text-start">
-						{errors.email.message as string}
+				{isEmailAvailable === null ? (
+					<div className="text-sm mb-4 text-start text-red">
+						{errors?.email?.message as string}
+					</div>
+				) : isEmailAvailable ? (
+					<div className="text-sm mb-4 text-start text-red">
+						이미 사용 중인 닉네임입니다.
+					</div>
+				) : (
+					<div className="text-sm mb-4 text-start text-green">
+						사용 가능한 닉네임입니다.
 					</div>
 				)}
 				<input
