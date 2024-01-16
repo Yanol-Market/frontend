@@ -73,7 +73,9 @@ const SignUp = () => {
 				)}
 				<div className="relative mb-2">
 					<input
-						className="border border-borderGray  w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+						className={`border border-borderGray w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
+							userNickName && errors.userNickName ? 'border border-red' : ''
+						}`}
 						type="text"
 						placeholder="닉네임"
 						{...register('userNickName', {
@@ -99,14 +101,16 @@ const SignUp = () => {
 				)}
 				<div className="relative">
 					<input
-						className="border border-borderGray  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none"
+						className={`border border-borderGray  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none ${
+							userEmail && errors.email ? 'border border-red' : ''
+						}`}
 						type="text"
 						placeholder="이메일"
 						{...register('email', {
 							required: true,
 							pattern: {
-								value: /@/,
-								message: '@를 포함한 주소를 적어주세요.',
+								value: /^[가-힣a-zA-Z0-9]*$/,
+								message: '특수문자와 띄어쓰기를 제외한 이메일을 작성해주세요.',
 							},
 						})}
 					/>
