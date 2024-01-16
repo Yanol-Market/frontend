@@ -34,6 +34,7 @@ module.exports = {
 				gray50: '#E0E0E0',
 				yaLogo: '#FF3478',
 				gradientStart: '#FFE266',
+				green: '#0FA254',
 			},
 			fontSize: {
 				headline1: '24px',

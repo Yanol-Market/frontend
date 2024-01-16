@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { getNickName } from '../../apis/nickname';
+import { getEmail } from '../../apis/email';
 
 const SignUp = () => {
 	const {
@@ -22,6 +24,9 @@ const SignUp = () => {
 	const watchCheckboxThird = watch('third-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
 
+	const [isNickNameAvailable, setIsNickNameAvailable] = useState(true);
+	const [isEmailAvailable, setIsEmailAvailable] = useState(true);
+
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignUp,
@@ -35,6 +40,15 @@ const SignUp = () => {
 		},
 	});
 
+	const handleCheckNickName = async () => {
+		const res = await getNickName(userNickName);
+		setIsNickNameAvailable(res?.data?.data);
+	};
+
+	const handleCheckEmail = async () => {
+		const res = await getEmail(userEmail);
+		setIsEmailAvailable(res?.data?.data);
+	};
 	const handleSignUp = () => {
 		const data = {
 			name: userName,
@@ -51,13 +65,22 @@ const SignUp = () => {
 			console.log(data);
 		}
 	};
-
+	useEffect(() => {
+		if (userNickName === '') {
+			setIsNickNameAvailable(true);
+		}
+		if (userEmail === '') {
+			setIsEmailAvailable(true);
+		}
+	}, [userNickName, userEmail]);
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
 			<div className="mt-7">회원가입</div>
 			<form className="mt-10" onSubmit={handleSubmit(handleSignUp)}>
 				<input
-					className="border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none ${
+						userName && errors.username ? 'border border-red' : ''
+					}`}
 					type="text"
 					placeholder="이름"
 					{...register('username', {
@@ -73,7 +96,9 @@ const SignUp = () => {
 				)}
 				<div className="relative mb-2">
 					<input
-						className={`border border-borderGray w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
+						className={`border ${
+							isNickNameAvailable ? 'border-borderGray' : 'border-green'
+						} w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
 							userNickName && errors.userNickName ? 'border border-red' : ''
 						}`}
 						type="text"
@@ -90,6 +115,7 @@ const SignUp = () => {
 					<button
 						type="button"
 						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						onClick={handleCheckNickName}
 					>
 						중복 확인
 					</button>
@@ -101,7 +127,9 @@ const SignUp = () => {
 				)}
 				<div className="relative">
 					<input
-						className={`border border-borderGray  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none ${
+						className={`border ${
+							isEmailAvailable ? 'border-borderGray' : 'border-green'
+						}  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none ${
 							userEmail && errors.email ? 'border border-red' : ''
 						}`}
 						type="text"
@@ -109,7 +137,7 @@ const SignUp = () => {
 						{...register('email', {
 							required: true,
 							pattern: {
-								value: /^[가-힣a-zA-Z0-9]*$/,
+								value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 								message: '특수문자와 띄어쓰기를 제외한 이메일을 작성해주세요.',
 							},
 						})}
@@ -117,6 +145,7 @@ const SignUp = () => {
 					<button
 						type="button"
 						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						onClick={handleCheckEmail}
 					>
 						중복 확인
 					</button>
