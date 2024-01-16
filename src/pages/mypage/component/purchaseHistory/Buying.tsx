@@ -3,33 +3,64 @@ import StatusBar from '../salesHistory/StatusBar';
 import Buyer from '../salesHistory/Buyer';
 import CardProd from '../salesHistory/CardProd';
 import { getPurchases } from '../../../../apis/purchases';
-import { getProducts } from '../../../../apis/home';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { BuyingProd } from '../../../../data/purchasesData';
 const Buying = () => {
-	const data = getPurchases();
-	console.log('getPurchases', data);
+	const { isLoading, error, data } = useQuery({
+		queryKey: ['purchases'],
+		queryFn: getPurchases,
+	});
 
-	const fetchData = async () => {
-		const res = await getPurchases();
-		const res1 = await getProducts();
-		console.log(res);
-		console.log(res1);
-	};
+	console.log('리액트 쿼리 성공', data?.data);
+	console.log('리액트 쿼리 성공2', data);
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+	if (isLoading) {
+		return <div> loading ... </div>;
+	}
 
-	return (
-		<div className="p-5">
-			<div className="pb-5 flex justify-between items-center">
-				<p className="text-sm ">골든티켓 등록번호 4567894512</p>
+	if (error) {
+		return <div> 에러 </div>;
+	}
+	if (data && !data.data) {
+		return <div> 상품 아무것도없다 </div>;
+	}
+	if (data && data.data) {
+		return (
+			<div className="pb-[80px]">
+				{data.data.map((item: BuyingProd) => (
+					<div className="p-5" key={item.productId}>
+						<div className="pb-5 flex justify-between items-center">
+							<p className="text-sm ">골든티켓 등록번호 {item.productId}</p>
+						</div>
+
+						<CardProd
+							accommodationImage={item.accommodationImage}
+							accommodationName={item.accommodationName}
+							reservationType={item.reservationType}
+							roomName={item.roomName}
+							standardNumber={item.standardNumber}
+							maximumNumber={item.maximumNumber}
+							checkInTime={item.checkInTime}
+							checkOutTime={item.checkOutTime}
+							checkInDate={item.checkInDate}
+							checkOutDate={item.checkOutDate}
+							goldenPrice={item.goldenPrice}
+						/>
+
+						<StatusBar status={item.status} />
+						<Buyer
+							chatRoomId={item.chatRoomId}
+							receiverNickname={item.receiverNickname}
+							receiverProfileImage={item.receiverProfileImage}
+							price={item.price}
+							lastUpdatedAt={item.lastUpdatedAt}
+						/>
+					</div>
+				))}
 			</div>
-
-			<CardProd />
-			<StatusBar />
-			<Buyer />
-		</div>
-	);
+		);
+	}
+	return <div> 예상치 못한 오류</div>;
 };
 
 export default Buying;

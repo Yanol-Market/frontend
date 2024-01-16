@@ -46,9 +46,9 @@ const Selling = () => {
 					/>
 				</div>
 			</div>
-			<CardProd />
-			<StatusBar />
-			<Buyer />
+			{/* <CardProd /> */}
+			{/* <StatusBar /> */}
+			{/* <Buyer /> */}
 		</div>
 	);
 };

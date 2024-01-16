@@ -44,7 +44,7 @@ const SoldDetail = () => {
 				</div>
 			</div>
 
-			<CardProd />
+			{/* <CardProd /> */}
 			<div>
 				<div className="text-body py-4 font-bold ">거래 정보</div>{' '}
 				<div className="flex justify-between items-center text-lg pb-2">

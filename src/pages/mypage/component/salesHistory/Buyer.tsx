@@ -3,8 +3,9 @@ import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useLocation } from 'react-router-dom';
+import { BuyerProps } from '../../../../data/purchasesData';
 
-const Buyer = () => {
+const Buyer = (props: BuyerProps) => {
 	const [click, setClick] = useState(false);
 	const location = useLocation();
 	const currentPath = location.pathname;
@@ -38,12 +39,12 @@ const Buyer = () => {
 						<div>
 							<img src="/assets/images/userDefault.svg" alt="userDefault" />
 						</div>
-						<div className="text-lg px-3"> 강릉 여행자 </div>
-						<div className="text-m text-descGray"> 5분전</div>
+						<div className="text-lg px-3"> {props.receiverNickname} </div>
+						<div className="text-m text-descGray"> {props.lastUpdatedAt}</div>
 					</div>
 
 					<div className="flex items-center">
-						<div className="font-bold pr-3">96,000</div>
+						<div className="font-bold pr-3">{props.price}</div>
 						<div>
 							<ArrowForwardIosIcon
 								sx={{ width: '15px' }}
