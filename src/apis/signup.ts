@@ -1,8 +1,8 @@
-import instance from './axios';
+import { instanceTest } from './axios';
 
 export const getSignUp = async (data: any) => {
 	try {
-		const res = await instance.post('/api/signup', data);
+		const res = await instanceTest.post('/api/signup', data);
 
 		alert('회원가입 성공');
 		console.log(res.data);

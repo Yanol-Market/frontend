@@ -37,7 +37,7 @@ const ManageAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetSignOutOpen}
 				onClose={closeBottomSheetSignOut}
-				viewHeight="calc(100vh * 0.35)"
+				viewHeight="calc(100vh * 0.25)"
 			>
 				<ContentTwoBtnPage
 					title="로그아웃 하시겠습니까?"
@@ -47,7 +47,7 @@ const ManageAccount = () => {
 					rightBtnFunc={signOutBtn}
 				/>
 			</BottomSheet>
-			<div className="w-full h-[100vh] flex flex-col items-center">
+			<div className="w-full flex flex-col items-center">
 				<div className="w-[90%] mt-5 flex flex-col">
 					<div className="flex flex-row justify-between mb-5">
 						<span>비밀번호 변경</span>

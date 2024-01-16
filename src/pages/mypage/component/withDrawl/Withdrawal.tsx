@@ -3,6 +3,7 @@ import { Header } from '../../../../component/common/Header';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import WithdrawlReasons from './WithdrawlReasons';
 import { useNavigate } from 'react-router-dom';
+import MyPageClickBtn from '../btn/MyPageClickBtn';
 
 const Withdrawl = () => {
 	const navigate = useNavigate();
@@ -23,11 +24,11 @@ const Withdrawl = () => {
 	return (
 		<div>
 			<Header title="회원탈퇴" />
-			<div className="flex flex-col items-center h-screen">
+			<div className="flex flex-col items-center">
 				<BottomSheet
 					isOpen={isBottomSheetOpenWithDrawl}
 					onClose={closeBottomSheetWithDrawl}
-					viewHeight="calc(100vh * 0.55)"
+					viewHeight="calc(100vh * 0.45)"
 				>
 					<WithdrawlReasons />
 				</BottomSheet>
@@ -52,13 +53,7 @@ const Withdrawl = () => {
 						<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
 					</div>
 				</div>
-				<button
-					type="button"
-					className="flex items-center w-[90%] h-11 mt-40 mx-auto rounded-xl text-center text-m bg-main text-white"
-					onClick={withdrawlConfirmBtn}
-				>
-					<span className="mx-auto">탈퇴하기</span>
-				</button>
+				<MyPageClickBtn content="탈퇴하기" onClick={withdrawlConfirmBtn} />
 			</div>
 		</div>
 	);

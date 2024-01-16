@@ -9,10 +9,8 @@ const NotFoundContent = ({ title, content }: NotFoundContentProps) => {
 	return (
 		<>
 			<Header title={title} />
-			<div className="flex flex-col h-screen items-center justify-center">
-				<div className="">
-					<p className="text-body text-descGray">{content}</p>
-				</div>
+			<div className="flex flex-col items-center">
+				<p className="text-body text-descGray text-center mt-72">{content}</p>
 			</div>
 		</>
 	);

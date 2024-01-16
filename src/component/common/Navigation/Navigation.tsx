@@ -58,7 +58,7 @@ const Navigation = () => {
 				<img
 					className="m-auto mb-2"
 					src={
-						currentPath === '/myPage'
+						currentPath === '/mypage'
 							? '/assets/images/profileLogoActive.svg'
 							: '/assets/images/profileLogo.svg'
 					}
