@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
+import { purchases } from '../data/purchasesData';
 
 export const handlers = [
 	http.get('/api/test', () => {
@@ -99,6 +100,10 @@ export const handlers = [
 				price: 200000,
 			},
 		]);
+	}),
+	// 구매 내역-구매중-조회 API
+	http.get('/api/purchases', () => {
+		return HttpResponse.json(purchases);
 	}),
 ];
 

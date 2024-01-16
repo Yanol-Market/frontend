@@ -35,7 +35,7 @@ const AddMyAccount = () => {
 			>
 				<SelectBanks />
 			</BottomSheet>
-			<div className="w-full h-[100vh] flex flex-col items-center mt-11">
+			<div className="w-full  flex flex-col items-center mt-11">
 				<form className="w-[90%] text-start">
 					<p>은행명과 계좌번호, 예금주를 입력해주세요.</p>
 					<div className="mt-7">
