@@ -57,7 +57,7 @@ const SignUp = () => {
 			<div className="mt-7">회원가입</div>
 			<form className="mt-10" onSubmit={handleSubmit(handleSignUp)}>
 				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+					className="border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none"
 					type="text"
 					placeholder="이름"
 					{...register('username', {
@@ -65,32 +65,61 @@ const SignUp = () => {
 						minLength: { value: 2, message: '이름은 2자 이상이어야 합니다.' },
 					})}
 				/>
+
 				{errors.username && errors.username.type === 'minLength' && (
-					<div className="text-sm text-gray mb-4 text-start">
+					<div className="text-sm text-red mb-2 text-start">
 						{errors.username.message as string}
 					</div>
 				)}
-				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
-					type="text"
-					placeholder="닉네임"
-					{...register('userNickName', {
-						required: true,
-					})}
-				/>
-
-				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
-					type="text"
-					placeholder="이메일"
-					{...register('email', {
-						required: true,
-						pattern: /@/,
-					})}
-				/>
-				{errors.email && errors.email?.type === 'pattern' && (
-					<div className="text-sm text-gray mb-4 text-start">
-						@를 포함한 주소를 적어주세요.
+				<div className="relative mb-2">
+					<input
+						className="border border-borderGray  w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+						type="text"
+						placeholder="닉네임"
+						{...register('userNickName', {
+							required: true,
+							pattern: {
+								value: /^[가-힣a-zA-Z0-9]*$/,
+								message:
+									'특수문자와 띄어쓰기를 제외한 한글, 영문, 숫자로 닉네임을 작성해주세요.',
+							},
+						})}
+					/>
+					<button
+						type="button"
+						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+					>
+						중복 확인
+					</button>
+				</div>
+				{errors.userNickName && (
+					<div className="text-sm text-red mb-4 text-start">
+						{errors.userNickName.message as string}
+					</div>
+				)}
+				<div className="relative">
+					<input
+						className="border border-borderGray  w-full h-11 mb-2 rounded-xl text-m pl-2 focus:outline-none"
+						type="text"
+						placeholder="이메일"
+						{...register('email', {
+							required: true,
+							pattern: {
+								value: /@/,
+								message: '@를 포함한 주소를 적어주세요.',
+							},
+						})}
+					/>
+					<button
+						type="button"
+						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+					>
+						중복 확인
+					</button>
+				</div>
+				{errors.email && (
+					<div className="text-sm text-red mb-2 text-start">
+						{errors.email.message as string}
 					</div>
 				)}
 				<input
