@@ -5,7 +5,7 @@ import { Layout } from './component/common/Layout';
 import { Main } from './pages/main';
 import { SignIn } from './pages/signIn';
 import { SignUp } from './pages/signUp';
-import ReservationPage from './pages/reservation/ReservationPage';
+import ReservationPage from './pages/reservation';
 import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
@@ -35,6 +35,7 @@ import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
 import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
+import ChatPage from './pages/chat';
 
 function App() {
 	return (
@@ -94,6 +95,7 @@ function App() {
 					<Route path="/myaccount/registration" element={<AddMyAccount />} />
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
+					<Route path="/chat" element={<ChatPage />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={
