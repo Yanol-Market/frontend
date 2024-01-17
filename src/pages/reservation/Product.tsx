@@ -5,7 +5,7 @@ const productData: PayMentProps = {
 	productId: 1,
 	imageUrl: '/assets/images/reserveRoom.svg',
 	accommodationName: '에코그린 리조트 호텔',
-	roomName: '디럭스 더블',
+	roomName: '스탠다드 더블',
 	reservationType: '숙박',
 	standardNumber: 1,
 	maximumNumber: 2,
