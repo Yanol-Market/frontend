@@ -19,6 +19,7 @@ const SignUp = () => {
 	const userNickName = watch('userNickName');
 	const userEmail = watch('email');
 	const userPassword = watch('password');
+	const userpasswordChecked = watch('passwordChecked');
 	const userPhoneNumber = watch('phoneNumber');
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
@@ -92,12 +93,12 @@ const SignUp = () => {
 		}
 	}, [userNickName, userEmail]);
 	return (
-		<div className="flex flex-col items-center w-full h-screen text-center px-5">
+		<div className="flex flex-col items-center text-center">
 			<div className="mt-7">회원가입</div>
-			<form className="mt-10" onSubmit={handleSubmit(handleSignUp)}>
+			<form className="mt-10 w-[90%]" onSubmit={handleSubmit(handleSignUp)}>
 				<input
 					className={`border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none ${
-						userName && errors.username ? 'border border-red' : ''
+						userName && errors.username ? 'border border-red mb-0' : ''
 					}`}
 					type="text"
 					placeholder="이름"
@@ -112,15 +113,17 @@ const SignUp = () => {
 						{errors.username.message as string}
 					</div>
 				)}
-				<div className="relative mb-2">
+				<div className="relative">
 					<input
-						className={`border border-borderGray ${
+						className={`border ${
 							userNickName &&
 							isNickNameAvailable !== null &&
-							(isNickNameAvailable ? 'border-green' : 'border-borderGray')
+							!isNickNameAvailable
+								? 'border-green'
+								: 'border-borderGray'
 						} w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
 							userNickName && errors.userNickName && !isNickNameAvailable
-								? 'border border-red'
+								? 'border border-red mb-0'
 								: ''
 						}`}
 						type="text"
@@ -164,7 +167,7 @@ const SignUp = () => {
 								? 'border-green'
 								: 'border-borderGray'
 						} w-full h-11 rounded-xl text-m  pl-2 focus:outline-none ${
-							userEmail && errors.userEmail && !isEmailAvailable
+							userEmail && errors.email && !isEmailAvailable
 								? 'border border-red'
 								: ''
 						}`}
@@ -192,33 +195,40 @@ const SignUp = () => {
 					</div>
 				) : isEmailAvailable ? (
 					<div className="text-sm mb-4 text-start text-red">
-						이미 사용 중인 닉네임입니다.
+						이미 사용 중인 이메일입니다.
 					</div>
 				) : (
 					<div className="text-sm mb-4 text-start text-green">
-						사용 가능한 닉네임입니다.
+						사용 가능한 이메일입니다.
 					</div>
 				)}
+
 				<input
-					className="border border-borderGray w-full h-11 mb-4 rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
+						userPassword && errors.password ? 'border border-red mb-0' : ''
+					}`}
 					type="password"
 					placeholder="비밀번호"
 					{...register('password', {
 						required: true,
 						pattern: {
 							value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
-							message:
-								'비밀번호는 최소 6자 이상, 숫자와 영문자를 모두 포함해야 합니다.',
+							message: '최소 6자 이상, 숫자와 영문자를 모두 포함해야 합니다.',
 						},
 					})}
 				/>
+
 				{errors.password && errors.password.type === 'pattern' && (
-					<div className="text-sm text-gray mb-4 text-start">
+					<div className="text-sm text-red mb-4 text-start">
 						{errors.password.message as string}
 					</div>
 				)}
 				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
+						errors.passwordChecked && userpasswordChecked && userPassword
+							? 'border border-red mb-0'
+							: ''
+					}`}
 					type="password"
 					placeholder="비밀번호 확인"
 					{...register('passwordChecked', {
@@ -226,9 +236,11 @@ const SignUp = () => {
 						validate: (value) => value === watch('password'),
 					})}
 				/>
-				{errors.passwordChecked &&
+				{userPassword &&
+					userpasswordChecked &&
+					errors.passwordChecked &&
 					errors.passwordChecked?.type === 'validate' && (
-						<div className="text-sm text-gray mb-4 text-start">
+						<div className="text-sm text-red mb-4 text-start">
 							입력한 비밀번호와 다릅니다
 						</div>
 					)}
