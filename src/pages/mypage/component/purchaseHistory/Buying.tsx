@@ -2,15 +2,10 @@ import React, { useEffect } from 'react';
 import StatusBar from '../salesHistory/StatusBar';
 import Buyer from '../salesHistory/Buyer';
 import CardProd from '../salesHistory/CardProd';
-import { getPurchases } from '../../../../apis/purchases';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { BuyingProd } from '../../../../data/purchasesData';
+import { useQueryPurchases } from '../../../../hooks/useQueryPurchases';
 const Buying = () => {
-	const { isLoading, error, data } = useQuery({
-		queryKey: ['purchases'],
-		queryFn: getPurchases,
-	});
-
+	const { isLoading, error, data } = useQueryPurchases();
 	console.log('리액트 쿼리 성공', data?.data);
 	console.log('리액트 쿼리 성공2', data);
 
