@@ -1,6 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { getPaymentsDetail } from '../../apis/paymentsDetail';
 
-const productData: PayMentProps = {
+export const productData: PaymentProps = {
 	orderId: 1,
 	productId: 1,
 	imageUrl: '/assets/images/reserveRoom.svg',
@@ -22,7 +24,7 @@ const productData: PayMentProps = {
 	registrationNumber: 202401051119,
 };
 
-interface PayMentProps {
+interface PaymentProps {
 	orderId: number;
 	productId: number;
 	imageUrl: string;
@@ -45,6 +47,13 @@ interface PayMentProps {
 }
 
 const Product = () => {
+	// 결제 상세페이지 조회 로직(productData.productId 추후 변경 예정)
+	// const { data } = useQuery({
+	// 	queryKey: ['paymentDetail'],
+	// 	queryFn: () => getPaymentsDetail(productData.productId),
+	// });
+	// console.log(data);
+
 	return (
 		<>
 			<div className="p-[20px]">
@@ -71,7 +80,9 @@ const Product = () => {
 								{productData.standardNumber}/최대 {productData.maximumNumber}인
 							</p>
 						</div>
-						<p className="text-lg font-bold pt-[15px]">{productData.price}</p>
+						<p className="text-lg font-bold pt-[15px]">
+							{productData.price.toLocaleString()}원
+						</p>
 					</div>
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center bg-[#fafafa] rounded-[10px] w-[35px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">
