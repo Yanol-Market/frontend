@@ -1,6 +1,10 @@
 import { http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
-import { BoughtListRes, BuyingRes } from '../data/purchasesData';
+import {
+	BoughtDetailRes,
+	BoughtListRes,
+	BuyingRes,
+} from '../data/purchasesData';
 
 export const handlers = [
 	http.get('/api/test', () => {
@@ -108,6 +112,10 @@ export const handlers = [
 	// 구매 내역-구매 완료-리스트-조회 API
 	http.get('/api/purchase/history?status=COMPLETE', () => {
 		return HttpResponse.json(BoughtListRes);
+	}),
+	// 구매 내역-구매 완료-상세-조회 API
+	http.get('/api/orders/history?status=COMPLETED&productId=1', () => {
+		return HttpResponse.json(BoughtDetailRes);
 	}),
 ];
 

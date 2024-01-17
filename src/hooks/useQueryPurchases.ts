@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { getPurchases } from '../apis/purchases';
+import { getBoughtDetailList, getPurchases } from '../apis/purchases';
 import { getBoughtList } from '../apis/purchases';
 
 // 구매내역 - 구매중
@@ -14,8 +14,22 @@ export const useQueryPurchases = () => {
 // 구매내역 - 구매완료 - 리스트
 export const useQueryBoughtList = () => {
 	const { isLoading, error, data } = useQuery({
-		queryKey: ['purchases'],
+		queryKey: ['BoughtList'],
 		queryFn: getBoughtList,
+		select: ({ data }) => data,
+	});
+	return {
+		isLoading,
+		error,
+		data,
+	};
+};
+
+// // 구매내역 - 구매완료 - 상세
+export const useQueryBoughtDetail = (productId: string) => {
+	const { isLoading, error, data } = useQuery({
+		queryKey: ['BoughtDetail'],
+		queryFn: () => getBoughtDetailList(productId),
 		select: ({ data }) => data,
 	});
 	return {

@@ -6,33 +6,6 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQueryBoughtList } from '../../../../hooks/useQueryPurchases';
 import { BoughtProd } from '../../../../data/purchasesData';
-const productData: ProductData = {
-	productId: '545487548754',
-	registrationNumber: 202401051119,
-	image: '/assets/images/reserveRoom.svg',
-	productName: '에코그린 리조트 호텔',
-	productCondition: '디럭스 더블',
-	productAccommodation: '2인/최대 2인',
-	productStatus: '숙박',
-	transactionStatus: '판매완료',
-	price: '210,000원',
-	checkIn: '2024-01-28(일) 15:00',
-	checkOut: '2024-01-30(화) 15:00',
-};
-
-interface ProductData {
-	productId: string;
-	registrationNumber: number;
-	image: string;
-	productName: string;
-	productCondition: string;
-	productAccommodation: string;
-	productStatus: string;
-	transactionStatus: string;
-	price: string;
-	checkIn: string;
-	checkOut: string;
-}
 
 const BoughtListProd = () => {
 	const { isLoading, error, data } = useQueryBoughtList();
@@ -101,7 +74,7 @@ const BoughtListProd = () => {
 										<p className="text-lg font-bold">
 											{item.accommodationName}
 										</p>
-										<p className=" text-m text-gray pl-2">1년전</p>
+										<p className=" text-m text-gray pl-2">{item.completedAt}</p>
 									</div>
 
 									<div className="flex">

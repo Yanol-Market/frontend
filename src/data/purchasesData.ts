@@ -68,11 +68,11 @@ export interface BoughtProd {
 	productId: number;
 	accommodationImage: string;
 	accommodationName: string;
-	reservationType: string;
 	roomName: string;
 	standardNumber: number;
 	maximumNumber: number;
 	goldenPrice: number;
+	completedAt: string;
 }
 
 export interface CardProdProps {
@@ -179,37 +179,36 @@ export const BoughtListRes: ApiBoughtProd = {
 			productId: 1,
 			accommodationImage: '/assets/images/reserveRoom.svg',
 			accommodationName: '숙소명',
-			reservationType: 'STAY',
 			roomName: '객실명',
 			standardNumber: 2,
 			maximumNumber: 4,
-
 			goldenPrice: 100000,
+			completedAt: '2024-01-10T14:00:00',
 		},
 		{
 			productId: 2,
 			accommodationImage: '/assets/images/reserveRoom.svg',
 			accommodationName: '숙소명2',
-			reservationType: 'STAY',
 			roomName: '객실명2',
 			standardNumber: 2,
 			maximumNumber: 4,
 			goldenPrice: 100000,
+			completedAt: '2024-01-10T14:00:00',
 		},
 		{
 			productId: 3,
 			accommodationImage: '/assets/images/reserveRoom.svg',
 			accommodationName: '숙소명3',
-			reservationType: 'STAY',
 			roomName: '객실명3',
 			standardNumber: 2,
 			maximumNumber: 4,
 			goldenPrice: 100000,
+			completedAt: '2024-01-10T14:00:00',
 		},
 	],
 };
 
-// 구매 내역-구매완료-리스트-조회 API
+// 구매 내역-구매완료-상세-조회 API
 export const BoughtDetailRes: ApiBoughtDetailProd = {
 	status: 'SUCCESS',
 	message: '상품이 성공적으로 조회가 완료되었습니다.',
