@@ -117,11 +117,9 @@ const PurchaseDetail = () => {
 									<img src="/assets/images/userDefault.svg" alt="userDefault" />
 								</div>
 								<div className="text-lg px-3 text-descGray">
-									{' '}
-									{data.receiverNickname}{' '}
+									{data.receiverNickname}
 								</div>
 								<div className="text-m text-descGray">
-									{' '}
 									{data.lastUpdatedAt}분전
 								</div>
 							</div>
@@ -133,7 +131,7 @@ const PurchaseDetail = () => {
 										sx={{ width: '15px' }}
 										className="cursor-pointer text-descGray"
 									/>
-								</div>{' '}
+								</div>
 							</div>
 						</div>
 					</div>

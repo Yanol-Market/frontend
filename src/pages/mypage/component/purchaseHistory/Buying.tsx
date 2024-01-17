@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import StatusBar from '../salesHistory/StatusBar';
-import Buyer from '../salesHistory/Buyer';
 import CardProd from '../salesHistory/CardProd';
 import { BuyingProd } from '../../../../data/purchasesData';
 import { useQueryPurchases } from '../../../../hooks/useQueryPurchases';
+import PurchaseBuyer from './PurchaseBuyer';
 const Buying = () => {
 	const { isLoading, error, data } = useQueryPurchases();
 	console.log('리액트 쿼리 성공', data?.data);
@@ -43,7 +43,7 @@ const Buying = () => {
 						/>
 
 						<StatusBar status={item.status} />
-						<Buyer
+						<PurchaseBuyer
 							chatRoomId={item.chatRoomId}
 							receiverNickname={item.receiverNickname}
 							receiverProfileImage={item.receiverProfileImage}
