@@ -1,8 +1,8 @@
-import { instanceTest } from './axios';
+import axios from './axios';
 
 export const getWishes = async () => {
 	try {
-		const res = await instanceTest.get('api/wishes');
+		const res = await axios.get('api/wwwww'); // 임시 수정
 		if (res) {
 			return res.data;
 		}

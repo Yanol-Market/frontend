@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getSignIn } from '../../apis/signin';
 import { setCookie } from '../../apis/cookie';
@@ -91,20 +91,21 @@ const SignIn = () => {
 				</div>
 			</form>
 			<div className="w-full mt-[3.75rem]">
-				<button
-					type="button"
-					className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
-					onClick={handleSignUp}
-				>
-					<img
-						className="ml-6"
-						src="/assets/images/yaLogo.svg"
-						alt="야놀자 로고"
-					/>
-					<span className="text-center w-2/3 ml-2 text-white">
-						야놀자로 로그인
-					</span>
-				</button>
+				<Link to="/yasignin">
+					<button
+						type="button"
+						className="border border-borderGray bg-yaLogo flex items-center w-full h-11 rounded-xl text-gray text-m"
+					>
+						<img
+							className="ml-6"
+							src="/assets/images/yaLogo.svg"
+							alt="야놀자 로고"
+						/>
+						<span className="text-center w-2/3 ml-2 text-white">
+							야놀자로 로그인
+						</span>
+					</button>
+				</Link>
 				<button
 					type="button"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"

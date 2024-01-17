@@ -1,4 +1,5 @@
 import { Cookies } from 'react-cookie';
+import instance from './axios';
 
 const cookies = new Cookies();
 
@@ -25,4 +26,23 @@ export const deleteCookie = () => {
 		secure: '/',
 		maxAge: 0,
 	});
+};
+
+export const refreshCookie = async () => {
+	try {
+		const refreshTokenValue = getCookie('refreshToken');
+		if (refreshTokenValue) {
+			const res = await instance.post('/reissue', {
+				refreshToken: refreshTokenValue,
+			});
+			if (res) {
+				const { accessToken, refreshToken } = res.data.data;
+				setCookie('accessToken', accessToken);
+				setCookie('refreshToken', refreshToken);
+				return accessToken;
+			}
+		}
+	} catch (err) {
+		console.error('토큰 재발급 실패', err);
+	}
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getNickName } from '../../apis/nickname';
 import { getEmail } from '../../apis/email';
@@ -11,6 +11,7 @@ const SignUp = () => {
 		register,
 		handleSubmit,
 		watch,
+		setValue,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 
@@ -40,6 +41,15 @@ const SignUp = () => {
 		},
 	});
 
+	const storedUserData = sessionStorage.getItem('userData');
+	useEffect(() => {
+		if (storedUserData) {
+			const userData = JSON.parse(storedUserData);
+			setValue('username', userData.name);
+			setValue('email', userData.email);
+			setValue('phoneNumber', userData.phoneNumber);
+		}
+	}, [storedUserData, setValue]);
 	const handleCheckNickName = async () => {
 		const res = await getNickName(userNickName);
 		setIsNickNameAvailable(res?.data?.data);
@@ -50,12 +60,20 @@ const SignUp = () => {
 		setIsEmailAvailable(res?.data?.data);
 	};
 	const handleSignUp = () => {
+		const storedUserData = sessionStorage.getItem('userData');
+		let userId = null;
+
+		if (storedUserData) {
+			const userData = JSON.parse(storedUserData);
+			userId = userData.id;
+		}
 		const data = {
 			name: userName,
 			nickname: userNickName,
 			email: userEmail,
 			password: userPassword,
 			phoneNumber: userPhoneNumber,
+			id: userId,
 			agreement: {
 				isMarketing: watchCheckboxThird,
 			},
