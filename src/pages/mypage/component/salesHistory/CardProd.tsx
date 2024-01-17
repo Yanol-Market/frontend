@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CardProdProps } from '../../../../data/purchasesData';
+import { reservationTypeTrans } from '../../../../utils/translate';
 
 const CardProd = (props: CardProdProps) => {
 	const location = useLocation();
@@ -31,7 +32,7 @@ const CardProd = (props: CardProdProps) => {
 					</div>
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] bg-lightGray border-[1px] border-[#e0e0e0] w-[35px] h-[20px] p-[5px] text-center ">
-							<p className="">{props.reservationType}</p>
+							<p className="">{reservationTypeTrans(props.reservationType)}</p>
 						</div>
 					</div>
 				</div>

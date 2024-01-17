@@ -16,6 +16,7 @@ export const useQuerySoldList = () => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['soldList'],
 		queryFn: getSoldList,
+		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };
 };
