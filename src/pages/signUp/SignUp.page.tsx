@@ -42,7 +42,7 @@ const SignUp = () => {
 		},
 	});
 
-	const storedUserData = sessionStorage.getItem('userData');
+	const storedUserData = localStorage.getItem('userData');
 	useEffect(() => {
 		if (storedUserData) {
 			const userData = JSON.parse(storedUserData);
@@ -61,7 +61,7 @@ const SignUp = () => {
 		setIsEmailAvailable(res?.data?.data);
 	};
 	const handleSignUp = () => {
-		const storedUserData = sessionStorage.getItem('userData');
+		const storedUserData = localStorage.getItem('userData');
 		let userId = null;
 
 		if (storedUserData) {

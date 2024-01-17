@@ -21,7 +21,7 @@ const YaSignIn = () => {
 		onSuccess(data) {
 			console.log(data);
 			if (data.status === 'FAIL') {
-				const userData = sessionStorage.setItem(
+				const userData = localStorage.setItem(
 					'userData',
 					JSON.stringify(data.data),
 				);
@@ -46,7 +46,7 @@ const YaSignIn = () => {
 			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
 		} else {
 			mutation.mutate(data);
-			const userId = sessionStorage.setItem('userId', data.email);
+			const userId = localStorage.setItem('userId', data.email);
 		}
 	};
 

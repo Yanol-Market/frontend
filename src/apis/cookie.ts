@@ -30,7 +30,10 @@ export const deleteCookie = () => {
 
 export const refreshCookie = async () => {
 	try {
+		const accessTokenValue = getCookie('accessToken');
 		const refreshTokenValue = getCookie('refreshToken');
+		console.log('기존 액세스 토큰 :', accessTokenValue);
+		console.log('기존 리프레쉬 토큰 :', refreshTokenValue);
 		if (refreshTokenValue) {
 			const res = await instance.post('/reissue', {
 				refreshToken: refreshTokenValue,
@@ -39,6 +42,10 @@ export const refreshCookie = async () => {
 				const { accessToken, refreshToken } = res.data.data;
 				setCookie('accessToken', accessToken);
 				setCookie('refreshToken', refreshToken);
+				console.log('새 토큰', accessToken);
+				const newAccessToken = getCookie('accessToken');
+				const equal = accessTokenValue === newAccessToken;
+				console.log(equal);
 				return accessToken;
 			}
 		}

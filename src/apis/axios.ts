@@ -21,21 +21,24 @@ instance.interceptors.request.use((config) => {
 	return config;
 });
 
-instance.interceptors.response.use(
-	(response) => response,
-	async (error) => {
-		const originalRequest = error.config;
+// instance.interceptors.response.use(
+// 	(response) => response,
+// 	async (error) => {
+// 		const originalRequest = error.config;
+// 		const refreshTokenValue = getCookie('refreshToken');
+// 		console.log(refreshTokenValue);
 
-		if (error.response.status === 401 && !originalRequest._retry) {
-			originalRequest._retry = true;
-			const newAccessToken = await refreshCookie();
+// 		if (error.response.status === 401 && !originalRequest._retry) {
+// 			originalRequest._retry = true;
+// 			const newAccessToken = await refreshCookie();
+// 			console.log(newAccessToken);
+// 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+// 			console.log('토큰 재발급 완료');
+// 			return instance(originalRequest);
+// 		}
 
-			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-			return instance(originalRequest);
-		}
-
-		return Promise.reject(error);
-	},
-);
+// 		return Promise.reject(error);
+// 	},
+// );
 
 export default instance;

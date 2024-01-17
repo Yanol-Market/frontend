@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { refreshCookie } from '../../../../apis/cookie';
 const AfterSignInMyPage = () => {
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center">
 			<div className="mt-8 font-medium">마이페이지</div>
+			<button onClick={refreshCookie}>토큰 재발급</button>
 			<div className="mt-11 text-start w-[90%] text-descGray">
 				<div className="flex flex-row gap-6">
 					<img
