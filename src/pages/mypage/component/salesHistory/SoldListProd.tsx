@@ -52,7 +52,7 @@ const SoldListProd = () => {
 	}
 	if (data) {
 		return (
-			<>
+			<div className="pb-[80px]">
 				<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
 					<ContentTwoBtnPage
 						title="판매 정보를 삭제하시겠습니까?"
@@ -129,7 +129,7 @@ const SoldListProd = () => {
 						<div className="border-b border-borderGray"></div>
 					</div>
 				))}
-			</>
+			</div>
 		);
 	}
 
