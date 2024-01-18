@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { RequestPayParams, RequestPayResponse } from '../../type/portone';
+import { useMutation } from '@tanstack/react-query';
+import { paymentPrePare } from '../../apis/paymentPrepare';
+import { productData } from './Product';
 
 interface TermSheetProps {
 	setTermSheet: (value: boolean) => void;
@@ -12,6 +15,22 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		term3: false,
 	});
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
+
+	const mutation = useMutation({
+		mutationFn: paymentPrePare,
+		onSuccess(data) {
+			console.log(data);
+			// handlePayment();
+		},
+		onError(err) {
+			console.error(err);
+			throw new Error('로그인 실패');
+		},
+	});
+
+	const onClickPayment = () => {
+		mutation.mutate(productData.productId);
+	};
 
 	const [checkAll, setCheckAll] = useState(false);
 
@@ -299,7 +318,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 						className={`w-[100%] h-[50px] text-lg ${
 							checkAll ? 'bg-[#FFCC00]' : 'bg-[#e5e5e5]'
 						} ${checkAll ? 'text-white' : 'text-[#828282]'} rounded-[12px]`}
-						onClick={handlePayment}
+						onClick={onClickPayment}
 					>
 						결제하기
 					</button>

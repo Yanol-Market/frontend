@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface GoldenPriceDecisionProps {
-	currentSellingPrice: number;
-	initialPurchasePrice: number;
-	onPriceChange: (newPrice: number) => void;
+	originPrice: string | null;
+	yanoljaPrice: string | null;
+	setGoldenPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GoldenPriceDecision = ({
-	currentSellingPrice,
-	initialPurchasePrice,
-	onPriceChange,
+	yanoljaPrice,
+	originPrice,
+	setGoldenPrice,
 }: GoldenPriceDecisionProps) => {
 	return (
 		<div>
@@ -19,9 +19,8 @@ const GoldenPriceDecision = ({
 			</p>
 			<div className="mt-3 w-[21.0625rem] h-[3.125rem] mx-auto text-center bg-lightGray flex items-center justify-center text-lg">
 				<p>
-					현재 야놀자는{' '}
-					<span className="font-semibold">{currentSellingPrice}</span>원에 팔고
-					있어요!
+					현재 야놀자는 <span className="font-semibold">{yanoljaPrice}</span>
+					원에 팔고 있어요!
 				</p>
 			</div>
 			<div className="flex mt-9 text-lg">
@@ -31,8 +30,8 @@ const GoldenPriceDecision = ({
 				</p>
 				<input
 					type="number"
-					placeholder={`기존구매가 ${initialPurchasePrice}`}
-					onChange={(e) => onPriceChange(Number(e.target.value))}
+					placeholder={`기존구매가 ${originPrice}`}
+					onChange={(e) => setGoldenPrice(Number(e.target.value))}
 					className="border-b border-borderGray outline-none ml-3 mt-1 w-[14.0625rem] text-center text-descGray pb-2"
 				/>
 				<p className="ml-2 mt-3">원</p>

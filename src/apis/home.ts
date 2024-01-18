@@ -1,8 +1,9 @@
-import { instanceTest } from './axios';
+import axios from 'axios';
+import instance from './axios';
 
 export const getProducts = async () => {
 	try {
-		const res = await instanceTest.get('/api/products');
+		const res = await axios.get('http://localhost:3000/api/products');
 		console.log(res.data);
 		return res.data;
 	} catch (error) {

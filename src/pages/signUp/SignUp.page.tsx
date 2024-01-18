@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { getSignUp } from '../../apis/signup';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { getNickName } from '../../apis/nickname';
+import { getEmail } from '../../apis/email';
 
 const SignUp = () => {
 	const {
 		register,
 		handleSubmit,
 		watch,
+		setValue,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 
@@ -16,18 +19,21 @@ const SignUp = () => {
 	const userNickName = watch('userNickName');
 	const userEmail = watch('email');
 	const userPassword = watch('password');
+	const userpasswordChecked = watch('passwordChecked');
 	const userPhoneNumber = watch('phoneNumber');
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
-	const watchCheckboxThird = watch('third-checkbox-');
+	const watchCheckboxThird = watch('third-checkbox');
 	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
+
+	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
+	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
 
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignUp,
 		onSuccess(data) {
 			console.log(data);
-			alert('회원가입 완료');
 			navigate('/');
 		},
 		onError(err) {
@@ -36,26 +42,64 @@ const SignUp = () => {
 		},
 	});
 
-	const handleSignUp = async () => {
+	const storedUserData = localStorage.getItem('userData');
+	useEffect(() => {
+		if (storedUserData) {
+			const userData = JSON.parse(storedUserData);
+			setValue('username', userData.name);
+			setValue('email', userData.email);
+			setValue('phoneNumber', userData.phoneNumber);
+		}
+	}, [storedUserData, setValue]);
+	const handleCheckNickName = async () => {
+		const res = await getNickName(userNickName);
+		setIsNickNameAvailable(res?.data?.data);
+	};
+
+	const handleCheckEmail = async () => {
+		const res = await getEmail(userEmail);
+		setIsEmailAvailable(res?.data?.data);
+	};
+	const handleSignUp = () => {
+		const storedUserData = localStorage.getItem('userData');
+		let userId = null;
+
+		if (storedUserData) {
+			const userData = JSON.parse(storedUserData);
+			userId = userData.id;
+		}
 		const data = {
 			name: userName,
 			nickname: userNickName,
 			email: userEmail,
 			password: userPassword,
 			phoneNumber: userPhoneNumber,
-			marketing: watchCheckboxThird,
+			id: userId,
+			agreement: {
+				isMarketing: watchCheckboxThird,
+			},
 		};
 		if (data) {
 			mutation.mutate(data);
+			console.log(data);
 		}
 	};
-
+	useEffect(() => {
+		if (userNickName === '') {
+			setIsNickNameAvailable(null);
+		}
+		if (userEmail === '') {
+			setIsEmailAvailable(null);
+		}
+	}, [userNickName, userEmail]);
 	return (
-		<div className="flex flex-col items-center w-full h-screen text-center px-5">
+		<div className="flex flex-col items-center text-center">
 			<div className="mt-7">회원가입</div>
-			<form className="mt-10" onSubmit={handleSubmit(getSignUp)}>
+			<form className="mt-10 w-[90%]" onSubmit={handleSubmit(handleSignUp)}>
 				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none ${
+						userName && errors.username ? 'border border-red mb-0' : ''
+					}`}
 					type="text"
 					placeholder="이름"
 					{...register('username', {
@@ -63,54 +107,128 @@ const SignUp = () => {
 						minLength: { value: 2, message: '이름은 2자 이상이어야 합니다.' },
 					})}
 				/>
+
 				{errors.username && errors.username.type === 'minLength' && (
-					<div className="text-sm text-gray mb-4 text-start">
+					<div className="text-sm text-red mb-2 text-start">
 						{errors.username.message as string}
 					</div>
 				)}
-				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
-					type="text"
-					placeholder="닉네임"
-					{...register('userNickName', {
-						required: true,
-					})}
-				/>
+				<div className="relative">
+					<input
+						className={`border ${
+							userNickName &&
+							isNickNameAvailable !== null &&
+							!isNickNameAvailable
+								? 'border-green'
+								: 'border-borderGray'
+						} w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
+							userNickName && errors.userNickName && !isNickNameAvailable
+								? 'border border-red mb-0'
+								: ''
+						}`}
+						type="text"
+						placeholder="닉네임"
+						{...register('userNickName', {
+							required: true,
+							pattern: {
+								value: /^[가-힣a-zA-Z0-9]*$/,
+								message:
+									'특수문자와 띄어쓰기를 제외한 한글, 영문, 숫자로 닉네임을 작성해주세요.',
+							},
+						})}
+					/>
+					<button
+						type="button"
+						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						onClick={handleCheckNickName}
+					>
+						중복 확인
+					</button>
+				</div>
 
-				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
-					type="text"
-					placeholder="이메일"
-					{...register('email', {
-						required: true,
-						pattern: /@/,
-					})}
-				/>
-				{errors.email && errors.email?.type === 'pattern' && (
-					<div className="text-sm text-gray mb-4 text-start">
-						@를 포함한 주소를 적어주세요.
+				{isNickNameAvailable === null ? (
+					<div className="text-sm mb-4 text-start text-red">
+						{errors?.userNickName?.message as string}
+					</div>
+				) : isNickNameAvailable ? (
+					<div className="text-sm mb-4 text-start text-red">
+						이미 사용 중인 닉네임입니다.
+					</div>
+				) : (
+					<div className="text-sm mb-4 text-start text-green">
+						사용 가능한 닉네임입니다.
 					</div>
 				)}
+
+				<div className="relative">
+					<input
+						className={`border ${
+							userEmail && isEmailAvailable !== null && !isEmailAvailable
+								? 'border-green'
+								: 'border-borderGray'
+						} w-full h-11 rounded-xl text-m  pl-2 focus:outline-none ${
+							userEmail && errors.email && !isEmailAvailable
+								? 'border border-red'
+								: ''
+						}`}
+						type="text"
+						placeholder="이메일"
+						{...register('email', {
+							required: true,
+							pattern: {
+								value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+								message: '특수문자와 띄어쓰기를 제외한 이메일을 작성해주세요.',
+							},
+						})}
+					/>
+					<button
+						type="button"
+						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						onClick={handleCheckEmail}
+					>
+						중복 확인
+					</button>
+				</div>
+				{isEmailAvailable === null ? (
+					<div className="text-sm mb-4 text-start text-red">
+						{errors?.email?.message as string}
+					</div>
+				) : isEmailAvailable ? (
+					<div className="text-sm mb-4 text-start text-red">
+						이미 사용 중인 이메일입니다.
+					</div>
+				) : (
+					<div className="text-sm mb-4 text-start text-green">
+						사용 가능한 이메일입니다.
+					</div>
+				)}
+
 				<input
-					className="border border-borderGray w-full h-11 mb-4 rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
+						userPassword && errors.password ? 'border border-red mb-0' : ''
+					}`}
 					type="password"
 					placeholder="비밀번호"
 					{...register('password', {
 						required: true,
 						pattern: {
 							value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
-							message:
-								'비밀번호는 최소 6자 이상, 숫자와 영문자를 모두 포함해야 합니다.',
+							message: '최소 6자 이상, 숫자와 영문자를 모두 포함해야 합니다.',
 						},
 					})}
 				/>
+
 				{errors.password && errors.password.type === 'pattern' && (
-					<div className="text-sm text-gray mb-4 text-start">
+					<div className="text-sm text-red mb-4 text-start">
 						{errors.password.message as string}
 					</div>
 				)}
 				<input
-					className="border border-borderGray mb-4 w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
+					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
+						errors.passwordChecked && userpasswordChecked && userPassword
+							? 'border border-red mb-0'
+							: ''
+					}`}
 					type="password"
 					placeholder="비밀번호 확인"
 					{...register('passwordChecked', {
@@ -118,9 +236,11 @@ const SignUp = () => {
 						validate: (value) => value === watch('password'),
 					})}
 				/>
-				{errors.passwordChecked &&
+				{userPassword &&
+					userpasswordChecked &&
+					errors.passwordChecked &&
 					errors.passwordChecked?.type === 'validate' && (
-						<div className="text-sm text-gray mb-4 text-start">
+						<div className="text-sm text-red mb-4 text-start">
 							입력한 비밀번호와 다릅니다
 						</div>
 					)}
