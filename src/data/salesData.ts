@@ -179,16 +179,14 @@ export interface SoldDetailData {
 	accommodationImage: string;
 	accommodationName: string;
 	roomName: string;
+	reservationType: string;
 	standardNumber: number;
 	maximumNumber: number;
 	checkInTime: string;
 	checkOutTime: string;
 	checkInDate: string;
 	checkOutDate: string;
-	price: number;
-	buyerName: string;
-	buyerPhoneNumber: string;
-	buyerEmail: string;
+	goldenPrice: number;
 	completedDate: string;
 	calculatedDate: string;
 	calculatedPrice: number;
@@ -209,21 +207,19 @@ export const SoldDetailRes: ApiSoldDetail = {
 		roomName: '객실명',
 		standardNumber: 2,
 		maximumNumber: 4,
+		reservationType: 'STAY',
 		checkInTime: '14:00:00',
 		checkOutTime: '12:00:00',
 		checkInDate: '2024-01-10',
 		checkOutDate: '2024-01-15',
-		price: 100000,
-		buyerName: '구매자 이름',
-		buyerPhoneNumber: '구매자 전화번호',
-		buyerEmail: '구매자 이메일',
+		goldenPrice: 100000,
+		receiverNickname: '구매자 닉네임',
 		completedDate: '2024-01-01T01:01:01',
 		calculatedDate: '2024-01-01T01:01:01',
 		calculatedPrice: 90000,
 		fee: 900,
 		chatRoomId: 123,
-		receiverNickname: '닉네임1',
 		receiverProfileImage: '/assets/images/userDefault.svg',
-		lastUpdatedAt: '2024-01-10T14:00:00',
+		lastUpdatedAt: '2024-01-18T14:00:00',
 	},
 };

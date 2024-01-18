@@ -1,9 +1,9 @@
 import React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BuyerProps } from '../../../../data/purchasesData';
-import { formatNumber } from '../../../../utils/formate';
+import { formatNumber, formatTimeAgo } from '../../../../utils/formate';
 
-const SalesBuyer = (props: BuyerProps) => {
+const Chat = (props: BuyerProps) => {
 	return (
 		<div className="border-borderGray border px-5 py-3 mt-2 flex items-center  justify-between rounded-lg">
 			<div className="flex items-center">
@@ -11,7 +11,9 @@ const SalesBuyer = (props: BuyerProps) => {
 					<img src="/assets/images/userDefault.svg" alt="userDefault" />
 				</div>
 				<div className="text-lg px-3"> {props.receiverNickname} </div>
-				<div className="text-m text-descGray"> {props.lastUpdatedAt}</div>
+				<div className="text-m text-descGray">
+					{formatTimeAgo(props.lastUpdatedAt)}
+				</div>
 			</div>
 
 			<div className="flex items-center">
@@ -27,4 +29,4 @@ const SalesBuyer = (props: BuyerProps) => {
 	);
 };
 
-export default SalesBuyer;
+export default Chat;

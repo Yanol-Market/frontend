@@ -5,9 +5,9 @@ import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SellingBottom from './SellingBottom';
 import { useQuerySales } from '../../../../hooks/useQuerySales';
-import SalesBuyer from './SalesBuyer';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
+import Chat from './Chat';
 
 // 판매중
 const Selling = () => {
@@ -96,7 +96,7 @@ const Selling = () => {
 								? null
 								: data?.[index].chats.map((item) => (
 										<div key={item.chatRoomId}>
-											<SalesBuyer
+											<Chat
 												chatRoomId={item.chatRoomId}
 												receiverNickname={item.receiverNickname}
 												receiverProfileImage={item.receiverProfileImage}

@@ -26,6 +26,7 @@ export const useQuerySoldDetail = (productId: string) => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['SoldDetail'],
 		queryFn: () => getSoldDetail(productId),
+		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };
 };

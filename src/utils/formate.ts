@@ -1,3 +1,4 @@
+// 금액 ,
 export const formatNumber = (number: number) => {
 	const formattedNumber = number.toFixed(0);
 	return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -27,4 +28,25 @@ export const formatDateTime = (dateTimeString: string) => {
 	const minutes = `0${dateTime.getMinutes()}`.slice(-2);
 
 	return `${year}.${month}.${day}. ${hours}:${minutes}`;
+};
+
+// 입력된 날짜가 현재 날짜와 같은 날이면 시간 반환, 그렇지 않으면 몇 일 전인지 반환
+export const formatTimeAgo = (dateTimeString: string) => {
+	const dateTime = new Date(dateTimeString);
+	const currentDate = new Date();
+
+	const isSameDay =
+		dateTime.getDate() === currentDate.getDate() &&
+		dateTime.getMonth() === currentDate.getMonth() &&
+		dateTime.getFullYear() === currentDate.getFullYear();
+
+	if (isSameDay) {
+		const hours = `0${dateTime.getHours()}`.slice(-2);
+		const minutes = `0${dateTime.getMinutes()}`.slice(-2);
+		return `${hours}:${minutes}`;
+	} else {
+		const timeDifference = currentDate.getTime() - dateTime.getTime();
+		const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+		return `${daysAgo}일 전`;
+	}
 };

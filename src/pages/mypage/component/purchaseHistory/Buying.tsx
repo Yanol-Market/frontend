@@ -3,7 +3,8 @@ import StatusBar from '../salesHistory/StatusBar';
 import CardProd from '../salesHistory/CardProd';
 import { BuyingProd } from '../../../../data/purchasesData';
 import { useQueryPurchases } from '../../../../hooks/useQueryPurchases';
-import PurchaseBuyer from './PurchaseBuyer';
+import Chat from '../salesHistory/Chat';
+
 const Buying = () => {
 	const { isLoading, error, data } = useQueryPurchases();
 	console.log('리액트 쿼리 성공', data?.data);
@@ -43,7 +44,13 @@ const Buying = () => {
 						/>
 
 						<StatusBar status={item.status} />
-						<PurchaseBuyer
+						<div className="flex mb-4 pt-2">
+							<div className="text-body font-semibold pt-3">
+								{' '}
+								나의 구매현황{' '}
+							</div>
+						</div>
+						<Chat
 							chatRoomId={item.chatRoomId}
 							receiverNickname={item.receiverNickname}
 							receiverProfileImage={item.receiverProfileImage}
