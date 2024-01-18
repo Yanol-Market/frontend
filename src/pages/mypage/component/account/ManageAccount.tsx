@@ -3,12 +3,24 @@ import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { deleteCookie } from '../../../../apis/cookie';
+import { deleteCookie, getCookie } from '../../../../apis/cookie';
+import { useMutation } from '@tanstack/react-query';
+import { getSignOut } from '../../../../apis/signout';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
 	const [isBottomSheetSignOutOpen, setIsBottomSheetSignOutOpen] =
 		useState(false);
+
+	const mutation = useMutation({
+		mutationFn: getSignOut,
+		onSuccess() {
+			navigate('/');
+		},
+		onError(err) {
+			alert('로그아웃 실패');
+		},
+	});
 
 	const openBottomSheetSignOut = () => {
 		setIsBottomSheetSignOutOpen(true);
@@ -26,7 +38,12 @@ const ManageAccount = () => {
 		navigate('/member/withdrawl');
 	};
 
-	const signOutBtn = () => {
+	const signOutBtn = async () => {
+		const accessToken = getCookie('accessToken');
+		const refreshToken = getCookie('refreshToken');
+
+		await mutation.mutateAsync({ accessToken, refreshToken });
+
 		deleteCookie();
 		alert('로그아웃 완료');
 		navigate('/');
@@ -37,7 +54,7 @@ const ManageAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetSignOutOpen}
 				onClose={closeBottomSheetSignOut}
-				viewHeight="calc(100vh * 0.35)"
+				viewHeight="calc(100vh * 0.25)"
 			>
 				<ContentTwoBtnPage
 					title="로그아웃 하시겠습니까?"
@@ -47,7 +64,7 @@ const ManageAccount = () => {
 					rightBtnFunc={signOutBtn}
 				/>
 			</BottomSheet>
-			<div className="w-full h-[100vh] flex flex-col items-center">
+			<div className="w-full flex flex-col items-center">
 				<div className="w-[90%] mt-5 flex flex-col">
 					<div className="flex flex-row justify-between mb-5">
 						<span>비밀번호 변경</span>

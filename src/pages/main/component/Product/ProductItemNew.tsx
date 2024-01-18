@@ -11,7 +11,7 @@ export const ProductItemNew = ({
 			<div className="relative mb-2 h-full">
 				<img
 					className="w-[120px] h-[95px] rounded-[5px]"
-					src="assets/images/productImg.jpg"
+					src="/assets/images/productImg.jpg"
 					alt="productImg"
 				/>
 				<div className="flex bg-dateBlue px-[6px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">
@@ -21,12 +21,11 @@ export const ProductItemNew = ({
 					<p className="text-white font-pre text-[8px] font-semibold"> D-5</p>
 				</div>
 				<button className="absolute bottom-[10px] left-[10px]">
-					<img src="assets/images/heart_2.svg" alt="heartImage" />
+					<img src="/assets/images/heart_2.svg" alt="heartImage" />
 				</button>
 			</div>
 			<div className="flex flex-col w-[60%] justify-between ml-4">
 				<div className="flex-col w-full">
-
 					<div>
 						<p className="text-fontBlack font-pre text-lg font-normal">
 							{product.name}

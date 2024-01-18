@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 import { useRecoilValue } from 'recoil';
 import { checkedBankState } from '../../../../recoil/atom';
+import MyPageClickBtn from '../btn/MyPageClickBtn';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
@@ -35,7 +36,7 @@ const MyAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetAccountOpen}
 				onClose={closeBottomSheetAccount}
-				viewHeight="calc(100vh * 0.4)"
+				viewHeight="calc(100vh * 0.25)"
 			>
 				<ContentTwoBtnPage
 					title="계좌를 삭제하시겠습니까?"
@@ -45,7 +46,7 @@ const MyAccount = () => {
 					rightBtnFunc={removeAccountBtn}
 				/>
 			</BottomSheet>
-			<div className="w-full h-screen flex flex-col items-center">
+			<div className="w-full flex flex-col items-center">
 				<div className="w-[90%]">
 					<div className="border border-main h-28 flex flex-col mt-9 mb-44 p-4 bg-bgMain rounded-xl">
 						<p className="text-body font-bold mb-3">홍길동</p>
@@ -68,14 +69,7 @@ const MyAccount = () => {
 						</div>
 					</div>
 				</div>
-
-				<button
-					type="button"
-					className="flex items-center text-center mx-auto mt-72 w-[90%] h-11 rounded-xl text-gray text-m bg-main"
-					onClick={addAccountBtn}
-				>
-					<p className="text-center mx-auto text-white">계좌 등록하기</p>
-				</button>
+				<MyPageClickBtn content="계좌 등록하기" onClick={addAccountBtn} />
 			</div>
 		</div>
 	);
