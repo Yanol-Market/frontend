@@ -6,6 +6,7 @@ import {
 	BuyingRes,
 } from '../data/purchasesData';
 import {
+	ExpiredDetailRes,
 	SalesRes,
 	SellingDetailRes,
 	SellingRes,
@@ -135,6 +136,10 @@ export const handlers = [
 	// 판매 완료- 상세 -조회 API
 	http.get('/api/SoldDetail/1', () => {
 		return HttpResponse.json(SoldDetailRes);
+	}),
+	// 상품만료- 상세 -조회 API
+	http.get('/api/ExpiredDetail/1', () => {
+		return HttpResponse.json(ExpiredDetailRes);
 	}),
 ];
 

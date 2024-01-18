@@ -9,6 +9,8 @@ export const productStatusTrans = (status: string) => {
 export const reservationTypeTrans = (status: string) => {
 	if (status === 'STAY') {
 		return '숙박';
+	} else if (status === '상품만료') {
+		return '상품만료';
 	} else {
 		return '대실';
 	}

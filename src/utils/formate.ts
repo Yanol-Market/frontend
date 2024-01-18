@@ -47,6 +47,6 @@ export const formatTimeAgo = (dateTimeString: string) => {
 	} else {
 		const timeDifference = currentDate.getTime() - dateTime.getTime();
 		const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-		return `${daysAgo}일 전`;
+		return `${daysAgo + 1}일 전`;
 	}
 };

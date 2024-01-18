@@ -1,4 +1,9 @@
-import { ApiSales, ApiSold, ApiSoldDetail } from '../data/salesData';
+import {
+	ApiExpiredDetail,
+	ApiSales,
+	ApiSold,
+	ApiSoldDetail,
+} from '../data/salesData';
 import { instanceTest } from './axios';
 import { AxiosResponse } from 'axios';
 
@@ -20,6 +25,16 @@ export const getSoldDetail = async (
 ): Promise<ApiSoldDetail> => {
 	const res: AxiosResponse<ApiSoldDetail> = await instanceTest.get(
 		`/api/SoldDetail/${productId}`,
+	);
+	return res.data;
+};
+
+// 상품만료 - 상세 조회 API
+export const getExpiredDetail = async (
+	productId: string,
+): Promise<ApiExpiredDetail> => {
+	const res: AxiosResponse<ApiExpiredDetail> = await instanceTest.get(
+		`/api/ExpiredDetail/${productId}`,
 	);
 	return res.data;
 };

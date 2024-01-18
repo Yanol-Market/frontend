@@ -34,10 +34,12 @@ const SoldListProd = () => {
 	};
 
 	// 판매 완료 상세 클릭 (만료, 완료 나누기)
-	const detailClick = (productId: string) => {
-		if (currentPath === '/sales') {
+	const detailClick = (productId: string, status: string) => {
+		if (status === 'SOLD_OUT') {
 			console.log('클릭');
 			navigate(`/sales/detail/${productId}`);
+		} else {
+			navigate(`/sales/expired/detail/${productId}`);
 		}
 	};
 
@@ -112,7 +114,12 @@ const SoldListProd = () => {
 											<ArrowForwardIosIcon
 												sx={{ width: '15px' }}
 												className="cursor-pointer"
-												onClick={() => detailClick(String(item.productId))}
+												onClick={() =>
+													detailClick(
+														String(item.productId),
+														item.productStatus,
+													)
+												}
 											/>
 										</div>
 									</div>

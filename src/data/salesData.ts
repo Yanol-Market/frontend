@@ -59,7 +59,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임 1',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'NEGOTIATING',
+					status: 'ACTIVE ',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -67,7 +67,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임2',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'PAYMENT_PENDING',
+					status: 'INACTIVE ',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -75,7 +75,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임3',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'NEGOTIATION_CANCELLED',
+					status: 'YELLOW_DOT ',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -83,7 +83,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임4',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'NEGOTIATION_TIMEOUT',
+					status: 'ACTIVE ',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 			],
@@ -220,6 +220,45 @@ export const SoldDetailRes: ApiSoldDetail = {
 		fee: 900,
 		chatRoomId: 123,
 		receiverProfileImage: '/assets/images/userDefault.svg',
-		lastUpdatedAt: '2024-01-18T14:00:00',
+		lastUpdatedAt: '2024-01-18T23:00:00',
+	},
+};
+
+// 판매만료 - 상세 API
+export interface ApiExpiredDetail {
+	status: string;
+	message: string;
+	data: ExpiredDetailData;
+}
+
+export interface ExpiredDetailData {
+	productId: number;
+	accommodationImage: string;
+	accommodationName: string;
+	roomName: string;
+	standardNumber: number;
+	maximumNumber: number;
+	checkInTime: string;
+	checkOutTime: string;
+	checkInDate: string;
+	checkOutDate: string;
+	price: number;
+}
+
+export const ExpiredDetailRes = {
+	status: 'SUCCESS',
+	message: '상품이 성공적으로 조회가 완료되었습니다.',
+	data: {
+		productId: 1,
+		accommodationImage: '/assets/images/reserveRoom.svg',
+		accommodationName: '숙소명',
+		roomName: '객실명',
+		standardNumber: 2,
+		maximumNumber: 4,
+		checkInTime: '14:00:00',
+		checkOutTime: '12:00:00',
+		checkInDate: '2024-01-10',
+		checkOutDate: '2024-01-15',
+		price: 100000,
 	},
 };
