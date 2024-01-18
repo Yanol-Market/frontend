@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 const AfterSignInMyPage = () => {
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center">

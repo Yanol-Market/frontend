@@ -6,6 +6,7 @@ import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SelectBanks from '../region/SelectBanks';
 import { useRecoilValue } from 'recoil';
 import { checkedBankState } from '../../../../recoil/atom';
+import MyPageClickBtn from '../btn/MyPageClickBtn';
 
 const AddMyAccount = () => {
 	const {
@@ -26,17 +27,21 @@ const AddMyAccount = () => {
 	const closeBottomSheetBank = () => {
 		setIsBottomSheetBankOpen(false);
 	};
+
+	const addMyAccountClick = () => {
+		alert('계좌 등록 완료');
+	};
 	return (
 		<div>
 			<Header title="계좌 등록" />
 			<BottomSheet
 				isOpen={isBottomSheetBankOpen}
 				onClose={closeBottomSheetBank}
-				viewHeight="calc(100vh * 0.95)"
+				viewHeight="calc(100vh * 0.9)"
 			>
 				<SelectBanks />
 			</BottomSheet>
-			<div className="w-full h-[100vh] flex flex-col items-center mt-11">
+			<div className="w-full flex flex-col items-center mt-11">
 				<form className="w-[90%] text-start">
 					<p>은행명과 계좌번호, 예금주를 입력해주세요.</p>
 					<div className="mt-7">
@@ -90,7 +95,7 @@ const AddMyAccount = () => {
 							<p className="pt-2 text-start text-gray">홍길동</p>
 						</div>
 					</div>
-					<div className="mt-48">
+					{/* <div className="mt-48">
 						<div className="flex flex-row mb-5">
 							<input
 								className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"
@@ -117,7 +122,28 @@ const AddMyAccount = () => {
 						>
 							<p className="text-center mx-auto">계좌 등록하기</p>
 						</button>
+					</div> */}
+
+					<div className="absolute bottom-24 flex flex-row">
+						<input
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"
+							type="checkbox"
+							id="account-checkbox"
+							{...register('account-checkbox', { required: true })}
+						/>
+						<label htmlFor="account-checkbox" className="text-sm text-gray">
+							<span>
+								계좌인증을 위한 <u className="cursor-pointer">이용약관</u> 및{' '}
+								<u className="cursor-pointer">개인정보 처리방침</u>에
+								동의합니다.
+							</span>
+						</label>
 					</div>
+					<MyPageClickBtn
+						content="계좌 등록하기"
+						onClick={addMyAccountClick}
+						isDisabled={isButtonDisabled}
+					/>
 				</form>
 			</div>
 		</div>

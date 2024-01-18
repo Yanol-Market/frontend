@@ -3,6 +3,7 @@ import { Header } from '../../../../component/common/Header';
 import { useForm } from 'react-hook-form';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentFailBtn from '../../../../component/common/BottomSheet/Content/ContentFailBtnPage';
+import MyPageClickBtn from '../btn/MyPageClickBtn';
 
 const EditPassword = () => {
 	const {
@@ -33,7 +34,7 @@ const EditPassword = () => {
 			<BottomSheet
 				isOpen={isBottomSheetPasswordOpen}
 				onClose={closeBottomSheetPassword}
-				viewHeight="calc(100vh * 0.3)"
+				viewHeight="calc(100vh * 0.22)"
 			>
 				<ContentFailBtn
 					title="현재 비밀번호를 다시 확인해주세요."
@@ -41,7 +42,7 @@ const EditPassword = () => {
 					btnFunc={closeBottomSheetPassword}
 				/>
 			</BottomSheet>
-			<div className="flex flex-col items-center w-full h-[100vh] text-center">
+			<div className="flex flex-col items-center w-full text-center">
 				<div className="w-[90%] mt-14">
 					<form>
 						<div className="relative">
@@ -133,14 +134,10 @@ const EditPassword = () => {
 									</div>
 								)}
 						</div>
-
-						<button
-							type="button"
-							className="mt-72 flex items-center w-full h-11 rounded-xl text-center text-m bg-main text-white"
+						<MyPageClickBtn
+							content="비밀번호 변경하기"
 							onClick={openBottomSheetPassword}
-						>
-							<span className="mx-auto">비밀번호 변경하기</span>
-						</button>
+						/>
 					</form>
 				</div>
 			</div>
