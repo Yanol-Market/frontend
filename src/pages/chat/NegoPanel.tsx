@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-// import instance from '../../apis/axios';
+import instance from '../../apis/axios';
 
 const NegoPanel: React.FC<NegoPanelProps> = ({
 	chatList,
 	setChatList,
 	setNego,
 	setOffered,
-	// productData,
+	productData,
 }) => {
 	const initialPrice = 170000;
 
@@ -20,18 +20,18 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 		setPrice((prev) => prev - 5000);
 	};
 
-	// const negoSend = () => {
-	// 	instance
-	// 		.post(`/nego/proposePrice/${productData.productId}`, {
-	// 			price: { price },
-	// 		})
-	// 		.then((response) => console.log(response));
-	// };
+	const negoSend = () => {
+		instance
+			.post(`/nego/proposePrice/${productData.productId}`, {
+				price: { price },
+			})
+			.then((response) => console.log(response));
+	};
 
 	const makeOffer = () => {
 		if (confirm('상품당 2회의 네고 제안이 가능합니다.')) {
 			// 네고 생성 productId, price
-			// negoSend();
+			negoSend();
 
 			setOffered(true);
 			setNego(false);
@@ -50,8 +50,8 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 
 	return (
 		<div className="text-lg">
-			<div className="absolute top-0 h-[100%] w-[375px] bg-black opacity-75"></div>
-			<div className="animate-slide-up absolute bottom-0 h-[270px] w-[375px] bg-white rounded-t-[20px] leading-tight tracking-tight">
+			<div className="absolute z-50 fixed top-0 h-[100%] w-[375px] bg-black opacity-75"></div>
+			<div className="absolute z-50 animate-slide-up bottom-0 h-[270px] w-[375px] bg-white rounded-t-[20px] leading-tight tracking-tight">
 				<div>
 					<button
 						onClick={() => setNego(false)}
