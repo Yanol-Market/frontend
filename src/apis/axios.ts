@@ -31,7 +31,6 @@ instance.interceptors.response.use(
 		if (error.response.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
 			const newAccessToken = await refreshCookie();
-			console.log(newAccessToken);
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 			console.log('토큰 재발급 완료');
 			return instance(originalRequest);
