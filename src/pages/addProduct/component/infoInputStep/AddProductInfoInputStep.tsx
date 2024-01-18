@@ -9,11 +9,11 @@ interface Props {
 }
 
 const AddProductInfoInputStep = ({ onNextStep }: Props) => {
-	const [goldenPrice, setGoldenPrice] = useState<number>(-1);
+	const [goldenPrice, setGoldenPrice] = useState<number>(0);
 	const originPrice = 200000;
 
 	const handleNextStep = () => {
-		if (goldenPrice >= 0 && goldenPrice < originPrice) {
+		if (goldenPrice > 0 && goldenPrice < originPrice) {
 			onNextStep();
 		} else {
 			let alertMessage = '';
@@ -59,7 +59,7 @@ const AddProductInfoInputStep = ({ onNextStep }: Props) => {
 				<button
 					type="button"
 					className={`mx-auto w-[20.9375rem] h-[3.125rem] rounded-xl text-lg mt-[3.5625rem] mb-[2.1875rem] ${
-						goldenPrice >= 0 && goldenPrice < originPrice
+						goldenPrice > 0 && goldenPrice < originPrice
 							? 'cursor-pointer bg-main text-white'
 							: 'cursor-not-allowed bg-borderGray text-descGray'
 					}`}
