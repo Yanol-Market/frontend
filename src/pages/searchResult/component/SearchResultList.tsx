@@ -5,16 +5,18 @@ import { getProducts } from '../../../apis/home';
 
 export type ProductSpecialType = {
 	productId: number;
-	name: string;
-	option: string;
-	checkIn: string;
-	checkOut: string;
-	dDay: number;
-	marketPrice: number;
-	marketPriceRatio: number;
-	purchasePrice: number;
-	purchasePriceRatio: number;
-	price: number;
+	accommodationImage: string;
+	accommodationName: string;
+	reservationType: string;
+	roomName: string;
+	checkInDate: string;
+	checkOutDate: string;
+	nights: number;
+	days: number;
+	originPrice: number;
+	yanoljaPrice: number;
+	goldenPrice: number;
+	productStatus: string;
 };
 
 export const SearchResultList = () => {
