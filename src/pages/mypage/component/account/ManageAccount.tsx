@@ -3,12 +3,24 @@ import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { deleteCookie } from '../../../../apis/cookie';
+import { deleteCookie, getCookie } from '../../../../apis/cookie';
+import { useMutation } from '@tanstack/react-query';
+import { getSignOut } from '../../../../apis/signout';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
 	const [isBottomSheetSignOutOpen, setIsBottomSheetSignOutOpen] =
 		useState(false);
+
+	const mutation = useMutation({
+		mutationFn: getSignOut,
+		onSuccess() {
+			navigate('/');
+		},
+		onError(err) {
+			alert('로그아웃 실패');
+		},
+	});
 
 	const openBottomSheetSignOut = () => {
 		setIsBottomSheetSignOutOpen(true);
@@ -26,7 +38,12 @@ const ManageAccount = () => {
 		navigate('/member/withdrawl');
 	};
 
-	const signOutBtn = () => {
+	const signOutBtn = async () => {
+		const accessToken = getCookie('accessToken');
+		const refreshToken = getCookie('refreshToken');
+
+		await mutation.mutateAsync({ accessToken, refreshToken });
+
 		deleteCookie();
 		alert('로그아웃 완료');
 		navigate('/');
