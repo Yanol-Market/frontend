@@ -23,7 +23,7 @@ const ChatList = ({ chats }: ChatListProps) => {
 				<div
 					key={chat.id}
 					className={`py-1 flex items-center ${
-						chat.unread ? 'bg-blue-100' : 'text-descGray'
+						chat.unread ? '' : 'text-descGray'
 					}`}
 				>
 					<img
@@ -32,10 +32,17 @@ const ChatList = ({ chats }: ChatListProps) => {
 						alt="Default Profile"
 					/>
 					<div className="flex flex-col">
+						{/* 빨간색 작은 원 */}
+
 						{/* 호텔 이름 */}
-						<p className="text-sm">
-							{chat.hotelName}({chat.roomInfo})
-						</p>
+						<div className="relative flex items-center">
+							<p className="text-sm">
+								{chat.hotelName}({chat.roomInfo})
+							</p>
+							{chat.unread && (
+								<div className="w-2 h-2 bg-red rounded-full ml-1" />
+							)}
+						</div>
 						{/* 채팅을 주고 받는 사람의 아이디 */}
 						<p className="mb-1">
 							<span

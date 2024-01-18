@@ -6,24 +6,43 @@ interface SellerInfoInputProps {
 
 const SellerInfoInput = ({ onSellerInfoChange }: SellerInfoInputProps) => {
 	const [sellerComment, setSellerComment] = useState<string>('');
+	const maxCharCount = 500; // 최대 글자 수
 
 	const setSellerInfo = (info: string) => {
 		onSellerInfoChange(info);
+	};
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const inputText = e.target.value;
+
+		if (inputText.length <= maxCharCount) {
+			setSellerComment(inputText);
+		}
 	};
 	return (
 		<div className="mt-5">
 			<h3 className="text-body font-semibold text-black ">판매자 한마디</h3>
 			<p className="mt-3 text-m">판매를 위한 상품 설명을 적어주세요</p>
-			<textarea
-				id="sellerComment"
-				className="mt-4 w-full h-[120px] p-3 border border-borderGray rounded-md focus:outline-none focus:border-primary"
-				placeholder=" "
-				value={sellerComment}
-				onChange={(e) => {
-					setSellerComment(e.target.value);
-					setSellerInfo(e.target.value); // 수정된 부분
-				}}
-			/>
+			<div style={{ position: 'relative' }}>
+				<textarea
+					id="sellerComment"
+					className="mt-3 w-full h-[9.375rem] p-3 border border-borderGray rounded-xl focus:outline-none focus:border-primary"
+					placeholder=" "
+					value={sellerComment}
+					onChange={handleInputChange}
+					style={{ resize: 'none', overflow: 'hidden' }}
+				/>
+				<p
+					className=" text-m text-borderGray"
+					style={{
+						position: 'absolute',
+						bottom: '16px', // 조절하여 원하는 위치에 맞게 설정
+						right: '15px', // 조절하여 원하는 위치에 맞게 설정
+					}}
+				>
+					{sellerComment.length}/{maxCharCount}
+				</p>
+			</div>
 		</div>
 	);
 };
