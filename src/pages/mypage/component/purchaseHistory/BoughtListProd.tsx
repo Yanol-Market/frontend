@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQueryBoughtList } from '../../../../hooks/useQueryPurchases';
 import { BoughtProd } from '../../../../data/purchasesData';
+import { formatNumber } from '../../../../utils/formate';
 
 const BoughtListProd = () => {
 	const { isLoading, error, data } = useQueryBoughtList();
@@ -87,7 +88,7 @@ const BoughtListProd = () => {
 										</p>
 									</div>
 									<p className="text-lg font-bold pt-[15px]">
-										{item.goldenPrice}원
+										{formatNumber(item.goldenPrice)}원
 									</p>
 								</div>
 							</div>

@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CardProdProps } from '../../../../data/purchasesData';
 import { reservationTypeTrans } from '../../../../utils/translate';
+import {
+	formatNumber,
+	formatTime,
+	formatWeek,
+} from '../../../../utils/formate';
 
 const CardProd = (props: CardProdProps) => {
 	const location = useLocation();
@@ -28,7 +33,9 @@ const CardProd = (props: CardProdProps) => {
 								{props.standardNumber}인/최대 {props.maximumNumber}인
 							</p>
 						</div>
-						<p className="text-lg font-bold pt-[15px]">{props.goldenPrice}</p>
+						<p className="text-lg font-bold pt-[15px]">
+							{formatNumber(props.goldenPrice)}
+						</p>
 					</div>
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] bg-lightGray border-[1px] border-[#e0e0e0] w-[35px] h-[20px] p-[5px] text-center ">
@@ -40,16 +47,20 @@ const CardProd = (props: CardProdProps) => {
 					<div>
 						<p className="font-bold mb-[5px]">체크인</p>
 						<div className="flex">
-							<p>{props.checkInDate}(월)</p>
-							<p> {props.checkInTime}</p>
+							<p>
+								{props.checkInDate}({formatWeek(props.checkInDate)}){' '}
+								{formatTime(props.checkInTime)}
+							</p>
 						</div>
 					</div>
 					<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
 					<div>
 						<p className="font-bold mb-[5px]">체크아웃</p>
 						<div className="flex">
-							<p>{props.checkOutDate}(화)</p>
-							<p> {props.checkOutTime}</p>
+							<p>
+								{props.checkOutDate}({formatWeek(props.checkOutDate)}){' '}
+								{formatTime(props.checkInTime)}
+							</p>
 						</div>
 					</div>
 				</div>

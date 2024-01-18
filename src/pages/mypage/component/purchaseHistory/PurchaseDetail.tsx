@@ -3,6 +3,13 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useQueryBoughtDetail } from '../../../../hooks/useQueryPurchases';
 import { getBoughtDetailList } from '../../../../apis/purchases';
 import { BoughtDetailProd } from '../../../../data/purchasesData';
+import {
+	formatDateTime,
+	formatNumber,
+	formatTime,
+	formatWeek,
+} from '../../../../utils/formate';
+import { reservationTypeTrans } from '../../../../utils/translate';
 const prodData = {
 	productId: 145845145,
 	accommodationImage: '/assets/images/reserveRoom.svg',
@@ -65,11 +72,13 @@ const PurchaseDetail = () => {
 										{data.standardNumber}인/최대 {data.maximumNumber}인
 									</p>
 								</div>
-								<p className="text-lg font-bold pt-[15px]">{data.price}원</p>
+								<p className="text-lg font-bold pt-[15px]">
+									{formatNumber(data.price)}원
+								</p>
 							</div>
 							<div className="flex justify-end h-[80px] items-end">
 								<div className="text-sm border-[1px] border-[#e0e0e0] flex flex-col justify-center items-center rounded-[10px] w-[35px] h-[20px] p-[5px] text-center">
-									<p>{data.reservationType}</p>
+									<p>{reservationTypeTrans(data.reservationType)}</p>
 								</div>
 							</div>
 						</div>
@@ -77,16 +86,20 @@ const PurchaseDetail = () => {
 							<div>
 								<p className="font-bold mb-[5px]">체크인</p>
 								<div className="flex">
-									<p>{data.checkInDate}</p>
-									<p> {data.checkInTime}</p>
+									<p>
+										{data.checkInDate}({formatWeek(data.checkInDate)}){' '}
+										{formatTime(data.checkInTime)}
+									</p>
 								</div>
 							</div>
 							<div className="p-10px border-r-[1px] border-main h-[40px]"></div>
 							<div>
 								<p className="font-bold mb-[5px]">체크아웃</p>
 								<div className="flex">
-									<p>{data.checkOutDate}</p>
-									<p> {data.checkOutTime}</p>
+									<p>
+										{data.checkOutDate}({formatWeek(data.checkOutDate)}){' '}
+										{formatTime(data.checkInTime)}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -107,7 +120,7 @@ const PurchaseDetail = () => {
 							</div>
 							<div className="flex justify-between items-center text-lg  pb-2">
 								<div className="text-descGray"> 거래일시</div>
-								<div>{data.completedDate}</div>
+								<div>{formatDateTime(data.completedDate)}</div>
 							</div>
 						</div>
 						{/* 채팅ui */}
@@ -125,7 +138,9 @@ const PurchaseDetail = () => {
 							</div>
 
 							<div className="flex items-center">
-								<div className="font-bold pr-3 text-descGray">{data.price}</div>
+								<div className="font-bold pr-3 text-descGray">
+									{formatNumber(data.price)}
+								</div>
 								<div>
 									<ArrowForwardIosIcon
 										sx={{ width: '15px' }}

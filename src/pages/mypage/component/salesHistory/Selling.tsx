@@ -5,7 +5,6 @@ import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import SellingBottom from './SellingBottom';
 import { useQuerySales } from '../../../../hooks/useQuerySales';
-import { SalesResItem } from '../../../../data/salesData';
 import SalesBuyer from './SalesBuyer';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';

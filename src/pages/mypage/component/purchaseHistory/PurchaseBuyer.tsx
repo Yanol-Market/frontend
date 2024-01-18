@@ -2,6 +2,7 @@ import React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import { BuyerProps } from '../../../../data/purchasesData';
+import { formatNumber } from '../../../../utils/formate';
 
 const PurchaseBuyer = (props: BuyerProps) => {
 	return (
@@ -19,7 +20,7 @@ const PurchaseBuyer = (props: BuyerProps) => {
 				</div>
 
 				<div className="flex items-center">
-					<div className="font-bold pr-3">{props.price}</div>
+					<div className="font-bold pr-3">{formatNumber(props.price)}</div>
 					<div>
 						<ArrowForwardIosIcon
 							sx={{ width: '15px' }}
