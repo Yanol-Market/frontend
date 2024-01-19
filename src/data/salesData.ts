@@ -110,7 +110,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임1',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'NEGOTIATING',
+					status: 'YELLOW_DOT',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 			],

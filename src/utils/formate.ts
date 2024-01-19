@@ -30,7 +30,7 @@ export const formatDateTime = (dateTimeString: string) => {
 	return `${year}.${month}.${day}. ${hours}:${minutes}`;
 };
 
-// 입력된 날짜가 현재 날짜와 같은 날이면 시간 반환, 그렇지 않으면 몇 일 전인지 반환
+// 입력된 날짜가 현재 날짜와 같은 날이면 시간 반환, 그렇지 않으면 며칠전인지 반환
 export const formatTimeAgo = (dateTimeString: string) => {
 	const dateTime = new Date(dateTimeString);
 	const currentDate = new Date();
