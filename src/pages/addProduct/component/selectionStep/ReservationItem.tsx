@@ -4,6 +4,8 @@ export interface Reservation {
 	reservationNumber: number;
 	reservationDate: string;
 	hotelName: string;
+	numberOfPeople: number; // 인원 수
+	maxNumberOfPeople: number; // 최대 인원 수
 	roomInfo: string;
 	totalAmount: string;
 	checkInDate: string;
@@ -11,6 +13,7 @@ export interface Reservation {
 	checkInTime: string;
 	checkOutTime: string;
 	accommodationType: string;
+	isRegistered: boolean; // 상품 등록 여부
 }
 
 interface ReservationItemProps {
@@ -19,23 +22,39 @@ interface ReservationItemProps {
 	onClick: () => void;
 }
 
-const ReservationItem = ({ reservation }: ReservationItemProps) => {
-	const [isSelected, setIsSelected] = useState(false);
+const ReservationItem = ({
+	reservation,
+	isSelected,
+	onClick,
+}: ReservationItemProps) => {
+	const isRegistered = reservation.isRegistered;
 
 	const handleClick = () => {
-		setIsSelected(!isSelected);
+		if (isRegistered) {
+			alert('이미 골드티켓에 등록된 상품입니다!');
+		} else {
+			onClick();
+		}
 	};
 
 	return (
 		<div
-			className={` mx-5 mt-5 rounded-xl p-[0.9375rem] border ${
-				isSelected ? 'border-bgMain bg-bgMain' : 'border-borderGray bg-white'
-			}`}
+			className={`mx-5 mt-5 rounded-xl p-[0.9375rem] border ${
+				isRegistered
+					? 'border-lightGray bg-lightGray text-gray' // isRegistered true
+					: isSelected
+						? 'border-bgMain bg-bgMain' // isRegistered false & isSelected true
+						: 'bg-white border-borderGray' // isRegistered false & isSelected false
+			} cursor-pointer`}
 			onClick={handleClick}
 		>
 			<div
 				className={`flex items-center justify-between ${
-					isSelected ? 'text-black' : 'text-descGray'
+					isRegistered
+						? 'text-gray' // isRegistered true
+						: isSelected
+							? 'text-black'
+							: 'text-descGray'
 				}`}
 			>
 				<p className="mr-2 text-sm">예약번호 {reservation.reservationNumber}</p>
@@ -48,7 +67,7 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 			/>
 			<div className="flex flex-col">
 				<div className="flex items-center justify-between">
-					<p className="text-lg font-semibold mb-[0.3125rem]">
+					<p className={`text-lg font-semibold mb-[0.3125rem]}`}>
 						{reservation.hotelName}
 					</p>
 					<p
@@ -61,13 +80,31 @@ const ReservationItem = ({ reservation }: ReservationItemProps) => {
 						{reservation.accommodationType}
 					</p>
 				</div>
-				<p className="text-sm">{reservation.roomInfo}</p>
+				<p className="text-sm flex items-center">
+					<span>{reservation.roomInfo}</span>
+					<div
+						className={`h-2 w-[0.01rem] mx-[0.4rem]  ${
+							isSelected ? 'bg-homeMain' : 'bg-borderGray'
+						}`}
+					/>
+					<span>{`${reservation.numberOfPeople}인`}</span>
+					<div
+						className={`h-2 w-[0.01rem] mx-[0.4rem]  ${
+							isSelected ? 'bg-homeMain' : 'bg-borderGray'
+						}`}
+					/>{' '}
+					<span>{`최대 ${reservation.maxNumberOfPeople}인`}</span>
+				</p>
 			</div>
 			<div className="flex items-end flex-col text-m">
 				<p className="mb-[0.625rem]">{reservation.totalAmount}</p>
 				<div
 					className={`items-center flex w-full h-[3.875rem] rounded-md ${
-						isSelected ? 'bg-homeMain' : 'bg-lightGray'
+						isRegistered
+							? 'bg-borderWhite' // isRegistered true
+							: isSelected
+								? 'bg-homeMain'
+								: 'bg-lightGray'
 					}`}
 				>
 					<div className="flex-1">

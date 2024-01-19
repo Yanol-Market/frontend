@@ -18,7 +18,7 @@ export const ProductItemSpecial = ({
 						alt="productImg"
 					/>
 					<button className="absolute bottom-[10px] left-[10px]">
-						<img src="/assets/images/heart.svg" alt="heart" />
+						<img src="/assets/images/heart_white.svg" alt="heart" />
 					</button>
 				</div>
 				<div className="flex flex-col w-[60%] justify-between ml-4">

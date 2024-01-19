@@ -8,6 +8,22 @@ interface Props {
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	const [isLoggedIn] = useState(true);
 	const hasReservations = true; // 예약 내역 여부
+	const [selectedReservationIndex, setSelectedReservationIndex] = useState<
+		number | null
+	>(null);
+
+	const handleReservationItemClick = (index: number) => {
+		setSelectedReservationIndex(index);
+		console.log('Selected Reservation Index:', index);
+	};
+
+	const handleNextStep = () => {
+		if (selectedReservationIndex === null) {
+			alert('상품을 선택해주세요!');
+		} else {
+			onNextStep();
+		}
+	};
 
 	const renderContent = () => {
 		const reservations: Reservation[] = [
@@ -16,51 +32,69 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 				reservationNumber: 2312120123456,
 				reservationDate: '2024.01.01',
 				hotelName: '에코그린 리조트 호텔',
-				roomInfo: '디럭스 더블 2인 (최대 2인)',
+				roomInfo: '디럭스 더블',
+				numberOfPeople: 2,
+				maxNumberOfPeople: 2,
 				totalAmount: '300,000원',
 				checkInDate: '2024.01.03',
 				checkOutDate: '2024.01.03',
 				checkInTime: '15:00',
 				checkOutTime: '22:00',
 				accommodationType: '대실',
+				isRegistered: false,
 			},
 			{
 				reservationNumber: 2312120123456,
 				reservationDate: '2023.12.12',
 				hotelName: '가평 푸른하늘 펜션',
-				roomInfo: '디럭스 더블 2인 (최대 2인)',
+				roomInfo: '디럭스 더블',
+				numberOfPeople: 2,
+				maxNumberOfPeople: 2,
 				totalAmount: '2박 300,000원',
 				checkInDate: '2024.01.03',
 				checkOutDate: '2024.01.05',
 				checkInTime: '15:00',
 				checkOutTime: '15:00',
 				accommodationType: '숙박',
+				isRegistered: false,
 			},
 			{
 				reservationNumber: 2312120123456,
 				reservationDate: '2024.01.01',
 				hotelName: '에코그린 리조트 호텔',
-				roomInfo: '디럭스 더블 2인 (최대 2인)',
+				roomInfo: '디럭스 더블',
+				numberOfPeople: 2,
+				maxNumberOfPeople: 2,
 				totalAmount: '300,000원',
-				checkInDate: '2024.01.03',
-				checkOutDate: '2024.01.03',
+				checkInDate: '2024.01.10',
+				checkOutDate: '2024.01.10',
 				checkInTime: '15:00',
 				checkOutTime: '22:00',
 				accommodationType: '대실',
+				isRegistered: true,
 			},
 			{
 				reservationNumber: 2312120123456,
 				reservationDate: '2023.12.12',
 				hotelName: '가평 푸른하늘 펜션',
-				roomInfo: '디럭스 더블 2인 (최대 2인)',
-				totalAmount: '2박 300,000원',
-				checkInDate: '2024.01.03',
+				roomInfo: '디럭스 더블',
+				numberOfPeople: 2,
+				maxNumberOfPeople: 2,
+				totalAmount: '1박 100,000원',
+				checkInDate: '2024.01.04',
 				checkOutDate: '2024.01.05',
 				checkInTime: '15:00',
 				checkOutTime: '15:00',
 				accommodationType: '숙박',
+				isRegistered: false,
 			},
 		];
+
+		// 기존 reservations 배열을 복사한 후 예약일 기준으로 정렬
+		const sortedReservations = [...reservations].sort((a, b) => {
+			// 날짜 형식이 'YYYY.MM.DD' 이므로 간단한 문자열 비교로 정렬 가능
+			return a.checkInDate.localeCompare(b.checkInDate);
+		});
 
 		if (isLoggedIn) {
 			return (
@@ -82,14 +116,12 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 					) : (
 						<div className="flex flex-col">
 							<div className="mt-[12rem] mb-[6rem]">
-								{reservations.map((reservation, index) => (
+								{sortedReservations.map((reservation, index) => (
 									<ReservationItem
 										key={index}
 										reservation={reservation}
-										isSelected={false}
-										onClick={function (): void {
-											throw new Error('Function not implemented.');
-										}}
+										isSelected={selectedReservationIndex === index}
+										onClick={() => handleReservationItemClick(index)}
 									/>
 								))}
 							</div>
@@ -99,8 +131,12 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
 									type="button"
-									className="mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-descGray cursor-pointer text-lg"
-									onClick={onNextStep}
+									className={`mx-auto  w-[20.9375rem] h-[3.125rem] rounded-xl text-lg ${
+										selectedReservationIndex === null
+											? 'cursor-not-allowed bg-borderGray text-descGray'
+											: 'cursor-pointer bg-main text-white'
+									}`}
+									onClick={handleNextStep}
 								>
 									다음
 								</button>
