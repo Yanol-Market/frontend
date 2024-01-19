@@ -66,7 +66,7 @@ function App() {
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />
-					<Route path="/product/:id" element={<Products />} />
+					<Route path="/product/:productId" element={<Products />} />
 					<Route path="/addproduct/*" element={<AddProduct />} />
 					<Route path="/edit/:productId" element={<EditProd />} />
 					<Route
