@@ -3,6 +3,7 @@ import { useQueryExpiredDetail } from '../../../../hooks/useQuerySales';
 import CardProd from './CardProd';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { isNull } from 'util';
 
 const ExpiredProdDetail = () => {
 	const { data, isLoading } = useQueryExpiredDetail('1');
@@ -62,7 +63,6 @@ const ExpiredProdDetail = () => {
 					checkOutTime={data.checkOutTime}
 					checkInDate={data.checkInDate}
 					checkOutDate={data.checkOutDate}
-					goldenPrice={data.price}
 				/>
 			</div>
 		);

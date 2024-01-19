@@ -86,7 +86,7 @@ export interface CardProdProps {
 	checkOutTime: string;
 	checkInDate: string;
 	checkOutDate: string;
-	goldenPrice: number;
+	goldenPrice?: number;
 }
 
 export interface StatusBarProps {

@@ -242,7 +242,6 @@ export interface ExpiredDetailData {
 	checkOutTime: string;
 	checkInDate: string;
 	checkOutDate: string;
-	price: number;
 }
 
 export const ExpiredDetailRes = {
@@ -259,6 +258,5 @@ export const ExpiredDetailRes = {
 		checkOutTime: '12:00:00',
 		checkInDate: '2024-01-10',
 		checkOutDate: '2024-01-15',
-		price: 100000,
 	},
 };

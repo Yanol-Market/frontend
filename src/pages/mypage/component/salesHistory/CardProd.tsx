@@ -33,9 +33,11 @@ const CardProd = (props: CardProdProps) => {
 								{props.standardNumber}인/최대 {props.maximumNumber}인
 							</p>
 						</div>
-						<p className="text-lg font-bold pt-[15px]">
-							{formatNumber(props.goldenPrice)}
-						</p>
+						{props.goldenPrice ? (
+							<p className="text-lg font-bold pt-[15px]">
+								{formatNumber(props.goldenPrice)}
+							</p>
+						) : null}
 					</div>
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center ">
