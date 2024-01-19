@@ -13,7 +13,7 @@ import {
 	SoldDetailRes,
 	SoldRes,
 } from '../data/salesData';
-
+import { bankTestData } from '../data/bankTestData';
 export const handlers = [
 	http.get('/api/test', () => {
 		return HttpResponse.json([
@@ -126,6 +126,9 @@ export const handlers = [
 				price: 200000,
 			},
 		]);
+	}),
+	http.get('/api/account', async () => {
+		return HttpResponse.json(bankTestData);
 	}),
 	// 구매 내역-구매중-조회 API
 	http.get('/api/purchases', () => {

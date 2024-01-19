@@ -2,7 +2,7 @@ import { instanceTest } from './axios';
 
 export const getAccounts = async () => {
 	try {
-		const res = await instanceTest('api/accounts');
+		const res = await instanceTest('api/account');
 		if (res) {
 			return res.data;
 		}

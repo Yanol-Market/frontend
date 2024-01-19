@@ -5,7 +5,7 @@ import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 
 import SelectBanks from '../region/SelectBanks';
 import { useRecoilValue } from 'recoil';
-import { checkedBankState } from '../../../../recoil/atom';
+import { checkedBankState, myAccountState } from '../../../../recoil/atom';
 import MyPageClickBtn from '../btn/MyPageClickBtn';
 
 const AddMyAccount = () => {
@@ -18,6 +18,7 @@ const AddMyAccount = () => {
 	const watchAgreeCheckBox = watch('account-checkbox');
 	const isButtonDisabled = !watchAgreeCheckBox;
 	const selectedBank = useRecoilValue(checkedBankState);
+	const myAccount = useRecoilValue(myAccountState);
 	const [isBottomSheetBankOpen, setIsBottomSheetBankOpen] = useState(false);
 
 	const openBottomSheetBank = () => {
@@ -92,7 +93,7 @@ const AddMyAccount = () => {
 							<p className="text-lg">예금주</p>
 						</div>
 						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
-							<p className="pt-2 text-start text-gray">홍길동</p>
+							<p className="pt-2 text-start text-gray">{myAccount?.name}</p>
 						</div>
 					</div>
 					{/* <div className="mt-48">

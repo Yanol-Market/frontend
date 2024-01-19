@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 export const startState = atom({
 	key: 'startDate',
@@ -26,5 +27,16 @@ export interface SelectBanksProps {
 
 export const checkedBankState = atom<SelectBanksProps | null>({
 	key: 'checkedBankState',
+	default: null,
+});
+
+export interface MyAccountProps {
+	account_number: string;
+	bank_image: string;
+	bank_name: string;
+	name: string;
+}
+export const myAccountState = atom<MyAccountProps | null>({
+	key: 'myAccountState',
 	default: null,
 });
