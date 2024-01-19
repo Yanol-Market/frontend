@@ -83,6 +83,20 @@ export const handlers = [
 			},
 		]);
 	}),
+	// 프로필 조회
+	http.get('/api/me', async () => {
+		return HttpResponse.json([
+			{
+				id: 1,
+				email: 'test@gmail.com',
+				name: '테스트네임',
+				nickname: '테스트닉네임',
+				imageUrl: null,
+				phoneNumber: '01012345678',
+				yanoljaId: 1,
+			},
+		]);
+	}),
 	http.get('/api/wishes', async () => {
 		return HttpResponse.json([
 			{
