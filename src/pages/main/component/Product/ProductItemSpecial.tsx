@@ -14,7 +14,7 @@ export const ProductItemSpecial = ({
 				<div className="relative w-[38%] h-full">
 					<img
 						className="w-[124px] h-[150px] rounded-[5px]"
-						src={'/assets/images/productImg.jpg'}
+						src={product.accommodationImage}
 						alt="productImg"
 					/>
 					<button className="absolute bottom-[10px] left-[10px]">
