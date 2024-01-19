@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQueryBoughtList } from '../../../../hooks/useQueryPurchases';
 import { BoughtProd } from '../../../../data/purchasesData';
-import { formatNumber } from '../../../../utils/formate';
+import { formatNumber, formatTimeAgo } from '../../../../utils/formate';
 
 const BoughtListProd = () => {
 	const { isLoading, error, data } = useQueryBoughtList();
@@ -44,7 +44,7 @@ const BoughtListProd = () => {
 
 	if (data) {
 		return (
-			<div>
+			<div className="pb-[80px]">
 				{' '}
 				{data.map((item: BoughtProd) => (
 					<div
@@ -75,7 +75,9 @@ const BoughtListProd = () => {
 										<p className="text-lg font-bold">
 											{item.accommodationName}
 										</p>
-										<p className=" text-m text-gray pl-2">{item.completedAt}</p>
+										<p className=" text-m text-gray pl-2">
+											{formatTimeAgo(item.completedAt)}
+										</p>
 									</div>
 
 									<div className="flex">

@@ -32,7 +32,7 @@ const SoldDetail = () => {
 
 	if (data) {
 		return (
-			<div className="p-5 pb-[80px]">
+			<div className="p-5 pb-[100px]">
 				<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
 					<ContentTwoBtnPage
 						title="판매 정보를 삭제하시겠습니까?"

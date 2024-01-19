@@ -7,6 +7,7 @@ import {
 	formatDateTime,
 	formatNumber,
 	formatTime,
+	formatTimeAgo,
 	formatWeek,
 } from '../../../../utils/formate';
 import { reservationTypeTrans } from '../../../../utils/translate';
@@ -46,12 +47,12 @@ const PurchaseDetail = () => {
 		return (
 			<div className="pb-[80px] pt-4 flex items-center justify-center">
 				<div
-					className="h-[672px] w-[375PX] bg-cover bg-center"
+					className="h-[672px] w-[375PX] bg-cover bg-center mr-1"
 					style={{
 						backgroundImage: `url('/assets/images/ticket_1.svg')`,
 					}}
 				>
-					<div className=" pt-[115px] px-10">
+					<div className=" pt-[116px] px-10 ml-1">
 						<div className="pb-4 flex justify-between items-center">
 							<p className="text-sm ">골든티켓 등록번호 {data.productId}</p>
 						</div>
@@ -133,7 +134,7 @@ const PurchaseDetail = () => {
 									{data.receiverNickname}
 								</div>
 								<div className="text-m text-descGray">
-									{data.lastUpdatedAt}분전
+									{formatTimeAgo(data.lastUpdatedAt)}
 								</div>
 							</div>
 
