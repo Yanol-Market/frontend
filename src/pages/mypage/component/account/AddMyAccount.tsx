@@ -60,7 +60,7 @@ const AddMyAccount = () => {
 										src={selectedBank.image}
 										alt="은행 이미지"
 									/>
-									<p className="mt-1 text-black">{selectedBank.bankName}</p>
+									<p className="mt-1 text-black">{selectedBank.bank_name}</p>
 								</div>
 							) : (
 								<p>은행을 선택해주세요.</p>

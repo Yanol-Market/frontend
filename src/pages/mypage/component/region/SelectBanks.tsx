@@ -1,7 +1,8 @@
 import React from 'react';
-import { bankData } from '../../../../data/bankData';
+
 import { useRecoilState } from 'recoil';
 import { SelectBanksProps, checkedBankState } from '../../../../recoil/atom';
+import { bankData } from '../../../../data/bankData';
 
 const SelectBanks = () => {
 	const [selectBank, setSelectBank] = useRecoilState(checkedBankState);
@@ -22,7 +23,7 @@ const SelectBanks = () => {
 					onClick={() => handleSelectBanks(bank)}
 				>
 					<img className="w-8 h-8 mr-2" src={bank.image} alt="은행 이미지" />
-					<p className="mt-1">{bank.bankName}</p>
+					<p className="mt-1">{bank.bank_name}</p>
 				</div>
 			))}
 		</div>

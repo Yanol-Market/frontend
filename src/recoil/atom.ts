@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
+const { persistAtom } = recoilPersist();
+
 export const startState = atom({
 	key: 'startDate',
 	default: new Date(),
@@ -21,7 +23,7 @@ export const checkedListState = atom({
 
 export interface SelectBanksProps {
 	id: number;
-	bankName: string;
+	bank_name: string;
 	image: string;
 }
 
@@ -39,4 +41,5 @@ export interface MyAccountProps {
 export const myAccountState = atom<MyAccountProps | null>({
 	key: 'myAccountState',
 	default: null,
+	// effects_UNSTABLE: [persistAtom],
 });

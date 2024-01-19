@@ -13,7 +13,6 @@ import {
 	SoldDetailRes,
 	SoldRes,
 } from '../data/salesData';
-import { bankTestData } from '../data/bankTestData';
 export const handlers = [
 	http.get('/api/test', () => {
 		return HttpResponse.json([
@@ -85,17 +84,15 @@ export const handlers = [
 	}),
 	// 프로필 조회
 	http.get('/api/me', async () => {
-		return HttpResponse.json([
-			{
-				id: 1,
-				email: 'test@gmail.com',
-				name: '테스트네임',
-				nickname: '테스트닉네임',
-				imageUrl: null,
-				phoneNumber: '01012345678',
-				yanoljaId: 1,
-			},
-		]);
+		return HttpResponse.json({
+			id: 1,
+			email: 'test@gmail.com',
+			name: '테스트네임',
+			nickname: '테스트닉네임',
+			imageUrl: null,
+			phoneNumber: '01012345678',
+			yanoljaId: 1,
+		});
 	}),
 	http.get('/api/wishes', async () => {
 		return HttpResponse.json([
@@ -128,7 +125,11 @@ export const handlers = [
 		]);
 	}),
 	http.get('/api/account', async () => {
-		return HttpResponse.json(bankTestData);
+		return HttpResponse.json({
+			name: '김계좌',
+			bank_name: '농협은행',
+			account_number: '2050501234560',
+		});
 	}),
 	// 구매 내역-구매중-조회 API
 	http.get('/api/purchases', () => {
