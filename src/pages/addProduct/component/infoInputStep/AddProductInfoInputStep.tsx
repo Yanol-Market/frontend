@@ -8,16 +8,34 @@ interface Props {
 	onNextStep: () => void;
 	originPrice: number;
 	yanoljaPrice: number;
+	reservationId: number;
+	setItem: (item: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+		goldenPrice: number;
+		content: string;
+	}) => void;
 }
 const AddProductInfoInputStep = ({
 	onNextStep,
 	originPrice,
 	yanoljaPrice,
+	reservationId,
+	setItem,
 }: Props) => {
 	const [goldenPrice, setGoldenPrice] = useState<number>(0);
+	const [content, setContent] = useState<string>('');
 
 	const handleNextStep = () => {
 		if (goldenPrice > 0 && goldenPrice < originPrice) {
+			setItem({
+				originPrice,
+				yanoljaPrice,
+				reservationId,
+				goldenPrice,
+				content,
+			});
 			onNextStep();
 		} else {
 			let alertMessage = '';
@@ -28,6 +46,10 @@ const AddProductInfoInputStep = ({
 			}
 			alert(alertMessage);
 		}
+	};
+
+	const handleSellerInfoChange = (info: string) => {
+		setContent(info);
 	};
 
 	const setSellerInfo = (info: string): void => {
@@ -49,7 +71,7 @@ const AddProductInfoInputStep = ({
 			<div className="pt-[11rem] px-5">
 				<GoldenPriceDecision
 					yanoljaPrice={yanoljaPrice.toString()} // 문자열로 변환
-					setGoldenPrice={setGoldenPrice}
+					setGoldenPrice={(price) => setGoldenPrice(Number(price))}
 					originPrice={originPrice.toString()}
 				/>
 			</div>
@@ -57,7 +79,7 @@ const AddProductInfoInputStep = ({
 			<div className="mt-[2rem] w-[375px] h-[0.4375rem] bg-lightGray" />
 			{/* 판매자 한마디 */}
 			<div className="mx-5 text-black">
-				<SellerInfoInput onSellerInfoChange={setSellerInfo} />
+				<SellerInfoInput onSellerInfoChange={handleSellerInfoChange} />
 			</div>
 			{/* 수수료 안내 */}
 			<div className="mx-5 text-black">

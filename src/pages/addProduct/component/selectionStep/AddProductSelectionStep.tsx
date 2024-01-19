@@ -3,7 +3,13 @@ import ReservationItem, { Reservation } from './ReservationItem';
 import { getReservations } from '../../../../apis/reservations';
 
 interface Props {
-	onNextStep: (data: { originPrice: number; yanoljaPrice: number }) => void;
+	onNextStep: (data: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+		goldenPrice: number; // 추가
+		content: string; // 추가
+	}) => void;
 }
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
@@ -43,11 +49,21 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 			alert('상품을 선택해주세요!');
 		} else {
 			const selectedReservation = sortedReservations[selectedReservationIndex];
-			const { originPrice, yanoljaPrice } = selectedReservation;
+			const { originPrice, yanoljaPrice, reservationId } = selectedReservation;
+
+			// 선택된 상품의 정보 출력
+			console.log('Selected Product Info:', {
+				originPrice,
+				yanoljaPrice,
+				reservationId,
+			});
 
 			onNextStep({
-				originPrice: originPrice,
-				yanoljaPrice: yanoljaPrice,
+				originPrice,
+				yanoljaPrice,
+				reservationId,
+				goldenPrice: 0,
+				content: '',
 			});
 		}
 	};

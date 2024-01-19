@@ -9,14 +9,28 @@ import { getCookie } from '../../apis/cookie';
 const AddProductPage = () => {
 	const [currentStep, setCurrentStep] = useState(1);
 	const navigate = useNavigate();
-	const [selectedItem, setSelectedItem] = useState({
+	const [selectedItem, setSelectedItem] = useState<{
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+	}>({
 		originPrice: 0,
 		yanoljaPrice: 0,
+		reservationId: 0,
 	});
+
+	const setItem = (item: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+	}) => {
+		setSelectedItem(item);
+	};
 
 	const handleNextStepSelection = (item: {
 		originPrice: number;
 		yanoljaPrice: number;
+		reservationId: number;
 	}) => {
 		setSelectedItem(item);
 		const nextStep = currentStep + 1;
@@ -34,7 +48,11 @@ const AddProductPage = () => {
 	const handleNextStep = () => {
 		const nextStep = currentStep + 1;
 		setCurrentStep(nextStep);
-		navigate(`/addproduct/${nextStep}`);
+		navigate(`/addproduct/${nextStep}`, {
+			state: {
+				...selectedItem,
+			},
+		});
 	};
 
 	const handlePrevStep = () => {
@@ -88,12 +106,15 @@ const AddProductPage = () => {
 						onNextStep={handleNextStep}
 						originPrice={selectedItem.originPrice}
 						yanoljaPrice={selectedItem.yanoljaPrice}
+						reservationId={selectedItem.reservationId}
+						setItem={setItem}
 					/>
 				)}
 				{currentStep === 3 && (
 					<TermsAndPolicyAgreementStep
 						onPrevStep={handlePrevStep}
 						onComplete={handleComplete}
+						selectedItem={selectedItem}
 					/>
 				)}
 			</div>
