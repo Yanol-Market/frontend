@@ -28,10 +28,10 @@ export const SearchResultProduct = ({
 				<div className="flex-col w-full mb-[15px]">
 					<div>
 						<p className="text-fontBlack font-pre text-lg font-semibold">
-							{product.name}
+							{product.accommodationName}
 						</p>
 						<p className="text-fontBlack font-pre text-lg font-normal">
-							{product.option}
+							{product.roomName}
 						</p>
 					</div>
 				</div>
@@ -40,10 +40,10 @@ export const SearchResultProduct = ({
 						<p className="text-descGray font-pre text-m">현재 야놀자 판매가</p>
 						<div className="flex">
 							<p className="text-descGray font-pre text-m mr-1">
-								{product.marketPriceRatio}%
+								{1}%
 							</p>
 							<p className="text-descGray font-pre text-m line-through">
-								{product.marketPrice.toLocaleString()}
+								{product.yanoljaPrice.toLocaleString()}
 							</p>
 							<p className="text-descGray font-pre text-m line-through">원</p>
 						</div>
@@ -52,10 +52,10 @@ export const SearchResultProduct = ({
 						<p className="text-descGray font-pre text-m">기존 구매가</p>
 						<div className="flex">
 							<p className="text-descGray font-pre text-m mr-1">
-								{product.purchasePriceRatio}%
+								{2}%
 							</p>
 							<p className="text-descGray font-pre text-m line-through">
-								{product.purchasePrice.toLocaleString()}
+								{product.originPrice.toLocaleString()}
 							</p>
 							<p className="text-descGray font-pre text-m line-through">원</p>
 						</div>
@@ -66,7 +66,7 @@ export const SearchResultProduct = ({
 						</p>
 						<div className="flex">
 							<p className="text-fontBlack font-pre text-m font-semibold">
-								{product.price.toLocaleString()}
+								{product.goldenPrice.toLocaleString()}
 							</p>
 							<p className="text-fontBlack font-pre text-m font-semibold">원</p>
 						</div>

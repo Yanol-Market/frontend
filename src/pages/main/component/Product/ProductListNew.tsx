@@ -5,38 +5,32 @@ import { PlusButton } from '../PlusButton';
 
 export type ProductSpecialType = {
 	productId: number;
-	name: string;
-	option: string;
-	checkIn: string;
-	checkOut: string;
-	dDay: number;
-	marketPrice: number;
-	marketPriceRatio: number;
-	purchasePrice: number;
-	purchasePriceRatio: number;
-	price: number;
+	accommodationImage: string;
+	accommodationName: string;
+	reservationType: string;
+	roomName: string;
+	checkInDate: string;
+	checkOutDate: string;
+	nights: number;
+	days: number;
+	originPrice: number;
+	yanoljaPrice: number;
+	goldenPrice: number;
+	productStatus: string;
 };
 
-export const ProductListNew = () => {
-	const [products, setProducts] = useState<ProductSpecialType[]>();
+export const ProductListNew = ({ product }: any) => {
 	const [visibleProducts, setVisibleProducts] =
 		useState<ProductSpecialType[]>();
 	const [showAll, setShowAll] = useState<boolean>(false);
-	const fetchData = async () => {
-		const res = await getProducts();
-		setProducts(res);
-	};
+
 	const handleClickPlusButton = () => {
-		setVisibleProducts(products);
+		setVisibleProducts(product);
 		setShowAll(true);
 	};
 	useEffect(() => {
-		fetchData();
-	}, []);
-
-	useEffect(() => {
-		setVisibleProducts(products?.slice(0, 2));
-	}, [products]);
+		setVisibleProducts(product?.slice(0, 2));
+	}, [product]);
 
 	if (!visibleProducts) {
 		return <div>Loading...</div>;

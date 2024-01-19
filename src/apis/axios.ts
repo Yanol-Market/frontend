@@ -5,6 +5,13 @@ import { getCookie, refreshCookie } from './cookie';
  * @param instance 실제 api 연결 시 사용되는 instance입니다.
  */
 
+export const instanceTest = axios.create({
+	baseURL: 'http://localhost:3000',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+});
+
 const instance = axios.create({
 	baseURL: 'https://golden-ticket.site',
 	headers: {

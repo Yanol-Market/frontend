@@ -36,6 +36,7 @@ import { YaSignIn } from './pages/yaSignIn';
 import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
 import ChatPage from './pages/chat';
+import ExpiredProdDetail from './pages/mypage/component/salesHistory/ExpiredProdDetail';
 
 function App() {
 	return (
@@ -52,6 +53,10 @@ function App() {
 					<Route path="/search" element={<Search />} />
 					<Route path="/sales" element={<SalesHistory />}>
 						<Route path="detail/:productId" element={<SoldDetail />} />
+						<Route
+							path="expired/detail/:productId"
+							element={<ExpiredProdDetail />}
+						/>
 					</Route>
 					<Route path="/purchase" element={<PurchaseHistory />}>
 						<Route path="detail/:productId" element={<PurchaseDetail />} />
