@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GoldenPriceDecision from './GoldenPriceDecision';
 import SellerInfoInput from './SellerInfoInput';
 import CommissionInfo from './CommissionInfo';
 
 interface Props {
+	onPrevStep: () => void;
 	onNextStep: () => void;
-	onPrevStep?: () => void;
+	originPrice: number;
+	yanoljaPrice: number;
 }
-
-const AddProductInfoInputStep = ({ onNextStep }: Props) => {
+const AddProductInfoInputStep = ({
+	onNextStep,
+	originPrice,
+	yanoljaPrice,
+}: Props) => {
 	const [goldenPrice, setGoldenPrice] = useState<number>(0);
-	const originPrice = 200000;
 
 	const handleNextStep = () => {
 		if (goldenPrice > 0 && goldenPrice < originPrice) {
 			onNextStep();
 		} else {
 			let alertMessage = '';
-			if (goldenPrice < 0) {
+			if (goldenPrice === 0) {
 				alertMessage = '희망 판매가를 입력해주세요!';
 			} else if (goldenPrice >= originPrice) {
 				alertMessage = '희망 판매가는 기존 구매가보다 낮아야 합니다!';
@@ -26,9 +30,14 @@ const AddProductInfoInputStep = ({ onNextStep }: Props) => {
 		}
 	};
 
-	function setSellerInfo(info: string): void {
+	const setSellerInfo = (info: string): void => {
 		throw new Error('Function not implemented.');
-	}
+	};
+
+	useEffect(() => {
+		// 페이지 로드 시 스크롤을 맨 위로 이동
+		window.scrollTo(0, 0);
+	}, []); // 빈 배열을 전달하여 페이지가 처음 로드될 때만 실행
 
 	return (
 		<>
@@ -39,9 +48,9 @@ const AddProductInfoInputStep = ({ onNextStep }: Props) => {
 			{/* 골든특가 결정 */}
 			<div className="pt-[11rem] px-5">
 				<GoldenPriceDecision
-					yanoljaPrice="100,000"
+					yanoljaPrice={yanoljaPrice.toString()} // 문자열로 변환
 					setGoldenPrice={setGoldenPrice}
-					originPrice="200,000"
+					originPrice={originPrice.toString()}
 				/>
 			</div>
 
