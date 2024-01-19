@@ -15,7 +15,7 @@ export const ProductItemRental = ({
 					<div className="relative mb-[10px]">
 						<img
 							className="w-[130px] h-[160px] rounded-[5px]"
-							src="assets/images/productImg.jpg"
+							src={product.accommodationImage}
 							alt="productImg"
 						/>
 						<div className="flex bg-dateBlue px-[6px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">

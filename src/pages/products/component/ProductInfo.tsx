@@ -1,35 +1,89 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { getProduct } from '../../../apis/detail';
+import { formatDate } from '../../../utils/b';
+
+type ProductDetailType = {
+	accommodationImage: string;
+	accommodationName: string;
+	accommodationAddress: string;
+	reservationType: string;
+	roomName: string;
+	standardNumber: number;
+	maximumNumber: number;
+	checkInTime: string;
+	checkOutTime: string;
+	checkInDate: string;
+	checkOutDate: string;
+	nights: number;
+	days: number;
+	originPrice: number;
+	yanoljaPrice: number;
+	goldenPrice: number;
+	originPriceRatio: number;
+	marketPriceRatio: number;
+	content: string;
+	productStatus: string;
+};
 
 export const ProductInfo = () => {
+	const navigate = useNavigate();
+	const param = useParams();
+	const [checkInDate, setCheckInDate] = useState<string | undefined>();
+	const [checkOutDate, setCheckOutDate] = useState<string | undefined>();
+	const [product, setProduct] = useState<ProductDetailType>();
+
+	const fetchData = async () => {
+		const data = await getProduct(param?.productId);
+		setCheckInDate(formatDate(data.data.checkInDate));
+		setCheckOutDate(data.data.checkOutDate);
+		setProduct(data.data);
+	};
+	const handleClickButton = (link: string) => {
+		const isLogin = false;
+		if (isLogin) {
+			navigate('/login');
+		}
+		navigate(link);
+	};
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	if (!product) {
+		return <div>Loading...</div>;
+	}
 	return (
 		<div className="">
 			<div className="relative mb-5">
 				<img
 					className="w-full h-[205px]"
-					src="/assets/images/productImg.jpg"
+					src={product.accommodationImage}
 					alt="productImg"
 				/>
 				<p className="absolute top-0 rounded-br-[5px] text-m font-semibold text-white bg-subBtn px-2 py-1">
-					D-{5}
+					D-{product.days}
 				</p>
 			</div>
 			<div className="px-5 mb-[13px]">
 				<div className="flex justify-between">
 					<p className="text-black text-headline2 font-semibold">
-						에코그린 리조트 호텔
+						{product.accommodationName}
 					</p>
 					<button>
 						<img src="/assets/images/headrt_xl.svg" alt="heartIcon" />
 					</button>
 				</div>
-				<p className="text-black text-headline2 font-medium">디럭스 트윈</p>
+				<p className="text-black text-headline2 font-medium">
+					{product.roomName}
+				</p>
 			</div>
 			<div className="px-5 flex justify-between">
 				<div className="flex item-center mb-5">
 					<p className="py-1 px-2  rounded-[20px] border-[1px] border-solid border-borderGray bg-lightGray text-sm text-black mr-[6px]">
 						숙박
 					</p>
-					<p className="text-m text-black m-auto ">기존 2명/최대 3명</p>
+					<p className="text-m text-black m-auto ">{`기존 ${product.standardNumber}명/최대 ${product.maximumNumber}명`}</p>
 				</div>
 				<div className="flex item-center mb-5">
 					<img
@@ -37,27 +91,31 @@ export const ProductInfo = () => {
 						src="/assets/images/location_sm.svg"
 						alt=""
 					/>
-					<p className="text-black text-m m-auto"> 제주특별시 제주 한림읍</p>
+					<p className="text-black text-m m-auto">
+						{product.accommodationAddress}
+					</p>
 				</div>
 			</div>
 			<div className="flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px] mx-5 mb-[25px]">
 				<div>
 					<p className="font-bold mb-[5px]">체크인</p>
-					<p>{`2023-12-28(목) 15:00`}</p>
+					<p>{`${checkInDate} ${product.checkInTime}`}</p>
 				</div>
 				<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
 				<div>
 					<p className="font-bold mb-[5px]">체크아웃</p>
-					<p>{`2023-12-30(목) 15:00`}</p>
+					<p>{`${checkOutDate} ${product.checkOutTime}`}</p>
 				</div>
 			</div>
 			<div className="w-full px-5 mb-5">
 				<div className="flex justify-between w-[100%]">
 					<p className="text-descGray font-pre text-lg">현재 야놀자 판매가</p>
 					<div className="flex">
-						<p className="text-descGray font-pre text-lg mr-1">{13}%</p>
+						<p className="text-descGray font-pre text-lg mr-1">
+							{product.marketPriceRatio}%
+						</p>
 						<p className="text-descGray font-pre text-lg line-through">
-							{(200000).toLocaleString()}
+							{product.yanoljaPrice.toLocaleString()}
 						</p>
 						<p className="text-descGray font-pre text-lg line-through">원</p>
 					</div>
@@ -65,9 +123,11 @@ export const ProductInfo = () => {
 				<div className="flex justify-between w-[100%]">
 					<p className="text-descGray font-pre text-lg">기존 구매가</p>
 					<div className="flex">
-						<p className="text-descGray font-pre text-lg mr-1">{17}%</p>
+						<p className="text-descGray font-pre text-lg mr-1">
+							{product.originPriceRatio}%
+						</p>
 						<p className="text-descGray font-pre text-lg line-through">
-							{(210000).toLocaleString()}
+							{product.originPrice.toLocaleString()}
 						</p>
 						<p className="text-descGray font-pre text-lg line-through">원</p>
 					</div>
@@ -78,7 +138,7 @@ export const ProductInfo = () => {
 					</p>
 					<div className="flex">
 						<p className="text-subBtn font-pre text-lg font-semibold">
-							{(175000).toLocaleString()}
+							{product.goldenPrice.toLocaleString()}
 						</p>
 						<p className="text-subBtn font-pre text-lg font-semibold">원</p>
 					</div>
@@ -94,7 +154,7 @@ export const ProductInfo = () => {
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
 						<p className="p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]">
-							새해 일출보기 좋은 오션뷰 호텔입니다!
+							{product.content}
 						</p>
 					</div>
 					<div className="mb-[25px]">
@@ -143,10 +203,22 @@ export const ProductInfo = () => {
 					</div>
 				</div>
 				<div className="flex px-5 pt-[60px] pb-[30px] justify-between">
-					<button className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn">
+					<button
+						onClick={() => {
+							handleClickButton(
+								`/chat?productId=${param.productId}&sellerId=${'sellerId'}&buyerId=${'buyerId'}`,
+							);
+						}}
+						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
+					>
 						네고하기
 					</button>
-					<button className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main">
+					<button
+						onClick={() => {
+							handleClickButton(`/reservation?productId=${param.productId}`);
+						}}
+						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
+					>
 						예약하기
 					</button>
 				</div>

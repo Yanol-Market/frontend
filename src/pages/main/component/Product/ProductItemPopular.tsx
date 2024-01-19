@@ -15,7 +15,7 @@ export const ProductItemPopular = ({
 					<div className="relative mb-2">
 						<img
 							className="w-[115px] h-[140px] rounded-[5px]"
-							src="assets/images/productImg.jpg"
+							src={product.accommodationImage}
 							alt="productImg"
 						/>
 						<div className="flex bg-dateBlue px-[6px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">
