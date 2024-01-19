@@ -27,19 +27,19 @@ const PurchaseHistory = () => {
 			<Header title={'구매내역'} />
 			<div className="h-[50px] w-full  flex  border-solid border-b-2 border-borderGray px-5">
 				<div
-					className={`w-1/2  flex justify-center font-body pt-4 ${
+					className={`w-1/2  flex justify-center font-body pt-2 ${
 						currentTab
 							? '  border-solid border-b-4 border-main font-semibold'
 							: null
 					} `}
 					onClick={purchaseClick}
 				>
-					<div className="flex justify-center items-center relative">
-						<p className="pr-1 ">구매중 </p>
+					<div className="flex justify-center items-center relative ">
+						<p className="pr-1 cursor-pointer">구매중 </p>
 						<img
 							src="assets/images/ic.svg"
 							alt="heartImage"
-							className="w-[14px] h-[14px] "
+							className="w-[14px] h-[14px] cursor-pointer "
 							onClick={handleOpen}
 						/>
 						{/* 공지 알람 */}
@@ -49,6 +49,7 @@ const PurchaseHistory = () => {
 									<CloseIcon
 										sx={{ width: '18px', color: '#BDBDBD' }}
 										onClick={handleClose}
+										className="cursor-pointer"
 									/>{' '}
 								</div>
 
@@ -66,7 +67,7 @@ const PurchaseHistory = () => {
 					</div>
 				</div>
 				<div
-					className={` w-1/2 flex justify-center font-body pt-4   ${
+					className={`cursor-pointer w-1/2 flex justify-center font-body pt-4   ${
 						currentTab
 							? null
 							: '  border-solid border-b-4 border-main font-semibold '
