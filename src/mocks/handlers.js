@@ -1,5 +1,18 @@
 import { http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
+import {
+	BoughtDetailRes,
+	BoughtListRes,
+	BuyingRes,
+} from '../data/purchasesData';
+import {
+	ExpiredDetailRes,
+	SalesRes,
+	SellingDetailRes,
+	SellingRes,
+	SoldDetailRes,
+	SoldRes,
+} from '../data/salesData';
 
 export const handlers = [
 	http.get('/api/test', () => {
@@ -99,6 +112,34 @@ export const handlers = [
 				price: 200000,
 			},
 		]);
+	}),
+	// 구매 내역-구매중-조회 API
+	http.get('/api/purchases', () => {
+		return HttpResponse.json(BuyingRes);
+	}),
+	// 구매 내역-구매 완료-리스트-조회 API
+	http.get('/api/purchase/history?status=COMPLETE', () => {
+		return HttpResponse.json(BoughtListRes);
+	}),
+	// 구매 내역-구매 완료-상세-조회 API
+	http.get('/api/orders/history?status=COMPLETED&productId=1', () => {
+		return HttpResponse.json(BoughtDetailRes);
+	}),
+	// 판매 내역-판매중-조회 API
+	http.get('/api/sales', () => {
+		return HttpResponse.json(SalesRes);
+	}),
+	// 판매 완료- 리스트 -조회 API
+	http.get('/api/SoldList', () => {
+		return HttpResponse.json(SoldRes);
+	}),
+	// 판매 완료- 상세 -조회 API
+	http.get('/api/SoldDetail/1', () => {
+		return HttpResponse.json(SoldDetailRes);
+	}),
+	// 상품만료- 상세 -조회 API
+	http.get('/api/ExpiredDetail/1', () => {
+		return HttpResponse.json(ExpiredDetailRes);
 	}),
 ];
 
