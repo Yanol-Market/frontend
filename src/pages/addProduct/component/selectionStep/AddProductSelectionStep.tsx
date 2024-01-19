@@ -24,7 +24,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	useEffect(() => {
 		const fetchReservations = async () => {
 			try {
-				const data = await getReservations('1');
+				const data = await getReservations('4');
 				setReservations(data.data);
 			} catch (error) {
 				console.error('예약을 불러오는 중 오류 발생:', error);
