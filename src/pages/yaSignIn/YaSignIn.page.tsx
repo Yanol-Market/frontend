@@ -20,12 +20,11 @@ const YaSignIn = () => {
 		mutationFn: getYaSignIn,
 		onSuccess(data) {
 			console.log(data);
-			if (data.status === 'FAIL') {
+			if (data.status === 'FAIL' && data.data) {
 				const userData = localStorage.setItem(
 					'userData',
 					JSON.stringify(data.data),
 				);
-				console.log(userData);
 				navigate('/signup');
 			} else {
 				const { accessToken, refreshToken } = data.data;
@@ -39,15 +38,23 @@ const YaSignIn = () => {
 			throw new Error('로그인 실패');
 		},
 	});
+
 	const handleYaSignIn = async () => {
 		const data = { email: yaUserId, password: yaUserPassword };
 
-		if (data.email === 'error@naver.com') {
-			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
-		} else {
-			mutation.mutate(data);
-			const userId = localStorage.setItem('userId', data.email);
+		try {
+			const res = await mutation.mutateAsync(data);
+
+			const { accessToken, refreshToken } = res.data.data;
+			setCookie('accessToken', accessToken, { path: '/' });
+			setCookie('refreshToken', refreshToken, { path: '/' });
+			navigate('/');
+		} catch (err) {
+			console.error(err);
+			setError('errorEmail', { message: '이메일 및 비밀번호를 확인해주세요' });
 		}
+
+		const userEmail = localStorage.setItem('userId', data.email);
 	};
 
 	return (
@@ -74,16 +81,16 @@ const YaSignIn = () => {
 					})}
 				/>
 
-				{errors.emailError ? (
+				{errors.errorEmail ? (
 					<div className="text-red text-sm text-left mt-1">
-						<p>{errors.emailError.message as string}</p>
+						<p>{errors.errorEmail.message as string}</p>
 					</div>
 				) : (
 					''
 				)}
 				<div>
 					<button
-						type="button"
+						type="submit"
 						className="border w-full h-11 rounded-xl mt-6 bg-yaLogo text-white text-m cursor-pointer"
 						onClick={handleYaSignIn}
 					>

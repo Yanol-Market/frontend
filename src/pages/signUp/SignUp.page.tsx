@@ -28,13 +28,17 @@ const SignUp = () => {
 
 	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
 	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
-
+	const storedUserData = localStorage.getItem('userData');
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignUp,
 		onSuccess(data) {
-			console.log(data);
-			navigate('/');
+			if (storedUserData) {
+				navigate('/yasignin');
+			} else {
+				console.log(data);
+				navigate('/');
+			}
 		},
 		onError(err) {
 			console.error(err);
@@ -42,7 +46,6 @@ const SignUp = () => {
 		},
 	});
 
-	const storedUserData = localStorage.getItem('userData');
 	useEffect(() => {
 		if (storedUserData) {
 			const userData = JSON.parse(storedUserData);
@@ -74,14 +77,13 @@ const SignUp = () => {
 			email: userEmail,
 			password: userPassword,
 			phoneNumber: userPhoneNumber,
-			id: userId,
+			yanoljaId: userId,
 			agreement: {
 				isMarketing: watchCheckboxThird,
 			},
 		};
 		if (data) {
 			mutation.mutate(data);
-			console.log(data);
 		}
 	};
 	useEffect(() => {
@@ -223,6 +225,11 @@ const SignUp = () => {
 						{errors.password.message as string}
 					</div>
 				)}
+				{/* {storedUserData ? (
+					<div className="text-sm text-gray mb-4 text-start">
+						야놀자 가입 때 사용한 비밀번호를 입력해주세요
+					</div>
+				) : null} */}
 				<input
 					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
 						errors.passwordChecked && userpasswordChecked && userPassword

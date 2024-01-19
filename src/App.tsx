@@ -33,9 +33,10 @@ import CompletionEdit from './pages/editProd/component/CompletionEdit';
 import { ChatList } from './pages/chatList';
 import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
-import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
 import ChatPage from './pages/chat';
+import { NotFoundPage } from './component/common/NotFound';
+import { Splash } from './pages/splash';
 
 function App() {
 	return (
@@ -120,6 +121,7 @@ function App() {
 							/>
 						}
 					/>
+					<Route path="/*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
 		</>
