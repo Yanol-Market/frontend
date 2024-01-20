@@ -63,9 +63,11 @@ const AddProductInfoInputStep = ({
 
 	return (
 		<>
-			<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem]" />
-			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">판매 정보 입력</h2>
-			<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray" />
+			<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem] z-10" />
+			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem] z-10">
+				판매 정보 입력
+			</h2>
+			<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray z-10" />
 
 			{/* 골든특가 결정 */}
 			<div className="pt-[11rem] px-5">
