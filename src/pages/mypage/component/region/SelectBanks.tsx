@@ -3,11 +3,14 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { SelectBanksProps, checkedBankState } from '../../../../recoil/atom';
 import { bankData } from '../../../../data/bankData';
-
-const SelectBanks = () => {
+interface CloseFuncProps {
+	closeFunc: () => void;
+}
+const SelectBanks = ({ closeFunc }: CloseFuncProps) => {
 	const [selectBank, setSelectBank] = useRecoilState(checkedBankState);
 	const handleSelectBanks = (bank: SelectBanksProps) => {
 		setSelectBank(bank);
+		closeFunc();
 	};
 	// useEffect(() => {
 	// 	console.log(selectBank);
@@ -23,7 +26,7 @@ const SelectBanks = () => {
 					onClick={() => handleSelectBanks(bank)}
 				>
 					<img className="w-8 h-8 mr-2" src={bank.image} alt="은행 이미지" />
-					<p className="mt-1">{bank.bank_name}</p>
+					<p className="mt-1">{bank.bankName}</p>
 				</div>
 			))}
 		</div>

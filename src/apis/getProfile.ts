@@ -1,8 +1,8 @@
-import { instanceTest } from './axios';
+import instance from './axios';
 
 export const getProfiles = async () => {
 	try {
-		const res = await instanceTest('api/me');
+		const res = await instance.get('/users/me');
 		if (res) {
 			return res.data;
 		}

@@ -19,18 +19,19 @@ const YaSignIn = () => {
 	const mutation = useMutation({
 		mutationFn: getYaSignIn,
 		onSuccess(data) {
-			console.log(data);
-			if (data.status === 'FAIL' && data.data) {
-				const userData = localStorage.setItem(
-					'userData',
-					JSON.stringify(data.data),
-				);
-				navigate('/signup');
-			} else {
-				const { accessToken, refreshToken } = data.data;
+			console.log(data.data.userInfo);
+			console.log(data.data);
+			if (data.data.token) {
+				const { accessToken, refreshToken } = data.data.token;
 				setCookie('accessToken', accessToken, { path: '/' });
 				setCookie('refreshToken', refreshToken, { path: '/' });
-				navigate('/');
+			}
+			if (data.data.isFirst) {
+				const userInfo = localStorage.setItem(
+					'userInfo',
+					JSON.stringify(data.data.userInfo),
+				);
+				navigate('/signup');
 			}
 		},
 		onError(err) {
@@ -41,19 +42,7 @@ const YaSignIn = () => {
 
 	const handleYaSignIn = async () => {
 		const data = { email: yaUserId, password: yaUserPassword };
-
-		try {
-			const res = await mutation.mutateAsync(data);
-
-			const { accessToken, refreshToken } = res.data.data;
-			setCookie('accessToken', accessToken, { path: '/' });
-			setCookie('refreshToken', refreshToken, { path: '/' });
-			navigate('/');
-		} catch (err) {
-			console.error(err);
-			setError('errorEmail', { message: '이메일 및 비밀번호를 확인해주세요' });
-		}
-
+		mutation.mutate(data);
 		const userEmail = localStorage.setItem('userId', data.email);
 	};
 

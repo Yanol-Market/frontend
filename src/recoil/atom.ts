@@ -23,7 +23,7 @@ export const checkedListState = atom({
 
 export interface SelectBanksProps {
 	id: number;
-	bank_name: string;
+	bankName: string;
 	image: string;
 }
 

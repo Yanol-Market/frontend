@@ -40,7 +40,7 @@ const AddMyAccount = () => {
 				onClose={closeBottomSheetBank}
 				viewHeight="calc(100vh * 0.9)"
 			>
-				<SelectBanks />
+				<SelectBanks closeFunc={closeBottomSheetBank} />
 			</BottomSheet>
 			<div className="w-full flex flex-col items-center mt-11">
 				<form className="w-[90%] text-start">
@@ -60,7 +60,7 @@ const AddMyAccount = () => {
 										src={selectedBank.image}
 										alt="은행 이미지"
 									/>
-									<p className="mt-1 text-black">{selectedBank.bank_name}</p>
+									<p className="mt-1 text-black">{selectedBank.bankName}</p>
 								</div>
 							) : (
 								<p>은행을 선택해주세요.</p>
@@ -96,35 +96,6 @@ const AddMyAccount = () => {
 							<p className="pt-2 text-start text-gray">{myAccount?.name}</p>
 						</div>
 					</div>
-					{/* <div className="mt-48">
-						<div className="flex flex-row mb-5">
-							<input
-								className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"
-								type="checkbox"
-								id="account-checkbox"
-								{...register('account-checkbox', { required: true })}
-							/>
-							<label htmlFor="account-checkbox" className="text-sm text-gray">
-								<span>
-									계좌인증을 위한 <u className="cursor-pointer">이용약관</u> 및{' '}
-									<u className="cursor-pointer">개인정보 처리방침</u>에
-									동의합니다.
-								</span>
-							</label>
-						</div>
-						<button
-							type="button"
-							className={`${
-								isButtonDisabled
-									? 'border-borderGray bg-borderGray'
-									: 'border-borderGray bg-main text-white'
-							} flex items-center text-center mx-auto  w-full h-11 rounded-xl text-gray text-m`}
-							disabled={isButtonDisabled}
-						>
-							<p className="text-center mx-auto">계좌 등록하기</p>
-						</button>
-					</div> */}
-
 					<div className="absolute bottom-24 flex flex-row">
 						<input
 							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"

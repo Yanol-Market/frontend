@@ -1,8 +1,8 @@
-import { instanceTest } from './axios';
+import instance from './axios';
 
 export const getAccounts = async () => {
 	try {
-		const res = await instanceTest('api/account');
+		const res = await instance.get('/users/account');
 		if (res) {
 			return res.data;
 		}
