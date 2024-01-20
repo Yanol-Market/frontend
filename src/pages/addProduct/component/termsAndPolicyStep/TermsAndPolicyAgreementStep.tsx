@@ -51,8 +51,8 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 				</h2>
 				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray z-10" />
 				{/* <div className="flex flex-col h-screen text-black"> */}
-				<div className="pt-[11rem] px-5">
-					<h3 className="text-body font-semibold text-black mb-5">
+				<div className="pt-[11rem]">
+					<h3 className="text-body font-semibold text-black mb-5 ml-5">
 						약관 및 정책
 					</h3>
 
