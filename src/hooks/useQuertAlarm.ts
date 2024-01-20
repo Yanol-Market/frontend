@@ -1,6 +1,5 @@
-import { getAlarm } from '../apis/alarm';
+import { getAlarm, getNewAlarm } from '../apis/alarm';
 import { useQuery } from '@tanstack/react-query';
-import { AlertListRes } from '../type/alarm';
 
 export const useQueryAlarm = () => {
 	const { isLoading, error, data } = useQuery({

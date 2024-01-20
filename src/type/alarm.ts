@@ -12,3 +12,11 @@ export type AlertListRes = {
 		alertResponses: AlertRes[];
 	};
 };
+
+export type CheckNewAlertRes = {
+	status: string;
+	message: string;
+	data: {
+		existsNewAlert: boolean;
+	};
+};

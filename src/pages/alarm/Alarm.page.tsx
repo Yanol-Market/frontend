@@ -6,9 +6,6 @@ import { formatTimeAgo } from '../../utils/formate';
 
 const Alarm = () => {
 	const { data, error } = useQueryAlarm();
-	console.log(data);
-	console.log(data?.alertResponses);
-	console.log('error', error);
 	if (error) {
 		return <div> 에러에러 </div>;
 	}
