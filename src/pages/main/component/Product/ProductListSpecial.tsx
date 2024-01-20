@@ -17,6 +17,8 @@ export type ProductSpecialType = {
 	yanoljaPrice: number;
 	goldenPrice: number;
 	productStatus: string;
+	wishId: number;
+	isWished : boolean;
 };
 
 export const ProductListSpecial = ({ product }: any) => {

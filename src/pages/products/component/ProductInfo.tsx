@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProduct } from '../../../apis/detail';
 import { formatDate } from '../../../utils/b';
+import { FormatLimitText } from '../../../utils/formate';
+import { addWish } from '../../../apis/wish';
+import { deleteWish } from '../../../apis/wish';
 
 type ProductDetailType = {
+	isWished: boolean;
+	isSeller: boolean;
 	accommodationImage: string;
 	accommodationName: string;
 	accommodationAddress: string;
@@ -24,11 +29,15 @@ type ProductDetailType = {
 	marketPriceRatio: number;
 	content: string;
 	productStatus: string;
+	wishId: number;
+	
 };
 
 export const ProductInfo = () => {
 	const navigate = useNavigate();
 	const param = useParams();
+	const [isWished, setIsWished] = useState(false);
+	const [isSeller, setIsSeller] = useState(false);
 	const [checkInDate, setCheckInDate] = useState<string | undefined>();
 	const [checkOutDate, setCheckOutDate] = useState<string | undefined>();
 	const [product, setProduct] = useState<ProductDetailType>();
@@ -38,13 +47,26 @@ export const ProductInfo = () => {
 		setCheckInDate(formatDate(data.data.checkInDate));
 		setCheckOutDate(data.data.checkOutDate);
 		setProduct(data.data);
+		setIsWished(data.data.isWished);
+		setIsSeller(data.data.isSeller);
 	};
+	console.log(product);
 	const handleClickButton = (link: string) => {
 		const isLogin = false;
 		if (isLogin) {
 			navigate('/login');
 		}
 		navigate(link);
+	};
+	const handleClickHeart = async (productId: number) => {
+		if (!isWished) {
+			addWish(productId);
+			setIsWished(true);
+		}
+		if (isWished) {
+			deleteWish(product?.wishId as number);
+			setIsWished(false);
+		}
 	};
 	useEffect(() => {
 		fetchData();
@@ -70,8 +92,15 @@ export const ProductInfo = () => {
 					<p className="text-black text-headline2 font-semibold">
 						{product.accommodationName}
 					</p>
-					<button>
-						<img src="/assets/images/headrt_xl.svg" alt="heartIcon" />
+					<button
+						onClick={() => {
+							handleClickHeart(Number(param.productId));
+						}}
+					>
+						<img
+							src={`/assets/images/${isWished ? 'Fill' : ''}heart_xl.svg`}
+							alt="heartIcon"
+						/>
 					</button>
 				</div>
 				<p className="text-black text-headline2 font-medium">
@@ -81,7 +110,7 @@ export const ProductInfo = () => {
 			<div className="px-5 flex justify-between">
 				<div className="flex item-center mb-5">
 					<p className="py-1 px-2  rounded-[20px] border-[1px] border-solid border-borderGray bg-lightGray text-sm text-black mr-[6px]">
-						숙박
+						숙박
 					</p>
 					<p className="text-m text-black m-auto ">{`기존 ${product.standardNumber}명/최대 ${product.maximumNumber}명`}</p>
 				</div>
@@ -92,7 +121,7 @@ export const ProductInfo = () => {
 						alt=""
 					/>
 					<p className="text-black text-m m-auto">
-						{product.accommodationAddress}
+						{FormatLimitText(product.accommodationAddress, 20)}
 					</p>
 				</div>
 			</div>

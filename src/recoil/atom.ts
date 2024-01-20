@@ -1,16 +1,19 @@
 import { atom } from 'recoil';
+const toDay = new Date();
+const sevenDaysLater = new Date();
+sevenDaysLater.setDate(toDay.getDate() + 6);
 
 export const startState = atom({
 	key: 'startDate',
-	default: new Date(),
+	default: toDay,
 });
 export const endState = atom({
 	key: 'endDate', //
-	default: new Date(),
+	default: sevenDaysLater,
 });
 export const checkedState = atom({
 	key: 'checkedState',
-	default: 0,
+	default: 'FULL_RANGE',
 });
 
 export const checkedListState = atom({
@@ -27,4 +30,12 @@ export interface SelectBanksProps {
 export const checkedBankState = atom<SelectBanksProps | null>({
 	key: 'checkedBankState',
 	default: null,
+});
+export const selectOptionState = atom({
+	key: 'SelectOptionState',
+	default: 'ALL',
+});
+export const searchInputState = atom({
+	key: 'SearchInputState',
+	default: '',
 });
