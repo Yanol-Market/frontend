@@ -17,6 +17,8 @@ const SellerInfoInput = ({ onSellerInfoChange }: SellerInfoInputProps) => {
 
 		if (inputText.length <= maxCharCount) {
 			setSellerComment(inputText);
+			console.log('Content in SellerInfoInput:', inputText);
+			onSellerInfoChange(inputText);
 		}
 	};
 	return (

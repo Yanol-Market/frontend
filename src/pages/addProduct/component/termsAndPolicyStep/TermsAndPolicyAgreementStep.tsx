@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import CompletionScreen from '../CompletionScreen';
+import { registerProduct } from '../../../../apis/products';
 
 interface Props {
 	onPrevStep?: () => void;
 	onComplete: () => void;
+	selectedItem: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+		goldenPrice?: number;
+		content?: string;
+	};
 }
 
-const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
+const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 	const [agreed, setAgreed] = useState(false);
 	const [isCompleted, setIsCompleted] = useState(false);
 
-	const handleNextButtonClick = () => {
+	const handleNextButtonClick = async () => {
 		if (agreed) {
-			setIsCompleted(true);
+			try {
+				const { reservationId, goldenPrice, content } = selectedItem;
+				const response = await registerProduct(reservationId.toString(), {
+					goldenPrice: goldenPrice || 0,
+					content: content || '',
+				});
+				setIsCompleted(true);
+				// 서버 응답 처리
+				console.log('상품 등록 성공:', response);
+			} catch (error) {
+				console.error('상품 등록 오류:', error);
+				// 오류 처리
+			}
 		} else {
 			alert('약관에 동의해주세요!');
 		}
