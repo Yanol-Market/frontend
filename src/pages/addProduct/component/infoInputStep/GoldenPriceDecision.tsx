@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface GoldenPriceDecisionProps {
 	originPrice: string | null;
@@ -6,11 +6,32 @@ interface GoldenPriceDecisionProps {
 	setGoldenPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
+const addCommas = (value: string | null): string => {
+	if (!value) return '';
+	const numberValue = Number(value);
+	if (isNaN(numberValue)) return '';
+
+	return numberValue.toLocaleString();
+};
+
 const GoldenPriceDecision = ({
 	yanoljaPrice,
 	originPrice,
 	setGoldenPrice,
 }: GoldenPriceDecisionProps) => {
+	const [formattedYanoljaPrice, setFormattedYanoljaPrice] = useState<string>();
+
+	const handleYanoljaPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const rawValue = e.target.value.replace(/,/g, ''); // 콤마 제거
+		const numericValue = Number(rawValue);
+
+		if (!isNaN(numericValue)) {
+			setFormattedYanoljaPrice(addCommas(rawValue));
+			setGoldenPrice(numericValue);
+		} else {
+			setFormattedYanoljaPrice(''); // 값이 유효하지 않으면 빈 문자열로 설정
+		}
+	};
 	return (
 		<div>
 			<h3 className="text-body font-semibold text-black">골든특가 결정</h3>
@@ -19,7 +40,11 @@ const GoldenPriceDecision = ({
 			</p>
 			<div className="mt-3 w-[21.0625rem] h-[3.125rem] mx-auto text-center bg-lightGray flex items-center justify-center text-lg">
 				<p>
-					현재 야놀자는 <span className="font-semibold">{yanoljaPrice}</span>
+					현재 야놀자는
+					<span className="font-semibold">
+						{' '}
+						{yanoljaPrice && Number(yanoljaPrice).toLocaleString()}
+					</span>
 					원에 팔고 있어요!
 				</p>
 			</div>
@@ -29,9 +54,10 @@ const GoldenPriceDecision = ({
 					<span className="text-alarmRed">*</span>
 				</p>
 				<input
-					type="number"
-					placeholder={`기존구매가 ${originPrice}`}
-					onChange={(e) => setGoldenPrice(Number(e.target.value))}
+					type="text" // type을 text로 변경
+					placeholder={`기존구매가 ${addCommas(originPrice)}`}
+					value={formattedYanoljaPrice}
+					onChange={handleYanoljaPriceChange}
 					className="border-b border-borderGray outline-none ml-3 mt-1 w-[14.0625rem] text-center text-descGray pb-2"
 				/>
 				<p className="ml-2 mt-3">원</p>

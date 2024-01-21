@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReservationItem, { Reservation } from './ReservationItem';
+import { getReservations } from '../../../../apis/reservations';
 
 interface Props {
-	onNextStep: () => void;
+	onNextStep: (data: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+		goldenPrice: number; // 추가
+		content: string; // 추가
+	}) => void;
 }
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	const [isLoggedIn] = useState(true);
 	const hasReservations = true; // 예약 내역 여부
+	const [reservations, setReservations] = useState<Reservation[]>([]); // 예약 상태를 저장합니다.
+
 	const [selectedReservationIndex, setSelectedReservationIndex] = useState<
 		number | null
 	>(null);
+
+	useEffect(() => {
+		const fetchReservations = async () => {
+			try {
+				const data = await getReservations('4');
+				setReservations(data.data);
+			} catch (error) {
+				console.error('예약을 불러오는 중 오류 발생:', error);
+				// 오류 처리를 추가하세요.
+			}
+		};
+
+		// 컴포넌트가 마운트될 때 예약을 가져옵니다.
+		fetchReservations();
+	}, []);
 
 	const handleReservationItemClick = (index: number) => {
 		setSelectedReservationIndex(index);
@@ -18,78 +42,33 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	};
 
 	const handleNextStep = () => {
+		const sortedReservations = [...reservations].sort((a, b) => {
+			return a.checkInDate.localeCompare(b.checkInDate);
+		});
 		if (selectedReservationIndex === null) {
 			alert('상품을 선택해주세요!');
 		} else {
-			onNextStep();
+			const selectedReservation = sortedReservations[selectedReservationIndex];
+			const { originPrice, yanoljaPrice, reservationId } = selectedReservation;
+
+			// 선택된 상품의 정보 출력
+			console.log('Selected Product Info:', {
+				originPrice,
+				yanoljaPrice,
+				reservationId,
+			});
+
+			onNextStep({
+				originPrice,
+				yanoljaPrice,
+				reservationId,
+				goldenPrice: 0,
+				content: '',
+			});
 		}
 	};
 
 	const renderContent = () => {
-		const reservations: Reservation[] = [
-			// 야놀자 예약 정보 배열
-			{
-				reservationNumber: 2312120123456,
-				reservationDate: '2024.01.01',
-				hotelName: '에코그린 리조트 호텔',
-				roomInfo: '디럭스 더블',
-				numberOfPeople: 2,
-				maxNumberOfPeople: 2,
-				totalAmount: '300,000원',
-				checkInDate: '2024.01.03',
-				checkOutDate: '2024.01.03',
-				checkInTime: '15:00',
-				checkOutTime: '22:00',
-				accommodationType: '대실',
-				isRegistered: false,
-			},
-			{
-				reservationNumber: 2312120123456,
-				reservationDate: '2023.12.12',
-				hotelName: '가평 푸른하늘 펜션',
-				roomInfo: '디럭스 더블',
-				numberOfPeople: 2,
-				maxNumberOfPeople: 2,
-				totalAmount: '2박 300,000원',
-				checkInDate: '2024.01.03',
-				checkOutDate: '2024.01.05',
-				checkInTime: '15:00',
-				checkOutTime: '15:00',
-				accommodationType: '숙박',
-				isRegistered: false,
-			},
-			{
-				reservationNumber: 2312120123456,
-				reservationDate: '2024.01.01',
-				hotelName: '에코그린 리조트 호텔',
-				roomInfo: '디럭스 더블',
-				numberOfPeople: 2,
-				maxNumberOfPeople: 2,
-				totalAmount: '300,000원',
-				checkInDate: '2024.01.10',
-				checkOutDate: '2024.01.10',
-				checkInTime: '15:00',
-				checkOutTime: '22:00',
-				accommodationType: '대실',
-				isRegistered: true,
-			},
-			{
-				reservationNumber: 2312120123456,
-				reservationDate: '2023.12.12',
-				hotelName: '가평 푸른하늘 펜션',
-				roomInfo: '디럭스 더블',
-				numberOfPeople: 2,
-				maxNumberOfPeople: 2,
-				totalAmount: '1박 100,000원',
-				checkInDate: '2024.01.04',
-				checkOutDate: '2024.01.05',
-				checkInTime: '15:00',
-				checkOutTime: '15:00',
-				accommodationType: '숙박',
-				isRegistered: false,
-			},
-		];
-
 		// 기존 reservations 배열을 복사한 후 예약일 기준으로 정렬
 		const sortedReservations = [...reservations].sort((a, b) => {
 			// 날짜 형식이 'YYYY.MM.DD' 이므로 간단한 문자열 비교로 정렬 가능
