@@ -5,6 +5,7 @@ import { paymentPrePare } from '../../apis/paymentPrepare';
 import { useRecoilValue } from 'recoil';
 import { paymentsState } from '../../recoil/atom';
 import instance from '../../apis/axios';
+import { useNavigate } from 'react-router-dom';
 
 interface TermSheetProps {
 	setTermSheet: (value: boolean) => void;
@@ -23,23 +24,16 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		term2: false,
 		term3: false,
 	});
+	const navigate = useNavigate();
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
-	const [pgData ,setPgData] = useState<PgDataProps>();
-	
+	const [pgData, setPgData] = useState<PgDataProps>();
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
-			console.log(data);
 			setPgData(data.data);
-			console.log(pgData);
 			console.log('결제 준비 완료');
-			if(pgData){
-				handlePayment();
-			}
-			
-			
 		},
 		onError(err) {
 			console.error(err);
@@ -48,10 +42,9 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
-		if(payPreData){
+		if (payPreData) {
 			mutation.mutate(payPreData.orderId);
 		}
-		
 	};
 
 	const [checkAll, setCheckAll] = useState(false);
@@ -71,6 +64,12 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		setCheckAll(allChecked);
 	}, [checkboxes]);
 
+	useEffect(() => {
+		console.log(pgData);
+		if (pgData) {
+			handlePayment();
+		}
+	}, [pgData]);
 	const handlePayment = () => {
 		if (!window.IMP) return;
 
@@ -79,37 +78,36 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 			const data: RequestPayParams = {
 				pg: 'html5_inicis.INIBillTst',
 				pay_method: 'card',
-				// merchant_uid: `mid_${new Date().getTime()}`,
-				amount: pgData?.price as number, 
+				merchant_uid: String(pgData?.orderId),
+				amount: pgData?.price as number,
 				name: pgData?.roomName,
 				buyer_name: pgData?.userName,
 				buyer_tel: pgData?.phoneNumber || '',
 				buyer_email: pgData?.email || '',
 			};
-			
+
 			try {
 				console.log('Payment data:', data);
 				window.IMP.request_pay(data, callback);
-			  } catch (error) {
+			} catch (error) {
 				console.error('Error during payment request:', error);
-			  }
+			}
 		}
 	};
 
 	const callback = (response: RequestPayResponse) => {
-		console.log(response);
-		if(response.success){
+		if (response.success) {
 			try {
 				instance.post('/payments/result', {
 					impUid: response.imp_uid,
 					orderId: payPreData?.orderId,
-				})
-			} catch(err){
+				});
+			} catch (err) {
 				console.error(err);
-				throw new Error('사후검증 실패')
+				throw new Error('사후검증 실패');
 			}
 			alert('결제 성공');
-			
+			navigate('/');
 		}
 	};
 

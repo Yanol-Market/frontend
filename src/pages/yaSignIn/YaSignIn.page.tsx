@@ -19,8 +19,6 @@ const YaSignIn = () => {
 	const mutation = useMutation({
 		mutationFn: getYaSignIn,
 		onSuccess(data) {
-			console.log(data.data.userInfo);
-			console.log(data.data);
 			if (data.data.token) {
 				const { accessToken, refreshToken } = data.data.token;
 				setCookie('accessToken', accessToken, { path: '/' });
@@ -43,7 +41,6 @@ const YaSignIn = () => {
 	const handleYaSignIn = async () => {
 		const data = { email: yaUserId, password: yaUserPassword };
 		mutation.mutate(data);
-		const userEmail = localStorage.setItem('userId', data.email);
 	};
 
 	return (

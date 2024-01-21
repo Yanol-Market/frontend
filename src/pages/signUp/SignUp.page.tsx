@@ -225,11 +225,6 @@ const SignUp = () => {
 						{errors.password.message as string}
 					</div>
 				)}
-				{/* {storedUserData ? (
-					<div className="text-sm text-gray mb-4 text-start">
-						야놀자 가입 때 사용한 비밀번호를 입력해주세요
-					</div>
-				) : null} */}
 				<input
 					className={`border border-borderGray w-full h-11 rounded-xl mb-4 text-m pl-2 focus:outline-none ${
 						errors.passwordChecked && userpasswordChecked && userPassword
