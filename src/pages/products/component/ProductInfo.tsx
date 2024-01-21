@@ -4,6 +4,9 @@ import { getProduct } from '../../../apis/detail';
 import { formatDate } from '../../../utils/b';
 import { useQuery } from '@tanstack/react-query';
 import { getPaymentsDetail } from '../../../apis/paymentsDetail';
+import { PaymentProps } from '../../reservation/Product';
+import { useRecoilState } from 'recoil';
+import { paymentsState } from '../../../recoil/atom';
 
 type ProductDetailType = {
 	accommodationImage: string;
@@ -34,6 +37,7 @@ export const ProductInfo = () => {
 	const [checkInDate, setCheckInDate] = useState<string | undefined>();
 	const [checkOutDate, setCheckOutDate] = useState<string | undefined>();
 	const [product, setProduct] = useState<ProductDetailType>();
+	const [payData , setPayData] = useRecoilState(paymentsState);
 
 	const fetchData = async () => {
 		const data = await getProduct(param?.productId);
@@ -57,10 +61,12 @@ export const ProductInfo = () => {
 		try {
 			const payData  = await getPaymentsDetail(param?.productId);
 			console.log(payData);
+			setPayData(payData.data);
+			navigate(link);
 		  } catch (error) {
 			throw new Error('결제 상세페이지 이동 실패');
 		  }
-		// navigate(link);
+		
 	};
 	useEffect(() => {
 		fetchData();

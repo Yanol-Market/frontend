@@ -3,6 +3,8 @@ import { RequestPayParams, RequestPayResponse } from '../../type/portone';
 import { useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
 import { productData } from './Product';
+import { useRecoilValue } from 'recoil';
+import { paymentsState } from '../../recoil/atom';
 
 interface TermSheetProps {
 	setTermSheet: (value: boolean) => void;
@@ -14,6 +16,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		term2: false,
 		term3: false,
 	});
+	const payData = useRecoilValue(paymentsState);
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 
 	const mutation = useMutation({
@@ -29,7 +32,10 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
-		mutation.mutate(productData.productId);
+		if(payData){
+			mutation.mutate(payData.productId);
+		}
+		
 	};
 
 	const [checkAll, setCheckAll] = useState(false);

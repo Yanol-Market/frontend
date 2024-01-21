@@ -9,6 +9,7 @@ import MyPageClickBtn from '../btn/MyPageClickBtn';
 import { bankLogoData } from '../../../../data/bankLogoData';
 import { useMutation } from '@tanstack/react-query';
 import { deleteAccounts } from '../../../../apis/deleteAccounts';
+import NotFoundContent from '../content/NotFoundContent';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
@@ -47,7 +48,11 @@ const MyAccount = () => {
 
 	return (
 		<div>
+			{myAccount ? 
+			<>
 			<Header title="내 계좌" />
+			
+			
 			<BottomSheet
 				isOpen={isBottomSheetAccountOpen}
 				onClose={closeBottomSheetAccount}
@@ -87,9 +92,10 @@ const MyAccount = () => {
 							/>
 						</div>
 					</div>
-				</div>
+				</div> 
 				<MyPageClickBtn content="계좌 등록하기" onClick={addAccountBtn} />
-			</div>
+			</div> </> : <NotFoundContent title="내 계좌" content="이용 가능한 계좌가 없습니다." /> }
+			
 		</div>
 	);
 };

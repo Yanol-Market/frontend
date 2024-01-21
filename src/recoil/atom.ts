@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+import { PaymentProps } from '../pages/reservation/Product';
 
 const { persistAtom } = recoilPersist();
 
@@ -44,5 +45,9 @@ export interface MyAccountProps {
 export const myAccountState = atom<MyAccountProps | null>({
 	key: 'myAccountState',
 	default: null,
-	// effects_UNSTABLE: [persistAtom],
 });
+
+export const paymentsState = atom<PaymentProps | null>({
+	key: 'PaymentsState',
+	default: null,
+})
