@@ -4,22 +4,24 @@ import {
 	ApiSold,
 	ApiSoldDetail,
 } from '../data/salesData';
-import { instanceTest } from './axios';
+import instance, { instanceTest } from './axios';
 import { AxiosResponse } from 'axios';
 
-// 구매내역-구매중 조회 API
+// 판매내역-판매중 조회 API
 export const getSales = async (): Promise<ApiSales> => {
-	const res: AxiosResponse<ApiSales> = await instanceTest.get('/api/sales');
+	const res: AxiosResponse<ApiSales> = await instance.get(
+		'/products/history/progress',
+	);
 	return res.data;
 };
 
-// 구매완료 - 리스트 조회 API
+// 판매완료 - 리스트 조회 API
 export const getSoldList = async (): Promise<ApiSold> => {
 	const res: AxiosResponse<ApiSold> = await instanceTest.get('/api/SoldList');
 	return res.data;
 };
 
-// 구매완료 - 상세 조회 API
+// 판매완료 - 상세 조회 API
 export const getSoldDetail = async (
 	productId: string,
 ): Promise<ApiSoldDetail> => {
