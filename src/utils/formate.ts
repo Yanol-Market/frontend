@@ -4,6 +4,11 @@ export const formatNumber = (number: number) => {
 	return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+// 금액 , 스트링 반환
+export const formatNumberString = (number: number) => {
+	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 // 날짜 요일 반환 함수
 export const formatWeek = (dateString: string) => {
 	const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];

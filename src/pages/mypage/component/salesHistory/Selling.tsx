@@ -51,6 +51,7 @@ const Selling = () => {
 										productId={item.productId}
 										yanoljaPrice={item.yanoljaPrice}
 										originPrice={item.originPrice}
+										goldenPrice={item.goldenPrice}
 									/>
 								</BottomSheet>
 
