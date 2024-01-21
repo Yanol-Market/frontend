@@ -34,25 +34,23 @@ const AddMyAccount = () => {
 
 	const mutation = useMutation({
 		mutationFn: patchAccounts,
-		onSuccess(data){
+		onSuccess(data) {
 			alert('계좌 등록 성공');
-		}
-	})
+		},
+	});
 
 	const handleAccount = () => {
 		const bankName = selectedBank?.bankName;
-	  
+
 		if (bankName && typeof bankName === 'string') {
-		  const data = {
-			bankName: bankName,
-			accountNumber: accountNumber,
-		  };
-	  
-		  mutation.mutate(data);
+			const data = {
+				bankName: bankName,
+				accountNumber: accountNumber,
+			};
+
+			mutation.mutate(data);
 		}
-	  };
-	  
-	
+	};
 
 	return (
 		<div>
@@ -71,10 +69,7 @@ const AddMyAccount = () => {
 						<div className="flex flex-row justify-between font-bold">
 							<p className="text-lg">은행명</p>
 						</div>
-						<div
-							className="flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray"
-							// onClick={openBottomSheet}
-						>
+						<div className="flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray">
 							{selectedBank ? (
 								<div className="flex flex-row gap-2 cursor-default">
 									<img
@@ -104,12 +99,12 @@ const AddMyAccount = () => {
 							className="w-full h-11 rounded-xl text-lg mt-2 bg-lightGray pl-4 focus:outline-none"
 							type="text"
 							placeholder="계좌 번호를 입력해주세요."
-							{...register('accountNumber', { 
-							required: true,
-							  pattern: {
-								value: /[^0-9]/g,
-								message: '숫자만 입력해주세요'
-							  },
+							{...register('accountNumber', {
+								required: true,
+								pattern: {
+									value: /[^0-9]/g,
+									message: '숫자만 입력해주세요',
+								},
 							})}
 						/>
 					</div>
@@ -118,7 +113,9 @@ const AddMyAccount = () => {
 							<p className="text-lg">예금주</p>
 						</div>
 						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
-							<p className="pt-2 text-start text-gray">{myAccount?.data.name}</p>
+							<p className="pt-2 text-start text-gray">
+								{myAccount?.data.name}
+							</p>
 						</div>
 					</div>
 					<div className="absolute bottom-24 flex flex-row">

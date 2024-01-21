@@ -28,7 +28,7 @@ export default function Main() {
 
 	const myProfileData = results[0].data;
 	const myAccountsData = results[1].data;
-	
+
 	useEffect(() => {
 		if (myProfileData) {
 			const userProfileInfo = localStorage.setItem(
@@ -41,7 +41,6 @@ export default function Main() {
 	useEffect(() => {
 		if (myAccountsData) {
 			setMyAccount(myAccountsData);
-			console.log(myAccount);
 		}
 	}, [myAccountsData, setMyAccount]);
 	return (

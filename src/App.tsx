@@ -89,7 +89,7 @@ function App() {
 						path="/mypage/guide"
 						element={
 							<NotFoundContent
-								title="이용가이드"
+								title="개인정보 처리방침"
 								content="페이지 준비중입니다."
 							/>
 						}

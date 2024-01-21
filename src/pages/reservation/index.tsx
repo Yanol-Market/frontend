@@ -5,8 +5,6 @@ import Total from './Total';
 import Payment from './Payment';
 import TermSheet from './TermSheet';
 import { Header } from '../../component/common/Header';
-import { useQuery } from '@tanstack/react-query';
-
 
 const ReservationPage = () => {
 	const [payment, setPayment] = useState('');
@@ -14,7 +12,6 @@ const ReservationPage = () => {
 	const isDisabled = !!payment;
 
 	console.log(payment, isDisabled, termSheet);
-
 
 	return (
 		<div className="relative">

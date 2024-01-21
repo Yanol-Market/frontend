@@ -3,7 +3,7 @@ import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { deleteCookie, getCookie } from '../../../../apis/cookie';
+import { getCookie } from '../../../../apis/cookie';
 import { useMutation } from '@tanstack/react-query';
 import { getSignOut } from '../../../../apis/signout';
 
@@ -42,8 +42,7 @@ const ManageAccount = () => {
 		const accessToken = getCookie('accessToken');
 		const refreshToken = getCookie('refreshToken');
 
-		 mutation.mutate({ accessToken, refreshToken });
-
+		mutation.mutate({ accessToken, refreshToken });
 	};
 	return (
 		<div>
