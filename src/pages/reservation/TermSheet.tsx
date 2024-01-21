@@ -1,29 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { RequestPayParams, RequestPayResponse } from '../../type/portone';
-import { useMutation } from '@tanstack/react-query';
+import { dataTagSymbol, useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
-import { productData } from './Product';
 import { useRecoilValue } from 'recoil';
 import { paymentsState } from '../../recoil/atom';
+import instance from '../../apis/axios';
 
 interface TermSheetProps {
 	setTermSheet: (value: boolean) => void;
 }
-
+interface PgDataProps {
+	email: string;
+	orderId: number;
+	phoneNumber: string;
+	price: number;
+	roomName: string;
+	userName: string;
+}
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
 		term2: false,
 		term3: false,
 	});
-	const payData = useRecoilValue(paymentsState);
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
+	const payPreData = useRecoilValue(paymentsState);
+	const [pgData ,setPgData] = useState<PgDataProps>();
+	
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
 			console.log(data);
-			// handlePayment();
+			setPgData(data.data);
+			console.log(pgData);
+			console.log('결제 준비 완료');
+			if(pgData){
+				handlePayment();
+			}
+			
+			
 		},
 		onError(err) {
 			console.error(err);
@@ -32,8 +48,8 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
-		if(payData){
-			mutation.mutate(payData.orderId);
+		if(payPreData){
+			mutation.mutate(payPreData.orderId);
 		}
 		
 	};
@@ -63,27 +79,37 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 			const data: RequestPayParams = {
 				pg: 'html5_inicis.INIBillTst',
 				pay_method: 'card',
-				merchant_uid: `mid_${new Date().getTime()}`,
-				amount: 1000220,
-				name: '아임포트 결제 테스트 카드',
-				buyer_name: '골든티켓',
-				buyer_tel: '01012341234',
-				buyer_email: 'example@example.com',
-				buyer_addr: '신사동 661-16',
-				buyer_postcode: '06018',
+				// merchant_uid: `mid_${new Date().getTime()}`,
+				amount: pgData?.price as number, 
+				name: pgData?.roomName,
+				buyer_name: pgData?.userName,
+				buyer_tel: pgData?.phoneNumber || '',
+				buyer_email: pgData?.email || '',
 			};
-
-			window.IMP.request_pay(data, callback);
+			
+			try {
+				console.log('Payment data:', data);
+				window.IMP.request_pay(data, callback);
+			  } catch (error) {
+				console.error('Error during payment request:', error);
+			  }
 		}
 	};
 
 	const callback = (response: RequestPayResponse) => {
-		const { error_msg } = response;
-
-		if (error_msg) {
-			alert(`결제 실패: ${error_msg}`);
-		} else {
+		console.log(response);
+		if(response.success){
+			try {
+				instance.post('/payments/result', {
+					impUid: response.imp_uid,
+					orderId: payPreData?.orderId,
+				})
+			} catch(err){
+				console.error(err);
+				throw new Error('사후검증 실패')
+			}
 			alert('결제 성공');
+			
 		}
 	};
 

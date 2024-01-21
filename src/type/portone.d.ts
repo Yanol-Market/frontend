@@ -14,7 +14,7 @@ export interface RequestPayParams extends RequestPayAdditionalParams {
 	pg?: string;
 	pay_method: string;
 	escrow?: boolean;
-	merchant_uid: string;
+	merchant_uid?: string;
 	name?: string;
 	amount: number;
 	custom_data?: any;
