@@ -33,7 +33,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 
 	const onClickPayment = () => {
 		if(payData){
-			mutation.mutate(payData.productId);
+			mutation.mutate(payData.orderId);
 		}
 		
 	};

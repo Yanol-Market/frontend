@@ -6,8 +6,7 @@ import Payment from './Payment';
 import TermSheet from './TermSheet';
 import { Header } from '../../component/common/Header';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useParams } from 'react-router-dom';
-import { getProduct } from '../../apis/detail';
+
 
 const ReservationPage = () => {
 	const [payment, setPayment] = useState('');

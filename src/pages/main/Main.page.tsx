@@ -25,9 +25,10 @@ export default function Main() {
 			},
 		],
 	});
+
 	const myProfileData = results[0].data;
 	const myAccountsData = results[1].data;
-
+	
 	useEffect(() => {
 		if (myProfileData) {
 			const userProfileInfo = localStorage.setItem(

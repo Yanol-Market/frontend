@@ -38,11 +38,11 @@ const ManageAccount = () => {
 		navigate('/member/withdrawl');
 	};
 
-	const signOutBtn = async () => {
+	const signOutBtn = () => {
 		const accessToken = getCookie('accessToken');
 		const refreshToken = getCookie('refreshToken');
 
-		await mutation.mutateAsync({ accessToken, refreshToken });
+		 mutation.mutate({ accessToken, refreshToken });
 
 	};
 	return (
