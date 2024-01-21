@@ -44,9 +44,6 @@ const ManageAccount = () => {
 
 		await mutation.mutateAsync({ accessToken, refreshToken });
 
-		deleteCookie();
-		alert('로그아웃 완료');
-		navigate('/');
 	};
 	return (
 		<div>

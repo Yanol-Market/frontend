@@ -7,6 +7,8 @@ import SelectBanks from '../region/SelectBanks';
 import { useRecoilValue } from 'recoil';
 import { checkedBankState, myAccountState } from '../../../../recoil/atom';
 import MyPageClickBtn from '../btn/MyPageClickBtn';
+import { useMutation } from '@tanstack/react-query';
+import { patchAccounts } from '../../../../apis/patchAccounts';
 
 const AddMyAccount = () => {
 	const {
@@ -15,6 +17,7 @@ const AddMyAccount = () => {
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
+	const accountNumber = watch('accountNumber');
 	const watchAgreeCheckBox = watch('account-checkbox');
 	const isButtonDisabled = !watchAgreeCheckBox;
 	const selectedBank = useRecoilValue(checkedBankState);
@@ -29,9 +32,28 @@ const AddMyAccount = () => {
 		setIsBottomSheetBankOpen(false);
 	};
 
-	const addMyAccountClick = () => {
-		alert('계좌 등록 완료');
-	};
+	const mutation = useMutation({
+		mutationFn: patchAccounts,
+		onSuccess(data){
+			alert('계좌 등록 성공');
+		}
+	})
+
+	const handleAccount = () => {
+		const bankName = selectedBank?.bankName;
+	  
+		if (bankName && typeof bankName === 'string') {
+		  const data = {
+			bankName: bankName,
+			accountNumber: accountNumber,
+		  };
+	  
+		  mutation.mutate(data);
+		}
+	  };
+	  
+	
+
 	return (
 		<div>
 			<Header title="계좌 등록" />
@@ -82,10 +104,13 @@ const AddMyAccount = () => {
 							className="w-full h-11 rounded-xl text-lg mt-2 bg-lightGray pl-4 focus:outline-none"
 							type="text"
 							placeholder="계좌 번호를 입력해주세요."
-							{...register('account-number', { required: true })}
-							onChange={(e) => {
-								e.target.value = e.target.value.replace(/[^0-9]/g, '');
-							}}
+							{...register('accountNumber', { 
+							required: true,
+							  pattern: {
+								value: /[^0-9]/g,
+								message: '숫자만 입력해주세요'
+							  },
+							})}
 						/>
 					</div>
 					<div className="mt-7">
@@ -93,7 +118,7 @@ const AddMyAccount = () => {
 							<p className="text-lg">예금주</p>
 						</div>
 						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
-							<p className="pt-2 text-start text-gray">{myAccount?.name}</p>
+							<p className="pt-2 text-start text-gray">{myAccount?.data.name}</p>
 						</div>
 					</div>
 					<div className="absolute bottom-24 flex flex-row">
@@ -113,7 +138,7 @@ const AddMyAccount = () => {
 					</div>
 					<MyPageClickBtn
 						content="계좌 등록하기"
-						onClick={addMyAccountClick}
+						onClick={handleAccount}
 						isDisabled={isButtonDisabled}
 					/>
 				</form>

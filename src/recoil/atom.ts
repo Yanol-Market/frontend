@@ -33,10 +33,13 @@ export const checkedBankState = atom<SelectBanksProps | null>({
 });
 
 export interface MyAccountProps {
-	account_number: string;
-	bank_image: string;
-	bank_name: string;
-	name: string;
+	data:{
+		accountNumber: string;
+		bankImage?: string;
+		bankName: string;
+		name: string;
+	}
+	
 }
 export const myAccountState = atom<MyAccountProps | null>({
 	key: 'myAccountState',

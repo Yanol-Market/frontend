@@ -4,7 +4,7 @@ interface PostAccountsProps {
 	bankName: string;
 	accountNumber: string;
 }
-export const postAccounts = async (data: PostAccountsProps) => {
+export const patchAccounts = async (data: PostAccountsProps) => {
 	try {
 		const res = await instance.patch('/users/account', data);
 		return res.data;

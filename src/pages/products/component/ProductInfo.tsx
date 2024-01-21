@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getProduct } from '../../../apis/detail';
 import { formatDate } from '../../../utils/b';
+import { useQuery } from '@tanstack/react-query';
+import { getPaymentsDetail } from '../../../apis/paymentsDetail';
 
 type ProductDetailType = {
 	accommodationImage: string;
@@ -39,12 +41,26 @@ export const ProductInfo = () => {
 		setCheckOutDate(data.data.checkOutDate);
 		setProduct(data.data);
 	};
-	const handleClickButton = (link: string) => {
+	const handleClickButton = async (link: string) => {
 		const isLogin = false;
 		if (isLogin) {
 			navigate('/login');
 		}
+		
 		navigate(link);
+	};
+	const handleClickPayMentsButton = async (link: string) => {
+		const isLogin = false;
+		if (isLogin) {
+			navigate('/login');
+		}
+		try {
+			const payData  = await getPaymentsDetail(param?.productId);
+			console.log(payData);
+		  } catch (error) {
+			throw new Error('결제 상세페이지 이동 실패');
+		  }
+		// navigate(link);
 	};
 	useEffect(() => {
 		fetchData();
@@ -215,7 +231,7 @@ export const ProductInfo = () => {
 					</button>
 					<button
 						onClick={() => {
-							handleClickButton(`/reservation?productId=${param.productId}`);
+							handleClickPayMentsButton(`/reservation?productId=${param.productId}`);
 						}}
 						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
 					>
