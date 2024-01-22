@@ -65,22 +65,15 @@ const SellingBottom = ({
 
 	return (
 		<>
-			<BottomSheet isOpen={isBottom} onClose={closeBottom} viewHeight="200px">
-				<ContentTwoBtnPage
-					title="판매 정보를 삭제하시겠습니까?"
-					leftBtn="취소"
-					rightBtn="삭제"
-					leftBtnFunc={closeBottom}
-					rightBtnFunc={delProd}
-				/>
-			</BottomSheet>
-
 			<div className="w-full h-full flex flex-col justify-around items-center">
-				<div className="cursor-pointer" onClick={handleEdit}>
+				{/* <div className="cursor-pointer" onClick={handleEdit}>
 					수정하기
 				</div>
 				<div className="text-red cursor-pointer" onClick={handleDelete}>
 					삭제하기
+				</div> */}
+				<div className="text-body">
+					거래 진행 중인 경우 상품을 수정할 수 없습니다.
 				</div>
 			</div>
 		</>

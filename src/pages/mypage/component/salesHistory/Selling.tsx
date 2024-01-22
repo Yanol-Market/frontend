@@ -8,12 +8,19 @@ import { useQuerySales } from '../../../../hooks/useQuerySales';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import Chat from './Chat';
+import { useNavigate } from 'react-router';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { editProdState } from '../../../../recoil/prodEditAtom';
 
 // 판매중
 const Selling = () => {
 	const [Bottom, setBottom] = useState(false);
 	const [click, setClick] = useState(false);
 	const { data, isLoading, error } = useQuerySales();
+
+	const navigate = useNavigate();
+
+	const editData = useSetRecoilState(editProdState);
 
 	console.log('판매중 성꽁', data);
 	// console.log('판매중 성꽁22', data?.[0].chats);
@@ -26,6 +33,27 @@ const Selling = () => {
 		setBottom(false);
 	};
 
+	const handleClick = (
+		status: string,
+		productId: number,
+		yanolja: number,
+		origin: number,
+		golden: number,
+	) => {
+		if (status === null) {
+			editData({
+				yanolja: yanolja,
+				origin: origin,
+				golden: golden,
+			});
+			//  수정 페이지로 이동
+			navigate(`/edit/${productId}`);
+			console.log('이동');
+		} else {
+			setBottom(true);
+			console.log('오픈');
+		}
+	};
 	if (isLoading) {
 		return <div> isLoading </div>;
 	}
@@ -46,22 +74,28 @@ const Selling = () => {
 									onClose={closeBottom}
 									viewHeight="160px"
 								>
-									<SellingBottom
-										setBottom={setBottom}
-										productId={item.productId}
-										yanoljaPrice={item.yanoljaPrice}
-										originPrice={item.originPrice}
-										goldenPrice={item.goldenPrice}
-									/>
+									<div className="w-full h-full flex flex-col justify-center items-center">
+										<div className="text-body">
+											거래 진행 중인 경우 상품을 수정할 수 없습니다.
+										</div>
+									</div>
 								</BottomSheet>
 
 								<div className="pb-4 flex justify-between items-center">
 									<p className="text-sm">골든티켓 등록번호 {item.productId}</p>
 									<div>
-										<MoreVertIcon
-											sx={{ width: '13px', color: '#BDBDBD' }}
+										<img
+											src="/assets/images/ic_edit.svg"
 											className="cursor-pointer"
-											onClick={openBottom}
+											onClick={() =>
+												handleClick(
+													item.status,
+													item.productId,
+													item.yanoljaPrice,
+													item.originPrice,
+													item.goldenPrice,
+												)
+											}
 										/>
 									</div>
 								</div>
