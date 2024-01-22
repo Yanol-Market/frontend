@@ -20,30 +20,18 @@ const EditProd = () => {
 	const [content, setContent] = useState<string>(' ');
 
 	// 수정 API 연결
-	const handleEdit = () => {
-		// console.log('상품 수정 완료 ');
-		// navigate(`/edit/completion/${productId}`);
+	const handleEdit = async () => {
 		if (productId) {
-			const handleEditProd = async (
-				productId: string,
-				goldenPrice: number,
-				content: string,
-			) => {
-				try {
-					const res = await putEditProd(productId, goldenPrice, content);
-					console.log('상품 수정 성공', res);
-					alert('상품 수정에 성공했습니다 !');
-				} catch (e) {
-					console.log('상품 수정 실패', e);
-					alert('상품 수정에 실패했습니다. 전 페이지로 돌아가주세요.');
-				}
-			};
-			handleEditProd(productId, goldenPrice, content);
+			try {
+				const res = await putEditProd(productId, goldenPrice, content);
+				console.log('상품 수정 성공', res);
+				alert('상품 수정에 성공했습니다 !');
+			} catch (e) {
+				console.log('상품 수정 실패', e);
+				alert('상품 수정에 실패했습니다. 전 페이지로 돌아가주세요.');
+			}
 		}
-
-		navigate('');
-		console.log(content);
-		console.log(goldenPrice);
+		navigate(-1);
 	};
 
 	return (
