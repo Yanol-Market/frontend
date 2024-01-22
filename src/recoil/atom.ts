@@ -138,3 +138,8 @@ export const searchInputState = atom({
 	key: 'SearchInputState',
 	default: '',
 });
+
+export const chatStatusState = atom({
+	key: 'ChatStatusState',
+	default: '',
+});

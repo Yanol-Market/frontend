@@ -4,9 +4,10 @@ import SellerChat from './SellerChat';
 import { Header } from '../../component/common/Header';
 import ProductInfo from './ProductInfo';
 import instance from '../../apis/axios';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
 	buyerIdState,
+	chatStatusState,
 	messageState,
 	offeredPriceState,
 	productIdState,
@@ -33,6 +34,7 @@ const ChatPage = () => {
 	const [buyerId, setBuyerId] = useRecoilState(buyerIdState);
 	const [sellerid, setSellerId] = useRecoilState(sellerIdState);
 	const [offeredPrice, setOfferPrice] = useRecoilState(offeredPriceState);
+	const [chatStatus, setChatStatus] = useRecoilState(chatStatusState);
 
 	// 로그인 유저 아이디 가져오기
 
@@ -75,8 +77,14 @@ const ChatPage = () => {
 
 				console.log(offerPrice);
 
-				const { receiverNickname, price, productId, buyerId, sellerId } =
-					chatRoomInfoResponse;
+				const {
+					receiverNickname,
+					price,
+					productId,
+					buyerId,
+					sellerId,
+					chatStatus,
+				} = chatRoomInfoResponse;
 
 				setReceiverName(receiverNickname);
 				setProductPrice(price);
@@ -85,6 +93,7 @@ const ChatPage = () => {
 				setBuyerId(buyerId);
 				setSellerId(sellerId);
 				setOfferPrice(offerPrice);
+				setChatStatus(chatStatus);
 			} catch (error) {
 				console.error('Error fetching chat data:', error);
 			}

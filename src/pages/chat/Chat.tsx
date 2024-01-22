@@ -5,7 +5,7 @@ import ChatItem from './ChatItem';
 import { Link } from 'react-router-dom';
 import { ProductData } from './Chat.page';
 import { useRecoilValue } from 'recoil';
-import { userIdState, userNameState } from '../../recoil/atom';
+import { chatStatusState, userIdState, userNameState } from '../../recoil/atom';
 
 const Chat: React.FC<ChatProps> = ({
 	productData,
@@ -18,6 +18,7 @@ const Chat: React.FC<ChatProps> = ({
 	const [offered, setOffered] = useState(false);
 	const userName = useRecoilValue(userNameState);
 	const userId = useRecoilValue(userIdState);
+	const chatStatus = useRecoilValue(chatStatusState);
 
 	return (
 		<div className="h-[100%] bg-[#fafafa] overflow-y-auto scrollbar-hide pb-[110px]">
@@ -27,29 +28,40 @@ const Chat: React.FC<ChatProps> = ({
 			</div>
 			<div></div>
 			{chatList ? <ChatItem chatList={chatList} userId={userId} /> : null}
-			{nego ? (
-				<NegoPanel
-					setNegoStatus={setNegoStatus}
-					setNego={setNego}
-					setOffered={setOffered}
-				/>
-			) : offered ? (
-				<div className="absolute bottom-0 h-[110px] bg-[#fafafa]">
+			{chatStatus !== 'NEGO_PROPOSE' &&
+				(nego ? (
+					<NegoPanel
+						setNegoStatus={setNegoStatus}
+						setNego={setNego}
+						setOffered={setOffered}
+					/>
+				) : offered ? (
+					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
+						<Link
+							to="/reservation"
+							className="w-[335px] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						>
+							원래 가격으로 결제하기
+						</Link>
+					</div>
+				) : (
+					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
+						<div
+							onClick={() => setNego(true)}
+							className="absolute w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						>
+							제시하기
+						</div>
+					</div>
+				))}
+			{chatStatus === 'NEGO_PROPOSE' && (
+				<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
 					<Link
 						to="/reservation"
-						className="w-[335px] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 					>
-						원래 가격으로 결제하기
+						결제하기
 					</Link>
-				</div>
-			) : (
-				<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
-					<div
-						onClick={() => setNego(true)}
-						className="absolute w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
-					>
-						제시하기
-					</div>
 				</div>
 			)}
 		</div>

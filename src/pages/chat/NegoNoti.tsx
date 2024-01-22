@@ -41,13 +41,13 @@ const NegoNoti: React.FC<NegoNotiProps> = ({
 				<div className="w-[100%] flex justify-between absolute bottom-0 h-[110px]">
 					<div
 						onClick={handleReject}
-						className="w-[160px] bottom-[25px] text-[#828282] text-lg cursor-pointer ml-[20px] h-[42px] bg-[#e5e5e5] rounded-[12px] flex items-center justify-center"
+						className="w-[160px] bottom-[25px] text-[#828282] text-lg cursor-pointer ml-[30px] h-[42px] bg-[#e5e5e5] rounded-[12px] flex items-center justify-center"
 					>
 						거절하기
 					</div>
 					<div
 						onClick={consent}
-						className="w-[160px] bottom-[25px] text-lg cursor-pointer mr-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						className="w-[160px] bottom-[25px] text-lg cursor-pointer mr-[30px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 					>
 						승인하기
 					</div>
