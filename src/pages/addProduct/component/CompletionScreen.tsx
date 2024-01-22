@@ -24,7 +24,7 @@ const CompletionScreen = ({ onComplete }: Props) => {
 					<CloseIcon sx={{ width: '20px' }} />
 				</div>
 			</div>
-			<div className="w-[375px] fixed top-0 bottom-0 flex flex-col items-center justify-center bg-white">
+			<div className="w-[375px] fixed top-0 bottom-0 flex flex-col items-center justify-center bg-white z-10">
 				<div className="h-[80%] flex flex-col items-center justify-center">
 					<img src="/assets/images/check.svg" alt="" />
 					<h2 className="text-body font-light	my-[20px]">상품 등록 완료! </h2>

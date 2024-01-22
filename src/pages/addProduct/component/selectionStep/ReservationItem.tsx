@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { formatDate, formatNumber } from '../../../../utils/formate';
+import {
+	reservationStatusTrans,
+	reservationTypeTrans,
+} from '../../../../utils/translate';
 
 export interface Reservation {
 	reservationId: number;
@@ -6,8 +11,8 @@ export interface Reservation {
 	accommodationName: string;
 	reservationType: string;
 	roomName: string;
-	standardNumber: number; // 인원 수
-	maximumNumber: number; // 최대 인원 수
+	standardNumber: number;
+	maximumNumber: number;
 	checkInDate: string;
 	checkOutDate: string;
 	checkInTime: string;
@@ -25,27 +30,12 @@ interface ReservationItemProps {
 	onClick: () => void;
 }
 
-const formatDate = (dateString: string) => {
-	const dateObject = new Date(dateString);
-	const year = dateObject.getFullYear();
-	const month = String(dateObject.getMonth() + 1).padStart(2, '0');
-	const day = String(dateObject.getDate()).padStart(2, '0');
-	return `${year}.${month}.${day}`;
-};
-
-const formatNumberWithCommas = (number: number) => {
-	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
-
 const ReservationItem = ({
 	reservation,
 	isSelected,
 	onClick,
 }: ReservationItemProps) => {
-	const isRegistered = reservation.reservationStatus === 'REGISTERED';
-
-	const formattedReservationType =
-		reservation.reservationType === 'DAY_USE' ? '대실' : '숙박';
+	const isRegistered = reservationStatusTrans(reservation.reservationStatus);
 
 	const handleClick = () => {
 		if (isRegistered) {
@@ -95,7 +85,7 @@ const ReservationItem = ({
 								: 'border-borderGray bg-lightGray'
 						}`}
 					>
-						{formattedReservationType}
+						{reservationTypeTrans(reservation.reservationType)}
 					</p>
 				</div>
 				<p className="text-sm flex items-center">
@@ -117,7 +107,7 @@ const ReservationItem = ({
 			<div className="flex items-end flex-col text-m">
 				<p className="mb-[0.625rem]">
 					{reservation.nights !== 0 && `${reservation.nights}박 `}
-					{formatNumberWithCommas(reservation.originPrice)}원
+					{formatNumber(reservation.originPrice)}원
 				</p>
 				<div
 					className={`items-center flex w-full h-[3.875rem] rounded-md ${
