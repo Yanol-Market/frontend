@@ -20,7 +20,7 @@ const Header = ({ title }: propsType) => {
 		if (isMoveMyPage) {
 			navigate(`/mypage`);
 		} else {
-			window.history.back();
+			navigate(-1);
 		}
 	};
 
