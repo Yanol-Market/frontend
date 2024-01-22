@@ -6,7 +6,7 @@ const ProductInfo: React.FC<{ productData: ProductData | null }> = ({
 	productData,
 }) => {
 	const productName = `${productData?.accommodationName} ${productData?.roomName}`;
-	const product = productName.substring(0, 15);
+	const product = productName.substring(0, 22);
 	const startDate = productData?.checkInDate;
 	const endDate = productData?.checkOutDate;
 	const checkInDate = dayjs(startDate).format('YYYY년 MM월 DD일');

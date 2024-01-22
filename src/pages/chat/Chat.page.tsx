@@ -75,8 +75,6 @@ const ChatPage = () => {
 				const regex = /[\d,]+ 원/;
 				const offerPrice = offer?.match(regex);
 
-				console.log(offerPrice);
-
 				const {
 					receiverNickname,
 					price,
