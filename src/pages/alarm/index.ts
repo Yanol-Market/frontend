@@ -1,3 +1,3 @@
-import Alarm from './component/Alarm.page';
+import Alarm from './Alarm.page';
 
 export { Alarm };
