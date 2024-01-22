@@ -12,6 +12,7 @@ const BottomSheetRegionContent = ({
 	const [checkedList, setCheckedList] = useRecoilState(checkedListState);
 	const onCheckedItem = useCallback(
 		(item: string) => {
+			// const regionCode = convertRegionToCode(item);
 			if (checkedList.includes(item)) {
 				setCheckedList((prev) => prev.filter((el) => el !== item));
 			} else if (checkedList.length < 3) {
@@ -59,3 +60,6 @@ const BottomSheetRegionContent = ({
 };
 
 export default BottomSheetRegionContent;
+function convertRegionToCode(item: string) {
+	throw new Error('Function not implemented.');
+}
