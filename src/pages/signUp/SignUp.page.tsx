@@ -28,29 +28,32 @@ const SignUp = () => {
 
 	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
 	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
-
+	const userInfoData = localStorage.getItem('userInfo');
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignUp,
 		onSuccess(data) {
-			console.log(data);
+			if (userInfoData) {
+				navigate('/yasignin');
+			}
 			navigate('/');
 		},
 		onError(err) {
 			console.error(err);
-			throw new Error('로그인 실패');
+			alert('이미 가입된 계정입니다. 로그인을 해주세요.');
+			navigate('/signin');
+			throw new Error('회원가입 실패');
 		},
 	});
 
-	const storedUserData = localStorage.getItem('userData');
 	useEffect(() => {
-		if (storedUserData) {
-			const userData = JSON.parse(storedUserData);
+		if (userInfoData) {
+			const userData = JSON.parse(userInfoData);
 			setValue('username', userData.name);
 			setValue('email', userData.email);
 			setValue('phoneNumber', userData.phoneNumber);
 		}
-	}, [storedUserData, setValue]);
+	}, [userInfoData, setValue]);
 	const handleCheckNickName = async () => {
 		const res = await getNickName(userNickName);
 		setIsNickNameAvailable(res?.data?.data);
@@ -61,11 +64,11 @@ const SignUp = () => {
 		setIsEmailAvailable(res?.data?.data);
 	};
 	const handleSignUp = () => {
-		const storedUserData = localStorage.getItem('userData');
+		const userInfoData = localStorage.getItem('userInfo');
 		let userId = null;
 
-		if (storedUserData) {
-			const userData = JSON.parse(storedUserData);
+		if (userInfoData) {
+			const userData = JSON.parse(userInfoData);
 			userId = userData.id;
 		}
 		const data = {
@@ -74,14 +77,13 @@ const SignUp = () => {
 			email: userEmail,
 			password: userPassword,
 			phoneNumber: userPhoneNumber,
-			id: userId,
+			yanoljaId: userId,
 			agreement: {
 				isMarketing: watchCheckboxThird,
 			},
 		};
 		if (data) {
 			mutation.mutate(data);
-			console.log(data);
 		}
 	};
 	useEffect(() => {
