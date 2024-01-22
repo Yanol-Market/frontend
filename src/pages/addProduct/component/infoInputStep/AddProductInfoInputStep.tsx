@@ -52,10 +52,6 @@ const AddProductInfoInputStep = ({
 		setContent(info);
 	};
 
-	const setSellerInfo = (info: string): void => {
-		throw new Error('Function not implemented.');
-	};
-
 	useEffect(() => {
 		// 페이지 로드 시 스크롤을 맨 위로 이동
 		window.scrollTo(0, 0);

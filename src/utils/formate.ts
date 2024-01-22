@@ -4,6 +4,15 @@ export const formatNumber = (number: number) => {
 	return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+// 금액 , (string으로 받는 경우)
+export const addCommas = (value: string | null) => {
+	if (!value) return '';
+	const numberValue = Number(value);
+	if (isNaN(numberValue)) return '';
+
+	return numberValue.toLocaleString();
+};
+
 // 날짜 요일 반환 함수
 export const formatWeek = (dateString: string) => {
 	const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -49,4 +58,13 @@ export const formatTimeAgo = (dateTimeString: string) => {
 		const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 		return `${daysAgo + 1}일 전`;
 	}
+};
+
+// 날짜 반환하는 함수 "2024-01-10" => "24.01.01"
+export const formatDate = (dateString: string) => {
+	const dateObject = new Date(dateString);
+	const year = dateObject.getFullYear();
+	const month = `0${dateObject.getMonth() + 1}`.slice(-2);
+	const day = `0${dateObject.getDate()}`.slice(-2);
+	return `${year}.${month}.${day}`;
 };

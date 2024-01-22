@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
+import { addCommas } from '../../../../utils/formate';
 
 interface GoldenPriceDecisionProps {
 	originPrice: string | null;
 	yanoljaPrice: string | null;
 	setGoldenPrice: React.Dispatch<React.SetStateAction<number>>;
 }
-
-const addCommas = (value: string | null): string => {
-	if (!value) return '';
-	const numberValue = Number(value);
-	if (isNaN(numberValue)) return '';
-
-	return numberValue.toLocaleString();
-};
 
 const GoldenPriceDecision = ({
 	yanoljaPrice,
@@ -32,6 +25,7 @@ const GoldenPriceDecision = ({
 			setFormattedYanoljaPrice(''); // 값이 유효하지 않으면 빈 문자열로 설정
 		}
 	};
+
 	return (
 		<div>
 			<h3 className="text-body font-semibold text-black">골든특가 결정</h3>
@@ -41,19 +35,13 @@ const GoldenPriceDecision = ({
 			<div className="p-[0.9375rem] mt-3 w-[21.0625rem] mx-auto text-center bg-lightGray flex flex-col items-center justify-center text-lg">
 				<p>
 					현재 야놀자는
-					<span className="font-semibold">
-						{' '}
-						{yanoljaPrice && Number(yanoljaPrice).toLocaleString()}
-					</span>
+					<span className="font-semibold"> {addCommas(yanoljaPrice)}</span>
 					원에 팔고 있어요!
 				</p>
 				<p>
 					야놀자에서 구매하신 가격은{' '}
-					<span className="font-semibold">
-						{' '}
-						{originPrice && Number(originPrice).toLocaleString()}
-					</span>
-					원 입니다.
+					<span className="font-semibold"> {addCommas(originPrice)}</span>원
+					입니다.
 				</p>
 			</div>
 			<div className="flex mt-9 text-lg">
