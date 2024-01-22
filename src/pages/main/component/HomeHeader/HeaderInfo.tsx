@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const HeaderInfo = () => {
   return (
     <div className="flex justify-between pt-9">
-    <Link to={'/main'}>
+    <Link to={'/'}>
         <img src={'/assets/images/homeMainLogo.svg'} alt="mainLogo" />
     </Link>
     <div className="flex justify-between w-40">

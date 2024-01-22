@@ -5,9 +5,9 @@ import { styled } from 'styled-components';
 
 export const WishPriceContent = () => {
 	const [checkedItem, setCheckedItem] = useRecoilState(checkedState);
-	const handleCheckboxChange = (value: number) => {
+	const handleCheckboxChange = (value: string) => {
 		if (checkedItem === value) {
-			setCheckedItem(0);
+			setCheckedItem('FULL_RANGE');
 			return;
 		}
 		setCheckedItem(value);
@@ -18,7 +18,7 @@ export const WishPriceContent = () => {
 			<div className="flex gap-[7px]">
 				<label
 					className={`p-2 text-m rounded-[20px] cursor-pointer ${
-						checkedItem === 1
+						checkedItem === 'UNDER_10'
 							? 'bg-homeMain text-fontBlack'
 							: 'bg-borderWhite text-descGray'
 					}`}
@@ -27,16 +27,16 @@ export const WishPriceContent = () => {
 					<HiddenCheckBox
 						className="hidden-checkbox"
 						type="checkbox"
-						value={1}
-						checked={checkedItem === 1}
+						value={'UNDER_10'}
+						checked={checkedItem === 'UNDER_10'}
 						onChange={() => {
-							handleCheckboxChange(1);
+							handleCheckboxChange('UNDER_10');
 						}}
 					/>
 				</label>
 				<label
 					className={`p-2 text-m rounded-[20px] cursor-pointer ${
-						checkedItem === 2
+						checkedItem === 'BETWEEN_10_AND_20'
 							? 'bg-homeMain text-fontBlack'
 							: 'bg-borderWhite text-descGray'
 					}`}
@@ -44,16 +44,16 @@ export const WishPriceContent = () => {
 					20만원대
 					<HiddenCheckBox
 						type="checkbox"
-						value={2}
-						checked={checkedItem === 2}
+						value={'BETWEEN_10_AND_20'}
+						checked={checkedItem === 'BETWEEN_10_AND_20'}
 						onChange={() => {
-							handleCheckboxChange(2);
+							handleCheckboxChange('BETWEEN_10_AND_20');
 						}}
 					/>
 				</label>
 				<label
 					className={`p-2 text-m rounded-[20px] cursor-pointer ${
-						checkedItem === 3
+						checkedItem === 'BETWEEN_30_AND_40'
 							? 'bg-homeMain text-fontBlack'
 							: 'bg-borderWhite text-descGray'
 					}`}
@@ -61,16 +61,16 @@ export const WishPriceContent = () => {
 					30~40만원대
 					<HiddenCheckBox
 						type="checkbox"
-						value={3}
-						checked={checkedItem === 3}
+						value={'BETWEEN_30_AND_40'}
+						checked={checkedItem === 'BETWEEN_30_AND_40'}
 						onChange={() => {
-							handleCheckboxChange(3);
+							handleCheckboxChange('BETWEEN_30_AND_40');
 						}}
 					/>
 				</label>
 				<label
 					className={`p-2 text-m rounded-[20px] cursor-pointer ${
-						checkedItem === 4
+						checkedItem === 'ABOVE_50'
 							? 'bg-homeMain text-fontBlack'
 							: 'bg-borderWhite text-descGray'
 					}`}
@@ -78,10 +78,10 @@ export const WishPriceContent = () => {
 					50만원대~
 					<HiddenCheckBox
 						type="checkbox"
-						value={4}
-						checked={checkedItem === 4}
+						value={'ABOVE_50'}
+						checked={checkedItem === 'ABOVE_50'}
 						onChange={() => {
-							handleCheckboxChange(4);
+							handleCheckboxChange('ABOVE_50');
 						}}
 					/>
 				</label>
