@@ -79,7 +79,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 			return (
 				<>
 					{/* 회색 선 */}
-					<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray" />
+					<div className="fixed top-[9rem] w-[430px] h-[0.4375rem] bg-lightGray" />
 
 					<h3 className="fixed top-[11rem] text-body ml-5 font-semibold">
 						나의 예약 내역
@@ -105,7 +105,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 								))}
 							</div>
 							{/* 다음 버튼 밑으로 뒤에 컨텐츠 가림*/}
-							<div className="fixed bottom-0 w-[375px] bg-white h-[5.5rem]" />
+							<div className="fixed bottom-0 w-[430px] bg-white h-[5.5rem]" />
 							{/* 다음 버튼 */}
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
@@ -157,7 +157,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 
 	return (
 		<div>
-			<div className="fixed top-[6rem] w-[375px] bg-white h-[7rem]" />
+			<div className="fixed top-[6rem] w-[430px] bg-white h-[7rem]" />
 			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">판매 상품 선택</h2>
 			{renderContent()}
 		</div>
