@@ -31,14 +31,20 @@ const SignIn = () => {
 			throw new Error('로그인 실패');
 		},
 	});
-	const handleSignIn = () => {
+
+	const handleSignIn = async () => {
 		const data = { email: userId, password: userPassword };
 
-		if (data.email === 'error@naver.com') {
-			setError('emailError', { message: '이메일 및 비밀번호를 확인해주세요.' });
-		} else {
-			mutation.mutate(data);
-			const userId = localStorage.setItem('userId', data.email);
+		try {
+			const res = await mutation.mutateAsync(data);
+
+			const { accessToken, refreshToken } = res.data.data;
+			setCookie('accessToken', accessToken, { path: '/' });
+			setCookie('refreshToken', refreshToken, { path: '/' });
+			navigate('/');
+		} catch (err) {
+			console.error(err);
+			setError('errorEmail', { message: '이메일 및 비밀번호를 확인해주세요' });
 		}
 	};
 
@@ -70,16 +76,16 @@ const SignIn = () => {
 					})}
 				/>
 
-				{errors.emailError ? (
+				{errors.errorEmail ? (
 					<div className="text-red text-sm text-left mt-1">
-						<p>{errors.emailError.message as string}</p>
+						<p>{errors.errorEmail.message as string}</p>
 					</div>
 				) : (
 					''
 				)}
 				<div>
 					<button
-						type="button"
+						type="submit"
 						className="border w-full h-11 rounded-xl mt-6 bg-main text-white text-m cursor-pointer"
 						onClick={handleSignIn}
 					>
@@ -108,7 +114,7 @@ const SignIn = () => {
 					</button>
 				</Link>
 				<button
-					type="button"
+					type="submit"
 					className="border border-borderGray flex items-center w-full h-11 rounded-xl text-gray text-m mt-3"
 					onClick={handleSignUp}
 				>

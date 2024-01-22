@@ -3,7 +3,7 @@ import { Header } from '../../../../component/common/Header';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { deleteCookie, getCookie } from '../../../../apis/cookie';
+import { getCookie } from '../../../../apis/cookie';
 import { useMutation } from '@tanstack/react-query';
 import { getSignOut } from '../../../../apis/signout';
 
@@ -38,15 +38,11 @@ const ManageAccount = () => {
 		navigate('/member/withdrawl');
 	};
 
-	const signOutBtn = async () => {
+	const signOutBtn = () => {
 		const accessToken = getCookie('accessToken');
 		const refreshToken = getCookie('refreshToken');
 
-		await mutation.mutateAsync({ accessToken, refreshToken });
-
-		deleteCookie();
-		alert('로그아웃 완료');
-		navigate('/');
+		mutation.mutate({ accessToken, refreshToken });
 	};
 	return (
 		<div>
