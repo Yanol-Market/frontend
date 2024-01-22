@@ -8,15 +8,13 @@ const SellerInfoInput = ({ onSellerInfoChange }: SellerInfoInputProps) => {
 	const [sellerComment, setSellerComment] = useState<string>('');
 	const maxCharCount = 500; // 최대 글자 수
 
-	const setSellerInfo = (info: string) => {
-		onSellerInfoChange(info);
-	};
-
 	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const inputText = e.target.value;
 
 		if (inputText.length <= maxCharCount) {
 			setSellerComment(inputText);
+			console.log('Content in SellerInfoInput:', inputText);
+			onSellerInfoChange(inputText);
 		}
 	};
 	return (

@@ -1,16 +1,33 @@
 import React from 'react';
 import tw from 'twin.macro';
+import { StatusBarProps } from '../../../../data/purchasesData';
 
-const StatusBar = () => {
+const StatusBar = ({ status }: StatusBarProps) => {
+	const data = status;
+	console.log(data, 'ddd');
+
 	return (
 		<>
 			<div className="pt-6">
 				<div className="flex justify-between text-m  items-center">
-					<ClickRounded>네고|예약</ClickRounded>
+					{data === null ? (
+						<Rounded>네고|예약</Rounded>
+					) : (
+						<ClickRounded>네고|예약</ClickRounded>
+					)}
+
 					<Line />
-					<Rounded>결제 진행</Rounded>
+					{data === 'PAYMENT_PENDING' || data === 'TRANSFER_PENDING' ? (
+						<ClickRounded>결제 진행</ClickRounded>
+					) : (
+						<Rounded>결제 진행</Rounded>
+					)}
 					<Line />
-					<Rounded>양도 대기</Rounded>
+					{data === 'TRANSFER_PENDING' ? (
+						<ClickRounded>양도 대기</ClickRounded>
+					) : (
+						<Rounded>양도 대기</Rounded>
+					)}
 					<Line />
 					<Rounded>양도 완료</Rounded>
 				</div>

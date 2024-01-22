@@ -1,6 +1,18 @@
 import { http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
-
+import {
+	BoughtDetailRes,
+	BoughtListRes,
+	BuyingRes,
+} from '../data/purchasesData';
+import {
+	ExpiredDetailRes,
+	SalesRes,
+	SellingDetailRes,
+	SellingRes,
+	SoldDetailRes,
+	SoldRes,
+} from '../data/salesData';
 export const handlers = [
 	http.get('/api/test', () => {
 		return HttpResponse.json([
@@ -70,6 +82,18 @@ export const handlers = [
 			},
 		]);
 	}),
+	// 프로필 조회
+	http.get('/api/me', async () => {
+		return HttpResponse.json({
+			id: 1,
+			email: 'test@gmail.com',
+			name: '테스트네임',
+			nickname: '테스트닉네임',
+			imageUrl: null,
+			phoneNumber: '01012345678',
+			yanoljaId: 1,
+		});
+	}),
 	http.get('/api/wishes', async () => {
 		return HttpResponse.json([
 			{
@@ -99,6 +123,41 @@ export const handlers = [
 				price: 200000,
 			},
 		]);
+	}),
+	http.get('/api/account', async () => {
+		return HttpResponse.json({
+			name: '김계좌',
+			bank_name: '농협은행',
+			account_number: '2050501234560',
+		});
+	}),
+	// 구매 내역-구매중-조회 API
+	http.get('/api/purchases', () => {
+		return HttpResponse.json(BuyingRes);
+	}),
+	// 구매 내역-구매 완료-리스트-조회 API
+	http.get('/api/purchase/history?status=COMPLETE', () => {
+		return HttpResponse.json(BoughtListRes);
+	}),
+	// 구매 내역-구매 완료-상세-조회 API
+	http.get('/api/orders/history?status=COMPLETED&productId=1', () => {
+		return HttpResponse.json(BoughtDetailRes);
+	}),
+	// 판매 내역-판매중-조회 API
+	http.get('/api/sales', () => {
+		return HttpResponse.json(SalesRes);
+	}),
+	// 판매 완료- 리스트 -조회 API
+	http.get('/api/SoldList', () => {
+		return HttpResponse.json(SoldRes);
+	}),
+	// 판매 완료- 상세 -조회 API
+	http.get('/api/SoldDetail/1', () => {
+		return HttpResponse.json(SoldDetailRes);
+	}),
+	// 상품만료- 상세 -조회 API
+	http.get('/api/ExpiredDetail/1', () => {
+		return HttpResponse.json(ExpiredDetailRes);
 	}),
 ];
 

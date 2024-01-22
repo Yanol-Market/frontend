@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { getPaymentsDetail } from '../../apis/paymentsDetail';
+import { useRecoilValue } from 'recoil';
+import { paymentsState } from '../../recoil/atom';
 
 export const productData: PaymentProps = {
 	orderId: 1,
@@ -24,7 +25,7 @@ export const productData: PaymentProps = {
 	registrationNumber: 202401051119,
 };
 
-interface PaymentProps {
+export interface PaymentProps {
 	orderId: number;
 	productId: number;
 	imageUrl: string;
@@ -47,58 +48,51 @@ interface PaymentProps {
 }
 
 const Product = () => {
-	// 결제 상세페이지 조회 로직(productData.productId 추후 변경 예정)
-	// const { data } = useQuery({
-	// 	queryKey: ['paymentDetail'],
-	// 	queryFn: () => getPaymentsDetail(productData.productId),
-	// });
-	// console.log(data);
-
+	const payData = useRecoilValue(paymentsState);
+	console.log(payData);
 	return (
 		<>
 			<div className="p-[20px]">
 				<div className="flex justify-between py-[10px]">
 					<h2 className="text-body font-bold">예약 상품</h2>
-					<p className="text-sm pt-[8px]">
-						골든티켓 등록번호 {productData.registrationNumber}
-					</p>
+					<p className="text-sm pt-[8px]">골든티켓 등록번호 0123456789</p>
 				</div>
 				<div className="flex">
 					<img
-						src={productData.imageUrl}
+						src={payData?.imageUrl}
 						alt="image"
 						className="w-[80px] h-[80px]"
 					/>
 					<div className="w-[60%] px-[10px]">
-						<p className="text-lg font-bold">{productData.accommodationName}</p>
+						<p className="text-lg font-bold">{payData?.accommodationName}</p>
 						<div className="flex">
-							<p className="text-lg pr-[8px]">{productData.roomName}</p>
+							<p className="text-lg pr-[8px]">{payData?.roomName}</p>
 							<div className="flex items-center">
 								<div className="border-r-[1px] border-[#f5f5f5] h-[12px]"></div>
 							</div>
 							<p className="text-lg pl-[8px]">
-								{productData.standardNumber}/최대 {productData.maximumNumber}인
+								{payData?.standardNumber}/최대 {payData?.maximumNumber}인
 							</p>
 						</div>
 						<p className="text-lg font-bold pt-[15px]">
-							{productData.price.toLocaleString()}원
+							{payData?.price?.toLocaleString()}원
 						</p>
 					</div>
 					<div className="text-sm">
-						<div className="flex flex-col justify-center items-center bg-[#fafafa] rounded-[10px] w-[35px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">
-							<p className="">{productData.reservationType}</p>
+						<div className="flex flex-col justify-center items-center bg-[#fafafa] rounded-[10px] w-[50px] h-[20px] p-[5px] text-center border-[1px] border-[#e0e0e0]">
+							<p className="">{payData?.reservationType}</p>
 						</div>
 					</div>
 				</div>
 				<div className="mt-[20px] mb-[10px] flex justify-around text-center text-m bg-[#fafafa] p-[10px] rounded-[10px]">
 					<div>
 						<p className="font-bold mb-[5px]">체크인</p>
-						<p>{productData.checkInDate}</p>
+						<p>{payData?.checkInDate}</p>
 					</div>
 					<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
 					<div>
 						<p className="font-bold mb-[5px]">체크아웃</p>
-						<p>{productData.checkOutDate}</p>
+						<p>{payData?.checkOutDate}</p>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatNumber } from '../../../utils/formate';
 
 interface FeeInfoProps {
 	goldenPrice: number;
@@ -17,15 +18,19 @@ const FeeInfo = ({ goldenPrice }: FeeInfoProps) => {
 			<div className="mt-4 rounded-md bg-bgMain p-4 text-lg">
 				<p className="flex justify-between">
 					<span>희망 판매가</span>
-					<span className="font-semibold">{goldenPrice}원</span>
+					<span className="font-semibold">{formatNumber(goldenPrice)}원</span>
 				</p>
 				<p className="flex justify-between mt-2">
 					<span>골든티켓 수수료</span>
-					<span className="font-semibold">-{commissionAmount}원 (5%)</span>
+					<span className="font-semibold">
+						-{formatNumber(commissionAmount)}원 (5%)
+					</span>
 				</p>
 				<p className="flex justify-between font-semibold text-dateBlue mt-2">
 					<span>예상 최종 정산액</span>
-					<span className="font-semibold">{finalSettlementAmount}원</span>
+					<span className="font-semibold">
+						{formatNumber(finalSettlementAmount)}원
+					</span>
 				</p>
 			</div>
 		</div>
