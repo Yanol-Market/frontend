@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import CompletionScreen from '../CompletionScreen';
+import { registerProduct } from '../../../../apis/products';
 
 interface Props {
 	onPrevStep?: () => void;
 	onComplete: () => void;
+	selectedItem: {
+		originPrice: number;
+		yanoljaPrice: number;
+		reservationId: number;
+		goldenPrice?: number;
+		content?: string;
+	};
 }
 
-const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
+const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 	const [agreed, setAgreed] = useState(false);
 	const [isCompleted, setIsCompleted] = useState(false);
 
-	const handleNextButtonClick = () => {
+	const handleNextButtonClick = async () => {
 		if (agreed) {
-			setIsCompleted(true);
+			try {
+				const { reservationId, goldenPrice, content } = selectedItem;
+				const response = await registerProduct(reservationId.toString(), {
+					goldenPrice: goldenPrice || 0,
+					content: content || '',
+				});
+				setIsCompleted(true);
+				// 서버 응답 처리
+				console.log('상품 등록 성공:', response);
+			} catch (error) {
+				console.error('상품 등록 오류:', error);
+				// 오류 처리
+			}
 		} else {
 			alert('약관에 동의해주세요!');
 		}
@@ -25,16 +45,19 @@ const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
 	return (
 		<div>
 			<div>
-				<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem]">
+				<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem] z-10" />
+				<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem] z-10">
 					약관 및 정책 동의
 				</h2>
-				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray" />
-				<div className="flex flex-col h-screen text-black">
-					<h3 className="text-body font-semibold mt-[11rem] ml-5 my-5">
+				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray z-10" />
+				{/* <div className="flex flex-col h-screen text-black"> */}
+				<div className="pt-[11rem]">
+					<h3 className="text-body font-semibold text-black mb-5 ml-5">
 						약관 및 정책
 					</h3>
+
 					{/* 약관 및 정책 내용 */}
-					<div className="bg-lightGray p-4 rounded-xl max-w-[335px] mx-auto mb-4 text-sm">
+					<div className="bg-lightGray p-4 rounded-xl max-w-[335px] mx-auto mb-[10rem] text-sm">
 						<ul>
 							<li className="text-alarmRed mb-4">
 								• 판매하고자 하는 상품은 양도 가능한 상품임을 확인하였으며, 양도
@@ -54,11 +77,11 @@ const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
 					</div>
 
 					{/* 동의 체크박스 */}
-					<div className="flex flex-col mx-auto">
-						<div className="flex mb-3">
+					<div className="flex flex-col items-center">
+						<div className="mb-3 mx-auto flex items-center">
 							<input
 								type="checkbox"
-								className="mt-[0.15rem] appearance-none bg-[url('pages/addProduct/component/termsAndPolicyStep/unchecked.svg')] w-4 h-4 mr-2 checked:bg-[url('pages/addProduct/component/termsAndPolicyStep/checked.svg')]"
+								className="appearance-none bg-[url('pages/addProduct/component/termsAndPolicyStep/unchecked.svg')] w-4 h-4 mr-2 checked:bg-[url('pages/addProduct/component/termsAndPolicyStep/checked.svg')] mt-[0.01rem]"
 								checked={agreed}
 								onChange={() => setAgreed(!agreed)}
 							/>
@@ -66,7 +89,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete }: Props) => {
 								위 내용을 숙지하였고 동의합니다.(필수)
 							</label>
 						</div>
-						<p className="text-sm mx-auto">
+						<p className="text-sm mx-auto mb-2">
 							비동의 시 골든티켓에서의 판매가 불가합니다.
 						</p>
 					</div>

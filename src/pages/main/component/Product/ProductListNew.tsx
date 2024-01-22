@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getProducts } from '../../../../apis/home';
+
 import { ProductItemNew } from './ProductItemNew';
 import { PlusButton } from '../PlusButton';
 
@@ -17,6 +17,8 @@ export type ProductSpecialType = {
 	yanoljaPrice: number;
 	goldenPrice: number;
 	productStatus: string;
+	wishId: number;
+	isWished : boolean;
 };
 
 export const ProductListNew = ({ product }: any) => {

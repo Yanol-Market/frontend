@@ -183,7 +183,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			standardNumber: 2,
 			maximumNumber: 4,
 			goldenPrice: 100000,
-			completedAt: '2024-01-10T14:00:00',
+			completedAt: '2024-01-22T03:00:00',
 		},
 		{
 			productId: 2,
@@ -193,7 +193,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			standardNumber: 2,
 			maximumNumber: 4,
 			goldenPrice: 100000,
-			completedAt: '2024-01-10T14:00:00',
+			completedAt: '2023-12-10T14:00:00',
 		},
 		{
 			productId: 3,
@@ -203,7 +203,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			standardNumber: 2,
 			maximumNumber: 4,
 			goldenPrice: 100000,
-			completedAt: '2024-01-10T14:00:00',
+			completedAt: '2022-01-10T14:00:00',
 		},
 	],
 };

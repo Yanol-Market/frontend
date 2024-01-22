@@ -1,12 +1,16 @@
 import React from 'react';
-import { bankData } from '../../../../data/bankData';
+
 import { useRecoilState } from 'recoil';
 import { SelectBanksProps, checkedBankState } from '../../../../recoil/atom';
-
-const SelectBanks = () => {
+import { bankData } from '../../../../data/bankData';
+interface CloseFuncProps {
+	closeFunc: () => void;
+}
+const SelectBanks = ({ closeFunc }: CloseFuncProps) => {
 	const [selectBank, setSelectBank] = useRecoilState(checkedBankState);
 	const handleSelectBanks = (bank: SelectBanksProps) => {
 		setSelectBank(bank);
+		closeFunc();
 	};
 	// useEffect(() => {
 	// 	console.log(selectBank);

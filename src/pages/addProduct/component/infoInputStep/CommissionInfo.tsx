@@ -1,13 +1,9 @@
 import React from 'react';
+import { formatNumber } from '../../../../utils/formate';
 
 interface CommissionInfoProps {
 	goldenPrice: number;
 }
-
-const formatNumber = (number: number) => {
-	const formattedNumber = number.toFixed(0);
-	return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
 
 const CommissionInfo = ({ goldenPrice }: CommissionInfoProps) => {
 	// 골든티켓 수수료율

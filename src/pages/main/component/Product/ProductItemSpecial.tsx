@@ -1,24 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
 import { Link } from 'react-router-dom';
+import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemSpecial = ({
 	product,
 }: {
 	product: ProductSpecialType;
 }) => {
+	const [isWished, setIsWished] = useState(product.isWished);
+	const handleClickHeart = async (productId: number) => {
+		if (!isWished) {
+			addWish(productId);
+			setIsWished(true);
+			return;
+		} else {
+			deleteWish(product?.wishId as number);
+			setIsWished(false);
+		}
+	};
 	return (
 		<Link to={`product/${product.productId}`}>
 			<main className="flex w-full mt-5">
 				<div className="relative w-[38%] h-full">
 					<img
 						className="w-[124px] h-[150px] rounded-[5px]"
-						src={'/assets/images/productImg.jpg'}
+						src={product.accommodationImage}
 						alt="productImg"
 					/>
-					<button className="absolute bottom-[10px] left-[10px]">
-						<img src="/assets/images/heart_white.svg" alt="heart" />
+					<button
+						onClick={(event) => {
+							event.preventDefault();
+							handleClickHeart(Number(product.productId));
+							// event.stopPropagation();
+						}}
+						className="absolute bottom-[10px] left-[10px]"
+					>
+						<img
+							src={`/assets/images/${isWished ? 'Fill' : ''}heart_white.svg`}
+							alt="heartIcon"
+						/>
 					</button>
 				</div>
 				<div className="flex flex-col w-[60%] justify-between ml-4">

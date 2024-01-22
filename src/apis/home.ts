@@ -1,6 +1,5 @@
 import instance from './axios';
 
-
 export const getProducts = async () => {
 	try {
 		const res = await instance.get('/home');
