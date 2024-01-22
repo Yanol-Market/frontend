@@ -25,9 +25,9 @@ const Layout = () => {
 	const isNavPage = navPages.includes(currentPath);
 	return (
 		<div className="bg-borderGray min-h-screen relative">
-			<div className="bg-white max-w-[415px] min-h-screen m-auto top-0 left-0 overflow-x-clip sm:w-[415px]">
+			<div className="bg-white min-w-[360px] max-w-[430px] min-h-screen m-auto top-0 left-0 overflow-x-clip ">
 				<Outlet />
-				<div className="fixed w-[415px] bottom-0">
+				<div className="fixed w-[430px] bottom-0">
 					{isNavPage && <Navigation />}
 				</div>
 			</div>
