@@ -50,3 +50,68 @@ export const formatTimeAgo = (dateTimeString: string) => {
 		return `${daysAgo + 1}일 전`;
 	}
 };
+
+export const formatArea = (areaCode: string) => {
+	let area;
+	switch (areaCode) {
+		case 'ALL':
+			area = '전체';
+			break;
+		case 'SEOUL':
+			area = '서울';
+			break;
+		case 'GYEONGGI':
+			area = '경기';
+			break;
+		case 'INCHEON':
+			area = '인천';
+			break;
+		case 'GANGWON':
+			area = '강원';
+			break;
+		case 'JEJU':
+			area = '제주';
+			break;
+		case 'DAEJEON':
+			area = '대전';
+			break;
+		case 'CHUNGBUK':
+			area = '충북';
+			break;
+		case 'CHUNGNAM':
+			area = '충남';
+			break;
+		case 'BUSAN':
+			area = '부산';
+			break;
+		case 'ULSAN':
+			area = '울산';
+			break;
+		case 'GYEONGNAM':
+			area = '경남';
+			break;
+		case 'DAEGU':
+			area = '대구';
+			break;
+		case 'GYEONGBUK':
+			area = '경북';
+			break;
+		case 'GWANGJU':
+			area = '광주';
+			break;
+		case 'JEONNAM':
+			area = '전남';
+			break;
+		case 'JEONBUK':
+			area = '전북';
+			break;
+	}
+	return area;
+};
+
+export function FormatLimitText(text: string, maxLength: number) {
+	if (text.length > maxLength) {
+		return text.substring(0, maxLength) + '...';
+	}
+	return text;
+}
