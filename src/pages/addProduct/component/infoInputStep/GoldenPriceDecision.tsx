@@ -38,7 +38,7 @@ const GoldenPriceDecision = ({
 			<p className="mt-3 text-m">
 				하단의 야놀자 판매가를 참고하여 판매 가격을 매겨주세요.
 			</p>
-			<div className="mt-3 w-[21.0625rem] h-[3.125rem] mx-auto text-center bg-lightGray flex items-center justify-center text-lg">
+			<div className="p-[0.9375rem] mt-3 w-[21.0625rem] mx-auto text-center bg-lightGray flex flex-col items-center justify-center text-lg">
 				<p>
 					현재 야놀자는
 					<span className="font-semibold">
@@ -46,6 +46,14 @@ const GoldenPriceDecision = ({
 						{yanoljaPrice && Number(yanoljaPrice).toLocaleString()}
 					</span>
 					원에 팔고 있어요!
+				</p>
+				<p>
+					야놀자에서 구매하신 가격은{' '}
+					<span className="font-semibold">
+						{' '}
+						{originPrice && Number(originPrice).toLocaleString()}
+					</span>
+					원 입니다.
 				</p>
 			</div>
 			<div className="flex mt-9 text-lg">
