@@ -5,6 +5,9 @@ import { formatDate } from '../../../utils/b';
 import { FormatLimitText } from '../../../utils/formate';
 import { addWish } from '../../../apis/wish';
 import { deleteWish } from '../../../apis/wish';
+import { useRecoilState } from 'recoil';
+import { getPaymentsDetail } from '../../../apis/paymentsDetail';
+import { paymentsState } from '../../../recoil/atom';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -30,7 +33,6 @@ type ProductDetailType = {
 	content: string;
 	productStatus: string;
 	wishId: number;
-	
 };
 
 export const ProductInfo = () => {
@@ -41,6 +43,7 @@ export const ProductInfo = () => {
 	const [checkInDate, setCheckInDate] = useState<string | undefined>();
 	const [checkOutDate, setCheckOutDate] = useState<string | undefined>();
 	const [product, setProduct] = useState<ProductDetailType>();
+	const [payData, setPayData] = useRecoilState(paymentsState);
 
 	const fetchData = async () => {
 		const data = await getProduct(param?.productId);
@@ -56,6 +59,7 @@ export const ProductInfo = () => {
 		if (isLogin) {
 			navigate('/login');
 		}
+
 		navigate(link);
 	};
 	const handleClickHeart = async (productId: number) => {
@@ -66,6 +70,20 @@ export const ProductInfo = () => {
 		if (isWished) {
 			deleteWish(product?.wishId as number);
 			setIsWished(false);
+		}
+	};
+	const handleClickPayMentsButton = async (link: string) => {
+		const isLogin = false;
+		if (isLogin) {
+			navigate('/login');
+		}
+		try {
+			const payData = await getPaymentsDetail(param?.productId);
+			console.log(payData);
+			setPayData(payData.data);
+			navigate(link);
+		} catch (error) {
+			throw new Error('결제 상세페이지 이동 실패');
 		}
 	};
 	useEffect(() => {
@@ -244,7 +262,9 @@ export const ProductInfo = () => {
 					</button>
 					<button
 						onClick={() => {
-							handleClickButton(`/reservation?productId=${param.productId}`);
+							handleClickPayMentsButton(
+								`/reservation?productId=${param.productId}`,
+							);
 						}}
 						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
 					>

@@ -1,4 +1,8 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+import { PaymentProps } from '../pages/reservation/Product';
+
+const { persistAtom } = recoilPersist();
 const toDay = new Date();
 const sevenDaysLater = new Date();
 sevenDaysLater.setDate(toDay.getDate() + 6);
@@ -29,6 +33,24 @@ export interface SelectBanksProps {
 
 export const checkedBankState = atom<SelectBanksProps | null>({
 	key: 'checkedBankState',
+	default: null,
+});
+
+export interface MyAccountProps {
+	data: {
+		accountNumber: string;
+		bankImage?: string;
+		bankName: string;
+		name: string;
+	};
+}
+export const myAccountState = atom<MyAccountProps | null>({
+	key: 'myAccountState',
+	default: null,
+});
+
+export const paymentsState = atom<PaymentProps | null>({
+	key: 'PaymentsState',
 	default: null,
 });
 export const selectOptionState = atom({
