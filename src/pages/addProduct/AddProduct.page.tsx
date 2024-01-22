@@ -81,11 +81,11 @@ const AddProductPage = () => {
 				handleArrowBackClick={handlePrevStep}
 			/>
 			<div>
-				<div className="fixed flex px-5 bg-white">
+				<div className="fixed flex px-5 bg-white z-10">
 					{stepsCompleted.map((completed, index) => (
 						<div
 							key={index}
-							className={`rounded-md mb-[1.875rem] mt-[4.8125rem] ${
+							className={` rounded-md mb-[1.875rem] mt-[4.8125rem] ${
 								completed ? 'bg-main' : 'bg-borderGray'
 							}`}
 							style={{
