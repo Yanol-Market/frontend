@@ -19,8 +19,8 @@ const NegoNoti: React.FC<NegoNotiProps> = ({
 
 	return (
 		<div className="text-lg">
-			<div className="z-50 absolute top-0 h-[100%] w-[375px] bg-black opacity-75"></div>
-			<div className="z-50 animate-slide-up absolute bottom-0 h-[270px] w-[375px] bg-white rounded-t-[20px] leading-tight tracking-tight">
+			<div className="z-50 absolute top-0 h-[100%] w-[430px] bg-black opacity-75"></div>
+			<div className="z-50 animate-slide-up absolute bottom-0 h-[270px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
 				<div className="text-headline2 m-[30px] text-center leading-[35px]">
 					<p>
 						<span className="font-medium">{receiverName}</span> 님이 제안한{' '}

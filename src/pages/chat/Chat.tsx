@@ -43,10 +43,10 @@ const Chat: React.FC<ChatProps> = ({
 					</Link>
 				</div>
 			) : (
-				<div className="absolute bottom-0 h-[110px] w-[100%] bg-[#fafafa]">
+				<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
 					<div
 						onClick={() => setNego(true)}
-						className="absolute w-[335px] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						className="absolute w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 					>
 						제시하기
 					</div>

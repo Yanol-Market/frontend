@@ -86,8 +86,8 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 
 	return (
 		<div className="text-lg">
-			<div className="absolute z-50 fixed top-0 h-[100%] w-[375px] bg-black opacity-75"></div>
-			<div className="absolute z-50 animate-slide-up bottom-0 h-[270px] w-[375px] bg-white rounded-t-[20px] leading-tight tracking-tight">
+			<div className="absolute z-50 fixed top-0 h-[100%] w-[430px] bg-black opacity-75"></div>
+			<div className="absolute z-50 animate-slide-up bottom-0 h-[270px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
 				<div>
 					<button
 						onClick={() => setNego(false)}
@@ -97,7 +97,7 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 					</button>
 					<p className="p-[30px] text-center">네고가격제안</p>
 					<div className="flex px-[20px]">
-						<p className="flex justify-center items-center w-[15%]">네고가격</p>
+						<p className="flex justify-center items-center w-[20%]">네고가격</p>
 						<div className="w-[85%]">
 							<div className="flex h-[42px] w-[246px] ml-[30px]">
 								<button
@@ -135,10 +135,10 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 					</div>
 				</div>
 
-				<div className="absolute bottom-0 h-[110px]">
+				<div className="absolute bottom-0 h-[110px] w-[430px]">
 					<div
 						onClick={makeOffer}
-						className="w-[335px] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 					>
 						제시하기
 					</div>

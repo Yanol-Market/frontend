@@ -112,7 +112,7 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 						handleReject={handleReject}
 					/>
 				) : negoConsent || reject ? null : (
-					<div className="w-[375px] bg-white pt-[20px] flex justify-between absolute bottom-0 h-[110px]">
+					<div className="w-[430px] bg-white pt-[20px] flex justify-between absolute bottom-0 h-[110px]">
 						<div
 							onClick={handleReject}
 							className="w-[160px] bottom-[25px] text-[#828282] text-lg cursor-pointer ml-[20px] h-[42px] bg-[#e5e5e5] rounded-[12px] flex items-center justify-center"
