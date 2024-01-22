@@ -1,50 +1,86 @@
-import React, { useState } from 'react';
+import React from 'react';
 import instance from '../../apis/axios';
+import axios from 'axios';
+import {
+	negoIdState,
+	productIdState,
+	productPriceState,
+	userIdState,
+} from '../../recoil/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+interface NegoPanelProps {
+	setNego: (value: boolean) => void;
+	setOffered: (value: boolean) => void;
+	setNegoStatus: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const NegoPanel: React.FC<NegoPanelProps> = ({
-	chatList,
-	setChatList,
 	setNego,
 	setOffered,
-	productData,
+	setNegoStatus,
 }) => {
-	const initialPrice = 170000;
-
-	const [price, setPrice] = useState(initialPrice);
+	const userId = useRecoilValue(userIdState);
+	const productId = useRecoilValue(productIdState);
+	const [productPrice, setProductPrice] = useRecoilState<number | null>(
+		productPriceState,
+	);
+	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
 
 	const priceUp = () => {
-		setPrice((prev) => prev + 5000);
+		setProductPrice((prev) => (prev ?? 0) + 5000);
 	};
 
 	const priceDown = () => {
-		setPrice((prev) => prev - 5000);
+		setProductPrice((prev) => (prev ?? 0) - 5000);
 	};
 
 	const negoSend = () => {
 		instance
-			.post(`/nego/proposePrice/${productData.productId}`, {
-				price: { price },
+			.post(`/nego/proposePrice/${productId}`, {
+				price: productPrice,
 			})
-			.then((response) => console.log(response));
+			.then((response) => {
+				setNegoId(response.data.id);
+				console.log(response.data.id, response.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
+
+	const sendMessage = async (data: MessageType) => {
+		try {
+			const response = await axios.post(
+				'https://golden-ticket.site/chats/test',
+				data,
+			);
+			console.log(response.data);
+
+			if (response && response.data) {
+				const responseStatus = response.data.status;
+				if (responseStatus === 'SUCCESS') {
+					setNegoStatus('negotiated');
+				}
+			}
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	const makeOffer = () => {
 		if (confirm('상품당 2회의 네고 제안이 가능합니다.')) {
-			// 네고 생성 productId, price
 			negoSend();
+			const data = {
+				chatRoomId: 5,
+				senderType: 'BUYER',
+				userId: userId,
+				content: `${productPrice?.toLocaleString()} 원에 구매 가능할까요?`,
+			};
 
+			sendMessage(data);
 			setOffered(true);
 			setNego(false);
-			setChatList([
-				...chatList,
-				{
-					userId: false,
-					id: chatList.length + 1,
-					message: `${price.toLocaleString('ko-KR')}원에 구매 가능할까요?`,
-					timestamp: new Date(),
-					messageType: 'user',
-				},
-			]);
 		} else return;
 	};
 
@@ -73,7 +109,7 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 								<div className="flex-1 text-body flex justify-center items-center bg-[#fafafa]">
 									<input
 										type="number"
-										value={price}
+										value={productPrice ?? ''}
 										className="w-[166px] text-center text-gray-800 bg-white p-2.5 rounded"
 									/>
 									<style>{`
@@ -114,28 +150,9 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 
 export default NegoPanel;
 
-interface ChatItemType {
-	userId: boolean;
-	id: number;
-	message: string;
-	timestamp: Date;
-	messageType: string;
-}
-
-interface NegoPanelProps {
-	setNego: (value: boolean) => void;
-	setChatList: (value: ChatItemType[]) => void;
-	chatList: ChatItemType[];
-	setOffered: (value: boolean) => void;
-	offered: boolean;
-	productData: ProductData;
-}
-
-interface ProductData {
-	productId: number;
-	image: string;
-	productName: string;
-	productCondition: string;
-	price: string;
-	checkInOut: string;
+interface MessageType {
+	chatRoomId: number;
+	senderType: string;
+	userId: number;
+	content: string;
 }

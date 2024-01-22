@@ -35,7 +35,7 @@ import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
 import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
-import ChatPage from './pages/chat';
+import { ChatPage } from './pages/chat';
 
 function App() {
 	return (
