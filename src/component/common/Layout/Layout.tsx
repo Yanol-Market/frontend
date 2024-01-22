@@ -14,9 +14,7 @@ const Layout = () => {
 		'/purchase',
 		'/sales',
 		'/mypage',
-		'/chatList/all',
-		'/chatList/seller',
-		'/chatList/buyer',
+		'/chatList',
 	];
 
 	if (productId) {

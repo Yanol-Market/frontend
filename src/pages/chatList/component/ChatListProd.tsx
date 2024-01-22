@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatTimeAgo } from '../../../utils/formate';
 
-interface Chat {
+export interface Chat {
 	chatRoomId: number;
 	receiverNickname: string;
 	receiverProfileImage: string | null;
@@ -10,25 +10,24 @@ interface Chat {
 	lastMessage: string;
 	lastMessageCreatedAt: string;
 	viewed?: boolean;
-	type: string;
 }
 
 interface ChatListProps {
-	chats: Chat[];
+	chatRoomShortList: Chat[];
 }
 
-const ChatList = ({ chats }: ChatListProps) => {
+const ChatListProd = ({ chatRoomShortList }: ChatListProps) => {
 	return (
-		<div className="flex flex-col space-y-4 text-black">
-			{chats.map((chat) => (
+		<div className="flex flex-col space-y-4 text-black mx-5">
+			{chatRoomShortList.map((chatRoomShortList) => (
 				<div
-					key={chat.chatRoomId}
+					key={chatRoomShortList.chatRoomId}
 					className={`py-1 flex items-center ${
-						chat.viewed ? 'text-descGray' : ''
+						chatRoomShortList.viewed ? 'text-descGray' : ''
 					}`}
 				>
 					<img
-						className="w-14 mr-4"
+						className="w-14 mr-6"
 						src="./assets/images/profileImage.svg"
 						alt="Default Profile"
 					/>
@@ -38,9 +37,10 @@ const ChatList = ({ chats }: ChatListProps) => {
 						{/* 호텔 이름 */}
 						<div className="relative flex items-center">
 							<p className="text-sm">
-								{chat.accommodationName}({chat.roomName})
+								{chatRoomShortList.accommodationName}(
+								{chatRoomShortList.roomName})
 							</p>
-							{chat.viewed || (
+							{chatRoomShortList.viewed || (
 								<div className="w-2 h-2 bg-red rounded-full ml-1" />
 							)}
 						</div>
@@ -48,19 +48,19 @@ const ChatList = ({ chats }: ChatListProps) => {
 						<p className="mb-1">
 							<span
 								className={`font-semibold mr-[0.375rem] text-lg ${
-									chat.viewed ? '' : 'text-black'
+									chatRoomShortList.viewed ? '' : 'text-black'
 								}`}
 							>
-								{chat.receiverNickname}
+								{chatRoomShortList.receiverNickname}
 							</span>
 							<span className={`text-sm text-descGray`}>
-								{formatTimeAgo(chat.lastMessageCreatedAt)}
+								{formatTimeAgo(chatRoomShortList.lastMessageCreatedAt)}
 							</span>
 						</p>
 						{/* 마지막으로 온 채팅 메세지 */}
 						<p
 							className={`text-lg ${
-								chat.viewed ? 'text-descGray' : 'font-semibold'
+								chatRoomShortList.viewed ? 'text-descGray' : 'font-semibold'
 							}`}
 							style={{
 								whiteSpace: 'nowrap',
@@ -69,7 +69,7 @@ const ChatList = ({ chats }: ChatListProps) => {
 								maxWidth: '260px',
 							}}
 						>
-							{chat.lastMessage}
+							{chatRoomShortList.lastMessage}
 						</p>
 					</div>
 				</div>
@@ -78,4 +78,4 @@ const ChatList = ({ chats }: ChatListProps) => {
 	);
 };
 
-export default ChatList;
+export default ChatListProd;
