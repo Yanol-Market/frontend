@@ -10,7 +10,12 @@ const StatusBar = ({ status }: StatusBarProps) => {
 		<>
 			<div className="pt-6">
 				<div className="flex justify-between text-m  items-center">
-					<ClickRounded>네고|예약</ClickRounded>
+					{data === null ? (
+						<Rounded>네고|예약</Rounded>
+					) : (
+						<ClickRounded>네고|예약</ClickRounded>
+					)}
+
 					<Line />
 					{data === 'PAYMENT_PENDING' || data === 'TRANSFER_PENDING' ? (
 						<ClickRounded>결제 진행</ClickRounded>

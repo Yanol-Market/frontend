@@ -1,6 +1,6 @@
 import instance from './axios';
 
-export const getPaymentsDetail = async (productId: number) => {
+export const getPaymentsDetail = async (productId: string | undefined) => {
 	try {
 		const res = await instance.get(`/payments/${productId}`);
 		if (res) {

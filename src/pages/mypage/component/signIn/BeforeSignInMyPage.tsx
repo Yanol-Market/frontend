@@ -37,7 +37,7 @@ const BeforeSignInMyPage = () => {
 					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
-					<span>이용가이드</span>
+					<span>개인정보 처리방침</span>
 					<Link to="/mypage/guide">
 						<img
 							className="cursor-pointer mt-1"

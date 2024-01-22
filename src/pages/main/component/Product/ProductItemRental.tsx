@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
 import { Link } from 'react-router-dom';
+import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemRental = ({
 	product,
 }: {
 	product: ProductSpecialType;
 }) => {
+	const [isWished, setIsWished] = useState(product.isWished);
+	const handleClickHeart = async (productId: number) => {
+		if (!isWished) {
+			addWish(productId);
+			setIsWished(true);
+			return;
+		} else {
+			deleteWish(product?.wishId as number);
+			setIsWished(false);
+		}
+	};
 	return (
 		<Link to={`/product/${product.productId}`}>
 			<div className="w-[130px] h-[255px] flex flex-col justify-between">
@@ -32,9 +44,21 @@ export const ProductItemRental = ({
 						<div className="bg-dateBlue px-[6px] py-[4px] absolute bottom-0 right-0 rounded-br-[5px] rounded-tl-[5px]">
 							<p className="text-white font-pre text-sm font-semibold">대실</p>
 						</div>
-						<button className="absolute bottom-[12px] left-2">
-							<img src="assets/images/heart_2.svg" alt="heartImage" />
-						</button>
+						<button
+						onClick={(event) => {
+							handleClickHeart(Number(product.productId));
+							event.stopPropagation();
+							event.preventDefault();
+						}}
+						className="absolute bottom-[10px] left-[10px]"
+					>
+						<img
+							src={`/assets/images/${
+								product.isWished ? 'Fill' : ''
+							}heart_white.svg`}
+							alt="heartIcon"
+						/>
+					</button>
 					</div>
 					<div className="mb-5">
 						<p className="font-pre text-m text-fontBlack max-h-[14px] overflow-hidden">

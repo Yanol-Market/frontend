@@ -33,10 +33,11 @@ import CompletionEdit from './pages/editProd/component/CompletionEdit';
 import { ChatList } from './pages/chatList';
 import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
-import Splash from './pages/splash/Splash.page';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
 import ChatPage from './pages/chat';
 import ExpiredProdDetail from './pages/mypage/component/salesHistory/ExpiredProdDetail';
+import { NotFoundPage } from './component/common/NotFound';
+import { Splash } from './pages/splash';
 
 function App() {
 	return (
@@ -88,7 +89,7 @@ function App() {
 						path="/mypage/guide"
 						element={
 							<NotFoundContent
-								title="이용가이드"
+								title="개인정보 처리방침"
 								content="페이지 준비중입니다."
 							/>
 						}
@@ -125,6 +126,7 @@ function App() {
 							/>
 						}
 					/>
+					<Route path="/*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
 		</>

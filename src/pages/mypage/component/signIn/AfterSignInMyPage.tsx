@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const AfterSignInMyPage = () => {
+	const myProfileJSON = localStorage.getItem('userProfileInfo');
+	const myProfile = JSON.parse(myProfileJSON as string);
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center">
 			<div className="mt-8 font-medium">마이페이지</div>
@@ -12,7 +14,9 @@ const AfterSignInMyPage = () => {
 						src="/assets/images/profileImage.svg"
 					/>
 					<div className="mt-2 text-descGray flex flex-col">
-						<p className="text-headline2 text-black font-semibold">홍길동</p>
+						<p className="text-headline2 text-black font-semibold">
+							{myProfile.data.nickname}
+						</p>
 						<div className="flex flex-row gap-1">
 							<span className="text-body">프로필 수정</span>
 							<Link to="/mypage/editprofile">
@@ -108,7 +112,7 @@ const AfterSignInMyPage = () => {
 					</Link>
 				</div>
 				<div className="flex flex-row justify-between mb-5">
-					<span>이용가이드</span>
+					<span>개인정보 처리방침</span>
 					<Link to="/mypage/guide">
 						<img
 							className="cursor-pointer mt-1"

@@ -1,6 +1,6 @@
 import instance from './axios';
 
-export const getProduct = async (productId: string | undefined) => {
+export const getProduct = async (productId: string | undefined | null) => {
 	try {
 		const res = await instance.get(`/products/${productId}`);
 		return res.data;
