@@ -4,6 +4,11 @@ export const formatNumber = (number: number) => {
 	return formattedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+// 금액 , 스트링 반환
+export const formatNumberString = (number: number) => {
+	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 // 날짜 요일 반환 함수
 export const formatWeek = (dateString: string) => {
 	const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -47,7 +52,16 @@ export const formatTimeAgo = (dateTimeString: string) => {
 	} else {
 		const timeDifference = currentDate.getTime() - dateTime.getTime();
 		const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-		return `${daysAgo + 1}일 전`;
+
+		if (daysAgo < 30) {
+			return `${daysAgo + 1}일 전`;
+		} else if (daysAgo < 365) {
+			const monthsAgo = Math.floor(daysAgo / 30);
+			return `${monthsAgo}달 전`;
+		} else {
+			const yearsAgo = Math.floor(daysAgo / 365);
+			return `${yearsAgo}년 전`;
+		}
 	}
 };
 

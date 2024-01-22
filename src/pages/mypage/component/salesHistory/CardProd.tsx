@@ -16,29 +16,32 @@ const CardProd = (props: CardProdProps) => {
 	return (
 		<>
 			<div>
-				<div className="flex">
-					<img
-						src={props.accommodationImage}
-						alt="image"
-						className="w-[80px] h-[80px]"
-					/>
-					<div className="w-[60%] px-[10px]">
-						<p className="text-lg font-bold">{props.accommodationName}</p>
-						<div className="flex">
-							<p className="text-lg pr-[8px]">{props.roomName}</p>
-							<div className="flex items-center">
-								<div className="border-r-2 border-borderGray h-[12px]"></div>
+				<div className="flex justify-between ">
+					<div className="flex">
+						<img
+							src={props.accommodationImage}
+							alt="image"
+							className="w-[80px] h-[80px] rounded-md"
+						/>
+						<div className=" px-[10px]">
+							<p className="text-lg font-bold">{props.accommodationName}</p>
+							<div className="flex">
+								<p className="text-lg pr-[8px]">{props.roomName}</p>
+								<div className="flex items-center">
+									<div className="border-r-2 border-borderGray h-[12px]"></div>
+								</div>
+								<p className="text-lg pl-[8px]">
+									{props.standardNumber}인/최대 {props.maximumNumber}인
+								</p>
 							</div>
-							<p className="text-lg pl-[8px]">
-								{props.standardNumber}인/최대 {props.maximumNumber}인
-							</p>
+							{props.goldenPrice ? (
+								<p className="text-lg font-bold pt-[15px]">
+									{formatNumber(props.goldenPrice)}
+								</p>
+							) : null}
 						</div>
-						{props.goldenPrice ? (
-							<p className="text-lg font-bold pt-[15px]">
-								{formatNumber(props.goldenPrice)}
-							</p>
-						) : null}
 					</div>
+
 					<div className="text-sm">
 						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center ">
 							<p className="">{reservationTypeTrans(props.reservationType)}</p>
