@@ -110,7 +110,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
 									type="button"
-									className={`mx-auto  w-[20.9375rem] h-[3.125rem] rounded-xl text-lg ${
+									className={`mx-auto w-[50%] h-[3.125rem] rounded-xl text-lg ${
 										selectedReservationIndex === null
 											? 'cursor-not-allowed bg-borderGray text-descGray'
 											: 'cursor-pointer bg-main text-white'
