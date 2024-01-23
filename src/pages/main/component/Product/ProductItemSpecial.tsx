@@ -16,7 +16,7 @@ export const ProductItemSpecial = ({
 			setIsWished(true);
 			return;
 		} else {
-			deleteWish(product?.wishId as number);
+			deleteWish(product?.productId as number);
 			setIsWished(false);
 		}
 	};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { getProduct } from '../../../apis/detail';
+import { deleteProduct, getProduct } from '../../../apis/detail';
 import { formatDate } from '../../../utils/b';
 import { FormatLimitText } from '../../../utils/formate';
 import { addWish } from '../../../apis/wish';
@@ -8,6 +8,9 @@ import { deleteWish } from '../../../apis/wish';
 import { useRecoilState } from 'recoil';
 import { getPaymentsDetail } from '../../../apis/paymentsDetail';
 import { paymentsState } from '../../../recoil/atom';
+import { editProdState } from '../../../recoil/prodEditAtom';
+import { BottomSheet } from '../../../component/common/BottomSheet';
+import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -36,10 +39,12 @@ type ProductDetailType = {
 };
 
 export const ProductInfo = () => {
+	const [bottom, setBottom] = useState(false);
 	const navigate = useNavigate();
 	const param = useParams();
 	const [isWished, setIsWished] = useState(false);
 	const [isSeller, setIsSeller] = useState(false);
+	const [editProd, setEditProd] = useRecoilState(editProdState);
 	const [checkInDate, setCheckInDate] = useState<string | undefined>();
 	const [checkOutDate, setCheckOutDate] = useState<string | undefined>();
 	const [product, setProduct] = useState<ProductDetailType>();
@@ -68,7 +73,7 @@ export const ProductInfo = () => {
 			setIsWished(true);
 		}
 		if (isWished) {
-			deleteWish(product?.wishId as number);
+			deleteWish(productId as number);
 			setIsWished(false);
 		}
 	};
@@ -85,6 +90,21 @@ export const ProductInfo = () => {
 		} catch (error) {
 			throw new Error('결제 상세페이지 이동 실패');
 		}
+	};
+	const handleClickDeleteButton = () => {
+		console.log()
+	};
+	const openBottom = () => {
+		setBottom(true);
+	};
+
+	const closeBottom = () => {
+		setBottom(false);
+	};
+	const dltProduct = (productId:string) => {
+		deleteProduct(productId)
+		closeBottom();
+		navigate('/');
 	};
 	useEffect(() => {
 		fetchData();
@@ -250,28 +270,64 @@ export const ProductInfo = () => {
 					</div>
 				</div>
 				<div className="flex px-5 pt-[60px] pb-[30px] justify-between">
-					<button
-						onClick={() => {
-							handleClickButton(
-								`/chat?productId=${param.productId}&sellerId=${'sellerId'}&buyerId=${'buyerId'}`,
-							);
-						}}
-						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
-					>
-						네고하기
-					</button>
-					<button
-						onClick={() => {
-							handleClickPayMentsButton(
-								`/reservation?productId=${param.productId}`,
-							);
-						}}
-						className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
-					>
-						예약하기
-					</button>
+					{isSeller ? (
+						<button
+							onClick={() => {
+								setEditProd({
+									yanolja: product.yanoljaPrice,
+									origin: product.originPrice,
+									golden: product.goldenPrice,
+								});
+								handleClickButton(`/edit/${param.productId}`);
+							}}
+							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
+						>
+							수정하기
+						</button>
+					) : (
+						<button
+							onClick={() => {
+								handleClickButton(
+									`/chat?productId=${param.productId}&sellerId=${'sellerId'}&buyerId=${'buyerId'}`,
+								);
+							}}
+							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
+						>
+							네고하기
+						</button>
+					)}
+					{isSeller ? (
+						<button
+							onClick={() => {
+								openBottom()
+							}}
+							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
+						>
+							삭제하기
+						</button>
+					) : (
+						<button
+							onClick={() => {
+								handleClickPayMentsButton(
+									`/reservation?productId=${param.productId}`,
+								);
+							}}
+							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
+						>
+							예약하기
+						</button>
+					)}
 				</div>
 			</div>
+			<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
+				<ContentTwoBtnPage
+					title="판매 정보를 삭제하시겠습니까?"
+					leftBtn="취소"
+					rightBtn="삭제"
+					leftBtnFunc={closeBottom}
+					rightBtnFunc={()=>{dltProduct(param.productId as string)}}
+				/>
+			</BottomSheet>
 		</div>
 	);
 };

@@ -16,7 +16,7 @@ export const SearchResultProduct = ({
 			setIsWished(true);
 			return;
 		} else {
-			deleteWish(product?.wishId as number);
+			deleteWish(product?.productId as number);
 			setIsWished(false);
 		}
 	};

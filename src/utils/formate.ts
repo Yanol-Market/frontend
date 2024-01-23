@@ -141,6 +141,64 @@ export const formatArea = (areaCode: string) => {
 	return area;
 };
 
+export const formatLocation = (area: string) => {
+	let areaCode;
+	switch (area) {
+		case '전체':
+			areaCode = '전체';
+			break;
+		case '서울':
+			areaCode = 'SEOUL';
+			break;
+		case '경기':
+			areaCode = 'GYEONGGI';
+			break;
+		case '인천':
+			areaCode = 'INCHEON';
+			break;
+		case '강원':
+			areaCode = 'GANGWON';
+			break;
+		case '제주':
+			areaCode = 'JEJU';
+			break;
+		case '대전':
+			areaCode = 'DAEJEON';
+			break;
+		case '충북':
+			areaCode = 'CHUNGBUK';
+			break;
+		case '충남/세종':
+			areaCode = 'CHUNGNAM';
+			break;
+		case '부산':
+			areaCode = 'BUSAN';
+			break;
+		case '울산':
+			areaCode = 'ULSAN';
+			break;
+		case '경남':
+			areaCode = 'GYEONGNAM';
+			break;
+		case '대구':
+			areaCode = 'DAEGU';
+			break;
+		case '경북':
+			areaCode = 'GYEONGBUK';
+			break;
+		case '광주':
+			areaCode = 'GWANGJU';
+			break;
+		case '전남':
+			areaCode = 'JEONNAM';
+			break;
+		case '전주/전북':
+			areaCode = 'JEONBUK';
+			break;
+	}
+	return areaCode;
+};
+
 export function FormatLimitText(text: string, maxLength: number) {
 	if (text.length > maxLength) {
 		return text.substring(0, maxLength) + '...';
