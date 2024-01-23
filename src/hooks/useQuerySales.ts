@@ -37,10 +37,13 @@ export const useQuerySoldDetail = (productId: string) => {
 };
 
 // 상품만료 - 상세
-export const useQueryExpiredDetail = (productId: string) => {
+export const useQueryExpiredDetail = (
+	productId: string,
+	productStatus: string,
+) => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['ExpiredDetail'],
-		queryFn: () => getExpiredDetail(productId),
+		queryFn: () => getExpiredDetail(productId, productStatus),
 		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };

@@ -3,12 +3,22 @@ import { useQueryExpiredDetail } from '../../../../hooks/useQuerySales';
 import CardProd from './CardProd';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 
 const ExpiredProdDetail = () => {
-	const { data, isLoading } = useQueryExpiredDetail('1');
-	const [bottom, setBottom] = useState(false);
+	const { productId } = useParams();
+	const [searchParams] = useSearchParams();
+	const status = searchParams.get('status');
 
+	const { data, isLoading } = useQueryExpiredDetail(
+		`${productId}`,
+		`${status}`,
+	);
+	const [bottom, setBottom] = useState(false);
+	console.log('판매완료 status ', status);
+	console.log('아이딛값', productId);
 	console.log('판매완료 상세 ', data);
+
 	const openBottom = () => {
 		setBottom(true);
 	};

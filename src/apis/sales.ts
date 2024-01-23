@@ -32,7 +32,7 @@ export const getSoldList = async (): Promise<ApiSold> => {
 export const getSoldDetail = async (
 	productId: string,
 ): Promise<ApiSoldDetail> => {
-	const res: AxiosResponse<ApiSoldDetail> = await instanceTest.get(
+	const res: AxiosResponse<ApiSoldDetail> = await instance.get(
 		`/api/SoldDetail/${productId}`,
 	);
 	return res.data;
@@ -41,9 +41,11 @@ export const getSoldDetail = async (
 // 상품만료 - 상세 조회 API
 export const getExpiredDetail = async (
 	productId: string,
+	productStatus: string,
 ): Promise<ApiExpiredDetail> => {
-	const res: AxiosResponse<ApiExpiredDetail> = await instanceTest.get(
-		`/api/ExpiredDetail/${productId}`,
+	const res: AxiosResponse<ApiExpiredDetail> = await instance.get(
+		`/products/history/completed/${productId}?productStatus=${productStatus}
+		`,
 	);
 	return res.data;
 };

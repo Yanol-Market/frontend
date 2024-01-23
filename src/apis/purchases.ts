@@ -1,4 +1,4 @@
-import { instanceTest } from './axios';
+import instance, { instanceTest } from './axios';
 import {
 	ApiBoughtDetailProd,
 	ApiBoughtProd,
@@ -8,14 +8,15 @@ import { AxiosResponse } from 'axios';
 
 // 구매내역-구매중 조회 API
 export const getPurchases = async (): Promise<ApiBuyingProd> => {
-	const res: AxiosResponse<ApiBuyingProd> =
-		await instanceTest.get('/api/purchases');
+	const res: AxiosResponse<ApiBuyingProd> = await instance.get(
+		'/orders/history/progress',
+	);
 	return res.data;
 };
 
 // 구매내역-구매완료-리스트 조회 API
 export const getBoughtList = async (): Promise<ApiBoughtProd> => {
-	const res: AxiosResponse<ApiBoughtProd> = await instanceTest.get(
+	const res: AxiosResponse<ApiBoughtProd> = await instance.get(
 		'/api/purchase/history?status=COMPLETE',
 	);
 	return res.data;

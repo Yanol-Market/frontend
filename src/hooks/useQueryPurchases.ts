@@ -7,6 +7,7 @@ export const useQueryPurchases = () => {
 	const { isLoading, error, data } = useQuery({
 		queryKey: ['purchases'],
 		queryFn: getPurchases,
+		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };
 };
