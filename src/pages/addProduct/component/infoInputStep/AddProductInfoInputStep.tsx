@@ -87,7 +87,7 @@ const AddProductInfoInputStep = ({
 			<div className="bg-gray-200 flex justify-center">
 				<button
 					type="button"
-					className={`mx-auto w-[50%] h-[3.125rem] rounded-xl text-lg mt-[3.5625rem] mb-[2.1875rem] ${
+					className={`mx-auto w-[23rem] h-[3.125rem] rounded-xl text-lg mt-[3.5625rem] mb-[2.1875rem] ${
 						goldenPrice > 0 && goldenPrice < originPrice
 							? 'cursor-pointer bg-main text-white'
 							: 'cursor-not-allowed bg-borderGray text-descGray'
