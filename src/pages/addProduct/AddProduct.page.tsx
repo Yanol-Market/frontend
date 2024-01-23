@@ -89,7 +89,7 @@ const AddProductPage = () => {
 								completed ? 'bg-main' : 'bg-borderGray'
 							}`}
 							style={{
-								width: '105px',
+								width: '123px',
 								height: '2px',
 								marginRight: index < stepsCompleted.length - 1 ? '10px' : '0', // 맨 끝 바에는 오른쪽 마진X
 							}}
