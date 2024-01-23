@@ -7,6 +7,7 @@ import instance from '../../apis/axios';
 import { useRecoilState } from 'recoil';
 import {
 	buyerIdState,
+	chatRoomIdState,
 	chatStatusState,
 	messageState,
 	offeredPriceState,
@@ -14,6 +15,7 @@ import {
 	productPriceState,
 	receiverNicknameState,
 	sellerIdState,
+	sendMessage,
 	userIdState,
 	userNameState,
 } from '../../recoil/atom';
@@ -32,9 +34,10 @@ const ChatPage = () => {
 	};
 	const [productId, setProductId] = useRecoilState(productIdState);
 	const [buyerId, setBuyerId] = useRecoilState(buyerIdState);
-	const [sellerid, setSellerId] = useRecoilState(sellerIdState);
+	const [sellerId, setSellerId] = useRecoilState(sellerIdState);
 	const [offeredPrice, setOfferPrice] = useRecoilState(offeredPriceState);
 	const [chatStatus, setChatStatus] = useRecoilState(chatStatusState);
+	const [chatRoomId, setChatRoomId] = useRecoilState(chatRoomIdState);
 
 	// 로그인 유저 아이디 가져오기
 
@@ -43,7 +46,7 @@ const ChatPage = () => {
 			try {
 				const response = await instance.get('/users/me');
 				setUserId(response.data.data.id);
-				console.log('user', response);
+				console.log('user', response.data.data.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -51,22 +54,60 @@ const ChatPage = () => {
 		getUser();
 	}, []);
 
+	// 채팅방 만들기
+	// useEffect(() => {
+	// 	const makeChatRoom = async () => {
+	// 		const data = {
+	// 			userId: 7,
+	// 			productId: 1,
+	// 		};
+	// 		try {
+	// 			const response = await instance.post('/chats/test/chat-room', data);
+	// 			console.log(response);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+
+	// 	makeChatRoom();
+	// }, []);
+
 	// 챗룸 아이디 가져오기
+
+	// useEffect(() => {
+	// 	const makeChatRoom = async () => {
+	// 		const data = {
+	// 			userId: 7,
+	// 			productId: 2,
+	// 		};
+	// 		try {
+	// 			const response = await instance.post('/chats/test/chat-room', data);
+	// 			console.log(response);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	};
+
+	// 	makeChatRoom();
+	// }, []);
+
+	const chatRoomID = 6;
 
 	// 채팅 대화 목록 조회
 
 	useEffect(() => {
-		const chatRoomId = 5;
-
 		const fetchChatData = async () => {
 			try {
-				const response = await instance.get(`/chats/${chatRoomId}`);
+				const response = await instance.get(`/chats/${chatRoomID}`);
 				const chatRoomData = response.data.data;
+
 				console.log(chatRoomData);
 
 				const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
+
 				setProductData(chatRoomInfoResponse);
 				setChatList(chatResponseList);
+
 				const offerChatData = [...chatResponseList]
 					.reverse()
 					.find((item) => item.senderType === 'BUYER');
@@ -81,6 +122,7 @@ const ChatPage = () => {
 					productId,
 					buyerId,
 					sellerId,
+					chatRoomId,
 					chatStatus,
 				} = chatRoomInfoResponse;
 
@@ -92,6 +134,48 @@ const ChatPage = () => {
 				setSellerId(sellerId);
 				setOfferPrice(offerPrice);
 				setChatStatus(chatStatus);
+				setChatRoomId(chatRoomId);
+
+				if (chatResponseList.length === 0) {
+					const initialMessageSend = async () => {
+						const data1 = {
+							chatRoomId,
+							senderType: 'SYSTEM',
+							userId: buyerId,
+							content: `${receiverName}님이 입장하셨습니다.`,
+						};
+
+						const data2 = {
+							chatRoomId,
+							senderType: 'SYSTEM',
+							userId: sellerId,
+							content: `님이 입장하셨습니다.`,
+						};
+
+						const data3 = {
+							chatRoomId,
+							senderType: 'SELLER',
+							userId: sellerId,
+							content: `${productData?.accommodationName} ${productData?.roomName} ${productData?.checkInDate} ~ ${productData?.checkOutDate} ${productData?.price.toLocaleString(
+								'ko-KR',
+							)} 원에 팝니다. 가격 협의 가능합니다.`,
+						};
+
+						try {
+							const result1 = await sendMessage(data1);
+							console.log('첫 번째 메시지 전송 결과:', result1);
+
+							const result2 = await sendMessage(data2);
+							console.log('두 번째 메시지 전송 결과:', result2);
+
+							const result3 = await sendMessage(data3);
+							console.log('세 번째 메시지 전송 결과:', result3);
+						} catch (error) {
+							console.error('메시지 전송 중 오류 발생:', error);
+						}
+					};
+					initialMessageSend();
+				}
 			} catch (error) {
 				console.error('Error fetching chat data:', error);
 			}
@@ -99,14 +183,6 @@ const ChatPage = () => {
 
 		fetchChatData();
 	}, []);
-
-	// 메시지 보내기
-
-	// 채팅방 만들기
-
-	// 채팅방으로 넘어갈 때
-	// 구매자이면 구매내역 판매자 닉네임
-	// 판매자이면 판매내역 구매자 닉네임
 
 	return (
 		<div className="h-screen relative">
@@ -181,49 +257,10 @@ export interface ChatResponse {
 }
 
 // 채팅방 만들기
-
-// useEffect(() => {
-// 	const makeChatRoom = async () => {
-// 		const data = {
-// 			userId: 41,
-// 			productId: 15,
-// 		};
-// 		try {
-// 			const response = await instance.post('/chats/test/chat-room', data);
-// 			console.log(response);
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	};
-
-// 	makeChatRoom();
-// }, []);
-
-// useEffect(() => {
-// 	const sendMessage = async () => {
-// 		const data = {
-// 			chatRoomId: 5,
-// 			senderType: 'SYSTEM',
-// 			userId: 41,
-// 			content: '입장하셨습니다.',
-// 		};
-// 		try {
-// 			const response = await axios.post(
-// 				'https://golden-ticket.site/chats/test',
-// 				data,
-// 			);
-// 			console.log(response.data);
-// 		} catch (error) {
-// 			console.error(error);
-// 		}
-// 	};
-// sendMessage();
-// }, []);
-
 // const createChatRoom = async () => {
 // 	const data = {
-// 		userId: 41,
-// 		productId: 15,
+// 		userId: 7,
+// 		productId: 2,
 // 	};
 // 	try {
 // 		const response = await axios.post(

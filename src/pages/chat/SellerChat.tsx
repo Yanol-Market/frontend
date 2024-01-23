@@ -8,6 +8,7 @@ import instance from '../../apis/axios';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import {
 	buyerIdState,
+	chatRoomIdState,
 	chatStatusState,
 	messageState,
 	negoIdState,
@@ -32,6 +33,9 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 	const buyerId = useRecoilValue(buyerIdState);
 	const userId = useRecoilValue(userIdState);
 	const chatStatus = useRecoilValue(chatStatusState);
+	const chatRoomId = useRecoilValue(chatRoomIdState);
+
+	console.log('negoId', negoId);
 
 	const sendConsent = async () => {
 		try {
@@ -55,21 +59,21 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 
 		const sendMessages = async () => {
 			const data1 = {
-				chatRoomId: 5,
+				chatRoomId,
 				senderType: 'SELLER',
 				userId: userId,
 				content: '네. 가격을 수정했으니 결제 부탁드려요.',
 			};
 
 			const data2 = {
-				chatRoomId: 5,
+				chatRoomId,
 				senderType: 'SYSTEM',
 				userId: buyerId,
 				content: `판매자가 판매가격을 수정했습니다. ${limitTime}까지 결제를 완료해주세요.`,
 			};
 
 			const data3 = {
-				chatRoomId: 5,
+				chatRoomId,
 				senderType: 'SYSTEM',
 				userId: userId,
 				content: `판매가가 ${receiverName}님만을 위해 변경되었습니다. 구매자가 20분 이내 결제시 거래가 완료됩니다.`,
@@ -107,7 +111,7 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 			<div className="text-m text-center p-[10px]"></div>
 			<ChatItem chatList={chatList} userId={userId} />
 			<div>
-				{chatStatus !== 'NEGO_PROPOSE' &&
+				{chatStatus !== 'PAYMENT_PENDING' &&
 					(noti ? (
 						<NegoNoti
 							setNoti={setNoti}
@@ -117,16 +121,16 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 					) : (
 						!negoConsent &&
 						!reject && (
-							<div className="w-[430px] bg-white pt-[20px] flex justify-between absolute bottom-0 h-[110px]">
+							<div className="w-[430px] bg-[#fafafa] pt-[20px] flex justify-between absolute bottom-0 h-[110px]">
 								<div
 									onClick={handleReject}
-									className="w-[160px] bottom-[25px] text-[#828282] text-lg cursor-pointer ml-[20px] h-[42px] bg-[#e5e5e5] rounded-[12px] flex items-center justify-center"
+									className="w-[160px] bottom-[25px] text-[#828282] text-lg cursor-pointer ml-[40px] h-[42px] bg-[#e5e5e5] rounded-[12px] flex items-center justify-center"
 								>
 									거절하기
 								</div>
 								<div
 									onClick={consent}
-									className="w-[160px] bottom-[25px] text-lg cursor-pointer mr-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+									className="w-[160px] bottom-[25px] text-lg cursor-pointer mr-[40px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 								>
 									승인하기
 								</div>

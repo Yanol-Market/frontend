@@ -22,16 +22,14 @@ async function enableMocking() {
 }
 enableMocking().then(() => {
 	root.render(
-		<React.StrictMode>
-			<QueryClientProvider client={queryClient}>
-				<RecoilRoot>
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
-				</RecoilRoot>
-				<ReactQueryDevtools />
-			</QueryClientProvider>
-		</React.StrictMode>,
+		<QueryClientProvider client={queryClient}>
+			<RecoilRoot>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</RecoilRoot>
+			<ReactQueryDevtools />
+		</QueryClientProvider>,
 	);
 
 	// If you want to start measuring performance in your app, pass a function

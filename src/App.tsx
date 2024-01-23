@@ -64,6 +64,10 @@ function App() {
 					</Route>
 					<Route path="/searchResult" element={<SearchResult />} />
 					<Route path="/reservation" element={<ReservationPage />} />
+					<Route
+						path="/reservation/nego/:productId"
+						element={<ReservationPage />}
+					/>
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />

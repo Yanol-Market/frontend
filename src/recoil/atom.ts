@@ -143,3 +143,8 @@ export const chatStatusState = atom({
 	key: 'ChatStatusState',
 	default: '',
 });
+
+export const chatRoomIdState = atom({
+	key: 'ChatRoomIdState',
+	default: 0,
+});
