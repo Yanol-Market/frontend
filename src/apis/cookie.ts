@@ -28,19 +28,21 @@ export const deleteCookie = () => {
 	});
 };
 
-export const refreshCookie = async () => {
+export const refreshCookie = async (refreshTokenValue: string) => {
 	try {
-		const refreshTokenValue = getCookie('refreshToken');
 		if (refreshTokenValue) {
 			const res = await instance.post('/reissue', {
 				refreshToken: refreshTokenValue,
 			});
 			if (res) {
 				const { accessToken, refreshToken } = res.data.data;
+				console.log(res.data.data);
+				console.log(accessToken);
+				console.log(refreshToken);
 				setCookie('accessToken', accessToken);
 				setCookie('refreshToken', refreshToken);
-				console.log('새 토큰', accessToken);
 				const newAccessToken = getCookie('accessToken');
+
 				return newAccessToken;
 			}
 		}

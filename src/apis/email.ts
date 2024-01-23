@@ -1,4 +1,4 @@
-import instance from './axios';
+import instance, { instanceNoToken } from './axios';
 
 export interface getEmailProps {
 	email: string;
@@ -6,7 +6,7 @@ export interface getEmailProps {
 
 export const getEmail = async (email: getEmailProps) => {
 	try {
-		const res = await instance.get(`/users/check/email?email=${email}`);
+		const res = await instanceNoToken.get(`/users/check/email?email=${email}`);
 		return res.data;
 	} catch (err) {
 		console.error('이메일 중복 조회에 실패 했습니다.', err);
