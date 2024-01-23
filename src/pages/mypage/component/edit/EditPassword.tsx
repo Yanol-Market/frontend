@@ -4,6 +4,9 @@ import { useForm } from 'react-hook-form';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentFailBtn from '../../../../component/common/BottomSheet/Content/ContentFailBtnPage';
 import MyPageClickBtn from '../btn/MyPageClickBtn';
+import { useMutation } from '@tanstack/react-query';
+import { patchPassword } from '../../../../apis/patchPassword';
+import { useNavigate } from 'react-router-dom';
 
 const EditPassword = () => {
 	const {
@@ -15,6 +18,7 @@ const EditPassword = () => {
 	const [isBottomSheetPasswordOpen, setIsBottomSheetPasswordOpen] =
 		useState(false);
 
+	const navigate = useNavigate();
 	const currentPasswordCheckBox = watch('currentPasswordBox');
 	const currentPasswordText = watch('currentPassword');
 	const newPasswordText = watch('newPassword');
@@ -27,6 +31,21 @@ const EditPassword = () => {
 
 	const closeBottomSheetPassword = () => {
 		setIsBottomSheetPasswordOpen(false);
+	};
+	const mutation = useMutation({
+		mutationFn: patchPassword,
+		onSuccess() {
+			alert('비밀번호 변경 성공');
+			navigate('/signin');
+		},
+	});
+
+	const handleEditPassword = () => {
+		const data = {
+			originPassword: currentPasswordText,
+			changePassword: newPasswordText,
+		};
+		mutation.mutate(data);
 	};
 	return (
 		<div>
@@ -136,7 +155,7 @@ const EditPassword = () => {
 						</div>
 						<MyPageClickBtn
 							content="비밀번호 변경하기"
-							onClick={openBottomSheetPassword}
+							onClick={handleEditPassword}
 						/>
 					</form>
 				</div>

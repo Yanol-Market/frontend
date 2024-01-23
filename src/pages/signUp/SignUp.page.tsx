@@ -316,9 +316,7 @@ const SignUp = () => {
 				<button
 					type="button"
 					className={`border ${
-						isButtonDisabled
-							? 'border-borderGray'
-							: 'border-borderGray bg-main text-white'
+						isButtonDisabled ? 'border-borderGray' : 'bg-main text-white'
 					} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
 					disabled={isButtonDisabled}
 					onClick={handleSignUp}
