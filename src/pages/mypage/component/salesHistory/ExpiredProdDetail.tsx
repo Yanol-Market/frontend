@@ -7,8 +7,6 @@ import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/
 const ExpiredProdDetail = () => {
 	const { data, isLoading } = useQueryExpiredDetail('1');
 	const [bottom, setBottom] = useState(false);
-
-	console.log('판매완료 상세 ', data);
 	const openBottom = () => {
 		setBottom(true);
 	};
