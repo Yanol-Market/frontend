@@ -11,6 +11,7 @@ import Chat from './Chat';
 import { useNavigate } from 'react-router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { editProdState } from '../../../../recoil/prodEditAtom';
+import SellingSkeleton from './skeleton/SellingSkeleton';
 
 // 판매중
 const Selling = () => {
@@ -55,7 +56,12 @@ const Selling = () => {
 		}
 	};
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<SellingSkeleton />{' '}
+			</div>
+		);
 	}
 
 	if (data) {

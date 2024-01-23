@@ -35,6 +35,7 @@ module.exports = {
 				yaLogo: '#FF3478',
 				gradientStart: '#FFE266',
 				green: '#0FA254',
+				skel: "#ccc"
 			},
 			fontSize: {
 				headline1: '24px',
