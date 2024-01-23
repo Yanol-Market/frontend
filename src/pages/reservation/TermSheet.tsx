@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { RequestPayParams, RequestPayResponse } from '../../type/portone';
-import { dataTagSymbol, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
 import { useRecoilValue } from 'recoil';
 import { paymentsState } from '../../recoil/atom';

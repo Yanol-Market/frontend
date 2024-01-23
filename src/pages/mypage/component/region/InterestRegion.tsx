@@ -5,10 +5,25 @@ import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import BottomSheetRegionContent from '../content/BottomSheetRegionContent';
 import { useRecoilValue } from 'recoil';
 import { checkedListState } from '../../../../recoil/atom';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { postInterestRegion } from '../../../../apis/postInterestRegion';
+import { getInterestRegions } from '../../../../apis/getInterestRegions';
+import { convertRegionCode } from '../../../../utils/convertRegionCode';
+import { getCookie, refreshCookie } from '../../../../apis/cookie';
 
+interface WishRegionProps {
+	id: number;
+	region: string;
+}
+interface InterestRegionProps {
+	status: string;
+	message: null | string;
+	data?: {
+		wishRegions: WishRegionProps[];
+	};
+}
 const InterestRegion = () => {
 	const selectedList = useRecoilValue(checkedListState);
-	console.log(selectedList);
 	const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
 	const openBottomSheet = () => {
@@ -18,6 +33,37 @@ const InterestRegion = () => {
 	const closeBottomSheet = () => {
 		setIsBottomSheetOpen(false);
 	};
+	const mutation = useMutation({
+		mutationFn: postInterestRegion,
+		onSuccess() {
+			alert('관심 지역 등록 성공');
+			closeBottomSheet();
+		},
+	});
+
+	const { data, isError } = useQuery<InterestRegionProps>({
+		queryKey: ['getInterestRegions'],
+		queryFn: getInterestRegions,
+	});
+	console.log(data?.data);
+	const convertedWishRegions = data?.data?.wishRegions.map(
+		(region: WishRegionProps) => {
+			return {
+				...region,
+				region: convertRegionCode(region.region),
+			};
+		},
+	);
+
+	const handlePostRegions = () => {
+		if (selectedList) {
+			mutation.mutate({ regions: selectedList });
+		}
+	};
+	// const handleRefreshToken = () => {
+	// 	const refreshToken = getCookie('refreshToken');
+	// 	refreshCookie(refreshToken);
+	// };
 	return (
 		<div>
 			<Header title="관심 지역" />
@@ -27,7 +73,7 @@ const InterestRegion = () => {
 					onClose={closeBottomSheet}
 					viewHeight="calc(100vh * 0.9)"
 				>
-					<BottomSheetRegionContent onClick={closeBottomSheet} />
+					<BottomSheetRegionContent onClick={handlePostRegions} />
 				</BottomSheet>
 				<div className="w-[90%] mx-auto mt-11 font-body font-medium">
 					<p>관심 지역을 설정해 두시면 알림을 보내드려요!</p>
@@ -42,13 +88,16 @@ const InterestRegion = () => {
 						onClick={openBottomSheet}
 					/>
 				</div>
-				{selectedList &&
-					selectedList.map((selectedRegion, index) => (
+				{/* <button className="border" onClick={handleRefreshToken}>
+					토큰 재발급
+				</button> */}
+				{convertedWishRegions &&
+					convertedWishRegions.map((region: WishRegionProps) => (
 						<div
-							key={index}
+							key={region.id}
 							className="w-[90%] h-12 bg-homeMain mt-5 rounded-xl p-3"
 						>
-							<p className="text-center">{selectedRegion}</p>
+							<p className="text-center">{region.region}</p>
 						</div>
 					))}
 			</div>

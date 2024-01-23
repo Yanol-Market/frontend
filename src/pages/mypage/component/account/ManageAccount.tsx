@@ -15,7 +15,11 @@ const ManageAccount = () => {
 	const mutation = useMutation({
 		mutationFn: getSignOut,
 		onSuccess() {
-			navigate('/');
+			const userProfileInfo = localStorage.getItem('userProfileInfo');
+			if (userProfileInfo) {
+				localStorage.removeItem('userProfileInfo');
+			}
+			navigate('/signin');
 		},
 		onError(err) {
 			alert('로그아웃 실패');

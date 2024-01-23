@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 const PurchaserInfo = () => {
 	const [saveInfo, setSaveInfo] = useState(false);
+	const myProfileJSON = localStorage.getItem('userProfileInfo');
+	const myProfile = JSON.parse(myProfileJSON as string);
 	return (
 		<div className="p-[20px]">
 			<div className="pt-[10px] pb-[20px]">
@@ -15,66 +17,22 @@ const PurchaserInfo = () => {
 			<div>
 				<div className="pt-[10px]">
 					<p className="text-lg font-medium">이름</p>
-					<input
-						type="text"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
-					/>
+					<div className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]">
+						{myProfile.data.name}
+					</div>
 				</div>
 				<div className="pt-[10px]">
 					<p className="text-lg font-medium">전화번호</p>
-					<input
-						type="text"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
-					/>
+					<div className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]">
+						{myProfile.data.phoneNumber}
+					</div>
 				</div>
 				<div className="pt-[10px]">
 					<p className="text-lg font-medium">이메일</p>
-					<input
-						type="email"
-						className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]"
-					/>
+					<div className="bg-[#fafafa] w-[100%] rounded-[12px] p-[12px] text-lg m-[5px]">
+						{myProfile.data.email}
+					</div>
 				</div>
-			</div>
-			<div className="flex items-center">
-				<input
-					id="check_btn"
-					type="checkbox"
-					className="hidden"
-					onChange={(saveInfo) => !saveInfo}
-				/>
-
-				<label htmlFor="check_btn" className="cursor-pointer"></label>
-
-				<style>
-					{`
-         
-                
-                input#check_btn + label:before{
-                    content:"";
-                    display:block;
-                    width:16px;
-                    height:16px;
-                    border:2px solid #e5e5e5;
-                    border-radius: 5px;
-                    vertical-align:middle;
-
-                }
-
-                input#check_btn:checked + label:before {
-                    content: "";
-                    background-color: #FFCC00;
-                    background-image: url(/assets/images/reserveCheck.svg);
-                    background-repeat: no-repeat;
-                    background-size: 10px 10px; 
-                    background-position: center center;
-					border:2px solid #FFCC00;
-                    z-index: 9; 
-                }
-
-                `}
-				</style>
-
-				<p className="text-m m-[10px]">기본 정보로 저장하기</p>
 			</div>
 		</div>
 	);

@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { setCookie } from '../../apis/cookie';
+import { getCookie, setCookie } from '../../apis/cookie';
 import { getYaSignIn } from '../../apis/yaSignIn';
 
 const YaSignIn = () => {
@@ -19,17 +19,17 @@ const YaSignIn = () => {
 	const mutation = useMutation({
 		mutationFn: getYaSignIn,
 		onSuccess(data) {
-			if (data.data.token) {
-				const { accessToken, refreshToken } = data.data.token;
-				setCookie('accessToken', accessToken, { path: '/' });
-				setCookie('refreshToken', refreshToken, { path: '/' });
-			}
-			if (data.data.isFirst) {
+			const { accessToken, refreshToken } = data.data.token;
+			setCookie('accessToken', accessToken, { path: '/' });
+			setCookie('refreshToken', refreshToken, { path: '/' });
+			if (data?.data?.isFirst) {
 				const userInfo = localStorage.setItem(
 					'userInfo',
 					JSON.stringify(data.data.userInfo),
 				);
 				navigate('/signup');
+			} else {
+				navigate('/');
 			}
 		},
 		onError(err) {

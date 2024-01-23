@@ -1,4 +1,4 @@
-import instance from './axios';
+import instance, { instanceNoToken } from './axios';
 
 export interface SignUpProps {
 	name: string;
@@ -13,7 +13,7 @@ export interface SignUpProps {
 
 export const getSignUp = async (data: SignUpProps) => {
 	try {
-		const res = await instance.post('/users', data);
+		const res = await instanceNoToken.post('/users', data);
 		alert('회원가입 성공');
 		return res.data;
 	} catch (err) {
