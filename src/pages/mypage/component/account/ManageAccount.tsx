@@ -66,32 +66,26 @@ const ManageAccount = () => {
 			</BottomSheet>
 			<div className="w-full flex flex-col items-center">
 				<div className="w-[90%] mt-5 flex flex-col">
-					<div className="flex flex-row justify-between mb-5">
+					<div
+						className="flex flex-row justify-between mb-5 cursor-pointer"
+						onClick={editPasswordBtn}
+					>
 						<span>비밀번호 변경</span>
-						<img
-							className="cursor-pointer"
-							src="/assets/images/rightArrowTab.svg"
-							alt="탭 이동"
-							onClick={editPasswordBtn}
-						/>
+						<img src="/assets/images/rightArrowTab.svg" alt="탭 이동" />
 					</div>
-					<div className="flex flex-row justify-between mb-5">
+					<div
+						className="flex flex-row justify-between mb-5 cursor-pointer"
+						onClick={openBottomSheetSignOut}
+					>
 						<span>로그아웃</span>
-						<img
-							className="cursor-pointer"
-							src="/assets/images/rightArrowTab.svg"
-							alt="탭 이동"
-							onClick={openBottomSheetSignOut}
-						/>
+						<img src="/assets/images/rightArrowTab.svg" alt="탭 이동" />
 					</div>
-					<div className="flex flex-row justify-between mb-5">
+					<div
+						className="flex flex-row justify-between mb-5 cursor-pointer"
+						onClick={withdrawlBtn}
+					>
 						<span>회원탈퇴</span>
-						<img
-							className="cursor-pointer"
-							src="/assets/images/rightArrowTab.svg"
-							alt="탭 이동"
-							onClick={withdrawlBtn}
-						/>
+						<img src="/assets/images/rightArrowTab.svg" alt="탭 이동" />
 					</div>
 				</div>
 			</div>

@@ -60,10 +60,6 @@ const InterestRegion = () => {
 			mutation.mutate({ regions: selectedList });
 		}
 	};
-	// const handleRefreshToken = () => {
-	// 	const refreshToken = getCookie('refreshToken');
-	// 	refreshCookie(refreshToken);
-	// };
 	return (
 		<div>
 			<Header title="관심 지역" />
@@ -79,18 +75,13 @@ const InterestRegion = () => {
 					<p>관심 지역을 설정해 두시면 알림을 보내드려요!</p>
 					<p>관심지역은 3개까지 추가 가능합니다.</p>
 				</div>
-				<div className="w-[90%] flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray">
+				<div
+					className="w-[90%] flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 p-3 text-gray cursor-pointer"
+					onClick={openBottomSheet}
+				>
 					<p>관심지역을 선택해주세요.</p>
-					<img
-						className="cursor-pointer"
-						src="/assets/images/dropdownArrow.svg"
-						alt="아래로 이동"
-						onClick={openBottomSheet}
-					/>
+					<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
 				</div>
-				{/* <button className="border" onClick={handleRefreshToken}>
-					토큰 재발급
-				</button> */}
 				{convertedWishRegions &&
 					convertedWishRegions.map((region: WishRegionProps) => (
 						<div
