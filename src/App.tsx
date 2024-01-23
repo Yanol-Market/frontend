@@ -10,6 +10,7 @@ import Complete from './pages/reservation/Complete';
 import Timeout from './pages/reservation/Timeout';
 import Failure from './pages/reservation/Failure';
 import { AddProduct } from './pages/addProduct';
+import { AddProductYaSignIn } from './pages/addProductYaSignIn';
 import PurchaseHistory from './pages/mypage/component/purchaseHistory/PurchaseHistory';
 import SalesHistory from './pages/mypage/component/salesHistory/SalesHistory';
 import { Alarm } from './pages/alarm';
@@ -73,6 +74,7 @@ function App() {
 					<Route path="/reservation/failure" element={<Failure />} />
 					<Route path="/product/:productId" element={<Products />} />
 					<Route path="/addproduct/*" element={<AddProduct />} />
+					<Route path="/addproductyasignin" element={<AddProductYaSignIn />} />
 					<Route path="/edit/:productId" element={<EditProd />} />
 					<Route
 						path="/edit/completion/:productId"

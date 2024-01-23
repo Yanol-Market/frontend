@@ -45,11 +45,11 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 	return (
 		<div>
 			<div>
-				<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem] z-10" />
+				<div className="fixed top-[6rem] w-[430px] bg-white h-[3rem] z-10" />
 				<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem] z-10">
 					약관 및 정책 동의
 				</h2>
-				<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray z-10" />
+				<div className="fixed top-[9rem] w-[430px] h-[0.4375rem] bg-lightGray z-10" />
 				{/* <div className="flex flex-col h-screen text-black"> */}
 				<div className="pt-[11rem]">
 					<h3 className="text-body font-semibold text-black mb-5 ml-5">
@@ -57,7 +57,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 					</h3>
 
 					{/* 약관 및 정책 내용 */}
-					<div className="bg-lightGray p-4 rounded-xl max-w-[335px] mx-auto mb-[10rem] text-sm">
+					<div className="bg-lightGray p-5 rounded-xl max-w-[390px] mx-auto mb-[10rem] text-sm">
 						<ul>
 							<li className="text-alarmRed mb-4">
 								• 판매하고자 하는 상품은 양도 가능한 상품임을 확인하였으며, 양도
@@ -98,7 +98,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 					<div className="fixed bottom-7 left-0 right-0 flex justify-center">
 						<button
 							type="button"
-							className={`mx-auto bg-borderGray w-[20.9375rem] h-[3.125rem] rounded-xl text-lg ${
+							className={`mx-auto bg-borderGray w-[23rem] h-[3.125rem] rounded-xl text-lg ${
 								agreed
 									? 'text-white bg-main cursor-pointer'
 									: 'text-descGray cursor-not-allowed'
