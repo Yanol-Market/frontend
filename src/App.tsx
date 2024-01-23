@@ -34,7 +34,7 @@ import { ChatList } from './pages/chatList';
 import { Products } from './pages/products';
 import { YaSignIn } from './pages/yaSignIn';
 import NotFoundContent from './pages/mypage/component/content/NotFoundContent';
-import ChatPage from './pages/chat';
+import { ChatPage } from './pages/chat';
 import ExpiredProdDetail from './pages/mypage/component/salesHistory/ExpiredProdDetail';
 import { NotFoundPage } from './component/common/NotFound';
 import { Splash } from './pages/splash';

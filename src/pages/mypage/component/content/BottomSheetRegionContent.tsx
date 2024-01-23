@@ -22,7 +22,6 @@ const BottomSheetRegionContent = ({
 		},
 		[checkedList, setCheckedList],
 	);
-
 	console.log(checkedList);
 	return (
 		<div className="flex flex-col justify-center">
@@ -39,9 +38,9 @@ const BottomSheetRegionContent = ({
 								type="checkbox"
 								id={regions.region}
 								className=" appearance-none bg-selected w-5 h-5 mr-1 checked:bg-unselected cursor-pointer"
-								checked={checkedList.includes(regions.region)}
+								checked={checkedList.includes(regions.areaCode)}
 								onChange={() => {
-									onCheckedItem(regions.region);
+									onCheckedItem(regions.areaCode);
 								}}
 							/>
 						</div>

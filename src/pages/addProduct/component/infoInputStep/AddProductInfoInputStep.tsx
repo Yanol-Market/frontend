@@ -59,11 +59,11 @@ const AddProductInfoInputStep = ({
 
 	return (
 		<>
-			<div className="fixed top-[6rem] w-[375px] bg-white h-[3rem] z-10" />
+			<div className="fixed top-[6rem] w-[430px] bg-white h-[3rem] z-10" />
 			<h2 className="text-body ml-5 mb-4 fixed top-[6.5rem] z-10">
 				판매 정보 입력
 			</h2>
-			<div className="fixed top-[9rem] w-[375px] h-[0.4375rem] bg-lightGray z-10" />
+			<div className="fixed top-[9rem] w-[430px] h-[0.4375rem] bg-lightGray z-10" />
 
 			{/* 골든특가 결정 */}
 			<div className="pt-[11rem] px-5">
@@ -74,7 +74,7 @@ const AddProductInfoInputStep = ({
 				/>
 			</div>
 
-			<div className="mt-[2rem] w-[375px] h-[0.4375rem] bg-lightGray" />
+			<div className="mt-[2rem] w-[430px] h-[0.4375rem] bg-lightGray" />
 			{/* 판매자 한마디 */}
 			<div className="mx-5 text-black">
 				<SellerInfoInput onSellerInfoChange={handleSellerInfoChange} />
@@ -87,7 +87,7 @@ const AddProductInfoInputStep = ({
 			<div className="bg-gray-200 flex justify-center">
 				<button
 					type="button"
-					className={`mx-auto w-[20.9375rem] h-[3.125rem] rounded-xl text-lg mt-[3.5625rem] mb-[2.1875rem] ${
+					className={`mx-auto w-[50%] h-[3.125rem] rounded-xl text-lg mt-[3.5625rem] mb-[2.1875rem] ${
 						goldenPrice > 0 && goldenPrice < originPrice
 							? 'cursor-pointer bg-main text-white'
 							: 'cursor-not-allowed bg-borderGray text-descGray'
