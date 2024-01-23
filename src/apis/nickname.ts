@@ -1,4 +1,4 @@
-import instance from './axios';
+import instance, { instanceNoToken } from './axios';
 
 export interface getNickNameProps {
 	nickname: string;
@@ -6,7 +6,7 @@ export interface getNickNameProps {
 
 export const getNickName = async (nickname: getNickNameProps) => {
 	try {
-		const res = await instance.get(
+		const res = await instanceNoToken.get(
 			`/users/check/nickname?nickname=${nickname}`,
 		);
 		return res.data;
