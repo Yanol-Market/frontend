@@ -12,6 +12,12 @@ export const instanceTest = axios.create({
 	},
 });
 
+export const instanceNoToken = axios.create({
+	baseURL: 'https://golden-ticket.site',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+});
 const instance = axios.create({
 	baseURL: 'https://golden-ticket.site',
 	headers: {
@@ -29,14 +35,16 @@ instance.interceptors.request.use((config) => {
 });
 
 instance.interceptors.response.use(
-	(response) => response,
+	(response) => {
+		response.headers['Cache-Control'] = 'no-cache';
+		return response;
+	},
 	async (error) => {
 		const originalRequest = error.config;
-		// const refreshTokenValue = getCookie('refreshToken');
-		// console.log(refreshTokenValue);
+		const refreshToken = getCookie('refreshToken');
 		if (error.response.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true;
-			const newAccessToken = await refreshCookie();
+			const newAccessToken = await refreshCookie(refreshToken);
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 			console.log('토큰 재발급 완료');
 			return instance(originalRequest);

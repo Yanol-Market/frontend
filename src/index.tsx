@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -23,14 +24,16 @@ async function enableMocking() {
 enableMocking().then(() => {
 	root.render(
 		<React.StrictMode>
-			<QueryClientProvider client={queryClient}>
-				<RecoilRoot>
-					<BrowserRouter>
-						<App />
-					</BrowserRouter>
-				</RecoilRoot>
-				<ReactQueryDevtools />
-			</QueryClientProvider>
+			<CookiesProvider>
+				<QueryClientProvider client={queryClient}>
+					<RecoilRoot>
+						<BrowserRouter>
+							<App />
+						</BrowserRouter>
+					</RecoilRoot>
+					<ReactQueryDevtools />
+				</QueryClientProvider>
+			</CookiesProvider>
 		</React.StrictMode>,
 	);
 

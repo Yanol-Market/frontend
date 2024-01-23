@@ -16,7 +16,6 @@ const SignIn = () => {
 
 	const userId = watch('userid');
 	const userPassword = watch('userpassword');
-	// console.log(userId);
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignIn,
@@ -32,20 +31,9 @@ const SignIn = () => {
 		},
 	});
 
-	const handleSignIn = async () => {
+	const handleSignIn = () => {
 		const data = { email: userId, password: userPassword };
-
-		try {
-			const res = await mutation.mutateAsync(data);
-
-			const { accessToken, refreshToken } = res.data.data;
-			setCookie('accessToken', accessToken, { path: '/' });
-			setCookie('refreshToken', refreshToken, { path: '/' });
-			navigate('/');
-		} catch (err) {
-			console.error(err);
-			setError('errorEmail', { message: '이메일 및 비밀번호를 확인해주세요' });
-		}
+		mutation.mutate(data);
 	};
 
 	const handleSignUp = () => {
