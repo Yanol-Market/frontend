@@ -1,17 +1,25 @@
 import React from 'react';
+import { formatNumber, formatNumberString } from '../../../utils/formate';
 
 // 404 페이지 추가 후 null 수정 예정
 interface GoldenPriceInfoProps {
+	goldenPrice: number;
 	setGoldenPrice: React.Dispatch<React.SetStateAction<number>>;
-	originPrice: string | null;
-	yanoljaPrice: string | null;
+	originPrice: number;
+	yanoljaPrice: number;
 }
 
 const GoldenPriceInfo = ({
+	goldenPrice,
 	setGoldenPrice,
 	originPrice,
 	yanoljaPrice,
 }: GoldenPriceInfoProps) => {
+	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+		setGoldenPrice(Number(inputValue));
+	};
+
 	return (
 		<div>
 			{' '}
@@ -20,10 +28,16 @@ const GoldenPriceInfo = ({
 				<p className="mt-3 text-m">
 					하단의 야놀자 판매가를 참고하여 판매 가격을 매겨주세요.
 				</p>
-				<div className="mt-3 w-[21.0625rem] h-[3.125rem] mx-auto text-center bg-lightGray flex items-center justify-center text-lg">
+				<div className="mt-3 w-[21.0625rem] py-3 mx-auto text-center rounded-lg bg-lightGray flex  flex-col items-center justify-center text-lg">
 					<p>
-						현재 야놀자는 <span className="font-semibold">{yanoljaPrice}</span>
+						현재 야놀자는{' '}
+						<span className="font-semibold">{formatNumber(yanoljaPrice)}</span>
 						원에 팔고 있어요!
+					</p>
+					<p>
+						야놀자에서 구매하신 가격은
+						<span className="font-semibold">{formatNumber(originPrice)}</span>원
+						입니다.
 					</p>
 				</div>
 				<div className="flex mt-9 text-lg">
@@ -32,9 +46,9 @@ const GoldenPriceInfo = ({
 						<span className="text-alarmRed">*</span>
 					</p>
 					<input
-						type="number"
-						placeholder={`기존구매가 ${originPrice}`}
-						onChange={(e) => setGoldenPrice(Number(e.target.value))}
+						type="text"
+						value={formatNumberString(goldenPrice)}
+						onChange={handleInput}
 						className="border-b border-borderGray outline-none ml-3 mt-1 w-[14.0625rem] text-center text-descGray pb-2"
 					/>
 					<p className="ml-2 mt-3">원</p>

@@ -15,3 +15,11 @@ export const reservationTypeTrans = (status: string) => {
 		return '대실';
 	}
 };
+
+export const reservationStatusTrans = (status: string) => {
+	if (status === 'REGISTERED') {
+		return true;
+	} else {
+		return false;
+	}
+};
