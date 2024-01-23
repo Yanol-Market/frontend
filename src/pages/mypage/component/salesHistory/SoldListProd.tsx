@@ -18,7 +18,7 @@ const SoldListProd = () => {
 	const currentPath = location.pathname;
 
 	const [bottom, setBottom] = useState(false);
-
+	console.log('판매완료 리스으 ', error);
 	const openBottom = () => {
 		setBottom(true);
 	};
@@ -146,7 +146,7 @@ const SoldListProd = () => {
 		);
 	}
 
-	return <div> 오류오류 </div>;
+	return <div> {error && <div>오륭류 </div>} </div>;
 };
 
 export default SoldListProd;

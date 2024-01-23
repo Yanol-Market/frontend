@@ -24,6 +24,9 @@ const Selling = () => {
 	const editData = useSetRecoilState(editProdState);
 
 	console.log('판매중 성꽁', data);
+	console.log('판매중 에러', error);
+	console.log('판매중 메세지', error?.message);
+	// console.log('판매중 Fail', error.response);
 	// console.log('판매중 성꽁22', data?.[0].chats);
 	const openBottom = () => {
 		setBottom(true);
@@ -64,6 +67,9 @@ const Selling = () => {
 		);
 	}
 
+	if (error) {
+		return <div> 에러 에러 </div>;
+	}
 	if (data) {
 		return (
 			<>
