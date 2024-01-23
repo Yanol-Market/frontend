@@ -14,8 +14,13 @@ interface Props {
 }
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
-	const storedUserData = JSON.parse(localStorage.getItem('userData') || '{}');
-	const yanoljaIdExists = !!storedUserData.data?.yanoljaId;
+	const userProfileInfo = JSON.parse(
+		localStorage.getItem('userProfileInfo') || '{}',
+	);
+	const yanoljaId = userProfileInfo.data.yanoljaId;
+	console.log('yanoljaId:', userProfileInfo.data.yanoljaId);
+
+	const yanoljaIdExists = yanoljaId !== null;
 
 	const [isLoggedIn, setIsLoggedIn] = useState(yanoljaIdExists);
 
@@ -29,7 +34,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	useEffect(() => {
 		const fetchReservations = async () => {
 			try {
-				const data = await getReservations('9');
+				const data = await getReservations(yanoljaId);
 				setReservations(data.data);
 			} catch (error) {
 				console.error('예약을 불러오는 중 오류 발생:', error);
@@ -115,7 +120,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
 									type="button"
-									className={`mx-auto w-[50%] h-[3.125rem] rounded-xl text-lg ${
+									className={`mx-auto w-[23rem] h-[3.125rem] rounded-xl text-lg ${
 										selectedReservationIndex === null
 											? 'cursor-not-allowed bg-borderGray text-descGray'
 											: 'cursor-pointer bg-main text-white'
@@ -144,7 +149,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 						<Link to="/addproductyasignin">
 							<button
 								type="button"
-								className="mx-auto bg-yaLogo w-[20.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
+								className="mx-auto bg-yaLogo w-[22.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
 							>
 								야놀자에서 예약내역 가져오기
 							</button>

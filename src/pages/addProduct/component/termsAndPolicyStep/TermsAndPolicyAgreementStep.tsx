@@ -98,7 +98,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 					<div className="fixed bottom-7 left-0 right-0 flex justify-center">
 						<button
 							type="button"
-							className={`mx-auto bg-borderGray w-[50%] h-[3.125rem] rounded-xl text-lg ${
+							className={`mx-auto bg-borderGray w-[23rem] h-[3.125rem] rounded-xl text-lg ${
 								agreed
 									? 'text-white bg-main cursor-pointer'
 									: 'text-descGray cursor-not-allowed'
