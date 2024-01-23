@@ -17,9 +17,16 @@ export const getSales = async (): Promise<ApiSales> => {
 
 // 판매완료 - 리스트 조회 API
 export const getSoldList = async (): Promise<ApiSold> => {
-	const res: AxiosResponse<ApiSold> = await instanceTest.get('/api/SoldList');
+	const res: AxiosResponse<ApiSold> = await instance.get(
+		'/products/history/completed',
+	);
 	return res.data;
 };
+
+// export const getSoldList = async (): Promise<ApiSold> => {
+// 	const res: AxiosResponse<ApiSold> = await instanceTest.get('/api/SoldList');
+// 	return res.data;
+// };
 
 // 판매완료 - 상세 조회 API
 export const getSoldDetail = async (

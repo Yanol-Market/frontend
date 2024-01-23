@@ -37,9 +37,9 @@ const SoldListProd = () => {
 	const detailClick = (productId: string, status: string) => {
 		if (status === 'SOLD_OUT') {
 			console.log('클릭');
-			navigate(`/sales/detail/${productId}`);
+			navigate(`/sales/detail/${productId}?status=${status}`);
 		} else {
-			navigate(`/sales/expired/detail/${productId}`);
+			navigate(`/sales/expired/detail/${productId}?status=${status}`);
 		}
 	};
 
@@ -47,89 +47,102 @@ const SoldListProd = () => {
 		return <div> isLoading </div>;
 	}
 
-	if (!data) {
-		return <div> 판매 완료 된 상품 없다 ~ </div>;
-	}
 	if (data) {
 		return (
-			<div className="pb-[80px]">
-				<BottomSheet isOpen={bottom} onClose={closeBottom} viewHeight="220px">
-					<ContentTwoBtnPage
-						title="판매 정보를 삭제하시겠습니까?"
-						leftBtn="취소"
-						rightBtn="삭제"
-						leftBtnFunc={closeBottom}
-						rightBtnFunc={delSalesProd}
-					/>
-				</BottomSheet>
+			<>
+				{data.length === 0 ? (
+					<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
+						판매완료된 상품이 없습니다.
+					</div>
+				) : (
+					<div className="pb-[80px]">
+						<BottomSheet
+							isOpen={bottom}
+							onClose={closeBottom}
+							viewHeight="220px"
+						>
+							<ContentTwoBtnPage
+								title="판매 정보를 삭제하시겠습니까?"
+								leftBtn="취소"
+								rightBtn="삭제"
+								leftBtnFunc={closeBottom}
+								rightBtnFunc={delSalesProd}
+							/>
+						</BottomSheet>
 
-				{data.map((item) => (
-					<div key={item.productId}>
-						<div className="p-5">
-							<div className="pb-5 flex justify-between items-center ">
-								<p className="text-sm ">골든티켓 등록번호 {item.productId}</p>
-								<div>
-									<img
-										src="/assets/images/delete.svg"
-										alt="삭제하기"
-										className="cursor-pointer"
-										onClick={openBottom}
-									/>
-								</div>
-							</div>
-							<div className="flex">
-								<img
-									src={item.accommodationImage}
-									alt="image"
-									className="w-[80px] h-[80px]"
-								/>
-								<div className="w-[60%] px-[10px]">
-									<p className="text-lg font-bold">{item.accommodationName}</p>
-									<div className="flex">
-										<p className="text-lg pr-[8px]">{item.roomName}</p>
-										<div className="flex items-center">
-											<div className="border-r-2 border-borderGray h-[12px]"></div>
-										</div>
-										<p className="text-lg pl-[8px]">
-											{item.standardNumber}인/최대 {item.maximumNumber}인
+						{data.map((item) => (
+							<div key={item.productId}>
+								<div className="p-5">
+									<div className="pb-5 flex justify-between items-center ">
+										<p className="text-sm ">
+											골든티켓 등록번호 {item.productId}
 										</p>
-									</div>
-									<p className="text-lg font-bold pt-[15px]">
-										{formatNumber(item.goldenPrice)}
-									</p>
-								</div>
-								<div className="">
-									<div className=" text-sm flex flex-col items-centertext-center justify-between h-[80px]">
-										{item.productStatus === 'SOLD_OUT' ? (
-											<p className="flex items-center justify-center  bg-main text-white rounded-[10px] w-[55px] h-[20px] p-[5px] ">
-												{productStatusTrans(item.productStatus)}
-											</p>
-										) : (
-											<p className="flex items-center justify-center  bg-lightGray border-[1px] border-[#e0e0e0] bg-lightGray border-[1px] border-[#e0e0e0]  rounded-[10px] w-[55px] h-[20px] p-[5px] ">
-												{productStatusTrans(item.productStatus)}
-											</p>
-										)}
-
-										<div className="flex justify-end">
-											<ArrowForwardIosIcon
-												sx={{ width: '15px' }}
+										<div>
+											<img
+												src="/assets/images/delete.svg"
+												alt="삭제하기"
 												className="cursor-pointer"
-												onClick={() =>
-													detailClick(
-														String(item.productId),
-														item.productStatus,
-													)
-												}
+												onClick={openBottom}
 											/>
 										</div>
 									</div>
+									<div className="flex">
+										<img
+											src={item.accommodationImage}
+											alt="image"
+											className="w-[80px] h-[80px]"
+										/>
+										<div className="w-[60%] px-[10px]">
+											<p className="text-lg font-bold">
+												{item.accommodationName}
+											</p>
+											<div className="flex">
+												<p className="text-lg pr-[8px]">{item.roomName}</p>
+												<div className="flex items-center">
+													<div className="border-r-2 border-borderGray h-[12px]"></div>
+												</div>
+												<p className="text-lg pl-[8px]">
+													{item.standardNumber}인/최대 {item.maximumNumber}인
+												</p>
+											</div>
+											<p className="text-lg font-bold pt-[15px]">
+												{formatNumber(item.goldenPrice)}
+											</p>
+										</div>
+										<div className="">
+											<div className=" text-sm flex flex-col items-centertext-center justify-between h-[80px]">
+												{item.productStatus === 'SOLD_OUT' ? (
+													<p className="flex items-center justify-center  bg-main text-white rounded-[10px] w-[55px] h-[20px] p-[5px] ">
+														{productStatusTrans(item.productStatus)}
+													</p>
+												) : (
+													<p className="flex items-center justify-center  bg-lightGray border-[1px] border-[#e0e0e0] bg-lightGray border-[1px] border-[#e0e0e0]  rounded-[10px] w-[55px] h-[20px] p-[5px] ">
+														{productStatusTrans(item.productStatus)}
+													</p>
+												)}
+
+												<div className="flex justify-end">
+													<ArrowForwardIosIcon
+														sx={{ width: '15px' }}
+														className="cursor-pointer"
+														onClick={() =>
+															detailClick(
+																String(item.productId),
+																item.productStatus,
+															)
+														}
+													/>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div className="border-b border-borderGray"></div>
 							</div>
-						</div>
-						<div className="border-b border-borderGray"></div>
+						))}
 					</div>
-				))}
-			</div>
+				)}
+			</>
 		);
 	}
 
