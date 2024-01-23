@@ -4,6 +4,7 @@ import CardProd from './CardProd';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { delSoldProd } from '../../../../apis/sales';
 
 const ExpiredProdDetail = () => {
 	const { productId } = useParams();
@@ -29,10 +30,18 @@ const ExpiredProdDetail = () => {
 
 	console.log('상품만료', data);
 	// 판매완료 상세 - 판매완료 삭제 API
-	const dltProduct = () => {
-		console.log('판매 완료 상품 삭제 완료');
-		closeBottom();
+	const dltProduct = async (productId: number) => {
+		try {
+			const res = await delSoldProd(productId);
+			console.log('판매 완료 상품 삭제 완료', res);
+			alert(res.message);
+			closeBottom();
+			// 네비게이트 이동하기
+		} catch (error) {
+			console.error('에러 발생:', error);
+		}
 	};
+
 	if (isLoading) {
 		return <div> isLoading </div>;
 	}
@@ -46,7 +55,7 @@ const ExpiredProdDetail = () => {
 						leftBtn="취소"
 						rightBtn="삭제"
 						leftBtnFunc={closeBottom}
-						rightBtnFunc={dltProduct}
+						rightBtnFunc={() => dltProduct(data.productId)}
 					/>
 				</BottomSheet>
 				<div className="font-bold text-lg">판매 기간이 만료된 상품입니다.</div>

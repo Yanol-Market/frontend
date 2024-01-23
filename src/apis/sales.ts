@@ -23,11 +23,6 @@ export const getSoldList = async (): Promise<ApiSold> => {
 	return res.data;
 };
 
-// export const getSoldList = async (): Promise<ApiSold> => {
-// 	const res: AxiosResponse<ApiSold> = await instanceTest.get('/api/SoldList');
-// 	return res.data;
-// };
-
 // 판매완료 - 상세 조회 API
 export const getSoldDetail = async (
 	productId: string,
@@ -47,5 +42,11 @@ export const getExpiredDetail = async (
 		`/products/history/completed/${productId}?productStatus=${productStatus}
 		`,
 	);
+	return res.data;
+};
+
+// 판매 내역 - 판매완료 - 삭제
+export const delSoldProd = async (productId: number) => {
+	const res = await instance.delete(`/products/history/completed/${productId}`);
 	return res.data;
 };
