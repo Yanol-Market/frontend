@@ -1,5 +1,5 @@
 import { Cookies } from 'react-cookie';
-import instance from './axios';
+import instance, { instanceNoToken } from './axios';
 
 const cookies = new Cookies();
 
@@ -31,14 +31,11 @@ export const deleteCookie = () => {
 export const refreshCookie = async (refreshTokenValue: string) => {
 	try {
 		if (refreshTokenValue) {
-			const res = await instance.post('/reissue', {
+			const res = await instanceNoToken.post('/reissue', {
 				refreshToken: refreshTokenValue,
 			});
 			if (res) {
 				const { accessToken, refreshToken } = res.data.data;
-				console.log(res.data.data);
-				console.log(accessToken);
-				console.log(refreshToken);
 				setCookie('accessToken', accessToken);
 				setCookie('refreshToken', refreshToken);
 				const newAccessToken = getCookie('accessToken');
@@ -48,5 +45,6 @@ export const refreshCookie = async (refreshTokenValue: string) => {
 		}
 	} catch (err) {
 		console.error('토큰 재발급 실패', err);
+		return null;
 	}
 };

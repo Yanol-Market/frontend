@@ -14,7 +14,7 @@ const FindPassword = () => {
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
 	const navigate = useNavigate();
-	const findEmailText = watch('fintEmail');
+	const findEmailText = watch('findEmail');
 
 	const mutation = useMutation({
 		mutationFn: findEmail,
@@ -28,7 +28,7 @@ const FindPassword = () => {
 	});
 
 	const handleFindEmail = () => {
-		if (findEmailText) {
+		if (!findEmailText) {
 			return;
 		}
 		const data = { email: findEmailText };
@@ -39,7 +39,7 @@ const FindPassword = () => {
 			<Header title="비밀번호 찾기" />
 			<form className="w-[90%] mx-auto">
 				<p className="text-start text-lg font-medium mt-11 mb-5">
-					가입할 떄 사용한 이메일을 입력하시면 <br />
+					가입할 때 사용한 이메일을 입력하시면 <br />
 					임시 비밀번호를 발송해드립니다.
 				</p>
 				<div className="relative">
