@@ -19,6 +19,7 @@ interface PgDataProps {
 	userName: string;
 }
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
+	const redirectURL = 'https://golden-ticket.site/reservation/complete';
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
 		term2: false,
@@ -84,6 +85,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				buyer_name: pgData?.userName,
 				buyer_tel: pgData?.phoneNumber || '',
 				buyer_email: pgData?.email || '',
+				m_redirect_url: redirectURL,
 			};
 
 			try {
@@ -91,23 +93,29 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				window.IMP.request_pay(data, callback);
 			} catch (error) {
 				console.error('Error during payment request:', error);
+				navigate('/reservation/failure');
 			}
 		}
 	};
 
-	const callback = (response: RequestPayResponse) => {
+	const callback = async (response: RequestPayResponse) => {
 		if (response.success) {
 			try {
-				instance.post('/payments/result', {
+				const res = await instance.post('/payments/result', {
 					impUid: response.imp_uid,
 					orderId: payPreData?.orderId,
 				});
+				alert('결제 성공');
+				if (res) {
+					console.log(res.data.data);
+					navigate(
+						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
+					);
+				}
 			} catch (err) {
 				console.error(err);
 				throw new Error('사후검증 실패');
 			}
-			alert('결제 성공');
-			navigate('/');
 		}
 	};
 

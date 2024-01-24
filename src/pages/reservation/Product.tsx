@@ -3,28 +3,6 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { paymentsState } from '../../recoil/atom';
 
-export const productData: PaymentProps = {
-	orderId: 1,
-	productId: 1,
-	imageUrl: '/assets/images/reserveRoom.svg',
-	accommodationName: '에코그린 리조트 호텔',
-	roomName: '스탠다드 더블',
-	reservationType: '숙박',
-	standardNumber: 1,
-	maximumNumber: 2,
-	checkInDate: '2024-01-12',
-	checkInTime: '18:15:42.1989478',
-	checkOutDate: '2024-01-13',
-	checkOutTime: '19:15:42.1989478',
-	userName: 'test',
-	phoneNumber: '010-1234-5678',
-	email: 'test@mail',
-	price: 1000,
-	fee: 50,
-	totalPrice: 1050,
-	registrationNumber: 202401051119,
-};
-
 export interface PaymentProps {
 	orderId: number;
 	productId: number;
@@ -45,6 +23,7 @@ export interface PaymentProps {
 	fee: number;
 	totalPrice: number;
 	registrationNumber: number;
+	savingPrice: number;
 }
 
 const Product = () => {
@@ -55,7 +34,9 @@ const Product = () => {
 			<div className="p-[20px]">
 				<div className="flex justify-between py-[10px]">
 					<h2 className="text-body font-bold">예약 상품</h2>
-					<p className="text-sm pt-[8px]">골든티켓 등록번호 0123456789</p>
+					<p className="text-sm pt-[8px]">
+						골든티켓 등록번호 {payData?.productId}
+					</p>
 				</div>
 				<div className="flex">
 					<img
