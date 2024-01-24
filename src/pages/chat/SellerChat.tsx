@@ -41,7 +41,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const sellerId = useRecoilValue(sellerIdState);
 	const productId = useRecoilValue(productIdState);
 
-	console.log('negoId', negoId);
+	console.log('productStatus', productStatus);
 
 	const sendConsent = async () => {
 		try {
@@ -263,7 +263,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 									</div>
 								)
 							))}
-						{productStatus === 'TRANSFER_PENDING' &&
+						{chatStatus === 'TRANSFER_PENDING' &&
 							(transferNoti ? (
 								<TransferNoti
 									setTransferNoti={setTransferNoti}
