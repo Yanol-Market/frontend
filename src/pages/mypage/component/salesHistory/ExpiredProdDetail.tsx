@@ -9,6 +9,7 @@ import { delSoldProd } from '../../../../apis/sales';
 const ExpiredProdDetail = () => {
 	const { productId } = useParams();
 	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
 	const status = searchParams.get('status');
 
 	const { data, isLoading } = useQueryExpiredDetail(
@@ -36,7 +37,7 @@ const ExpiredProdDetail = () => {
 			console.log('판매 완료 상품 삭제 완료', res);
 			alert(res.message);
 			closeBottom();
-			// 네비게이트 이동하기
+			navigate(-1);
 		} catch (error) {
 			console.error('에러 발생:', error);
 		}

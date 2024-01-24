@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router';
 import { useQuerySoldList } from '../../../../hooks/useQuerySales';
 import { productStatusTrans } from '../../../../utils/translate';
 import { formatNumber } from '../../../../utils/formate';
-
+import { delSoldProd } from '../../../../apis/sales';
+import { useQueryClient } from '@tanstack/react-query';
 // 판매완료 리스트
 const SoldListProd = () => {
 	const { isLoading, error, data } = useQuerySoldList();
@@ -16,7 +17,7 @@ const SoldListProd = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const currentPath = location.pathname;
-
+	const queryClient = useQueryClient();
 	const [bottom, setBottom] = useState(false);
 	console.log('판매완료 리스으 ', error);
 	const openBottom = () => {
@@ -28,9 +29,16 @@ const SoldListProd = () => {
 	};
 
 	// 판매 완료 - 판매완료 상품 삭제 API
-	const delSalesProd = () => {
-		console.log('판매완료 상품 삭제 완료');
-		closeBottom();
+	const delSalesProd = async (productId: number) => {
+		try {
+			const res = await delSoldProd(productId);
+			console.log('판매 완료 리스트 삭제 완료', res);
+			alert(res.message);
+			queryClient.invalidateQueries({ queryKey: ['soldList'] });
+			closeBottom();
+		} catch (error) {
+			console.error('에러 발생:', error);
+		}
 	};
 
 	// 판매 완료 상세 클릭 (만료, 완료 나누기)
@@ -56,22 +64,22 @@ const SoldListProd = () => {
 					</div>
 				) : (
 					<div className="pb-[80px]">
-						<BottomSheet
-							isOpen={bottom}
-							onClose={closeBottom}
-							viewHeight="220px"
-						>
-							<ContentTwoBtnPage
-								title="판매 정보를 삭제하시겠습니까?"
-								leftBtn="취소"
-								rightBtn="삭제"
-								leftBtnFunc={closeBottom}
-								rightBtnFunc={delSalesProd}
-							/>
-						</BottomSheet>
-
 						{data.map((item) => (
 							<div key={item.productId}>
+								<BottomSheet
+									isOpen={bottom}
+									onClose={closeBottom}
+									viewHeight="220px"
+								>
+									<ContentTwoBtnPage
+										title="판매 정보를 삭제하시겠습니까?"
+										leftBtn="취소"
+										rightBtn="삭제"
+										leftBtnFunc={closeBottom}
+										rightBtnFunc={() => delSalesProd(item.productId)}
+									/>
+								</BottomSheet>
+
 								<div className="p-5">
 									<div className="pb-5 flex justify-between items-center ">
 										<p className="text-sm ">
