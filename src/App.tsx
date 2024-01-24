@@ -39,6 +39,7 @@ import { ChatPage } from './pages/chat';
 import ExpiredProdDetail from './pages/mypage/component/salesHistory/ExpiredProdDetail';
 import { NotFoundPage } from './component/common/NotFound';
 import { Splash } from './pages/splash';
+import { FindPassword } from './pages/findPassword';
 
 function App() {
 	return (
@@ -48,6 +49,7 @@ function App() {
 					<Route path="/splash" element={<Splash />} />
 					<Route path="/" element={<Main />} />
 					<Route path="/signin" element={<SignIn />} />
+					<Route path="/findpassword" element={<FindPassword />} />
 					<Route path="/yasignin" element={<YaSignIn />} />
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/alarm" element={<Alarm />} />

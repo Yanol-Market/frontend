@@ -1,9 +1,11 @@
 import React from 'react';
 import { useMutation } from '@tanstack/react-query';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getSignIn } from '../../apis/signin';
 import { setCookie } from '../../apis/cookie';
+import { Header } from '../../component/common/Header';
 
 const SignIn = () => {
 	const {
@@ -41,8 +43,17 @@ const SignIn = () => {
 		navigate('/signup');
 	};
 
+	const handleBackBtn = () => {
+		navigate(-1);
+	};
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
+			<div className="flex flex-row w-full items-start mt-3 cursor-pointer">
+				<ArrowBackIosNewOutlinedIcon
+					sx={{ width: '14px' }}
+					onClick={handleBackBtn}
+				/>
+			</div>
 			<img className="mt-24" src="/assets/images/mainLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"
@@ -80,10 +91,11 @@ const SignIn = () => {
 					>
 						로그인
 					</button>
-
-					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
-						비밀번호를 잊으셨나요?
-					</p>
+					<Link to="/findpassword">
+						<p className="text-sm text-left text-gray mt-1 cursor-pointer">
+							비밀번호를 잊으셨나요?
+						</p>
+					</Link>
 				</div>
 			</form>
 			<div className="w-full mt-[3.75rem]">
@@ -114,6 +126,11 @@ const SignIn = () => {
 					/>
 					<span className="w-2/3 ml-2 text-center">회원가입</span>
 				</button>
+				<Link to="/">
+					<p className="mt-11 text-lg text-gray underline underline-offset-1">
+						로그인 하지 않고 둘러보게요!
+					</p>
+				</Link>
 			</div>
 		</div>
 	);

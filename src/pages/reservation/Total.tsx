@@ -27,9 +27,8 @@ const Total = () => {
 				</div>
 			</div>
 			<p className="text-m p-[10px] text-right">
-				{/* 어떤 값 넣어야할 지..? */}
 				골든 티켓을 통해{' '}
-				<strong>{payData?.price.toLocaleString('ko-KR')}</strong>
+				<strong>{payData?.savingPrice.toLocaleString('ko-KR')}</strong>
 				원을 절약했어요!
 			</p>
 		</div>

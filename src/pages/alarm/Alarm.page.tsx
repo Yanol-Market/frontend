@@ -3,8 +3,10 @@ import { Header } from '../../component/common/Header';
 import { useQueryAlarm } from '../../hooks/useQuertAlarm';
 import { AlertRes } from '../../type/alarm';
 import { formatTimeAgo } from '../../utils/formate';
+import useSignInChecked from '../../utils/useSignInChecked';
 
 const Alarm = () => {
+	useSignInChecked();
 	const { data, error } = useQueryAlarm();
 	console.log(data);
 	if (error) {
