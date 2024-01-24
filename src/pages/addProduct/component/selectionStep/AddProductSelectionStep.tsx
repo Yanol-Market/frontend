@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReservationItem, { Reservation } from './ReservationItem';
 import { getReservations } from '../../../../apis/reservations';
+import { Link } from 'react-router-dom';
 
 interface Props {
 	onNextStep: (data: {
@@ -13,7 +14,16 @@ interface Props {
 }
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
-	const [isLoggedIn] = useState(true);
+	const userProfileInfo = JSON.parse(
+		localStorage.getItem('userProfileInfo') || '{"data": {}}',
+	);
+	const yanoljaId = userProfileInfo.data.yanoljaId;
+	console.log('yanoljaId:', userProfileInfo.data.yanoljaId);
+
+	const yanoljaIdExists = yanoljaId !== null;
+
+	const [isLoggedIn, setIsLoggedIn] = useState(yanoljaIdExists);
+
 	const hasReservations = true; // 예약 내역 여부
 	const [reservations, setReservations] = useState<Reservation[]>([]); // 예약 상태를 저장합니다.
 
@@ -24,7 +34,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	useEffect(() => {
 		const fetchReservations = async () => {
 			try {
-				const data = await getReservations('9');
+				const data = await getReservations(yanoljaId);
 				setReservations(data.data);
 			} catch (error) {
 				console.error('예약을 불러오는 중 오류 발생:', error);
@@ -110,7 +120,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 							<div className="fixed bottom-7 left-0 right-0 bg-gray-200 flex justify-center">
 								<button
 									type="button"
-									className={`mx-auto w-[50%] h-[3.125rem] rounded-xl text-lg ${
+									className={`mx-auto w-[23rem] h-[3.125rem] rounded-xl text-lg ${
 										selectedReservationIndex === null
 											? 'cursor-not-allowed bg-borderGray text-descGray'
 											: 'cursor-pointer bg-main text-white'
@@ -125,7 +135,7 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 				</>
 			);
 		} else {
-			// 비로그인 상태일 때 야놀자 로그인 안내 표시
+			// 야놀자 비로그인 상태일 때 야놀자 로그인 안내 표시
 			return (
 				<div className="flex flex-col items-center h-screen">
 					<div className="flex items-center">
@@ -136,16 +146,15 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 						/>
 					</div>
 					<div className="flex flex-col items-center flex-grow">
-						<button
-							type="button"
-							className="mx-auto bg-yaLogo w-[20.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
-						>
-							로그인
-						</button>
-						<p className="text-lg mb-6 mt-6">
-							야놀자 계정으로 간편하게 판매해보세요!
-						</p>
-						<p className="text-sm max-w-[245px]">
+						<Link to="/addproductyasignin">
+							<button
+								type="button"
+								className="mx-auto bg-yaLogo w-[22.9375rem] h-[3.125rem] rounded-xl text-white cursor-pointer text-m"
+							>
+								야놀자에서 예약내역 가져오기
+							</button>
+						</Link>
+						<p className="text-sm max-w-[245px] mt-6">
 							해당 서비스는 야놀자에서 예약된 건에 한해서 이용 가능합니다. 곧
 							외부 숙소 예약까지 확장할 예정이오니 조금만 기다려주세요!
 						</p>

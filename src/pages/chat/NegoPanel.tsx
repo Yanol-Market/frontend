@@ -1,7 +1,7 @@
 import React from 'react';
 import instance from '../../apis/axios';
-import axios from 'axios';
 import {
+	chatRoomIdState,
 	negoIdState,
 	productIdState,
 	productPriceState,
@@ -26,6 +26,7 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 		productPriceState,
 	);
 	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
+	const chatRoomId = useRecoilValue(chatRoomIdState);
 
 	const priceUp = () => {
 		setProductPrice((prev) => (prev ?? 0) + 5000);
@@ -51,7 +52,7 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 
 	const sendMessage = async (data: MessageType) => {
 		try {
-			const response = await axios.post(
+			const response = await instance.post(
 				'https://golden-ticket.site/chats/test',
 				data,
 			);
@@ -72,11 +73,13 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 		if (confirm('상품당 2회의 네고 제안이 가능합니다.')) {
 			negoSend();
 			const data = {
-				chatRoomId: 5,
+				chatRoomId,
 				senderType: 'BUYER',
 				userId: userId,
 				content: `${productPrice?.toLocaleString()} 원에 구매 가능할까요?`,
 			};
+
+			console.log(data);
 
 			sendMessage(data);
 			setOffered(true);

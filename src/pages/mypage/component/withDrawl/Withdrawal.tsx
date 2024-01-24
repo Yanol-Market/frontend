@@ -4,12 +4,25 @@ import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
 import WithdrawlReasons from './WithdrawlReasons';
 import { useNavigate } from 'react-router-dom';
 import MyPageClickBtn from '../btn/MyPageClickBtn';
+import { useRecoilValue } from 'recoil';
+import { withDrawlState } from '../../../../recoil/atom';
+import { useMutation } from '@tanstack/react-query';
+import { deleteMember } from '../../../../apis/deleteMember';
+import { deleteCookie } from '../../../../apis/cookie';
 
 const Withdrawl = () => {
 	const navigate = useNavigate();
+	const selectReason = useRecoilValue(withDrawlState);
 	const [isBottomSheetOpenWithDrawl, setIsBottomSheetWithDrawlOpen] =
 		useState(false);
 
+	const mutation = useMutation({
+		mutationFn: deleteMember,
+		onSuccess() {
+			deleteCookie();
+			navigate('/member/withdrawl/confirm');
+		},
+	});
 	const openBottomSheetWithDrawl = () => {
 		setIsBottomSheetWithDrawlOpen(true);
 	};
@@ -19,7 +32,7 @@ const Withdrawl = () => {
 	};
 
 	const withdrawlConfirmBtn = () => {
-		navigate('/member/withdrawl/confirm');
+		mutation.mutate({ reason: String(selectReason) });
 	};
 	return (
 		<div>
@@ -30,7 +43,7 @@ const Withdrawl = () => {
 					onClose={closeBottomSheetWithDrawl}
 					viewHeight="calc(100vh * 0.45)"
 				>
-					<WithdrawlReasons />
+					<WithdrawlReasons closeFunc={closeBottomSheetWithDrawl} />
 				</BottomSheet>
 				<div className="w-[90%] mx-auto mt-11 font-body font-medium text-descGray">
 					<p>서비스에 만족을 드리지 못해</p>
@@ -49,7 +62,7 @@ const Withdrawl = () => {
 						className="flex flex-row justify-between rounded-lg bg-lightGray mx-auto mt-5 mb-40 p-3 text-gray cursor-pointer"
 						onClick={openBottomSheetWithDrawl}
 					>
-						<p>탈퇴 사유 선택</p>
+						{selectReason ? <p>{selectReason}</p> : <p>탈퇴 사유 선택</p>}
 						<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
 					</div>
 				</div>

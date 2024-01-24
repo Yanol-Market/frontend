@@ -4,20 +4,36 @@ import { useQuery } from '@tanstack/react-query';
 import { getWishes } from '../../../../apis/wishes';
 import { ProductSpecialType } from '../../../main/component/Product/ProductListSpecial';
 import { Header } from '../../../../component/common/Header';
+import { WishItem, WishItemProps } from './WishItem';
 
+export interface WishListProps {
+	accommodationImage: string;
+	accommodationName: string;
+	checkInDate: string;
+	checkOutDate: string;
+	dDay: number;
+	goldenPrice: number;
+	id: number;
+	nights: number;
+	originPrice: number;
+	productId: number;
+	roomName: string;
+	status: string;
+	type: string;
+	yanoljaPrice: number;
+}
 const WishList = () => {
 	const { data } = useQuery({
 		queryKey: ['wishes'],
 		queryFn: getWishes,
 	});
-	console.log(data);
 	return (
 		<div>
 			<Header title="찜한 상품" />
-			{data &&
-				data.map((item: ProductSpecialType) => (
-					<div key={item.productId} className="w-[95%] mt-11 mb-7 mx-auto">
-						<ProductItemNew key={item.productId} product={item} />
+			{data?.data?.wishProducts &&
+				data?.data?.wishProducts.map((item: WishItemProps) => (
+					<div key={item.id} className="w-[95%] mt-11 mb-7 mx-auto">
+						<WishItem key={item.id} product={item} />
 					</div>
 				))}
 		</div>

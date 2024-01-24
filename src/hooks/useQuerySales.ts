@@ -27,20 +27,26 @@ export const useQuerySoldList = () => {
 };
 
 // 판매내역 - 판매 완료 - 상세
-export const useQuerySoldDetail = (productId: string) => {
+export const useQuerySoldDetail = (
+	productId: string,
+	productStatus: string,
+) => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['SoldDetail'],
-		queryFn: () => getSoldDetail(productId),
+		queryFn: () => getSoldDetail(productId, productStatus),
 		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };
 };
 
 // 상품만료 - 상세
-export const useQueryExpiredDetail = (productId: string) => {
+export const useQueryExpiredDetail = (
+	productId: string,
+	productStatus: string,
+) => {
 	const { data, isLoading, error } = useQuery({
 		queryKey: ['ExpiredDetail'],
-		queryFn: () => getExpiredDetail(productId),
+		queryFn: () => getExpiredDetail(productId, productStatus),
 		select: ({ data }) => data,
 	});
 	return { isLoading, error, data };

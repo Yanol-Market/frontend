@@ -4,7 +4,7 @@ import { registerProduct } from '../../../../apis/products';
 
 interface Props {
 	onPrevStep?: () => void;
-	onComplete: () => void;
+	onComplete: (productId?: number) => void;
 	selectedItem: {
 		originPrice: number;
 		yanoljaPrice: number;
@@ -17,6 +17,7 @@ interface Props {
 const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 	const [agreed, setAgreed] = useState(false);
 	const [isCompleted, setIsCompleted] = useState(false);
+	const [productId, setProductId] = useState();
 
 	const handleNextButtonClick = async () => {
 		if (agreed) {
@@ -29,6 +30,10 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 				setIsCompleted(true);
 				// 서버 응답 처리
 				console.log('상품 등록 성공:', response);
+
+				const productId = response.data.productId;
+				console.log('상품 등록 성공:', productId);
+				setProductId(productId);
 			} catch (error) {
 				console.error('상품 등록 오류:', error);
 				// 오류 처리
@@ -39,7 +44,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 	};
 
 	const handleCompleteButtonClick = () => {
-		onComplete();
+		onComplete(productId);
 	};
 
 	return (
@@ -98,7 +103,7 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 					<div className="fixed bottom-7 left-0 right-0 flex justify-center">
 						<button
 							type="button"
-							className={`mx-auto bg-borderGray w-[50%] h-[3.125rem] rounded-xl text-lg ${
+							className={`mx-auto bg-borderGray w-[23rem] h-[3.125rem] rounded-xl text-lg ${
 								agreed
 									? 'text-white bg-main cursor-pointer'
 									: 'text-descGray cursor-not-allowed'
@@ -111,7 +116,9 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 						</button>
 					</div>
 					{/* 완료 화면 */}
-					{isCompleted && <CompletionScreen onComplete={onComplete} />}
+					{isCompleted && (
+						<CompletionScreen onComplete={onComplete} productId={productId} />
+					)}
 				</div>
 			</div>
 		</div>
