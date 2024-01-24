@@ -17,13 +17,15 @@ const StatusBar = ({ status }: StatusBarProps) => {
 					)}
 
 					<Line />
-					{data === 'PAYMENT_PENDING' || data === 'TRANSFER_PENDING' ? (
+					{data === 'PAYMENT_PENDING' ||
+					data === 'TRANSFER_PENDING' ||
+					data === 'WAITING_TRANSFER' ? (
 						<ClickRounded>결제 진행</ClickRounded>
 					) : (
 						<Rounded>결제 진행</Rounded>
 					)}
 					<Line />
-					{data === 'TRANSFER_PENDING' ? (
+					{data === 'WAITING_TRANSFER' || data === 'TRANSFER_PENDING' ? (
 						<ClickRounded>양도 대기</ClickRounded>
 					) : (
 						<Rounded>양도 대기</Rounded>

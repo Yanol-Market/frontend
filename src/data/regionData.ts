@@ -6,7 +6,7 @@ export const regionData = [
 	},
 	{
 		id: 2,
-		region: '경기도',
+		region: '경기',
 		areaCode: 'GYEONGGI',
 	},
 	{

@@ -144,6 +144,7 @@ export const chatStatusState = atom({
 	default: '',
 });
 
+
 export const chatRoomIdState = atom({
 	key: 'ChatRoomIdState',
 	default: 0,
@@ -152,4 +153,8 @@ export const chatRoomIdState = atom({
 export const productStatusState = atom({
 	key: 'ProductStatusState',
 	default: '',
+
+export const withDrawlState = atom<string | null>({
+	key: 'withDrawlState',
+	default: null,
 });

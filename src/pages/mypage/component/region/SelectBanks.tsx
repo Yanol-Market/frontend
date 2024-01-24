@@ -3,7 +3,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { SelectBanksProps, checkedBankState } from '../../../../recoil/atom';
 import { bankData } from '../../../../data/bankData';
-interface CloseFuncProps {
+export interface CloseFuncProps {
 	closeFunc: () => void;
 }
 const SelectBanks = ({ closeFunc }: CloseFuncProps) => {

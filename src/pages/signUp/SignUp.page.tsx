@@ -56,12 +56,16 @@ const SignUp = () => {
 	}, [userInfoData, setValue]);
 	const handleCheckNickName = async () => {
 		const res = await getNickName(userNickName);
-		setIsNickNameAvailable(res?.data?.data);
+		console.log(res.data);
+		setIsNickNameAvailable(res.data);
+		console.log(isNickNameAvailable);
 	};
 
 	const handleCheckEmail = async () => {
 		const res = await getEmail(userEmail);
-		setIsEmailAvailable(res?.data?.data);
+		console.log(res);
+		setIsEmailAvailable(res.data);
+		console.log(isEmailAvailable);
 	};
 	const handleSignUp = () => {
 		const userInfoData = localStorage.getItem('userInfo');
@@ -124,7 +128,7 @@ const SignUp = () => {
 								? 'border-green'
 								: 'border-borderGray'
 						} w-full h-11 rounded-xl text-m pl-2 focus:outline-none ${
-							userNickName && errors.userNickName && !isNickNameAvailable
+							(userNickName && errors.userNickName) || isNickNameAvailable
 								? 'border border-red mb-0'
 								: ''
 						}`}
@@ -169,7 +173,7 @@ const SignUp = () => {
 								? 'border-green'
 								: 'border-borderGray'
 						} w-full h-11 rounded-xl text-m  pl-2 focus:outline-none ${
-							userEmail && errors.email && !isEmailAvailable
+							(userEmail && errors.email) || isEmailAvailable
 								? 'border border-red'
 								: ''
 						}`}
