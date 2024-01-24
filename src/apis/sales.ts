@@ -17,16 +17,21 @@ export const getSales = async (): Promise<ApiSales> => {
 
 // 판매완료 - 리스트 조회 API
 export const getSoldList = async (): Promise<ApiSold> => {
-	const res: AxiosResponse<ApiSold> = await instanceTest.get('/api/SoldList');
+	const res: AxiosResponse<ApiSold> = await instance.get(
+		'/products/history/completed',
+	);
 	return res.data;
 };
 
 // 판매완료 - 상세 조회 API
+// 테스트 못해봄
 export const getSoldDetail = async (
 	productId: string,
+	productStatus: string,
 ): Promise<ApiSoldDetail> => {
-	const res: AxiosResponse<ApiSoldDetail> = await instanceTest.get(
-		`/api/SoldDetail/${productId}`,
+	const res: AxiosResponse<ApiSoldDetail> = await instance.get(
+		`/products/history/completed/${productId}?productStatus=${productStatus}
+		`,
 	);
 	return res.data;
 };
@@ -34,9 +39,17 @@ export const getSoldDetail = async (
 // 상품만료 - 상세 조회 API
 export const getExpiredDetail = async (
 	productId: string,
+	productStatus: string,
 ): Promise<ApiExpiredDetail> => {
-	const res: AxiosResponse<ApiExpiredDetail> = await instanceTest.get(
-		`/api/ExpiredDetail/${productId}`,
+	const res: AxiosResponse<ApiExpiredDetail> = await instance.get(
+		`/products/history/completed/${productId}?productStatus=${productStatus}
+		`,
 	);
+	return res.data;
+};
+
+// 판매 내역 - 판매완료 - 삭제
+export const delSoldProd = async (productId: number) => {
+	const res = await instance.delete(`/products/history/completed/${productId}`);
 	return res.data;
 };

@@ -6,6 +6,7 @@ import { formatTimeAgo } from '../../utils/formate';
 
 const Alarm = () => {
 	const { data, error } = useQueryAlarm();
+	console.log(data);
 	if (error) {
 		return <div> 에러에러 </div>;
 	}
@@ -27,7 +28,7 @@ const Alarm = () => {
 									: ' bg-bgMain border-b border-homeMain'
 							}`}
 						>
-							<div className="w-[275px]">{item.content}</div>
+							<div className="">{item.content}</div>
 							<div className="pl-[35px]">{formatTimeAgo(item.createdAt)}</div>
 						</div>
 					))}

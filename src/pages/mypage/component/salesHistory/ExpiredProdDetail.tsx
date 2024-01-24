@@ -3,10 +3,24 @@ import { useQueryExpiredDetail } from '../../../../hooks/useQuerySales';
 import CardProd from './CardProd';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { delSoldProd } from '../../../../apis/sales';
 
 const ExpiredProdDetail = () => {
-	const { data, isLoading } = useQueryExpiredDetail('1');
+	const { productId } = useParams();
+	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
+	const status = searchParams.get('status');
+
+	const { data, isLoading } = useQueryExpiredDetail(
+		`${productId}`,
+		`${status}`,
+	);
 	const [bottom, setBottom] = useState(false);
+	console.log('판매완료 status ', status);
+	console.log('아이딛값', productId);
+	console.log('판매완료 상세 ', data);
+
 	const openBottom = () => {
 		setBottom(true);
 	};
@@ -17,10 +31,18 @@ const ExpiredProdDetail = () => {
 
 	console.log('상품만료', data);
 	// 판매완료 상세 - 판매완료 삭제 API
-	const dltProduct = () => {
-		console.log('판매 완료 상품 삭제 완료');
-		closeBottom();
+	const dltProduct = async (productId: number) => {
+		try {
+			const res = await delSoldProd(productId);
+			console.log('판매 완료 상품 삭제 완료', res);
+			alert(res.message);
+			closeBottom();
+			navigate(-1);
+		} catch (error) {
+			console.error('에러 발생:', error);
+		}
 	};
+
 	if (isLoading) {
 		return <div> isLoading </div>;
 	}
@@ -34,7 +56,7 @@ const ExpiredProdDetail = () => {
 						leftBtn="취소"
 						rightBtn="삭제"
 						leftBtnFunc={closeBottom}
-						rightBtnFunc={dltProduct}
+						rightBtnFunc={() => dltProduct(data.productId)}
 					/>
 				</BottomSheet>
 				<div className="font-bold text-lg">판매 기간이 만료된 상품입니다.</div>
