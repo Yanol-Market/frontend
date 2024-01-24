@@ -114,7 +114,7 @@ const SoldListProd = () => {
 												</p>
 											</div>
 											<p className="text-lg font-bold pt-[15px]">
-												{formatNumber(item.goldenPrice)}
+												{formatNumber(item.goldenPrice)}원
 											</p>
 										</div>
 										<div className="">

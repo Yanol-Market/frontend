@@ -2,14 +2,19 @@ import React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BuyerProps } from '../../../../data/purchasesData';
 import { formatNumber, formatTimeAgo } from '../../../../utils/formate';
+import { useNavigate } from 'react-router';
 
 const Chat = (props: BuyerProps) => {
 	const status = props.status;
+	const navigate = useNavigate();
 	console.log(status);
 
+	const handleClick = (chatRoomId: number) => {
+		navigate(`/chat?chatId=${chatRoomId}`);
+	};
 	if (status === 'INACTIVE') {
 		return (
-			<div className=" bg-borderWhite  px-5 py-3 mt-2 flex items-center  justify-between rounded-lg">
+			<div className=" bg-borderWhite  px-5  py-3  flex items-center  justify-between rounded-lg">
 				<div className="flex items-center">
 					<div>
 						<img src="/assets/images/userDefaultGray.svg" alt="userDefault" />
@@ -38,7 +43,7 @@ const Chat = (props: BuyerProps) => {
 		);
 	}
 	return (
-		<div className="border-borderGray border px-5 py-3 mt-2 flex items-center justify-between rounded-lg">
+		<div className="border-borderGray border px-5 py-3  flex items-center justify-between rounded-lg">
 			<div className="flex items-center">
 				<div>
 					<img src="/assets/images/userDefault.svg" alt="userDefault" />
@@ -57,7 +62,8 @@ const Chat = (props: BuyerProps) => {
 				<div>
 					<ArrowForwardIosIcon
 						sx={{ width: '15px' }}
-						className="cursor-pointer"
+						className="cursor-pointer "
+						onClick={() => handleClick(props.chatRoomId)}
 					/>
 				</div>{' '}
 			</div>

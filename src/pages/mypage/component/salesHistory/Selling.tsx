@@ -80,7 +80,7 @@ const Selling = () => {
 				) : (
 					<div className="p-5 pb-[80px]">
 						{data.map((item, index) => (
-							<div key={item.productId}>
+							<div key={item.productId} className="pb-5">
 								<BottomSheet
 									isOpen={Bottom}
 									onClose={closeBottom}
@@ -125,7 +125,7 @@ const Selling = () => {
 									goldenPrice={item.goldenPrice}
 								/>
 								<StatusBar status={item.status} />
-								<div className="flex mt-5 ">
+								<div className="flex mt-5 pb-1">
 									<div className="text-body font-semibold">구매 희망자 </div>
 									<div>
 										{click ? (
@@ -158,7 +158,7 @@ const Selling = () => {
 												</div>
 											))}
 								</div>
-								<div className=" border-b border-borderWhite pt-3"></div>
+								<div className=" border-b border-borderWhite pt-3 "></div>
 							</div>
 						))}
 					</div>
