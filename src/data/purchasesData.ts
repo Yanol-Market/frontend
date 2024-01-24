@@ -61,6 +61,7 @@ export interface BoughtDetailProd {
 	receiverNickname: string;
 	receiverProfileImage: string;
 	lastUpdatedAt: string;
+	orderId: number;
 }
 
 // 구매 완료 리스트
@@ -237,5 +238,6 @@ export const BoughtDetailRes: ApiBoughtDetailProd = {
 		receiverNickname: '닉네임1',
 		receiverProfileImage: '/assets/images/userDefault.svg',
 		lastUpdatedAt: '2024-01-10T14:00:00',
+		orderId: 5,
 	},
 };

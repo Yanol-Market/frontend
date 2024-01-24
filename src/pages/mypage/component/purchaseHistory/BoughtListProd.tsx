@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQueryBoughtList } from '../../../../hooks/useQueryPurchases';
 import { BoughtProd } from '../../../../data/purchasesData';
@@ -13,6 +13,7 @@ import { useQueryClient } from '@tanstack/react-query';
 // 테스트 ㄴㄴ
 const BoughtListProd = () => {
 	const queryClient = useQueryClient();
+
 	const { isLoading, error, data } = useQueryBoughtList();
 	console.log('구매완료 ', data);
 	console.log('구매완료 실패 ', error);
@@ -42,9 +43,9 @@ const BoughtListProd = () => {
 		}
 	};
 
-	const detailClick = (productId: string) => {
+	const detailClick = (productId: number, orderId: number) => {
 		console.log('클릭');
-		navigate(`/purchase/detail/${productId}`);
+		navigate(`/purchase/detail/${productId}?order=${orderId}`);
 	};
 
 	if (isLoading) {
@@ -117,7 +118,7 @@ const BoughtListProd = () => {
 										<ArrowForwardIosIcon
 											sx={{ width: '15px' }}
 											className="cursor-pointer"
-											onClick={() => detailClick(String(item.productId))}
+											onClick={() => detailClick(item.productId, item.orderId)}
 										/>
 									</div>
 									<BottomSheet
