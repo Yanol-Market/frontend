@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemNew = ({
@@ -9,23 +9,32 @@ export const ProductItemNew = ({
 }: {
 	product: ProductSpecialType;
 }) => {
+	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
-			addWish(productId);
+			const isSuccess = await addWish(productId);
 			setIsWished(true);
+			console.log(isSuccess);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
+
 			return;
 		} else {
-			deleteWish(product?.productId as number);
+			const isSuccess = await deleteWish(product?.productId as number);
 			setIsWished(false);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
 		}
 	};
 	return (
 		<Link to={`/product/${product.productId}`}>
-			<div className="flex h-[95px]">
+			<div className="flex h-[95px] justify-between">
 				<div className="relative mb-2 h-full">
 					<img
-						className="w-[120px] h-[95px] rounded-[5px]"
+						className="w-[140px] h-[95px] rounded-[5px] object-cover"
 						src={product.accommodationImage}
 						alt="productImg"
 					/>
@@ -48,9 +57,7 @@ export const ProductItemNew = ({
 						className="absolute bottom-[10px] left-[10px]"
 					>
 						<img
-							src={`/assets/images/${
-								product.isWished ? 'Fill' : ''
-							}heart_white.svg`}
+							src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
 							alt="heartIcon"
 						/>
 					</button>
@@ -73,10 +80,7 @@ export const ProductItemNew = ({
 							</p>
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
-									{(
-										(1 - product.goldenPrice / product.yanoljaPrice) *
-										100
-									).toFixed(0)}
+								{product.marketPriceRatio}
 									%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
@@ -90,10 +94,7 @@ export const ProductItemNew = ({
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
 									{' '}
-									{(
-										(1 - product.goldenPrice / product.originPrice) *
-										100
-									).toFixed(0)}
+									{product.originPriceRatio}
 									%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
@@ -111,7 +112,7 @@ export const ProductItemNew = ({
 									{product.goldenPrice.toLocaleString()}
 								</p>
 								<p className="text-fontBlack font-pre text-m font-semibold">
-									원
+								{`원(${product.days}박)`}
 								</p>
 							</div>
 						</div>

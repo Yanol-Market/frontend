@@ -9,17 +9,18 @@ const options = [
 	{ label: '경기', value: 2 },
 	{ label: '인천', value: 3 },
 	{ label: '강원', value: 4 },
-	{ label: '대전', value: 5 },
-	{ label: '충북', value: 6 },
-	{ label: '충남/세종', value: 7 },
-	{ label: '부산', value: 8 },
-	{ label: '울산', value: 9 },
-	{ label: '경남', value: 10 },
-	{ label: '대구', value: 11 },
-	{ label: '경북', value: 12 },
-	{ label: '광주', value: 13 },
-	{ label: '전남', value: 14 },
-	{ label: '전주/전북', value: 15 },
+	{ label: '제주', value: 5 },
+	{ label: '대전', value: 6 },
+	{ label: '충북', value: 7 },
+	{ label: '충남/세종', value:8 },
+	{ label: '부산', value: 9 },
+	{ label: '울산', value: 10 },
+	{ label: '경남', value: 11 },
+	{ label: '대구', value: 12 },
+	{ label: '경북', value: 13 },
+	{ label: '광주', value: 14 },
+	{ label: '전남', value: 15 },
+	{ label: '전주/전북', value: 16 },
 ];
 
 export const SearchProduct = () => {
@@ -81,7 +82,7 @@ export const SearchProduct = () => {
 				value={inputValue}
 				onChange={handleInputValue}
 				className="bg-inherit text-descGray outline-none text-lg placeholder:text-descGray w-full"
-				placeholder="국내 숙소명 또는 지역명"
+				placeholder="숙소명을 입력하세요"
 			/>
 		</div>
 	);
@@ -107,7 +108,7 @@ const formatSelectString = (numberValue: number) => {
 			break;
 		}
 		case 4: {
-			stringValue = 'AGANGWONLL';
+			stringValue = 'GANGWON';
 			break;
 		}
 		case 5: {

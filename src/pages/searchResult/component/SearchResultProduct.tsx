@@ -107,7 +107,7 @@ export const SearchResultProduct = ({
 									{product.goldenPrice.toLocaleString()}
 								</p>
 								<p className="text-fontBlack font-pre text-m font-semibold">
-									원
+								{`원(${product.days}박)`}
 								</p>
 							</div>
 						</div>

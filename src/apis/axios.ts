@@ -8,6 +8,7 @@ import { getCookie, refreshCookie } from './cookie';
 
 export const instanceTest = axios.create({
 	baseURL: 'http://localhost:3000',
+	withCredentials: true,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -21,6 +22,7 @@ export const instanceNoToken = axios.create({
 });
 const instance = axios.create({
 	baseURL: 'https://golden-ticket.site',
+	withCredentials: true,
 	headers: {
 		'Content-Type': 'application/json',
 	},

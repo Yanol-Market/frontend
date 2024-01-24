@@ -34,11 +34,12 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	useEffect(() => {
 		const fetchReservations = async () => {
 			try {
-				const data = await getReservations(yanoljaId);
-				setReservations(data.data);
+				if (yanoljaId !== null) {
+					const data = await getReservations(yanoljaId);
+					setReservations(data.data);
+				}
 			} catch (error) {
 				console.error('예약을 불러오는 중 오류 발생:', error);
-				// 오류 처리를 추가하세요.
 			}
 		};
 
