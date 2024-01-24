@@ -63,7 +63,7 @@ const ChatList = () => {
 				selectedFilter={userType}
 				onFilterChange={handleDropdownChange}
 			/>
-			<ChatListProd chatRoomShortList={chatList} />
+			<ChatListProd chatRoomShortList={chatList} userType={userType} />
 		</div>
 	);
 };
