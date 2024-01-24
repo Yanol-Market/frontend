@@ -73,6 +73,7 @@ export interface BoughtProd {
 	maximumNumber: number;
 	goldenPrice: number;
 	completedAt: string;
+	orderId: number;
 }
 
 export interface CardProdProps {
@@ -184,6 +185,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			maximumNumber: 4,
 			goldenPrice: 100000,
 			completedAt: '2024-01-22T03:00:00',
+			orderId: 5,
 		},
 		{
 			productId: 2,
@@ -194,6 +196,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			maximumNumber: 4,
 			goldenPrice: 100000,
 			completedAt: '2023-12-10T14:00:00',
+			orderId: 7,
 		},
 		{
 			productId: 3,
@@ -204,6 +207,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			maximumNumber: 4,
 			goldenPrice: 100000,
 			completedAt: '2022-01-10T14:00:00',
+			orderId: 8,
 		},
 	],
 };

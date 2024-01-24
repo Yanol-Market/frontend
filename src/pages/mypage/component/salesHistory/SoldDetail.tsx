@@ -14,6 +14,7 @@ const SoldDetail = () => {
 	const navigate = useNavigate();
 	const status = searchParams.get('status');
 
+	// 테스트 못해봄
 	const { data, isLoading } = useQuerySoldDetail(`${productId}`, `${status}`);
 	const [bottom, setBottom] = useState(false);
 

@@ -27,10 +27,10 @@ export const useQueryBoughtList = () => {
 };
 
 // // 구매내역 - 구매완료 - 상세
-export const useQueryBoughtDetail = (productId: string) => {
+export const useQueryBoughtDetail = (orderId: string) => {
 	const { isLoading, error, data } = useQuery({
 		queryKey: ['BoughtDetail'],
-		queryFn: () => getBoughtDetailList(productId),
+		queryFn: () => getBoughtDetailList(orderId),
 		select: ({ data }) => data,
 	});
 	return {

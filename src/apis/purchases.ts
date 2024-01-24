@@ -17,17 +17,23 @@ export const getPurchases = async (): Promise<ApiBuyingProd> => {
 // 구매내역-구매완료-리스트 조회 API
 export const getBoughtList = async (): Promise<ApiBoughtProd> => {
 	const res: AxiosResponse<ApiBoughtProd> = await instance.get(
-		'/api/purchase/history?status=COMPLETE',
+		'/orders/history/completed',
 	);
 	return res.data;
 };
 
-// 구매내역-구매완료-리스트 조회 API
+// 구매내역-구매완료 상세조회 API
 export const getBoughtDetailList = async (
-	productId: string,
+	orderId: string,
 ): Promise<ApiBoughtDetailProd> => {
 	const res: AxiosResponse<ApiBoughtDetailProd> = await instanceTest.get(
-		`/api/orders/history?status=COMPLETED&productId=${productId}`,
+		`/orders/history/completed/${orderId}`,
 	);
+	return res.data;
+};
+
+// 구매내역- 구매완료 - 삭제
+export const delBoughtProd = async (orderId: number) => {
+	const res = await instance.delete(`/products/history/completed/${orderId}`);
 	return res.data;
 };
