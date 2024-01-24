@@ -26,8 +26,7 @@ const Selling = () => {
 	console.log('판매중 성꽁', data);
 	console.log('판매중 에러', error);
 	console.log('판매중 메세지', error?.message);
-	// console.log('판매중 Fail', error.response);
-	// console.log('판매중 성꽁22', data?.[0].chats);
+
 	const openBottom = () => {
 		setBottom(true);
 		console.log('오픈');
@@ -80,7 +79,13 @@ const Selling = () => {
 				) : (
 					<div className="p-5 pb-[80px]">
 						{data.map((item, index) => (
-							<div key={item.productId} className="pb-5">
+							<div key={item.productId}>
+								{index === 0 ? null : (
+									<div className="border-b-[7px] border-lightGray  my-[32px]">
+										{' '}
+									</div>
+								)}
+
 								<BottomSheet
 									isOpen={Bottom}
 									onClose={closeBottom}
