@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useQueryBoughtDetail } from '../../../../hooks/useQueryPurchases';
-import { getBoughtDetailList } from '../../../../apis/purchases';
-import { BoughtDetailProd } from '../../../../data/purchasesData';
 import {
 	formatDateTime,
 	formatNumber,
@@ -11,36 +9,22 @@ import {
 	formatWeek,
 } from '../../../../utils/formate';
 import { reservationTypeTrans } from '../../../../utils/translate';
-const prodData = {
-	productId: 145845145,
-	accommodationImage: '/assets/images/reserveRoom.svg',
-	accommodationName: '에코그린 리조트 호텔',
-	roomName: '디럭스 더블',
-	reservationType: '숙박',
-	standardNumber: 2,
-	maximumNumber: 4,
-	checkInTime: '14:00:00',
-	checkOutTime: '12:00:00',
-	checkInDate: '2024-01-10',
-	checkOutDate: '2024-01-15',
-	price: 100000,
-	buyerName: '구매자 이름',
-	buyerPhoneNumber: '구매자 전화번호',
-	buyerEmail: '구매자 이메일',
-	completedDate: '2024-01-01T01:01:01',
-	chatRoomId: 456458421,
-	receiverNickname: '닉네임1',
-	receiverProfileImage: '프로필 이미지 경로',
-	lastUpdatedAt: '20',
-};
+import { useSearchParams } from 'react-router-dom';
 
 const PurchaseDetail = () => {
-	const { data, isLoading, error } = useQueryBoughtDetail('1');
+	const [searchParams] = useSearchParams();
+	const orderId = searchParams.get('order');
+
+	const { data, isLoading, error } = useQueryBoughtDetail(`${orderId}`);
 
 	console.log('구매왕료 상세 ', data);
 
 	if (isLoading) {
 		return <div> isLoading </div>;
+	}
+
+	if (error) {
+		return <div> error </div>;
 	}
 
 	if (data) {

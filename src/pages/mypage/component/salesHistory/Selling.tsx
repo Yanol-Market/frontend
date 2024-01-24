@@ -11,6 +11,7 @@ import Chat from './Chat';
 import { useNavigate } from 'react-router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { editProdState } from '../../../../recoil/prodEditAtom';
+import SellingSkeleton from './skeleton/SellingSkeleton';
 
 // 판매중
 const Selling = () => {
@@ -23,6 +24,9 @@ const Selling = () => {
 	const editData = useSetRecoilState(editProdState);
 
 	console.log('판매중 성꽁', data);
+	console.log('판매중 에러', error);
+	console.log('판매중 메세지', error?.message);
+	// console.log('판매중 Fail', error.response);
 	// console.log('판매중 성꽁22', data?.[0].chats);
 	const openBottom = () => {
 		setBottom(true);
@@ -55,9 +59,17 @@ const Selling = () => {
 		}
 	};
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<SellingSkeleton />{' '}
+			</div>
+		);
 	}
 
+	if (error) {
+		return <div> 에러 에러 </div>;
+	}
 	if (data) {
 		return (
 			<>
