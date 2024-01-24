@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 import CardProd from './CardProd';
 import { useQuerySoldDetail } from '../../../../hooks/useQuerySales';
 import { formatDateTime, formatNumber } from '../../../../utils/formate';
 import Chat from './Chat';
+import { delSoldProd } from '../../../../apis/sales';
+import { useNavigate } from 'react-router-dom';
 
 const SoldDetail = () => {
 	const { data, isLoading } = useQuerySoldDetail('1');
 	const [bottom, setBottom] = useState(false);
+	const navigate = useNavigate();
 
 	console.log('판매완료 상세 ', data);
 	const openBottom = () => {
@@ -21,9 +23,17 @@ const SoldDetail = () => {
 	};
 
 	// 판매완료 상세 - 판매완료 삭제 API
-	const dltProduct = () => {
-		console.log('판매 완료 상품 삭제 완료');
-		closeBottom();
+	// 테스트 못해봄
+	const dltProduct = async (productId: number) => {
+		try {
+			const res = await delSoldProd(productId);
+			console.log('판매 완료 상품 삭제 완료', res);
+			alert(res.message);
+			closeBottom();
+			navigate(-1);
+		} catch (error) {
+			console.error('에러 발생:', error);
+		}
 	};
 
 	if (isLoading) {
@@ -39,7 +49,7 @@ const SoldDetail = () => {
 						leftBtn="취소"
 						rightBtn="삭제"
 						leftBtnFunc={closeBottom}
-						rightBtnFunc={dltProduct}
+						rightBtnFunc={() => dltProduct(data.productId)}
 					/>
 				</BottomSheet>
 				<div className="pb-5 flex justify-between items-center">
