@@ -36,8 +36,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 		setProductPrice((prev) => (prev ?? 0) - 5000);
 	};
 
-	console.log('productId', productId);
-
 	const negoSend = () => {
 		instance
 			.post(`/nego/proposePrice/${productId}`, {

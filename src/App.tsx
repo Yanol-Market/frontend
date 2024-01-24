@@ -108,6 +108,7 @@ function App() {
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
 					<Route path="/chat" element={<ChatPage />} />
+					<Route path="/chat/:chatId" element={<ChatPage />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={

@@ -13,6 +13,7 @@ import {
 	messageState,
 	negoIdState,
 	negoSuccessState as negoSuccessAtom,
+	offeredPriceState,
 	receiverNicknameState,
 	sendMessage,
 	userIdState,
@@ -26,14 +27,11 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 	const [reject, setReject] = useState(false);
 	const negoId = useRecoilValue(negoIdState);
 	const receiverName = useRecoilValue(receiverNicknameState);
-	const [negoSuccess, setNegoSuccess] = useRecoilState<boolean | null>(
-		negoSuccessAtom,
-	);
-	const [message, setMessage] = useRecoilState(messageState);
 	const buyerId = useRecoilValue(buyerIdState);
 	const userId = useRecoilValue(userIdState);
 	const chatStatus = useRecoilValue(chatStatusState);
 	const chatRoomId = useRecoilValue(chatRoomIdState);
+	const offerPrice = useRecoilValue(offeredPriceState);
 
 	console.log('negoId', negoId);
 
@@ -41,9 +39,15 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 		try {
 			const response = await instance.patch(`nego/confirm/${negoId}`);
 			console.log(response.data);
-			if (response.data) {
-				setNegoSuccess(response.data.data.consent);
-			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const sendReject = async () => {
+		try {
+			const response = await instance.patch(`nego/deny/${negoId}`);
+			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -103,6 +107,24 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 	const handleReject = () => {
 		setNoti(false);
 		setReject(true);
+		const sendMessages = async () => {
+			const data = {
+				chatRoomId,
+				senderType: 'SELLER',
+				userId,
+				content: `제안해주신 네고 가격 ${offerPrice?.toLocaleString()}은 판매 불가합니다.`,
+			};
+
+			try {
+				const result = await sendMessage(data);
+				console.log('메시지 전송 결과:', result);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		sendReject();
+		sendMessages();
 	};
 
 	return (
@@ -111,7 +133,7 @@ const SellerChat: React.FC<ChatProps> = ({ productData, chatList }) => {
 			<div className="text-m text-center p-[10px]"></div>
 			<ChatItem chatList={chatList} userId={userId} />
 			<div>
-				{chatStatus !== 'PAYMENT_PENDING' &&
+				{chatStatus === 'NEGO_PROPOSE' &&
 					(noti ? (
 						<NegoNoti
 							setNoti={setNoti}

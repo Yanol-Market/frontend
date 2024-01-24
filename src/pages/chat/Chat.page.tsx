@@ -10,15 +10,18 @@ import {
 	chatRoomIdState,
 	chatStatusState,
 	messageState,
+	negoIdState,
 	offeredPriceState,
 	productIdState,
 	productPriceState,
+	productStatusState,
 	receiverNicknameState,
 	sellerIdState,
 	sendMessage,
 	userIdState,
 	userNameState,
 } from '../../recoil/atom';
+import { useLocation } from 'react-router-dom';
 
 const ChatPage = () => {
 	const [userId, setUserId] = useRecoilState<number>(userIdState);
@@ -38,6 +41,12 @@ const ChatPage = () => {
 	const [offeredPrice, setOfferPrice] = useRecoilState(offeredPriceState);
 	const [chatStatus, setChatStatus] = useRecoilState(chatStatusState);
 	const [chatRoomId, setChatRoomId] = useRecoilState(chatRoomIdState);
+	const [negoId, setNegoId] = useRecoilState(negoIdState);
+	const [productStatus, setProductStatus] = useRecoilState(productStatusState);
+
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const chatId = searchParams.get('chatId');
 
 	// 로그인 유저 아이디 가져오기
 
@@ -91,14 +100,12 @@ const ChatPage = () => {
 	// 	makeChatRoom();
 	// }, []);
 
-	const chatRoomID = 6;
-
 	// 채팅 대화 목록 조회
 
 	useEffect(() => {
 		const fetchChatData = async () => {
 			try {
-				const response = await instance.get(`/chats/${chatRoomID}`);
+				const response = await instance.get(`/chats/${chatId}`);
 				const chatRoomData = response.data.data;
 
 				console.log(chatRoomData);
@@ -124,6 +131,8 @@ const ChatPage = () => {
 					sellerId,
 					chatRoomId,
 					chatStatus,
+					negoId,
+					productStatus,
 				} = chatRoomInfoResponse;
 
 				setReceiverName(receiverNickname);
@@ -135,47 +144,8 @@ const ChatPage = () => {
 				setOfferPrice(offerPrice);
 				setChatStatus(chatStatus);
 				setChatRoomId(chatRoomId);
-
-				if (chatResponseList.length === 0) {
-					const initialMessageSend = async () => {
-						const data1 = {
-							chatRoomId,
-							senderType: 'SYSTEM',
-							userId: buyerId,
-							content: `${receiverName}님이 입장하셨습니다.`,
-						};
-
-						const data2 = {
-							chatRoomId,
-							senderType: 'SYSTEM',
-							userId: sellerId,
-							content: `님이 입장하셨습니다.`,
-						};
-
-						const data3 = {
-							chatRoomId,
-							senderType: 'SELLER',
-							userId: sellerId,
-							content: `${productData?.accommodationName} ${productData?.roomName} ${productData?.checkInDate} ~ ${productData?.checkOutDate} ${productData?.price.toLocaleString(
-								'ko-KR',
-							)} 원에 팝니다. 가격 협의 가능합니다.`,
-						};
-
-						try {
-							const result1 = await sendMessage(data1);
-							console.log('첫 번째 메시지 전송 결과:', result1);
-
-							const result2 = await sendMessage(data2);
-							console.log('두 번째 메시지 전송 결과:', result2);
-
-							const result3 = await sendMessage(data3);
-							console.log('세 번째 메시지 전송 결과:', result3);
-						} catch (error) {
-							console.error('메시지 전송 중 오류 발생:', error);
-						}
-					};
-					initialMessageSend();
-				}
+				setNegoId(negoId);
+				setProductStatus(productStatus);
 			} catch (error) {
 				console.error('Error fetching chat data:', error);
 			}
