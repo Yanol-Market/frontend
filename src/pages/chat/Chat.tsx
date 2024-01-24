@@ -15,11 +15,7 @@ import {
 } from '../../recoil/atom';
 import { getPaymentsDetail } from '../../apis/paymentsDetail';
 
-const Chat: React.FC<ChatProps> = ({
-	productData,
-	chatList,
-	setNegoStatus,
-}) => {
+const Chat: React.FC<ChatProps> = ({ chatList, setNegoStatus }) => {
 	const date = dayjs();
 	const now = date.format('YYYY.MM.DD');
 	const [nego, setNego] = useState(true);
@@ -128,6 +124,10 @@ const Chat: React.FC<ChatProps> = ({
 					</div>
 				</div>
 			)}
+
+			{productStatus === 'RESERVED' && chatStatus !== 'TRANSFER_PENDING' && (
+				<div></div>
+			)}
 		</div>
 	);
 };
@@ -135,7 +135,6 @@ const Chat: React.FC<ChatProps> = ({
 export default Chat;
 
 export interface ChatProps {
-	productData: ProductData | null;
 	chatList: ChatItemType[] | null;
 	setNegoStatus: React.Dispatch<React.SetStateAction<string>>;
 }

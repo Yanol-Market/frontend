@@ -12,12 +12,12 @@ import {
 	messageState,
 	negoIdState,
 	offeredPriceState,
+	productDataState,
 	productIdState,
 	productPriceState,
 	productStatusState,
 	receiverNicknameState,
 	sellerIdState,
-	sendMessage,
 	userIdState,
 	userNameState,
 } from '../../recoil/atom';
@@ -25,7 +25,7 @@ import { useLocation } from 'react-router-dom';
 
 const ChatPage = () => {
 	const [userId, setUserId] = useRecoilState<number>(userIdState);
-	const [productData, setProductData] = useState<ProductData | null>(null);
+	const [productData, setProductData] = useRecoilState(productDataState);
 	const [chatList, setChatList] = useState<ChatItemType[] | null>([]);
 	const [negoStatus, setNegoStatus] = useState<string>('negotiated');
 	const [message, setMessage] = useRecoilState(messageState);
@@ -62,43 +62,6 @@ const ChatPage = () => {
 		}
 		getUser();
 	}, []);
-
-	// 채팅방 만들기
-	// useEffect(() => {
-	// 	const makeChatRoom = async () => {
-	// 		const data = {
-	// 			userId: 7,
-	// 			productId: 1,
-	// 		};
-	// 		try {
-	// 			const response = await instance.post('/chats/test/chat-room', data);
-	// 			console.log(response);
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	};
-
-	// 	makeChatRoom();
-	// }, []);
-
-	// 챗룸 아이디 가져오기
-
-	// useEffect(() => {
-	// 	const makeChatRoom = async () => {
-	// 		const data = {
-	// 			userId: 7,
-	// 			productId: 2,
-	// 		};
-	// 		try {
-	// 			const response = await instance.post('/chats/test/chat-room', data);
-	// 			console.log(response);
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	};
-
-	// 	makeChatRoom();
-	// }, []);
 
 	// 채팅 대화 목록 조회
 
@@ -162,17 +125,9 @@ const ChatPage = () => {
 			</div>
 			<div className="h-[calc(100%-160px)]">
 				{userId === buyerId ? (
-					<Chat
-						productData={productData}
-						chatList={chatList}
-						setNegoStatus={setNegoStatus}
-					/>
+					<Chat chatList={chatList} setNegoStatus={setNegoStatus} />
 				) : (
-					<SellerChat
-						productData={productData}
-						chatList={chatList}
-						setNegoStatus={setNegoStatus}
-					/>
+					<SellerChat chatList={chatList} setNegoStatus={setNegoStatus} />
 				)}
 			</div>
 		</div>
