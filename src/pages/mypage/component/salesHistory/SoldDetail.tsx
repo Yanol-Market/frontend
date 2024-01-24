@@ -6,12 +6,16 @@ import { useQuerySoldDetail } from '../../../../hooks/useQuerySales';
 import { formatDateTime, formatNumber } from '../../../../utils/formate';
 import Chat from './Chat';
 import { delSoldProd } from '../../../../apis/sales';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 
 const SoldDetail = () => {
-	const { data, isLoading } = useQuerySoldDetail('1');
-	const [bottom, setBottom] = useState(false);
+	const { productId } = useParams();
+	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
+	const status = searchParams.get('status');
+
+	const { data, isLoading } = useQuerySoldDetail(`${productId}`, `${status}`);
+	const [bottom, setBottom] = useState(false);
 
 	console.log('판매완료 상세 ', data);
 	const openBottom = () => {
