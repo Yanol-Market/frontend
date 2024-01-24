@@ -11,11 +11,12 @@ const formatDate = (date: Date) => {
 	const day = moment(date).format(`YYYY.MM.DD`);
 	const enDaysWeek = moment(date).format('dddd');
 	let koDaysWeek = '';
+
 	switch (enDaysWeek) {
 		case 'Monday':
 			koDaysWeek = '월';
 			break;
-		case 'TuesDay':
+		case 'Tuesday':
 			koDaysWeek = '화';
 			break;
 		case 'Wednesday':
@@ -54,7 +55,6 @@ export const SearchDate = () => {
 	const [dateValue, setDateValue] = useState(createDefaultDate());
 
 	const handleDateChange = async (date: Date[], event: any) => {
-		console.log(date)
 		let startFormatDate = formatDate(startDate);
 		let endFormatDate = formatDate(endDate);
 		const dayDiff = moment(date[1]).diff(date[0], 'days');
@@ -65,7 +65,6 @@ export const SearchDate = () => {
 
 		setEndDate(() => {
 			endFormatDate = formatDate(date[1]);
-			console.log(startFormatDate)
 			return date[1];
 		});
 		setIsShow(false);
@@ -78,11 +77,14 @@ export const SearchDate = () => {
 		setDateValue(event.target.value);
 	};
 	const tileDisabled = ({ date }: { date: Date }) => {
-		if (date.toDateString() === new Date().toDateString()) {
-			return true;
-		}
+		// if (date.toDateString() === new Date().toDateString()) {
+		// 	return true;
+		// }
+		const currentDate = new Date();
+		currentDate.setHours(0, 0, 0, 0);
+		date.setHours(0, 0, 0, 0);
 
-		return date < new Date();
+		return date < currentDate;
 	};
 	return (
 		<div
@@ -136,15 +138,27 @@ export const StyledCalendar = styled(Calendar)`
 		background-color: #ffcc00;
 	}
 	color: #222222;
-
+	.react-calendar__tile--hasActive {
+		background-color: #ffcc00;
+		color: white;
+	}
 	.react-calendar__tile--active {
 		background-color: #ffcc00;
 	}
 	/* 현재 날짜 타일에 적용할 스타일 */
-	.react-calendar__tile--now {
-		background-color: inherit;
-	}
 	.react-calendar__tile:enabled:hover {
 		background-color: #ffcc00;
+	}
+	.react-calendar__tile--hasActive {
+		background-color: #ffcc00;
+		color: white;
+	}
+	.react-calendar__tile--now {
+		background-color: white;
+		color: #222222;
+	}
+	.react-calendar__tile--rangeStart{
+		background-color: #ffcc00;
+		color:white;
 	}
 `;

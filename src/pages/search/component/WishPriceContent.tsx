@@ -14,7 +14,7 @@ export const WishPriceContent = () => {
 	};
 	return (
 		<div>
-			<p className='text-fontBlack text-m mb-2'>희망 1박당 금액대</p>
+			<p className='text-fontBlack text-m mb-2'>희망 총 숙박금액대</p>
 			<div className="flex gap-[7px]">
 				<label
 					className={`p-2 text-m rounded-[20px] cursor-pointer ${
