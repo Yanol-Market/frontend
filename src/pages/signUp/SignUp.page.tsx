@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getNickName } from '../../apis/nickname';
 import { getEmail } from '../../apis/email';
+import { Header } from '../../component/common/Header';
 
 const SignUp = () => {
 	const {
@@ -36,7 +37,7 @@ const SignUp = () => {
 			if (userInfoData) {
 				navigate('/yasignin');
 			}
-			navigate('/');
+			navigate('/signin');
 		},
 		onError(err) {
 			console.error(err);
@@ -55,6 +56,9 @@ const SignUp = () => {
 		}
 	}, [userInfoData, setValue]);
 	const handleCheckNickName = async () => {
+		if (userNickName === '') {
+			return;
+		}
 		const res = await getNickName(userNickName);
 		console.log(res.data);
 		setIsNickNameAvailable(res.data);
@@ -62,6 +66,9 @@ const SignUp = () => {
 	};
 
 	const handleCheckEmail = async () => {
+		if (userEmail === '') {
+			return;
+		}
 		const res = await getEmail(userEmail);
 		console.log(res);
 		setIsEmailAvailable(res.data);
@@ -100,7 +107,7 @@ const SignUp = () => {
 	}, [userNickName, userEmail]);
 	return (
 		<div className="flex flex-col items-center text-center">
-			<div className="mt-7">회원가입</div>
+			<Header title="회원가입" />
 			<form className="mt-10 w-[90%]" onSubmit={handleSubmit(handleSignUp)}>
 				<input
 					className={`border border-borderGray w-full h-11 mb-4  rounded-xl text-m pl-2 focus:outline-none ${

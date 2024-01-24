@@ -25,7 +25,7 @@ export const LocalSearch = () => {
 	return (
 		<div>
 			<Header title="어디로 갈까요?" />
-			<main className="h-[90vh] border-solid border-borderWhite border-t-[1px] pt-[25px]">
+			<main className="h-[90vh] mt-5 border-solid border-borderWhite border-t-[1px] pt-[25px]">
 				<div className='grid grid-cols-5 px-5 gap-y-[25px]'>
 					{locationData.map((item, index) => (
 						<Location key={index} title={item.title} imgSrc={item.imgSrc} />

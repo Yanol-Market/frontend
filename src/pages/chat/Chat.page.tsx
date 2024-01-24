@@ -5,22 +5,29 @@ import { Header } from '../../component/common/Header';
 import ProductInfo from './ProductInfo';
 import instance from '../../apis/axios';
 import { useRecoilState } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
+
 import {
 	buyerIdState,
+	chatRoomIdState,
 	chatStatusState,
 	messageState,
+	negoIdState,
 	offeredPriceState,
+	productDataState,
 	productIdState,
 	productPriceState,
+	productStatusState,
 	receiverNicknameState,
 	sellerIdState,
 	userIdState,
 	userNameState,
 } from '../../recoil/atom';
+import { useLocation } from 'react-router-dom';
 
 const ChatPage = () => {
 	const [userId, setUserId] = useRecoilState<number>(userIdState);
-	const [productData, setProductData] = useState<ProductData | null>(null);
+	const [productData, setProductData] = useRecoilState(productDataState);
 	const [chatList, setChatList] = useState<ChatItemType[] | null>([]);
 	const [negoStatus, setNegoStatus] = useState<string>('negotiated');
 	const [message, setMessage] = useRecoilState(messageState);
@@ -32,9 +39,16 @@ const ChatPage = () => {
 	};
 	const [productId, setProductId] = useRecoilState(productIdState);
 	const [buyerId, setBuyerId] = useRecoilState(buyerIdState);
-	const [sellerid, setSellerId] = useRecoilState(sellerIdState);
+	const [sellerId, setSellerId] = useRecoilState(sellerIdState);
 	const [offeredPrice, setOfferPrice] = useRecoilState(offeredPriceState);
 	const [chatStatus, setChatStatus] = useRecoilState(chatStatusState);
+	const [chatRoomId, setChatRoomId] = useRecoilState(chatRoomIdState);
+	const [negoId, setNegoId] = useRecoilState(negoIdState);
+	const [productStatus, setProductStatus] = useRecoilState(productStatusState);
+
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const chatId = searchParams.get('chatId');
 
 	// 로그인 유저 아이디 가져오기
 
@@ -43,7 +57,7 @@ const ChatPage = () => {
 			try {
 				const response = await instance.get('/users/me');
 				setUserId(response.data.data.id);
-				console.log('user', response);
+				console.log('user', response.data.data.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -51,62 +65,68 @@ const ChatPage = () => {
 		getUser();
 	}, []);
 
-	// 챗룸 아이디 가져오기
-
 	// 채팅 대화 목록 조회
+	const fetchChatData = async () => {
+		const response = await instance.get(`/chats/${chatId}`);
+		return response.data.data;
+	};
+
+	const {
+		data: chatRoomData,
+		error,
+		refetch,
+	} = useQuery({
+		queryKey: ['chatData'],
+		queryFn: fetchChatData,
+		refetchInterval: 1000, // Refetch data every 1 second
+	});
 
 	useEffect(() => {
-		const chatRoomId = 5;
+		if (chatRoomData) {
+			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
 
-		const fetchChatData = async () => {
-			try {
-				const response = await instance.get(`/chats/${chatRoomId}`);
-				const chatRoomData = response.data.data;
-				console.log(chatRoomData);
+			setProductData(chatRoomInfoResponse);
+			setChatList(chatResponseList);
 
-				const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
-				setProductData(chatRoomInfoResponse);
-				setChatList(chatResponseList);
-				const offerChatData = [...chatResponseList]
-					.reverse()
-					.find((item) => item.senderType === 'BUYER');
+			const offerChatData = [...chatResponseList]
+				.reverse()
+				.find((item) => item.senderType === 'BUYER');
 
-				const offer = offerChatData ? offerChatData.content : null;
-				const regex = /[\d,]+ 원/;
-				const offerPrice = offer?.match(regex);
+			const offer = offerChatData ? offerChatData.content : null;
+			const regex = /[\d,]+ 원/;
+			const offerPrice = offer?.match(regex);
 
-				const {
-					receiverNickname,
-					price,
-					productId,
-					buyerId,
-					sellerId,
-					chatStatus,
-				} = chatRoomInfoResponse;
+			const {
+				receiverNickname,
+				price,
+				productId,
+				buyerId,
+				sellerId,
+				chatRoomId,
+				chatStatus,
+				negoId,
+				productStatus,
+			} = chatRoomInfoResponse;
 
-				setReceiverName(receiverNickname);
-				setProductPrice(price);
-				setUserName(receiverNickname);
-				setProductId(productId);
-				setBuyerId(buyerId);
-				setSellerId(sellerId);
-				setOfferPrice(offerPrice);
-				setChatStatus(chatStatus);
-			} catch (error) {
-				console.error('Error fetching chat data:', error);
-			}
-		};
+			setReceiverName(receiverNickname);
+			setProductPrice(price);
+			setUserName(receiverNickname);
+			setProductId(productId);
+			setBuyerId(buyerId);
+			setSellerId(sellerId);
+			setOfferPrice(offerPrice);
+			setChatStatus(chatStatus);
+			setChatRoomId(chatRoomId);
+			setNegoId(negoId);
+			setProductStatus(productStatus);
+		}
 
 		fetchChatData();
-	}, []);
+	}, [chatRoomData]);
 
-	// 메시지 보내기
-
-	// 채팅방 만들기
-
-	// 채팅방으로 넘어갈 때
-	// 구매자이면 구매내역 판매자 닉네임
-	// 판매자이면 판매내역 구매자 닉네임
+	if (error) {
+		console.error('Error fetching chat data:', error);
+	}
 
 	return (
 		<div className="h-screen relative">
@@ -116,17 +136,9 @@ const ChatPage = () => {
 			</div>
 			<div className="h-[calc(100%-160px)]">
 				{userId === buyerId ? (
-					<Chat
-						productData={productData}
-						chatList={chatList}
-						setNegoStatus={setNegoStatus}
-					/>
+					<Chat chatList={chatList} setNegoStatus={setNegoStatus} />
 				) : (
-					<SellerChat
-						productData={productData}
-						chatList={chatList}
-						setNegoStatus={setNegoStatus}
-					/>
+					<SellerChat chatList={chatList} setNegoStatus={setNegoStatus} />
 				)}
 			</div>
 		</div>
@@ -180,58 +192,54 @@ export interface ChatResponse {
 	viewed: boolean;
 }
 
-// 채팅방 만들기
-
 // useEffect(() => {
-// 	const makeChatRoom = async () => {
-// 		const data = {
-// 			userId: 41,
-// 			productId: 15,
-// 		};
+// 	const fetchChatData = async () => {
 // 		try {
-// 			const response = await instance.post('/chats/test/chat-room', data);
-// 			console.log(response);
+// 			const response = await instance.get(`/chats/${chatId}`);
+// 			const chatRoomData = response.data.data;
+
+// 			console.log(chatRoomData);
+
+// 			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
+
+// 			setProductData(chatRoomInfoResponse);
+// 			setChatList(chatResponseList);
+
+// 			const offerChatData = [...chatResponseList]
+// 				.reverse()
+// 				.find((item) => item.senderType === 'BUYER');
+
+// 			const offer = offerChatData ? offerChatData.content : null;
+// 			const regex = /[\d,]+ 원/;
+// 			const offerPrice = offer?.match(regex);
+
+// 			const {
+// 				receiverNickname,
+// 				price,
+// 				productId,
+// 				buyerId,
+// 				sellerId,
+// 				chatRoomId,
+// 				chatStatus,
+// 				negoId,
+// 				productStatus,
+// 			} = chatRoomInfoResponse;
+
+// 			setReceiverName(receiverNickname);
+// 			setProductPrice(price);
+// 			setUserName(receiverNickname);
+// 			setProductId(productId);
+// 			setBuyerId(buyerId);
+// 			setSellerId(sellerId);
+// 			setOfferPrice(offerPrice);
+// 			setChatStatus(chatStatus);
+// 			setChatRoomId(chatRoomId);
+// 			setNegoId(negoId);
+// 			setProductStatus(productStatus);
 // 		} catch (error) {
-// 			console.log(error);
+// 			console.error('Error fetching chat data:', error);
 // 		}
 // 	};
 
-// 	makeChatRoom();
+// 	fetchChatData();
 // }, []);
-
-// useEffect(() => {
-// 	const sendMessage = async () => {
-// 		const data = {
-// 			chatRoomId: 5,
-// 			senderType: 'SYSTEM',
-// 			userId: 41,
-// 			content: '입장하셨습니다.',
-// 		};
-// 		try {
-// 			const response = await axios.post(
-// 				'https://golden-ticket.site/chats/test',
-// 				data,
-// 			);
-// 			console.log(response.data);
-// 		} catch (error) {
-// 			console.error(error);
-// 		}
-// 	};
-// sendMessage();
-// }, []);
-
-// const createChatRoom = async () => {
-// 	const data = {
-// 		userId: 41,
-// 		productId: 15,
-// 	};
-// 	try {
-// 		const response = await axios.post(
-// 			'https://golden-ticket.site/chats/test/chat-room',
-// 			data,
-// 		);
-// 		console.log(response.data);
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
