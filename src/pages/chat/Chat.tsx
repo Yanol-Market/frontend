@@ -135,7 +135,7 @@ const Chat: React.FC<ChatProps> = ({ chatList, setNegoStatus }) => {
 				<div></div>
 			)}
 
-			{productStatus === 'SOLD_OUT' && chatStatus === 'TRANSFER_COMPLETE' && (
+			{productStatus === 'SOLD_OUT' && chatStatus === 'TRANSFER_COMPLETED' && (
 				<>
 					<div>
 						<div className="flex items-center flex-col">
