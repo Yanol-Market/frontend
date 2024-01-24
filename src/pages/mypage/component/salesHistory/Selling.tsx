@@ -157,6 +157,7 @@ const Selling = () => {
 												</div>
 											))}
 								</div>
+								<div className="border border-borderWhite"></div>
 							</div>
 						))}
 					</div>
