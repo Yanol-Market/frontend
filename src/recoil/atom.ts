@@ -57,7 +57,7 @@ export const productPriceState = atom<number | null>({
 
 export const negoIdState = atom<number | null>({
 	key: 'negoIdState',
-	default: 4,
+	default: 0,
 });
 
 export const negoSuccessState = atom<boolean | null>({
@@ -141,6 +141,16 @@ export const searchInputState = atom({
 
 export const chatStatusState = atom({
 	key: 'ChatStatusState',
+	default: '',
+});
+
+export const chatRoomIdState = atom({
+	key: 'ChatRoomIdState',
+	default: 0,
+});
+
+export const productStatusState = atom({
+	key: 'ProductStatusState',
 	default: '',
 });
 

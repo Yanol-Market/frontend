@@ -7,10 +7,11 @@ import { addWish } from '../../../apis/wish';
 import { deleteWish } from '../../../apis/wish';
 import { useRecoilState } from 'recoil';
 import { getPaymentsDetail } from '../../../apis/paymentsDetail';
-import { paymentsState } from '../../../recoil/atom';
+import { paymentsState, sendMessage, userIdState } from '../../../recoil/atom';
 import { editProdState } from '../../../recoil/prodEditAtom';
 import { BottomSheet } from '../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import instance from '../../../apis/axios';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -58,7 +59,7 @@ export const ProductInfo = () => {
 		setIsWished(data.data.isWished);
 		setIsSeller(data.data.isSeller);
 	};
-	console.log(product);
+
 	const handleClickButton = (link: string) => {
 		const isLogin = false;
 		if (isLogin) {
@@ -67,6 +68,107 @@ export const ProductInfo = () => {
 
 		navigate(link);
 	};
+
+	const [userId, setUserId] = useRecoilState<number>(userIdState);
+	const [chatRoomId, setChatRoomId] = useState<number>(0);
+	const [negoAvailable, setNegoAvailable] = useState<boolean>(true);
+	const [isNewChatRoom, setIsNewChatRoom] = useState<boolean>(true);
+
+	// 유저 아이디 가져오기
+	useEffect(() => {
+		async function getUser() {
+			try {
+				const response = await instance.get('/users/me');
+				setUserId(response.data.data.id);
+				console.log('user', response.data.data.id);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+		getUser();
+	}, []);
+
+	// 네고 정보 조회
+
+	const getChatRoomInfo = async (): Promise<{
+		chatRoomId: number;
+		negoAvailable: boolean;
+	}> => {
+		try {
+			const response = await instance(
+				`/nego/available?productId=${param?.productId}`,
+			);
+			const data = response?.data.data || {};
+
+			const chatRoomId = data.chatRoomId || 0;
+			const negoAvailable = data.negoAvailable || false;
+
+			setChatRoomId(chatRoomId);
+			setIsNewChatRoom(data.isNewChatRoom || false);
+			setNegoAvailable(negoAvailable);
+
+			console.log(response.data);
+
+			return { chatRoomId, negoAvailable };
+		} catch (error) {
+			console.error(error);
+			return { chatRoomId: 0, negoAvailable: false };
+		}
+	};
+
+	// 트리거 함수
+
+	const createChat = async () => {
+		const {
+			chatRoomId,
+			negoAvailable,
+		}: { chatRoomId: number; negoAvailable: boolean } = await getChatRoomInfo();
+		try {
+			return { chatRoomId, negoAvailable };
+		} catch (error) {
+			console.error('Error in createChat:', error);
+		}
+	};
+
+	console.log('chatRoomId', chatRoomId);
+
+	// 채팅방 생성 함수
+
+	const makeChatRoom = async () => {
+		const data = {
+			userId,
+			productId: param.productId,
+		};
+		try {
+			const response = await instance.post('/chats/test/chat-room', data);
+			console.log(response.data);
+			setChatRoomId(response.data.id);
+			return response.data.id;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	// 메시지 보내기 함수
+
+	const initialMessageSend = async () => {
+		const data = {
+			chatRoomId,
+			senderType: 'SELLER',
+			userId,
+			content: `${product?.accommodationName} ${product?.roomName} ${product?.checkInDate} ~ ${product?.checkOutDate} ${product?.goldenPrice.toLocaleString(
+				'ko-KR',
+			)} 원에 팝니다. 가격 협의 가능합니다.`,
+		};
+
+		try {
+			const result = await sendMessage(data);
+			console.log(' 메시지 전송 결과:', result);
+		} catch (error) {
+			console.error('메시지 전송 중 오류 발생:', error);
+		}
+	};
+
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
 			addWish(productId);
@@ -92,7 +194,7 @@ export const ProductInfo = () => {
 		}
 	};
 	const handleClickDeleteButton = () => {
-		console.log()
+		console.log();
 	};
 	const openBottom = () => {
 		setBottom(true);
@@ -101,8 +203,8 @@ export const ProductInfo = () => {
 	const closeBottom = () => {
 		setBottom(false);
 	};
-	const dltProduct = (productId:string) => {
-		deleteProduct(productId)
+	const dltProduct = (productId: string) => {
+		deleteProduct(productId);
 		closeBottom();
 		navigate('/');
 	};
@@ -113,6 +215,7 @@ export const ProductInfo = () => {
 	if (!product) {
 		return <div>Loading...</div>;
 	}
+
 	return (
 		<div className="">
 			<div className="relative mb-5">
@@ -191,7 +294,7 @@ export const ProductInfo = () => {
 					<p className="text-descGray font-pre text-lg">기존 구매가</p>
 					<div className="flex">
 						<p className="text-descGray font-pre text-lg mr-1">
-							{product.originPriceRatio}%
+							{product.originPriceRatio}
 						</p>
 						<p className="text-descGray font-pre text-lg line-through">
 							{product.originPrice.toLocaleString()}
@@ -286,10 +389,13 @@ export const ProductInfo = () => {
 						</button>
 					) : (
 						<button
-							onClick={() => {
-								handleClickButton(
-									`/chat?productId=${param.productId}&sellerId=${'sellerId'}&buyerId=${'buyerId'}`,
-								);
+							onClick={async () => {
+								const response = await createChat();
+								if (response?.negoAvailable === false) {
+									alert('더이상 네고를 진행할 수 없습니다.');
+								} else if (response?.chatRoomId !== -1) {
+									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
+								}
 							}}
 							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
 						>
@@ -299,7 +405,7 @@ export const ProductInfo = () => {
 					{isSeller ? (
 						<button
 							onClick={() => {
-								openBottom()
+								openBottom();
 							}}
 							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
 						>
@@ -325,7 +431,9 @@ export const ProductInfo = () => {
 					leftBtn="취소"
 					rightBtn="삭제"
 					leftBtnFunc={closeBottom}
-					rightBtnFunc={()=>{dltProduct(param.productId as string)}}
+					rightBtnFunc={() => {
+						dltProduct(param.productId as string);
+					}}
 				/>
 			</BottomSheet>
 		</div>
