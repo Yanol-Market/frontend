@@ -15,7 +15,7 @@ interface Props {
 
 const AddProductSelectionStep = ({ onNextStep }: Props) => {
 	const userProfileInfo = JSON.parse(
-		localStorage.getItem('userProfileInfo') || '{}',
+		localStorage.getItem('userProfileInfo') || '{"data": {}}',
 	);
 	const yanoljaId = userProfileInfo.data.yanoljaId;
 	console.log('yanoljaId:', userProfileInfo.data.yanoljaId);

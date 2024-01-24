@@ -3,6 +3,7 @@ import { getCookie, refreshCookie } from './cookie';
 
 /**
  * @param instance 실제 api 연결 시 사용되는 instance입니다.
+ * @param instanceNoToken api 연결 시 토큰이 필요 없을 때 사용합니다.
  */
 
 export const instanceTest = axios.create({

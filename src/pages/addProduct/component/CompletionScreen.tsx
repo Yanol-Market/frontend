@@ -11,9 +11,10 @@ interface AccountData {
 
 interface Props {
 	onComplete: () => void;
+	productId?: number;
 }
 
-const CompletionScreen = ({ onComplete }: Props) => {
+const CompletionScreen = ({ onComplete, productId }: Props) => {
 	const navigate = useNavigate();
 	const [accountData, setAccountData] = useState<AccountData | null>(null);
 
@@ -34,7 +35,7 @@ const CompletionScreen = ({ onComplete }: Props) => {
 	}, []);
 
 	const handleProductCheckClick = () => {
-		navigate('/sales');
+		navigate(`/product/${productId}`);
 	};
 
 	const handleAccountRegistrationClick = () => {

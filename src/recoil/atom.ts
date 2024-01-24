@@ -153,3 +153,8 @@ export const productStatusState = atom({
 	key: 'ProductStatusState',
 	default: '',
 });
+
+export const withDrawlState = atom<string | null>({
+	key: 'withDrawlState',
+	default: null,
+});
