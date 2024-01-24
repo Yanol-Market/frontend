@@ -152,7 +152,7 @@ const Selling = () => {
 														receiverProfileImage={item.receiverProfileImage}
 														price={item.price}
 														lastUpdatedAt={item.lastUpdatedAt}
-														status={item.status}
+														status={item.chatRoomStatus}
 													/>
 												</div>
 											))}

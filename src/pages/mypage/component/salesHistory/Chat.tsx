@@ -38,7 +38,7 @@ const Chat = (props: BuyerProps) => {
 		);
 	}
 	return (
-		<div className="border-borderGray border px-5 py-3 mt-2 flex items-center  justify-between rounded-lg">
+		<div className="border-borderGray border px-5 py-3 mt-2 flex items-center justify-between rounded-lg">
 			<div className="flex items-center">
 				<div>
 					<img src="/assets/images/userDefault.svg" alt="userDefault" />
