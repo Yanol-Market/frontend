@@ -12,9 +12,9 @@ export const addWish = async (productId: number) => {
 	}
 };
 
-export const deleteWish = async (wishId: number) => {
-	try {console.log(wishId)
-		const res = await instance.delete(`/products/wish/${wishId}`);
+export const deleteWish = async (productId: number) => {
+	try {console.log(productId)
+		const res = await instance.delete(`/products/wish/${productId}`);
 		console.log(res);
 		
 		return res.data;

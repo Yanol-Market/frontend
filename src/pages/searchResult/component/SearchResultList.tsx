@@ -60,7 +60,7 @@ export const SearchResultList = () => {
 	}, []);
 
 	useEffect(() => {
-		setVisibleProducts(products?.slice(0, 2));
+		setVisibleProducts(products);
 	}, [products]);
 
 	if (!visibleProducts) {

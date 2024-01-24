@@ -143,3 +143,8 @@ export const chatStatusState = atom({
 	key: 'ChatStatusState',
 	default: '',
 });
+
+export const withDrawlState = atom<string | null>({
+	key: 'withDrawlState',
+	default: null,
+});

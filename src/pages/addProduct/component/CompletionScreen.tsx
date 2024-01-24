@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
+import { getAccounts } from '../../../apis/getAccounts';
+
+interface AccountData {
+	name: string;
+	bankName: string | null;
+	accountNumber: string | null;
+}
 
 interface Props {
 	onComplete: () => void;
@@ -8,6 +15,23 @@ interface Props {
 
 const CompletionScreen = ({ onComplete }: Props) => {
 	const navigate = useNavigate();
+	const [accountData, setAccountData] = useState<AccountData | null>(null);
+
+	useEffect(() => {
+		const fetchAccountData = async () => {
+			try {
+				const response = await getAccounts();
+				if (response.status === 'SUCCESS' && response.data) {
+					setAccountData(response.data);
+					console.log('계좌 목록:', response.data);
+				}
+			} catch (error) {
+				console.error('계좌 정보를 불러오는 중 오류 발생:', error);
+			}
+		};
+
+		fetchAccountData();
+	}, []);
 
 	const handleProductCheckClick = () => {
 		navigate('/sales');
@@ -29,7 +53,9 @@ const CompletionScreen = ({ onComplete }: Props) => {
 					<img src="/assets/images/check.svg" alt="" />
 					<h2 className="text-body font-light	my-[20px]">상품 등록 완료! </h2>
 					<p className="text-center text-m text-descGray font-thin leading-[1.5rem] tracking-wide">
-						정산을 위해 필요한 계좌를 등록해주세요.
+						{accountData !== null && accountData.bankName !== null
+							? ''
+							: '정산을 위해 필요한 계좌를 등록해주세요!'}{' '}
 					</p>
 				</div>
 				<div className="flex flex-row gap-2 mt-11 text-lg">
@@ -43,7 +69,9 @@ const CompletionScreen = ({ onComplete }: Props) => {
 						className="bg-main w-40 h-11 rounded-xl text-white"
 						onClick={handleAccountRegistrationClick}
 					>
-						내 계좌 등록하기
+						{accountData !== null && accountData.bankName !== null
+							? `내 계좌 확인하기`
+							: '내 계좌 등록하기'}{' '}
 					</button>
 				</div>
 			</div>

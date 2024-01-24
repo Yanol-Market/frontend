@@ -3,7 +3,7 @@ import React from 'react';
 export interface MyPageClickBtnProps {
 	content: string;
 	onClick?: () => void;
-	isDisabled?: boolean;
+	isDisabled?: boolean | undefined;
 }
 
 const MyPageClickBtn = ({

@@ -2,7 +2,7 @@ import axios from './axios';
 
 export const getWishes = async () => {
 	try {
-		const res = await axios.get('api/wwwww'); // 임시 수정
+		const res = await axios.get('/products/wish'); // 임시 수정
 		if (res) {
 			return res.data;
 		}
