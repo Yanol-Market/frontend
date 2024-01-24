@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import NegoPanel from './NegoPanel';
 import ChatItem from './ChatItem';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ProductData } from './Chat.page';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
 	chatStatusState,
@@ -21,7 +20,6 @@ const Chat: React.FC<ChatProps> = ({ chatList, setNegoStatus }) => {
 	const now = date.format('YYYY.MM.DD');
 	const [nego, setNego] = useState(true);
 	const [offered, setOffered] = useState(false);
-	const userName = useRecoilValue(userNameState);
 	const userId = useRecoilValue(userIdState);
 	const chatStatus = useRecoilValue(chatStatusState);
 	const productId = useRecoilValue(productIdState);

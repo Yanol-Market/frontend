@@ -180,20 +180,3 @@ export interface ChatResponse {
 	userId: number;
 	viewed: boolean;
 }
-
-// 채팅방 만들기
-// const createChatRoom = async () => {
-// 	const data = {
-// 		userId: 7,
-// 		productId: 2,
-// 	};
-// 	try {
-// 		const response = await axios.post(
-// 			'https://golden-ticket.site/chats/test/chat-room',
-// 			data,
-// 		);
-// 		console.log(response.data);
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// };
