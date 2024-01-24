@@ -67,6 +67,10 @@ function App() {
 					</Route>
 					<Route path="/searchResult" element={<SearchResult />} />
 					<Route path="/reservation" element={<ReservationPage />} />
+					<Route
+						path="/reservation/nego/:productId"
+						element={<ReservationPage />}
+					/>
 					<Route path="/reservation/complete" element={<Complete />} />
 					<Route path="/reservation/timeout" element={<Timeout />} />
 					<Route path="/reservation/failure" element={<Failure />} />
@@ -106,6 +110,7 @@ function App() {
 					<Route path="/member" element={<ManageAccount />} />
 					<Route path="/member/editpassword" element={<EditPassword />} />
 					<Route path="/chat" element={<ChatPage />} />
+					<Route path="/chat/:chatId" element={<ChatPage />} />
 					<Route
 						path="/member/editpassword/confirm"
 						element={

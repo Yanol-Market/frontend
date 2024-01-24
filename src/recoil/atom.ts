@@ -3,6 +3,7 @@ import { messageType } from '../pages/chat/Chat.page';
 import instance from '../apis/axios';
 import { recoilPersist } from 'recoil-persist';
 import { PaymentProps } from '../pages/reservation/Product';
+import { ProductData } from '../pages/chat/Chat.page';
 
 const { persistAtom } = recoilPersist();
 const toDay = new Date();
@@ -57,7 +58,7 @@ export const productPriceState = atom<number | null>({
 
 export const negoIdState = atom<number | null>({
 	key: 'negoIdState',
-	default: 4,
+	default: 0,
 });
 
 export const negoSuccessState = atom<boolean | null>({
@@ -144,7 +145,36 @@ export const chatStatusState = atom({
 	default: '',
 });
 
+export const chatRoomIdState = atom({
+	key: 'ChatRoomIdState',
+	default: 0,
+});
+
+export const productStatusState = atom({
+	key: 'ProductStatusState',
+	default: '',
+});
+
 export const withDrawlState = atom<string | null>({
 	key: 'withDrawlState',
 	default: null,
+});
+
+export const productDataState = atom<ProductData>({
+	key: 'productDataState',
+	default: {
+		accommodationImage: '',
+		accommodationName: '',
+		roomName: '',
+		checkInDate: '',
+		checkOutDate: '',
+		checkInTime: '',
+		checkOutTime: '',
+		price: 0,
+		productStatus: '',
+		checkInOut: '',
+		receiverId: '',
+		receiverNickname: '',
+		productId: 0,
+	},
 });

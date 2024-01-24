@@ -43,13 +43,13 @@ const ChatItem: React.FC<ChatItemProps> = ({ chatList }) => {
 
 const ChatMessage: React.FC<ChatMessageProps> = ({ chatItem }) => {
 	const userId = useRecoilValue(userIdState);
-	const isMe = chatItem.userId !== userId;
+	const isMe = chatItem.userId === userId;
 
 	return (
 		<div
-			className={`flex items-end p-[20px] ${isMe ? '' : 'flex-row-reverse'}`}
+			className={`flex items-end p-[20px] ${isMe ? 'flex-row-reverse' : ''}`}
 		>
-			{isMe && (
+			{!isMe && (
 				<img
 					className="h-[36px] w-[36px]"
 					src="/assets/images/profileImage.svg"
@@ -59,8 +59,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ chatItem }) => {
 			<p
 				className={`text-lg mx-[10px] p-[10px] border-[1px] ${
 					isMe
-						? 'border-[#E5E5E5] bg-white rounded-t-[12px] rounded-br-[12px]'
-						: 'border-[#FFF3C5] bg-[#FFF3C5] rounded-t-[12px] rounded-bl-[12px]'
+						? 'border-[#FFF3C5] bg-[#FFF3C5] rounded-t-[12px] rounded-bl-[12px]'
+						: 'border-[#E5E5E5] bg-white rounded-t-[12px] rounded-br-[12px]'
 				}`}
 			>
 				{chatItem.content}
