@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemSpecial = ({
@@ -9,15 +9,25 @@ export const ProductItemSpecial = ({
 }: {
 	product: ProductSpecialType;
 }) => {
+	console.log(product);
+	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
-			addWish(productId);
+			const isSuccess = await addWish(productId);
 			setIsWished(true);
+			console.log(isSuccess);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
+
 			return;
 		} else {
-			deleteWish(product?.productId as number);
+			const isSuccess = await deleteWish(product?.productId as number);
 			setIsWished(false);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
 		}
 	};
 	return (
@@ -25,7 +35,7 @@ export const ProductItemSpecial = ({
 			<main className="flex w-full mt-5">
 				<div className="relative w-[38%] h-full">
 					<img
-						className="w-[124px] h-[150px] rounded-[5px]"
+						className="w-[124px] h-[150px] rounded-[5px] object-cover"
 						src={product.accommodationImage}
 						alt="productImg"
 					/>
@@ -38,7 +48,7 @@ export const ProductItemSpecial = ({
 						className="absolute bottom-[10px] left-[10px]"
 					>
 						<img
-							src={`/assets/images/${isWished ? 'Fill' : ''}heart_white.svg`}
+							src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
 							alt="heartIcon"
 						/>
 					</button>
@@ -71,11 +81,7 @@ export const ProductItemSpecial = ({
 							</p>
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
-									{(
-										(1 - product.goldenPrice / product.yanoljaPrice) *
-										100
-									).toFixed(0)}
-									%
+									{product.marketPriceRatio}%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
 									{product.yanoljaPrice}
@@ -87,11 +93,7 @@ export const ProductItemSpecial = ({
 							<p className="text-descGray font-pre text-m">기존 구매가</p>
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
-									{(
-										(1 - product.goldenPrice / product.originPrice) *
-										100
-									).toFixed(0)}
-									%
+									{product.originPriceRatio}%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
 									{product.originPrice}
@@ -108,7 +110,7 @@ export const ProductItemSpecial = ({
 									{product.goldenPrice.toLocaleString()}
 								</p>
 								<p className="text-fontBlack font-pre text-m font-semibold">
-									원
+									{`원(${product.days}박)`}
 								</p>
 							</div>
 						</div>

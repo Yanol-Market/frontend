@@ -11,6 +11,8 @@ import { paymentsState, sendMessage, userIdState } from '../../../recoil/atom';
 import { editProdState } from '../../../recoil/prodEditAtom';
 import { BottomSheet } from '../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
+import { patchAccounts } from '../../../apis/patchAccounts';
+import { p } from 'msw/lib/core/GraphQLHandler-907fc607';
 import instance from '../../../apis/axios';
 
 type ProductDetailType = {
@@ -53,7 +55,7 @@ export const ProductInfo = () => {
 
 	const fetchData = async () => {
 		const data = await getProduct(param?.productId);
-		setCheckInDate(formatDate(data.data.checkInDate));
+		setCheckInDate(data.data.checkInDate);
 		setCheckOutDate(data.data.checkOutDate);
 		setProduct(data.data);
 		setIsWished(data.data.isWished);
@@ -251,7 +253,7 @@ export const ProductInfo = () => {
 			<div className="px-5 flex justify-between">
 				<div className="flex item-center mb-5">
 					<p className="py-1 px-2  rounded-[20px] border-[1px] border-solid border-borderGray bg-lightGray text-sm text-black mr-[6px]">
-						숙박
+						{product.reservationType === 'DAY_USE' ? '대실' : '숙박'}
 					</p>
 					<p className="text-m text-black m-auto ">{`기존 ${product.standardNumber}명/최대 ${product.maximumNumber}명`}</p>
 				</div>
@@ -323,13 +325,13 @@ export const ProductInfo = () => {
 							</p>
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
-						<p className="p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]">
-							{product.content}
+						<p className={`${product.content ? 'text-black' : 'text-descGray'} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}>
+							{product.content ? product.content : '판매자 한마디가 없습니다.' }
 						</p>
 					</div>
 					<div className="mb-[25px]">
 						<div className="flex mb-[10px]">
-							<p className="text-black text-lg font-semibold mr-1">
+							<p className={`text-black text-lg font-semibold mr-1`}>
 								취소 및 환불 규정
 							</p>
 							<img src="/assets/images/warning.svg" alt="chatIcon" />
@@ -367,7 +369,7 @@ export const ProductInfo = () => {
 							</p>
 							<div className="h-[2px] w-[10px] bg-main m-auto"></div>
 							<p className="p-2 bg-white rounded-[20px] border-[1px] border-solid border-borderWhite text-fontBlack text-m">
-								3시간 내 양도 완료
+								20분 내 양도 완료
 							</p>
 						</div>
 					</div>
