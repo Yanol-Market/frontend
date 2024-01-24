@@ -125,7 +125,7 @@ const Selling = () => {
 									goldenPrice={item.goldenPrice}
 								/>
 								<StatusBar status={item.status} />
-								<div className="flex my-4 pt-3">
+								<div className="flex mt-5 ">
 									<div className="text-body font-semibold">구매 희망자 </div>
 									<div>
 										{click ? (
@@ -141,11 +141,12 @@ const Selling = () => {
 										)}
 									</div>
 								</div>
-								<div className="pb-5">
+
+								<div>
 									{click
 										? null
 										: data?.[index].chats.map((item) => (
-												<div key={item.chatRoomId}>
+												<div className=" pt-3" key={item.chatRoomId}>
 													<Chat
 														chatRoomId={item.chatRoomId}
 														receiverNickname={item.receiverNickname}
@@ -157,7 +158,7 @@ const Selling = () => {
 												</div>
 											))}
 								</div>
-								<div className="border border-borderWhite"></div>
+								<div className=" border-b border-borderWhite pt-3"></div>
 							</div>
 						))}
 					</div>
