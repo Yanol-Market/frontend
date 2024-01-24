@@ -19,6 +19,8 @@ export type ProductSpecialType = {
 	productStatus: string;
 	wishId: number;
 	isWished : boolean;
+	originPriceRatio:number;
+	marketPriceRatio:number;
 };
 
 export const ProductListSpecial = ({ product }: any) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemPopular = ({
@@ -9,27 +9,33 @@ export const ProductItemPopular = ({
 }: {
 	product: ProductSpecialType;
 }) => {
+	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
-			addWish(productId);
+			const isSuccess = await addWish(productId);
 			setIsWished(true);
+			console.log(isSuccess);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
+
 			return;
 		} else {
-			deleteWish(product?.productId as number);
+			const isSuccess = await deleteWish(product?.productId as number);
 			setIsWished(false);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
 		}
 	};
-	useEffect(() => {
-		console.log('변경된 값:', isWished);
-	}, [isWished]);
 	return (
 		<Link to={`product/${product.productId}`}>
-			<div className="w-[115px] h-[215px]">
+			<div className="w-[150px] h-[215px]">
 				<div className="">
 					<div className="relative mb-2">
 						<img
-							className="w-[115px] h-[140px] rounded-[5px]"
+							className="w-[150px] h-[140px] rounded-[5px] object-cover"
 							src={product.accommodationImage}
 							alt="productImg"
 						/>
@@ -51,15 +57,13 @@ export const ProductItemPopular = ({
 							}}
 							className="absolute bottom-[10px] left-[10px]"
 						>
-							<img
-								src={`/assets/images/${
-									product.isWished ? 'Fill' : ''
-								}heart_white.svg`}
-								alt="heartIcon"
-							/>
+						<img
+							src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
+							alt="heartIcon"
+						/>
 						</button>
 					</div>
-					<div className="mb-5">
+					<div className="mb-[10px]">
 						<p className="font-pre text-m text-fontBlack max-h-[14px] overflow-hidden">
 							{product.accommodationName}
 						</p>

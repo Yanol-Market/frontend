@@ -10,6 +10,6 @@ function formatDate(inputDate: any) {
 	const dayOfWeek = daysOfWeek[date.getDay()];
 
 	// 결과 반환
-	return `${month}-${day}(${dayOfWeek})`;
+	return `${month}/${day}(${dayOfWeek})`;
 }
 export { formatDate };

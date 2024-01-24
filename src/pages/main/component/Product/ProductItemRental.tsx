@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../../apis/wish';
 
 export const ProductItemRental = ({
@@ -9,24 +9,33 @@ export const ProductItemRental = ({
 }: {
 	product: ProductSpecialType;
 }) => {
+	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
-			addWish(productId);
+			const isSuccess = await addWish(productId);
 			setIsWished(true);
+			console.log(isSuccess);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
+
 			return;
 		} else {
-			deleteWish(product?.productId as number);
+			const isSuccess = await deleteWish(product?.productId as number);
 			setIsWished(false);
+			if (isSuccess.response && isSuccess.response.status === 401) {
+				navigate('/signin');
+			}
 		}
 	};
 	return (
 		<Link to={`/product/${product.productId}`}>
-			<div className="w-[130px] h-[255px] flex flex-col justify-between">
-				<div className="w-[130px]">
+			<div className="w-[150px] h-[255px] flex flex-col">
+				<div className="w-[150px]">
 					<div className="relative mb-[10px]">
 						<img
-							className="w-[130px] h-[160px] rounded-[5px]"
+							className="w-[150px] h-[160px] rounded-[5px] object-cover"
 							src={product.accommodationImage}
 							alt="productImg"
 						/>
@@ -53,14 +62,12 @@ export const ProductItemRental = ({
 						className="absolute bottom-[10px] left-[10px]"
 					>
 						<img
-							src={`/assets/images/${
-								product.isWished ? 'Fill' : ''
-							}heart_white.svg`}
+							src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
 							alt="heartIcon"
 						/>
 					</button>
 					</div>
-					<div className="mb-5">
+					<div className="mb-[10px]">
 						<p className="font-pre text-m text-fontBlack max-h-[14px] overflow-hidden">
 							{product.accommodationName}
 						</p>

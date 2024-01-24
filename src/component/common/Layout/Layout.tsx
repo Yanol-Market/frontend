@@ -27,7 +27,7 @@ const Layout = () => {
 		<div className="bg-borderGray min-h-screen relative">
 			<div className="bg-white max-w-[430px] min-h-screen m-auto top-0 left-0 overflow-x-clip sm:w-[430px]">
 				<Outlet />
-				<div className="fixed w-[430px] bottom-0">
+				<div className="fixed  w-full max-w-[430px] bottom-0">
 					{isNavPage && <Navigation />}
 				</div>
 			</div>
