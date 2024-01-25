@@ -30,10 +30,8 @@ const Alarm = () => {
 									: ' bg-bgMain border-b border-homeMain'
 							}`}
 						>
-							<div className="w-[300px]">{item.content}</div>
-							<div className="w-[20px] pl-5">
-								{formatTimeAgo(item.createdAt)}
-							</div>
+							<div className="w-[330px]">{item.content}</div>
+							<div className="pl-5">{formatTimeAgo(item.createdAt)}</div>
 						</div>
 					))}
 				</div>
