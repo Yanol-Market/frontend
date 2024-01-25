@@ -29,15 +29,12 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
 	console.log(payPreData);
-	const [pgData, setPgData] = useState<PgDataProps>();
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
-			// setPgData(data.data);
 			console.log('paymentPrePare 함수 호출 후 데이터 :', data.data);
 			console.log('결제 준비 완료');
-			// console.log('pgData : ', pgData);
 			if (data.data) {
 				handlePayment(data.data);
 				console.log('handlePayment 함수 실행 완료');
@@ -96,7 +93,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				window.IMP.request_pay(data, callback);
 				console.log('KG결제창 완료');
 			} catch (error) {
-				console.error('Error during payment request:', error);
+				console.error('결제 중 발생한 에러:', error);
 				navigate('/reservation/failure');
 			}
 		}
