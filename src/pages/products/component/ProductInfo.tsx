@@ -14,6 +14,7 @@ import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/Con
 import { patchAccounts } from '../../../apis/patchAccounts';
 import { p } from 'msw/lib/core/GraphQLHandler-907fc607';
 import instance from '../../../apis/axios';
+import { getCookie } from '../../../apis/cookie';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -182,10 +183,6 @@ export const ProductInfo = () => {
 		}
 	};
 	const handleClickPayMentsButton = async (link: string) => {
-		const isLogin = false;
-		if (isLogin) {
-			navigate('/login');
-		}
 		try {
 			const payData = await getPaymentsDetail(param?.productId);
 			console.log(payData);
@@ -325,8 +322,12 @@ export const ProductInfo = () => {
 							</p>
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
-						<p className={`${product.content ? 'text-black' : 'text-descGray'} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}>
-							{product.content ? product.content : '판매자 한마디가 없습니다.' }
+						<p
+							className={`${
+								product.content ? 'text-black' : 'text-descGray'
+							} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}
+						>
+							{product.content ? product.content : '판매자 한마디가 없습니다.'}
 						</p>
 					</div>
 					<div className="mb-[25px]">

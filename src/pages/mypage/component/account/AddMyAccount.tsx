@@ -9,6 +9,7 @@ import { checkedBankState, myAccountState } from '../../../../recoil/atom';
 import MyPageClickBtn from '../btn/MyPageClickBtn';
 import { useMutation } from '@tanstack/react-query';
 import { patchAccounts } from '../../../../apis/patchAccounts';
+import { useNavigate } from 'react-router-dom';
 
 const AddMyAccount = () => {
 	const {
@@ -27,7 +28,7 @@ const AddMyAccount = () => {
 		!selectedBank?.bankName ||
 		!accountNumber ||
 		(accountNumber && errors.addAccountNumber);
-	const myAccount = useRecoilValue(myAccountState);
+
 	const [isBottomSheetBankOpen, setIsBottomSheetBankOpen] = useState(false);
 
 	const openBottomSheetBank = () => {
@@ -37,11 +38,12 @@ const AddMyAccount = () => {
 	const closeBottomSheetBank = () => {
 		setIsBottomSheetBankOpen(false);
 	};
-
+	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: patchAccounts,
 		onSuccess(data) {
 			alert('계좌 등록 성공');
+			navigate('/myaccount');
 		},
 	});
 

@@ -25,9 +25,14 @@ const EditPassword = () => {
 	const newPasswordCheckBox = watch('newPasswordBox');
 	const newPassWordConfirmCheckBox = watch('newPasswordConfirmBox');
 	const newPassWordConfirmText = watch('newPassWordConfirm');
-	const openBottomSheetPassword = () => {
-		setIsBottomSheetPasswordOpen(true);
-	};
+	const isButtonDisabled =
+		!currentPasswordText ||
+		!newPasswordText ||
+		!newPassWordConfirmText ||
+		!currentPasswordText ||
+		errors.currentPassword ||
+		(newPasswordText && errors.newPassword) ||
+		(newPassWordConfirmText && errors.newPassWordConfirm);
 
 	const closeBottomSheetPassword = () => {
 		setIsBottomSheetPasswordOpen(false);
@@ -36,7 +41,10 @@ const EditPassword = () => {
 		mutationFn: patchPassword,
 		onSuccess() {
 			alert('비밀번호 변경 성공');
-			navigate('/signin');
+			navigate('/member/editpassword/confirm');
+		},
+		onError() {
+			setIsBottomSheetPasswordOpen(true);
 		},
 	});
 
@@ -109,6 +117,7 @@ const EditPassword = () => {
 								placeholder="새 비밀번호 입력(숫자 + 영문자, 6자 이상 20자 이내)"
 								{...register('newPassword', {
 									required: true,
+									validate: (value) => value !== watch('currentPassword'),
 									pattern: {
 										value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
 										message:
@@ -119,6 +128,11 @@ const EditPassword = () => {
 							{errors.newPassword && (
 								<div className="text-sm text-red mb-4 text-start">
 									{errors.newPassword.message as string}
+								</div>
+							)}
+							{errors?.newPassword?.type === 'validate' && (
+								<div className="text-sm text-red text-start">
+									현재 비밀번호와 동일합니다.
 								</div>
 							)}
 						</div>
@@ -156,6 +170,7 @@ const EditPassword = () => {
 						<MyPageClickBtn
 							content="비밀번호 변경하기"
 							onClick={handleEditPassword}
+							isDisabled={isButtonDisabled}
 						/>
 					</form>
 				</div>

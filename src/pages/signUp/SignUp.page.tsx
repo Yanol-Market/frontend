@@ -173,7 +173,7 @@ const SignUp = () => {
 					</button>
 				</div>
 
-				{isNickNameAvailable === null ? (
+				{isNickNameAvailable === null || errors.userNickName ? (
 					<div className="text-sm mb-4 text-start text-red">
 						{errors?.userNickName?.message as string}
 					</div>
@@ -220,7 +220,7 @@ const SignUp = () => {
 						중복 확인
 					</button>
 				</div>
-				{isEmailAvailable === null ? (
+				{isEmailAvailable === null || errors.email ? (
 					<div className="text-sm mb-4 text-start text-red">
 						{errors?.email?.message as string}
 					</div>
