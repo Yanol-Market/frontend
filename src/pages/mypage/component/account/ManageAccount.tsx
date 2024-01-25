@@ -6,7 +6,7 @@ import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/
 import { getCookie } from '../../../../apis/cookie';
 import { useMutation } from '@tanstack/react-query';
 import { getSignOut } from '../../../../apis/signout';
-
+import Swal from 'sweetalert2';
 const ManageAccount = () => {
 	const navigate = useNavigate();
 	const [isBottomSheetSignOutOpen, setIsBottomSheetSignOutOpen] =
