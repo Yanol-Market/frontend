@@ -84,7 +84,7 @@ const ChatPage = () => {
 	useEffect(() => {
 		if (chatRoomData) {
 			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
-
+			console.log(chatRoomData);
 			setProductData(chatRoomInfoResponse);
 			setChatList(chatResponseList);
 

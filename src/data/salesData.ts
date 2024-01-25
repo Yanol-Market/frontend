@@ -29,7 +29,7 @@ export type SalesResChatsItem = {
 	receiverNickname: string;
 	receiverProfileImage: string;
 	price: number;
-	status: string;
+	chatRoomStatus: string;
 	lastUpdatedAt: string;
 };
 
@@ -59,7 +59,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임 1',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'ACTIVE',
+					chatRoomStatus: 'ACTIVE',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -67,7 +67,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임2',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'INACTIVE',
+					chatRoomStatus: 'INACTIVE',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -75,7 +75,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임3',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 40000,
-					status: 'YELLOW_DOT',
+					chatRoomStatus: 'YELLOW_DOT',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 				{
@@ -83,7 +83,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임4',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'ACTIVE',
+					chatRoomStatus: 'ACTIVE',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 			],
@@ -110,7 +110,7 @@ export const SalesRes: ApiSales = {
 					receiverNickname: '닉네임1',
 					receiverProfileImage: '/assets/images/userDefault.svg',
 					price: 90000,
-					status: 'YELLOW_DOT',
+					chatRoomStatus: 'YELLOW_DOT',
 					lastUpdatedAt: '2024-01-10T14:00:00',
 				},
 			],
