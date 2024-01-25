@@ -17,6 +17,8 @@ const AddMyAccount = () => {
 		watch,
 		formState: { errors }, // isSubmitting, isDirty, isValid
 	} = useForm({ mode: 'onChange' });
+	const myProfileJSON = localStorage.getItem('userProfileInfo');
+	const myProfile = JSON.parse(myProfileJSON as string);
 	const accountNumber = watch('accountNumber');
 	const watchAgreeCheckBox = watch('account-checkbox');
 	const isButtonDisabled = !watchAgreeCheckBox;
@@ -114,7 +116,7 @@ const AddMyAccount = () => {
 						</div>
 						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
 							<p className="pt-2 text-start text-gray">
-								{myAccount?.data.name}
+								{myProfile.data.nickname}
 							</p>
 						</div>
 					</div>

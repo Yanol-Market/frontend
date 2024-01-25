@@ -166,7 +166,7 @@ const SignUp = () => {
 							isNickNameAvailable === null || isNickNameAvailable
 								? 'border border-main bg-main text-white'
 								: 'bg-borderGray'
-						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckNickName}
 					>
 						중복 확인
@@ -214,7 +214,7 @@ const SignUp = () => {
 							isEmailAvailable === null || isEmailAvailable
 								? 'border border-main bg-main text-white'
 								: 'bg-borderGray'
-						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckEmail}
 					>
 						중복 확인

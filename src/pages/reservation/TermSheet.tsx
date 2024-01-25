@@ -163,6 +163,9 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				console.error(err);
 				throw new Error('사후검증 실패');
 			}
+		} else {
+			console.log('결제 실패');
+			navigate('/reservation/failure');
 		}
 	};
 
