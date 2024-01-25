@@ -13,9 +13,10 @@ const SignUp = () => {
 		handleSubmit,
 		watch,
 		setValue,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
-
+	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
+	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
 	const userName = watch('username');
 	const userNickName = watch('userNickName');
 	const userEmail = watch('email');
@@ -25,10 +26,19 @@ const SignUp = () => {
 	const watchCheckboxFirst = watch('first-checkbox');
 	const watchCheckboxSecond = watch('second-checkbox');
 	const watchCheckboxThird = watch('third-checkbox');
-	const isButtonDisabled = !(watchCheckboxFirst && watchCheckboxSecond);
+	const isButtonDisabled =
+		!(watchCheckboxFirst && watchCheckboxSecond) ||
+		isEmailAvailable === null ||
+		isEmailAvailable === true ||
+		isNickNameAvailable === null ||
+		isNickNameAvailable === true ||
+		!userPhoneNumber ||
+		!userName ||
+		!userNickName ||
+		!userEmail ||
+		!userPassword ||
+		!userpasswordChecked;
 
-	const [isNickNameAvailable, setIsNickNameAvailable] = useState(null);
-	const [isEmailAvailable, setIsEmailAvailable] = useState(null);
 	const userInfoData = localStorage.getItem('userInfo');
 	const navigate = useNavigate();
 	const mutation = useMutation({
@@ -152,7 +162,11 @@ const SignUp = () => {
 					/>
 					<button
 						type="button"
-						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						className={`absolute right-3 top-2.5 bottom-0 ${
+							isNickNameAvailable === null || isNickNameAvailable
+								? 'border border-main bg-main text-white'
+								: 'bg-borderGray'
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
 						onClick={handleCheckNickName}
 					>
 						중복 확인
@@ -196,7 +210,11 @@ const SignUp = () => {
 					/>
 					<button
 						type="button"
-						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
+						className={`absolute right-3 top-2.5 bottom-0 ${
+							isEmailAvailable === null || isEmailAvailable
+								? 'border border-main bg-main text-white'
+								: 'bg-borderGray'
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
 						onClick={handleCheckEmail}
 					>
 						중복 확인
@@ -264,29 +282,18 @@ const SignUp = () => {
 						placeholder="휴대폰 번호"
 						{...register('phoneNumber', {
 							required: true,
+							pattern: {
+								value: /^(?=.*[A-Za-z])(?=.*\d).{6,}$/,
+								message: '- 없이 숫자만 입력해주세요',
+							},
 						})}
-						onChange={(e) => {
-							e.target.value = e.target.value.replace(/[^0-9]/g, '');
-						}}
 					/>
-					<button
-						type="button"
-						className="absolute right-3 top-2.5 bottom-0 border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm"
-					>
-						인증번호 받기
-					</button>
 				</div>
-				<input
-					className="border border-borderGray w-full h-11 rounded-xl text-m pl-2 focus:outline-none"
-					type="text"
-					placeholder="인증번호 입력"
-					{...register('authNumber')}
-				/>
 
-				<div className="flex flex-col mt-7 w-full">
+				<div className="flex flex-col mt-4 w-full">
 					<div className="flex flex-row mb-2">
 						<input
-							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')]"
+							className="appearance-none bg-[url('pages/signUp/component/unchecked.svg')] w-4 h-4 mr-1 checked:bg-[url('pages/signUp/component/checked.svg')] cursor-pointer"
 							type="checkbox"
 							id="first-checkbox"
 							{...register('first-checkbox', { required: true })}
@@ -328,7 +335,7 @@ const SignUp = () => {
 					type="button"
 					className={`border ${
 						isButtonDisabled ? 'border-borderGray' : 'bg-main text-white'
-					} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5"`}
+					} flex items-center w-full h-11 rounded-xl text-gray text-center text-m mt-5" cursor-pointer`}
 					disabled={isButtonDisabled}
 					onClick={handleSignUp}
 				>

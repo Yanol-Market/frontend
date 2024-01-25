@@ -128,7 +128,7 @@ const SignIn = () => {
 				</button>
 				<Link to="/">
 					<p className="mt-11 text-lg text-gray underline underline-offset-1">
-						로그인 하지 않고 둘러보게요!
+						로그인 하지 않고 둘러볼게요!
 					</p>
 				</Link>
 			</div>

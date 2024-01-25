@@ -34,7 +34,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const navigate = useNavigate();
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
-	const [pgData, setPgData] = useState<PgDataProps>();
 	const chatRoomId = useRecoilValue(chatRoomIdState);
 	const userId = useRecoilValue(userIdState);
 	const sellerId = useRecoilValue(sellerIdState);
@@ -42,8 +41,12 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
-			setPgData(data.data);
+			console.log('paymentPrePare 함수 호출 후 데이터 :', data.data);
 			console.log('결제 준비 완료');
+			if (data.data) {
+				handlePayment(data.data);
+				console.log('handlePayment 함수 실행 완료');
+			}
 		},
 		onError(err) {
 			console.error(err);
@@ -52,6 +55,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
+		console.log('payPreData: ', payPreData);
 		if (payPreData) {
 			mutation.mutate(payPreData.orderId);
 		}
@@ -74,34 +78,30 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		setCheckAll(allChecked);
 	}, [checkboxes]);
 
-	useEffect(() => {
-		console.log(pgData);
-		if (pgData) {
-			handlePayment();
-		}
-	}, [pgData]);
-	const handlePayment = () => {
+	const handlePayment = (paymentData: PgDataProps) => {
 		if (!window.IMP) return;
 
 		if (impCode) {
+			console.log(impCode);
 			window.IMP.init(impCode);
 			const data: RequestPayParams = {
 				pg: 'html5_inicis.INIBillTst',
 				pay_method: 'card',
-				merchant_uid: String(pgData?.orderId),
-				amount: pgData?.price as number,
-				name: pgData?.roomName,
-				buyer_name: pgData?.userName,
-				buyer_tel: pgData?.phoneNumber || '',
-				buyer_email: pgData?.email || '',
-				m_redirect_url: redirectURL,
+				merchant_uid: String(paymentData?.orderId),
+				amount: paymentData?.price as number,
+				name: paymentData?.roomName,
+				buyer_name: paymentData?.userName,
+				buyer_tel: paymentData?.phoneNumber || '',
+				buyer_email: paymentData?.email || '',
+				m_redirect_url: redirectURL, // 수정 예정
 			};
 
 			try {
 				console.log('Payment data:', data);
 				window.IMP.request_pay(data, callback);
+				console.log('KG결제창 완료');
 			} catch (error) {
-				console.error('Error during payment request:', error);
+				console.error('결제 중 발생한 에러:', error);
 				navigate('/reservation/failure');
 			}
 		}
@@ -142,18 +142,19 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 			console.error('메시지 전송 중 오류 발생:', error);
 		}
 	};
-
 	const callback = async (response: RequestPayResponse) => {
+		console.log(response);
 		if (response.success) {
 			try {
 				const res = await instance.post('/payments/result', {
 					impUid: response.imp_uid,
 					orderId: payPreData?.orderId,
 				});
+				console.log(res);
 				alert('결제 성공');
 				if (res) {
 					sendMessages();
-					console.log(res.data.data);
+					console.log('사후검증 후 응답받는 값: ', res.data.data);
 					navigate(
 						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
 					);
