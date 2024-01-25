@@ -155,9 +155,15 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				if (res) {
 					sendMessages();
 					console.log('사후검증 후 응답받는 값: ', res.data.data);
-					navigate(
-						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
-					);
+					if (res.data.data.result === 'SUCCESS') {
+						navigate(
+							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
+						);
+					} else if (res.data.data.result === 'TIME_OVER') {
+						navigate('/reservation/timeout');
+					} else {
+						navigate('/reservation/failure');
+					}
 				}
 			} catch (err) {
 				console.error(err);
