@@ -15,10 +15,16 @@ const SoldDetail = () => {
 	const status = searchParams.get('status');
 
 	// 테스트 못해봄
-	const { data, isLoading } = useQuerySoldDetail(`${productId}`, `${status}`);
+	const { data, isLoading, error } = useQuerySoldDetail(
+		`${productId}`,
+		`${status}`,
+	);
 	const [bottom, setBottom] = useState(false);
 
 	console.log('판매완료 상세 ', data);
+	console.log('판매완료 상세 오류', error?.message);
+	console.log('판매완료 상세 오류', error);
+	console.log(productId, 'status', status);
 	const openBottom = () => {
 		setBottom(true);
 	};
@@ -43,6 +49,10 @@ const SoldDetail = () => {
 
 	if (isLoading) {
 		return <div> isLoading </div>;
+	}
+
+	if (error) {
+		return <div> error </div>;
 	}
 
 	if (data) {
@@ -120,7 +130,7 @@ const SoldDetail = () => {
 			</div>
 		);
 	}
-	return <div> 오류오류</div>;
+	return <div> d아무것도 아닌거 </div>;
 };
 
 export default SoldDetail;
