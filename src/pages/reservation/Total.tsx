@@ -4,7 +4,7 @@ import { paymentsState } from '../../recoil/atom';
 
 const Total = () => {
 	const payData = useRecoilValue(paymentsState);
-	console.log(payData);
+
 	return (
 		<div className="p-[20px]">
 			<h2 className="text-body font-bold mb-[5px]">결제 정보</h2>
