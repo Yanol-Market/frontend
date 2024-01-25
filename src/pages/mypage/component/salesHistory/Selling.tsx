@@ -57,6 +57,11 @@ const Selling = () => {
 			console.log('오픈');
 		}
 	};
+
+	const navigateToDetailPage = (productId: number) => {
+		navigate(`/product/${productId}`);
+	};
+
 	if (isLoading) {
 		return (
 			<div>
@@ -89,7 +94,7 @@ const Selling = () => {
 									<BottomSheet
 										isOpen={Bottom}
 										onClose={closeBottom}
-										viewHeight="160px"
+										viewHeight="calc(100vh*0.2)"
 									>
 										<div className="w-full h-full flex flex-col justify-center items-center">
 											<div className="text-body">
@@ -99,7 +104,10 @@ const Selling = () => {
 									</BottomSheet>
 
 									<div className="pb-4 flex justify-between items-center">
-										<p className="text-sm">
+										<p
+											className="text-sm cursor-pointer"
+											onClick={() => navigateToDetailPage(item.productId)}
+										>
 											골든티켓 등록번호 {item.productId}
 										</p>
 										<div>
@@ -118,19 +126,24 @@ const Selling = () => {
 											/>
 										</div>
 									</div>
-									<CardProd
-										accommodationImage={item.accommodationImage}
-										accommodationName={item.accommodationName}
-										reservationType={item.reservationType}
-										roomName={item.roomName}
-										standardNumber={item.standardNumber}
-										maximumNumber={item.maximumNumber}
-										checkInTime={item.checkInTime}
-										checkOutTime={item.checkOutTime}
-										checkInDate={item.checkInDate}
-										checkOutDate={item.checkOutDate}
-										goldenPrice={item.goldenPrice}
-									/>
+									<div
+										onClick={() => navigateToDetailPage(item.productId)}
+										className="cursor-pointer"
+									>
+										<CardProd
+											accommodationImage={item.accommodationImage}
+											accommodationName={item.accommodationName}
+											reservationType={item.reservationType}
+											roomName={item.roomName}
+											standardNumber={item.standardNumber}
+											maximumNumber={item.maximumNumber}
+											checkInTime={item.checkInTime}
+											checkOutTime={item.checkOutTime}
+											checkInDate={item.checkInDate}
+											checkOutDate={item.checkOutDate}
+											goldenPrice={item.goldenPrice}
+										/>
+									</div>
 									<StatusBar status={item.status} />
 									<div className="flex mt-5 pb-1">
 										<div className="text-body font-semibold">구매 희망자 </div>

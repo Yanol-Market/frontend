@@ -14,7 +14,7 @@ const Alarm = () => {
 	}
 	return (
 		<div>
-			<Header title={'알람'} />
+			<Header title={'알림'} />
 			{data?.alertResponses.length === 0 ? (
 				<div className="test-lg text-descGray flex flex-col items-center justify-center h-screen">
 					<div className="pb-28">수신된 알림이 없습니다. </div>
@@ -24,14 +24,16 @@ const Alarm = () => {
 					{data?.alertResponses.map((item: AlertRes) => (
 						<div
 							key={item.alertId}
-							className={`h-[62px] flex justify-between items-center px-[20px] text-sm ${
+							className={`h-[62px] w-full flex justify-between items-center px-[20px] text-sm ${
 								item.viewed
 									? 'bg-white border-b border-borderGray '
 									: ' bg-bgMain border-b border-homeMain'
 							}`}
 						>
-							<div className="">{item.content}</div>
-							<div className="pl-[35px]">{formatTimeAgo(item.createdAt)}</div>
+							<div className="w-[300px]">{item.content}</div>
+							<div className="w-[20px] pl-5">
+								{formatTimeAgo(item.createdAt)}
+							</div>
 						</div>
 					))}
 				</div>

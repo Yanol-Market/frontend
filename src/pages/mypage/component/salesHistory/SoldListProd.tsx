@@ -98,7 +98,7 @@ const SoldListProd = () => {
 										<img
 											src={item.accommodationImage}
 											alt="image"
-											className="w-[80px] h-[80px]"
+											className="w-[80px] h-[80px] rounded-md"
 										/>
 										<div className="w-[60%] px-[10px]">
 											<p className="text-lg font-bold">
