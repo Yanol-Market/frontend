@@ -111,8 +111,8 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 								</button>
 								<div className="flex-1 text-body flex justify-center items-center bg-[#fafafa]">
 									<input
-										type="number"
-										value={productPrice ?? ''}
+										type="text"
+										value={`${productPrice?.toLocaleString('ko-KR')}원` ?? ''}
 										className="w-[166px] text-center text-gray-800 bg-white p-2.5 rounded"
 									/>
 									<style>{`
