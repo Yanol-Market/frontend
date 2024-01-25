@@ -20,19 +20,9 @@ const ReservationPage = () => {
 			<PurchaserInfo />
 			<Total />
 			<Payment setPayment={setPayment} />
-			<div
-				className={`mx-[20px] my-[20px] h-[50px] text-center p-[15px] text-lg ${
-					isDisabled ? 'text-white' : 'text-black'
-				} text-[#828282] rounded-[12px] ${
-					isDisabled ? 'bg-[#FFCC00]' : 'bg-[#e5e5e5]'
-				}`}
-			>
-				<button
-					className="w-[100%]"
-					disabled={!isDisabled}
-					onClick={() => setTermSheet(true)}
-				>
-					다음
+			<div className="mx-[20px] my-[20px] h-[50px] bg-main text-white text-center p-[15px] text-lg rounded-xl">
+				<button className="w-[100%]" onClick={() => setTermSheet(true)}>
+					카드결제
 				</button>
 			</div>
 			<div className="mb-[20px] h-[20px]"></div>

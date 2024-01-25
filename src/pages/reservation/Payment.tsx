@@ -9,7 +9,7 @@ const Payment: React.FC<PaymentProps> = ({ setPayment }) => {
 		<div className="px-[10px]">
 			<h2 className="text-body font-bold mb-[5px] p-[10px]">결제 수단</h2>
 			<div className="text-center flex flex-wrap justify-center text-lg gap-x-[17px] gap-y-[15px]">
-				<input
+				{/* <input
 					type="radio"
 					id="credit"
 					value="카드결제"
@@ -31,7 +31,7 @@ const Payment: React.FC<PaymentProps> = ({ setPayment }) => {
                         border: 1px solid #FFF3C5;
                         }
                     `}
-				</style>
+				</style> */}
 			</div>
 		</div>
 	);
