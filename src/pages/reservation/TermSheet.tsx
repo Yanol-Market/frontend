@@ -34,7 +34,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const navigate = useNavigate();
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
-	const chatRoomId = useRecoilValue(chatRoomIdState);
 	const userId = useRecoilValue(userIdState);
 	const sellerId = useRecoilValue(sellerIdState);
 
@@ -107,41 +106,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		}
 	};
 
-	const sendMessages = async () => {
-		const data1 = {
-			chatRoomId,
-			senderType: 'BUYER',
-			userId: userId,
-			content: '결제 완료했습니다.',
-		};
-
-		const data2 = {
-			chatRoomId,
-			senderType: 'SYSTEM',
-			userId: sellerId,
-			content: `구매자가 결제를 완료했습니다. 20분 이내 양도 미신청 시, 자동 양도됩니다.`,
-		};
-
-		const data3 = {
-			chatRoomId,
-			senderType: 'SYSTEM',
-			userId: userId,
-			content: `결제가 완료되었습니다. 판매자가 20분 이내 양도 신청 후 거래가 완료됩니다. 20분 이후에는 양도가 자동 신청됩니다. 판매자가 양도 취소 시에는 결제금액이 100% 환불됩니다.`,
-		};
-
-		try {
-			const result1 = await sendMessage(data1);
-			console.log('첫 번째 메시지 전송 결과:', result1);
-
-			const result2 = await sendMessage(data2);
-			console.log('두 번째 메시지 전송 결과:', result2);
-
-			const result3 = await sendMessage(data3);
-			console.log('세 번째 메시지 전송 결과:', result3);
-		} catch (error) {
-			console.error('메시지 전송 중 오류 발생:', error);
-		}
-	};
 	const callback = async (response: RequestPayResponse) => {
 		console.log(response);
 		if (response.success) {
@@ -151,8 +115,44 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					orderId: payPreData?.orderId,
 				});
 				console.log(res);
+
 				alert('결제 성공');
 				if (res) {
+					const sendMessages = async () => {
+						const data1 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'BUYER',
+							userId: userId,
+							content: '결제 완료했습니다.',
+						};
+
+						const data2 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'SYSTEM',
+							userId: sellerId,
+							content: `구매자가 결제를 완료했습니다. 20분 이내 양도 미신청 시, 자동 양도됩니다.`,
+						};
+
+						const data3 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'SYSTEM',
+							userId: userId,
+							content: `결제가 완료되었습니다. 판매자가 20분 이내 양도 신청 후 거래가 완료됩니다. 20분 이후에는 양도가 자동 신청됩니다. 판매자가 양도 취소 시에는 결제금액이 100% 환불됩니다.`,
+						};
+
+						try {
+							const result1 = await sendMessage(data1);
+							console.log('첫 번째 메시지 전송 결과:', result1);
+
+							const result2 = await sendMessage(data2);
+							console.log('두 번째 메시지 전송 결과:', result2);
+
+							const result3 = await sendMessage(data3);
+							console.log('세 번째 메시지 전송 결과:', result3);
+						} catch (error) {
+							console.error('메시지 전송 중 오류 발생:', error);
+						}
+					};
 					sendMessages();
 					console.log('사후검증 후 응답받는 값: ', res.data.data);
 					navigate(
