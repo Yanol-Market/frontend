@@ -9,6 +9,7 @@ import { productStatusTrans } from '../../../../utils/translate';
 import { formatNumber } from '../../../../utils/formate';
 import { delSoldProd } from '../../../../apis/sales';
 import { useQueryClient } from '@tanstack/react-query';
+import ListSkeleton from './skeleton/ListSkeleton';
 // 판매완료 리스트
 const SoldListProd = () => {
 	const { isLoading, error, data } = useQuerySoldList();
@@ -52,16 +53,25 @@ const SoldListProd = () => {
 	};
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<ListSkeleton />{' '}
+			</div>
+		);
 	}
 
 	if (data) {
 		return (
 			<>
 				{data.length === 0 ? (
-					<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
-						판매완료된 상품이 없습니다.
-					</div>
+					<>
+						{' '}
+						<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
+							판매완료된 상품이 없습니다.
+						</div>
+						{/* <ListSkeleton /> */}
+					</>
 				) : (
 					<div className="pb-[80px]">
 						{data.map((item) => (
@@ -100,22 +110,25 @@ const SoldListProd = () => {
 											alt="image"
 											className="w-[80px] h-[80px] rounded-md"
 										/>
-										<div className="w-[60%] px-[10px]">
-											<p className="text-lg font-bold">
-												{item.accommodationName}
-											</p>
-											<div className="flex">
-												<p className="text-lg pr-[8px]">{item.roomName}</p>
-												<div className="flex items-center">
-													<div className="border-r-2 border-borderGray h-[12px]"></div>
-												</div>
-												<p className="text-lg pl-[8px]">
-													{item.standardNumber}인/최대 {item.maximumNumber}인
+										<div className="w-[60%] px-[10px] flex flex-col justify-between">
+											<div>
+												<p className="text-lg font-bold">
+													{item.accommodationName}
 												</p>
+												<div className="flex">
+													<p className="text-lg pr-[8px]">{item.roomName}</p>
+													<div className="flex items-center">
+														<div className="border-r-2 border-borderGray h-[12px]"></div>
+													</div>
+													<p className="text-lg pl-[8px]">
+														{item.standardNumber}인/최대 {item.maximumNumber}인
+													</p>
+												</div>
 											</div>
-											<p className="text-lg font-bold pt-[15px]">
+
+											<div className="text-lg font-bold ">
 												{formatNumber(item.goldenPrice)}원
-											</p>
+											</div>
 										</div>
 										<div className="">
 											<div className=" text-sm flex flex-col items-centertext-center justify-between h-[80px]">

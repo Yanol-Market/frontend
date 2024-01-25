@@ -67,7 +67,7 @@ const SoldDetail = () => {
 						rightBtnFunc={() => dltProduct(data.productId)}
 					/>
 				</BottomSheet>
-				<div className="pb-5 flex justify-between items-center">
+				<div className="pb-4 flex justify-between items-center">
 					<p className="text-sm ">골든티켓 등록번호 {data.productId}</p>
 					<div>
 						<img

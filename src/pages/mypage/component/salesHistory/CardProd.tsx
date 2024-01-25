@@ -23,7 +23,7 @@ const CardProd = (props: CardProdProps) => {
 							alt="image"
 							className="w-[80px] h-[80px] rounded-md"
 						/>
-						<div className=" px-[10px]  flex flex-col  justify-between h-[80px]">
+						<div className=" px-[10px] w-[80%]  flex flex-col  justify-between h-[80px]">
 							<div>
 								<p className="text-lg font-bold">{props.accommodationName}</p>
 								<div className="flex">
@@ -45,8 +45,8 @@ const CardProd = (props: CardProdProps) => {
 							</div>
 						</div>
 					</div>
-					<div className="flex flex-col text-sm justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center ">
-						<p className="">{reservationTypeTrans(props.reservationType)}</p>
+					<div className="flex text-sm justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center w-9">
+						<p>{reservationTypeTrans(props.reservationType)}</p>
 					</div>
 				</div>
 				<div className="mt-[20px] mb-[10px] flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px]">
