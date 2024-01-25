@@ -68,10 +68,7 @@ export const negoSuccessState = atom<boolean | null>({
 
 export const sendMessage = async (data: messageType) => {
 	try {
-		const response = await instance.post(
-			'https://golden-ticket.site/chats/test',
-			data,
-		);
+		const response = await instance.post('/chats/test', data);
 		console.log(response.data);
 		return response.data;
 	} catch (error) {
