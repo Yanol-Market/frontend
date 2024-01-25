@@ -61,7 +61,7 @@ const AddProductYaSignInPage: React.FC = () => {
 	};
 
 	const handleForgotPassword = () => {
-		navigate('/emaillogin');
+		window.location.href = 'https://www.yanolja.com/emaillogin';
 	};
 
 	return (
@@ -76,7 +76,7 @@ const AddProductYaSignInPage: React.FC = () => {
 					onChange={handleChange}
 				/>
 				<input
-					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
+					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none cursor-pointer"
 					type="password"
 					name="password"
 					value={formData.password}
