@@ -33,7 +33,9 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 	};
 
 	const priceDown = () => {
-		setProductPrice((prev) => (prev ?? 0) - 5000);
+		if (productPrice !== null && productPrice > 5000) {
+			setProductPrice((prev) => (prev !== null ? prev - 5000 : 0));
+		}
 	};
 
 	const negoSend = () => {
