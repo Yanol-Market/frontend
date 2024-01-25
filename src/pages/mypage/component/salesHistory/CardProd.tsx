@@ -36,7 +36,7 @@ const CardProd = (props: CardProdProps) => {
 							</div>
 							{props.goldenPrice ? (
 								<p className="text-lg font-bold pt-[15px]">
-									{formatNumber(props.goldenPrice)}
+									{formatNumber(props.goldenPrice)}원
 								</p>
 							) : null}
 						</div>
@@ -64,7 +64,7 @@ const CardProd = (props: CardProdProps) => {
 						<div className="flex">
 							<p>
 								{props.checkOutDate}({formatWeek(props.checkOutDate)}){' '}
-								{formatTime(props.checkInTime)}
+								{formatTime(props.checkOutTime)}
 							</p>
 						</div>
 					</div>
