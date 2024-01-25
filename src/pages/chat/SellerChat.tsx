@@ -263,7 +263,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 									</div>
 								)
 							))}
-						{productStatus === 'TRANSFER_PENDING' &&
+						{chatStatus === 'TRANSFER_PENDING' &&
 							(transferNoti ? (
 								<TransferNoti
 									setTransferNoti={setTransferNoti}
