@@ -483,7 +483,7 @@ export const ProductInfo = () => {
 				viewHeight="220px"
 			>
 				<ContentFailBtn
-					title="구매자가 네고중이거나, 거래중일때는 상품수정이 불가합니다."
+					title="구매자가 거래 중인경우 상품수정이 불가합니다."
 					btn={'확인'}
 					btnFunc={closeBottomAlert}
 				/>
