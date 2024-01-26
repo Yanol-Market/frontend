@@ -11,13 +11,13 @@ import { paymentsState, sendMessage, userIdState } from '../../../recoil/atom';
 import { editProdState } from '../../../recoil/prodEditAtom';
 import { BottomSheet } from '../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { patchAccounts } from '../../../apis/patchAccounts';
-import { p } from 'msw/lib/core/GraphQLHandler-907fc607';
 import instance from '../../../apis/axios';
+import ContentFailBtn from '../../../component/common/BottomSheet/Content/ContentFailBtnPage';
 
 type ProductDetailType = {
 	isWished: boolean;
 	isSeller: boolean;
+	negoProductStatus: string;
 	accommodationImage: string;
 	accommodationName: string;
 	accommodationAddress: string;
@@ -43,6 +43,8 @@ type ProductDetailType = {
 
 export const ProductInfo = () => {
 	const [bottom, setBottom] = useState(false);
+	const [bottomAlert, setBottomAlert] = useState(false);
+	const [bottomAlertSecond, setBottomAlertSecond] = useState(false);
 	const navigate = useNavigate();
 	const param = useParams();
 	const [isWished, setIsWished] = useState(false);
@@ -82,7 +84,6 @@ export const ProductInfo = () => {
 			try {
 				const response = await instance.get('/users/me');
 				setUserId(response.data.data.id);
-				console.log('user', response.data.data.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -109,8 +110,6 @@ export const ProductInfo = () => {
 			setIsNewChatRoom(data.isNewChatRoom || false);
 			setNegoAvailable(negoAvailable);
 
-			console.log(response.data);
-
 			return { chatRoomId, negoAvailable };
 		} catch (error) {
 			console.error(error);
@@ -132,8 +131,6 @@ export const ProductInfo = () => {
 		}
 	};
 
-	console.log('chatRoomId', chatRoomId);
-
 	// 채팅방 생성 함수
 
 	const makeChatRoom = async () => {
@@ -143,7 +140,6 @@ export const ProductInfo = () => {
 		};
 		try {
 			const response = await instance.post('/chats/test/chat-room', data);
-			console.log(response.data);
 			setChatRoomId(response.data.id);
 			return response.data.id;
 		} catch (error) {
@@ -165,7 +161,6 @@ export const ProductInfo = () => {
 
 		try {
 			const result = await sendMessage(data);
-			console.log(' 메시지 전송 결과:', result);
 		} catch (error) {
 			console.error('메시지 전송 중 오류 발생:', error);
 		}
@@ -188,22 +183,31 @@ export const ProductInfo = () => {
 		}
 		try {
 			const payData = await getPaymentsDetail(param?.productId);
-			console.log(payData);
 			setPayData(payData.data);
 			navigate(link);
 		} catch (error) {
 			throw new Error('결제 상세페이지 이동 실패');
 		}
 	};
-	const handleClickDeleteButton = () => {
-		console.log();
-	};
+
 	const openBottom = () => {
 		setBottom(true);
+	};
+	const openBottomAlert = () => {
+		setBottomAlert(true);
+	};
+	const openBottomAlertSecond = () => {
+		setBottomAlertSecond(true);
 	};
 
 	const closeBottom = () => {
 		setBottom(false);
+	};
+	const closeBottomAlert = () => {
+		setBottomAlert(false);
+	};
+	const closeBottomAlertSecond = () => {
+		setBottomAlertSecond(false);
 	};
 	const dltProduct = (productId: string) => {
 		deleteProduct(productId);
@@ -218,6 +222,7 @@ export const ProductInfo = () => {
 		return <div>Loading...</div>;
 	}
 
+	console.log(product);
 	return (
 		<div className="">
 			<div className="relative mb-5">
@@ -229,6 +234,18 @@ export const ProductInfo = () => {
 				<p className="absolute top-0 rounded-br-[5px] text-m font-semibold text-white bg-subBtn px-2 py-1">
 					D-{product.days}
 				</p>
+				{!(product.productStatus === 'SELLING') && (
+					<div className="w-full h-[205px] bg-black opacity-[80%] absolute bottom-[0px] flex flex-col justify-center items-center">
+						<img
+							className="mb-5"
+							src={`/assets/images/ic_${product.productStatus}.svg`}
+							alt="ic_calendar"
+						/>
+						<pre className="text-lg text-center text-white font-semibold">
+							{productStatusAlertTitle(product.productStatus as string)}
+						</pre>
+					</div>
+				)}
 			</div>
 			<div className="px-5 mb-[13px]">
 				<div className="flex justify-between">
@@ -296,7 +313,7 @@ export const ProductInfo = () => {
 					<p className="text-descGray font-pre text-lg">기존 구매가</p>
 					<div className="flex">
 						<p className="text-descGray font-pre text-lg mr-1">
-							{product.originPriceRatio}
+							{product.originPriceRatio}%
 						</p>
 						<p className="text-descGray font-pre text-lg line-through">
 							{product.originPrice.toLocaleString()}
@@ -325,8 +342,12 @@ export const ProductInfo = () => {
 							</p>
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
-						<p className={`${product.content ? 'text-black' : 'text-descGray'} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}>
-							{product.content ? product.content : '판매자 한마디가 없습니다.' }
+						<p
+							className={`${
+								product.content ? 'text-black' : 'text-descGray'
+							} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}
+						>
+							{product.content ? product.content : '판매자 한마디가 없습니다.'}
 						</p>
 					</div>
 					<div className="mb-[25px]">
@@ -377,7 +398,17 @@ export const ProductInfo = () => {
 				<div className="flex px-5 pt-[60px] pb-[30px] justify-between">
 					{isSeller ? (
 						<button
+							disabled={
+								product.productStatus === 'SOLD_OUT' ||
+								product.productStatus === 'EXPIRED'
+									? true
+									: false
+							}
 							onClick={() => {
+								if (product.negoProductStatus === 'NEGOTIATION_HAVE') {
+									openBottomAlert();
+									return;
+								}
 								setEditProd({
 									yanolja: product.yanoljaPrice,
 									origin: product.originPrice,
@@ -391,10 +422,11 @@ export const ProductInfo = () => {
 						</button>
 					) : (
 						<button
+							disabled={product.productStatus === 'SELLING' ? false : true}
 							onClick={async () => {
 								const response = await createChat();
 								if (response?.negoAvailable === false) {
-									alert('더이상 네고를 진행할 수 없습니다.');
+									openBottomAlertSecond();
 								} else if (response?.chatRoomId !== -1) {
 									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
 								}
@@ -406,6 +438,12 @@ export const ProductInfo = () => {
 					)}
 					{isSeller ? (
 						<button
+							disabled={
+								product.productStatus === 'SOLD_OUT' ||
+								product.productStatus === 'EXPIRED'
+									? false
+									: true
+							}
 							onClick={() => {
 								openBottom();
 							}}
@@ -415,6 +453,7 @@ export const ProductInfo = () => {
 						</button>
 					) : (
 						<button
+							disabled={product.productStatus === 'SELLING' ? false : true}
 							onClick={() => {
 								handleClickPayMentsButton(
 									`/reservation?productId=${param.productId}`,
@@ -438,6 +477,46 @@ export const ProductInfo = () => {
 					}}
 				/>
 			</BottomSheet>
+			<BottomSheet
+				isOpen={bottomAlert}
+				onClose={closeBottomAlert}
+				viewHeight="220px"
+			>
+				<ContentFailBtn
+					title="구매자가 네고중이거나, 거래중일때는 상품수정이 불가합니다."
+					btn={'확인'}
+					btnFunc={closeBottomAlert}
+				/>
+			</BottomSheet>
+			<BottomSheet
+				isOpen={bottomAlertSecond}
+				onClose={closeBottomAlertSecond}
+				viewHeight="220px"
+			>
+				<ContentFailBtn
+					title="더 이상의 네고 진행이 불가능합니다."
+					btn={'확인'}
+					btnFunc={closeBottomAlertSecond}
+				/>
+			</BottomSheet>
 		</div>
 	);
+};
+
+const productStatusAlertTitle = (productStatus: string) => {
+	let title;
+	switch (productStatus) {
+		case 'RESERVED':
+			title = `예약 중인 상품이에요!
+찜 하시면 판매 중일때 다시 알려드릴게요
+`;
+			break;
+		case 'SOLD_OUT':
+			title = `아쉽지만 이미 팔렸어요`;
+			break;
+		case 'EXPIRED':
+			title = `기간이 만료된 상품이에요`;
+			break;
+	}
+	return title;
 };

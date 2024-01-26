@@ -13,29 +13,18 @@ const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement,
 );
-async function enableMocking() {
-	if (process.env.NODE_ENV !== 'development') {
-		return;
-	}
 
-	const { worker } = await import('./mocks/browsers');
-	return worker.start();
-}
-enableMocking().then(() => {
-	root.render(
-		<React.StrictMode>
-			<CookiesProvider>
-				<QueryClientProvider client={queryClient}>
-					<RecoilRoot>
-						<BrowserRouter>
-							<App />
-						</BrowserRouter>
-					</RecoilRoot>
-					<ReactQueryDevtools />
-				</QueryClientProvider>
-			</CookiesProvider>
-		</React.StrictMode>,
-	);
-
-	reportWebVitals();
-});
+root.render(
+	<React.StrictMode>
+		<CookiesProvider>
+			<QueryClientProvider client={queryClient}>
+				<RecoilRoot>
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</RecoilRoot>
+				<ReactQueryDevtools />
+			</QueryClientProvider>
+		</CookiesProvider>
+	</React.StrictMode>,
+);
