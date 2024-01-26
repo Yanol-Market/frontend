@@ -60,6 +60,10 @@ const AddProductYaSignInPage: React.FC = () => {
 		}
 	};
 
+	const handleForgotPassword = () => {
+		window.location.href = 'https://www.yanolja.com/emaillogin';
+	};
+
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
 			<img className="mt-24" src="/assets/images/yanoljaLogo.svg" alt="logo" />
@@ -72,7 +76,7 @@ const AddProductYaSignInPage: React.FC = () => {
 					onChange={handleChange}
 				/>
 				<input
-					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none"
+					className="border border-borderGray w-full h-11 rounded-xl text-left text-sm mt-4 pl-1 focus:outline-none cursor-pointer"
 					type="password"
 					name="password"
 					value={formData.password}
@@ -85,7 +89,10 @@ const AddProductYaSignInPage: React.FC = () => {
 				>
 					야놀자로 로그인
 				</button>
-				<p className="text-sm text-left text-gray mt-1 cursor-pointer">
+				<p
+					className="text-sm text-left text-gray mt-1 cursor-pointer"
+					onClick={handleForgotPassword}
+				>
 					비밀번호를 잊으셨나요?
 				</p>
 			</form>
