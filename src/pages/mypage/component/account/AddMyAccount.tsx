@@ -113,7 +113,7 @@ const AddMyAccount = () => {
 								required: true,
 								pattern: {
 									value: /^[0-9]*$/,
-									message: '- 없이 숫자만 입력해주세요',
+									message: '특수문자 제외, 숫자만 입력해주세요',
 								},
 							})}
 						/>

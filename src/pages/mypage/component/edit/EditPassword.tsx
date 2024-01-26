@@ -132,7 +132,7 @@ const EditPassword = () => {
 							)}
 							{errors?.newPassword?.type === 'validate' && (
 								<div className="text-sm text-red text-start">
-									현재 비밀번호와 동일합니다.
+									현재 비밀번호와 다른 비밀번호를 입력해주세요.
 								</div>
 							)}
 						</div>
