@@ -3,7 +3,13 @@ import { RequestPayParams, RequestPayResponse } from '../../type/portone';
 import { useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
 import { useRecoilValue } from 'recoil';
-import { paymentsState } from '../../recoil/atom';
+import {
+	chatRoomIdState,
+	paymentsState,
+	sellerIdState,
+	sendMessage,
+	userIdState,
+} from '../../recoil/atom';
 import instance from '../../apis/axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,13 +34,18 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const navigate = useNavigate();
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
-	const [pgData, setPgData] = useState<PgDataProps>();
+	const userId = useRecoilValue(userIdState);
+	const sellerId = useRecoilValue(sellerIdState);
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
-			setPgData(data.data);
+			console.log('paymentPrePare 함수 호출 후 데이터 :', data.data);
 			console.log('결제 준비 완료');
+			if (data.data) {
+				handlePayment(data.data);
+				console.log('handlePayment 함수 실행 완료');
+			}
 		},
 		onError(err) {
 			console.error(err);
@@ -43,6 +54,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
+		console.log('payPreData: ', payPreData);
 		if (payPreData) {
 			mutation.mutate(payPreData.orderId);
 		}
@@ -65,49 +77,84 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		setCheckAll(allChecked);
 	}, [checkboxes]);
 
-	useEffect(() => {
-		console.log(pgData);
-		if (pgData) {
-			handlePayment();
-		}
-	}, [pgData]);
-	const handlePayment = () => {
+	const handlePayment = (paymentData: PgDataProps) => {
 		if (!window.IMP) return;
 
 		if (impCode) {
+			console.log(impCode);
 			window.IMP.init(impCode);
 			const data: RequestPayParams = {
 				pg: 'html5_inicis.INIBillTst',
 				pay_method: 'card',
-				merchant_uid: String(pgData?.orderId),
-				amount: pgData?.price as number,
-				name: pgData?.roomName,
-				buyer_name: pgData?.userName,
-				buyer_tel: pgData?.phoneNumber || '',
-				buyer_email: pgData?.email || '',
-				m_redirect_url: redirectURL,
+				merchant_uid: String(paymentData?.orderId),
+				amount: paymentData?.price as number,
+				name: paymentData?.roomName,
+				buyer_name: paymentData?.userName,
+				buyer_tel: paymentData?.phoneNumber || '',
+				buyer_email: paymentData?.email || '',
+				m_redirect_url: redirectURL, // 수정 예정
 			};
 
 			try {
 				console.log('Payment data:', data);
 				window.IMP.request_pay(data, callback);
+				console.log('KG결제창 완료');
 			} catch (error) {
-				console.error('Error during payment request:', error);
+				console.error('결제 중 발생한 에러:', error);
 				navigate('/reservation/failure');
 			}
 		}
 	};
 
 	const callback = async (response: RequestPayResponse) => {
+		console.log(response);
 		if (response.success) {
 			try {
 				const res = await instance.post('/payments/result', {
 					impUid: response.imp_uid,
 					orderId: payPreData?.orderId,
 				});
+				console.log(res);
+
 				alert('결제 성공');
 				if (res) {
-					console.log(res.data.data);
+					const sendMessages = async () => {
+						const data1 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'BUYER',
+							userId: userId,
+							content: '결제 완료했습니다.',
+						};
+
+						const data2 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'SYSTEM',
+							userId: sellerId,
+							content: `구매자가 결제를 완료했습니다. 20분 이내 양도 미신청 시, 자동 양도됩니다.`,
+						};
+
+						const data3 = {
+							chatRoomId: res.data.data.chatRoomId,
+							senderType: 'SYSTEM',
+							userId: userId,
+							content: `결제가 완료되었습니다. 판매자가 20분 이내 양도 신청 후 거래가 완료됩니다. 20분 이후에는 양도가 자동 신청됩니다. 판매자가 양도 취소 시에는 결제금액이 100% 환불됩니다.`,
+						};
+
+						try {
+							const result1 = await sendMessage(data1);
+							console.log('첫 번째 메시지 전송 결과:', result1);
+
+							const result2 = await sendMessage(data2);
+							console.log('두 번째 메시지 전송 결과:', result2);
+
+							const result3 = await sendMessage(data3);
+							console.log('세 번째 메시지 전송 결과:', result3);
+						} catch (error) {
+							console.error('메시지 전송 중 오류 발생:', error);
+						}
+					};
+					sendMessages();
+					console.log('사후검증 후 응답받는 값: ', res.data.data);
 					navigate(
 						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
 					);
@@ -136,10 +183,10 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	return (
 		<div>
 			<div
-				className="absolute top-0 h-[100%] w-[100%] bg-black opacity-75"
+				className="absolute top-0 z-50 h-[100%] w-[100%] bg-black opacity-75"
 				onClick={() => setTermSheet(false)}
 			></div>
-			<div className="animate-slide-up absolute bottom-0 h-[500px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
+			<div className="animate-slide-up absolute z-50 bottom-0 h-[500px] w-[100%] bg-white rounded-t-[20px] leading-tight tracking-tight">
 				<div className="m-[20px]">
 					<h2 className="p-[20px] mx-[15px] text-body font-semibold">
 						양도 안내사항

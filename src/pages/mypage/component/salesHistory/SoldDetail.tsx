@@ -92,10 +92,10 @@ const SoldDetail = () => {
 						<div> 거래일시</div>
 						<div>{formatDateTime(data.completedDate)}</div>
 					</div>
-					<div className="flex justify-between items-center text-lg  pb-2">
+					{/* <div className="flex justify-between items-center text-lg  pb-2">
 						<div> 정산일시</div>
 						<div>{formatDateTime(data.calculatedDate)}</div>
-					</div>
+					</div> */}
 					<div className="flex justify-between items-center text-lg  pb-2">
 						<div className="flex items-center">
 							<div>수수료</div>

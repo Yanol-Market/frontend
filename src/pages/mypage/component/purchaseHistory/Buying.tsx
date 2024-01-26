@@ -4,14 +4,26 @@ import CardProd from '../salesHistory/CardProd';
 import { BuyingProd } from '../../../../data/purchasesData';
 import { useQueryPurchases } from '../../../../hooks/useQueryPurchases';
 import Chat from '../salesHistory/Chat';
+import { useNavigate } from 'react-router';
+import SellingSkeleton from '../salesHistory/skeleton/SellingSkeleton';
 
 const Buying = () => {
+	const navigate = useNavigate();
 	const { isLoading, error, data } = useQueryPurchases();
 	console.log('구매중', data);
 	console.log('구매중 에러', error);
 
+	const navigateToDetailPage = (productId: number) => {
+		navigate(`/product/${productId}`);
+	};
+
 	if (isLoading) {
-		return <div> loading ... </div>;
+		return (
+			<div>
+				{' '}
+				<SellingSkeleton />
+			</div>
+		);
 	}
 
 	if (error) {
@@ -26,41 +38,54 @@ const Buying = () => {
 						구매중인 상품이 없습니다.
 					</div>
 				) : (
-					<div className="pb-[80px]">
-						{data.map((item: BuyingProd) => (
-							<div className="p-5" key={item.productId}>
-								<div className="pb-5 flex justify-between items-center">
-									<p className="text-sm ">골든티켓 등록번호 {item.productId}</p>
-								</div>
-
-								<CardProd
-									accommodationImage={item.accommodationImage}
-									accommodationName={item.accommodationName}
-									reservationType={item.reservationType}
-									roomName={item.roomName}
-									standardNumber={item.standardNumber}
-									maximumNumber={item.maximumNumber}
-									checkInTime={item.checkInTime}
-									checkOutTime={item.checkOutTime}
-									checkInDate={item.checkInDate}
-									checkOutDate={item.checkOutDate}
-									goldenPrice={item.goldenPrice}
-								/>
-
-								<StatusBar status={item.status} />
-								<div className="flex mb-4 pt-2">
-									<div className="text-body font-semibold pt-3">
+					<div className="pb-[90px]">
+						{data.map((item: BuyingProd, index) => (
+							<div className="" key={item.productId}>
+								{index === 0 ? null : (
+									<div className="border-b-[7px] border-lightGray  my-[32px]">
 										{' '}
-										나의 구매현황{' '}
 									</div>
+								)}
+								<div className="p-5">
+									<div
+										onClick={() => navigateToDetailPage(item.productId)}
+										className="cursor-pointer"
+									>
+										<div className="pb-5 flex justify-between items-center">
+											<p className="text-sm ">
+												골든티켓 등록번호 {item.productId}
+											</p>
+										</div>
+
+										<CardProd
+											accommodationImage={item.accommodationImage}
+											accommodationName={item.accommodationName}
+											reservationType={item.reservationType}
+											roomName={item.roomName}
+											standardNumber={item.standardNumber}
+											maximumNumber={item.maximumNumber}
+											checkInTime={item.checkInTime}
+											checkOutTime={item.checkOutTime}
+											checkInDate={item.checkInDate}
+											checkOutDate={item.checkOutDate}
+											goldenPrice={item.goldenPrice}
+										/>
+									</div>
+									<StatusBar status={item.status} />
+									<div className="flex mb-4 pt-2">
+										<div className="text-body font-semibold pt-3">
+											{' '}
+											나의 구매현황{' '}
+										</div>
+									</div>
+									<Chat
+										chatRoomId={item.chatRoomId}
+										receiverNickname={item.receiverNickname}
+										receiverProfileImage={item.receiverProfileImage}
+										price={item.price}
+										lastUpdatedAt={item.lastUpdatedAt}
+									/>
 								</div>
-								<Chat
-									chatRoomId={item.chatRoomId}
-									receiverNickname={item.receiverNickname}
-									receiverProfileImage={item.receiverProfileImage}
-									price={item.price}
-									lastUpdatedAt={item.lastUpdatedAt}
-								/>
 							</div>
 						))}
 					</div>

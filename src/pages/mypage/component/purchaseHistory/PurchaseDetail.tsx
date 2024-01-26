@@ -44,7 +44,7 @@ const PurchaseDetail = () => {
 							<img
 								src={data.accommodationImage}
 								alt="image"
-								className="w-[80px] h-[80px]"
+								className="w-[80px] h-[80px] rounded-md"
 							/>
 							<div className="px-[10px]">
 								<p className="text-lg font-bold">{data.accommodationName}</p>

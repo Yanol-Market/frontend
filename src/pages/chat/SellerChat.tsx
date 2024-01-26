@@ -187,6 +187,8 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		sendMessages();
 	};
 
+	// 양도 거절
+
 	const sendTransferReject = async () => {
 		try {
 			const response = await instance.patch(
@@ -268,7 +270,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 								<TransferNoti
 									setTransferNoti={setTransferNoti}
 									transfer={transfer}
-									transferReject={transferReject}
 								/>
 							) : (
 								<div className="w-[430px] bg-[#fafafa] pt-[20px] flex justify-center absolute bottom-0 h-[110px]">

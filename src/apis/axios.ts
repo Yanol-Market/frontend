@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCookie, refreshCookie } from './cookie';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @param instance 실제 api 연결 시 사용되는 instance입니다.
@@ -50,6 +51,11 @@ instance.interceptors.response.use(
 			const newAccessToken = await refreshCookie(refreshToken);
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 			console.log('토큰 재발급 완료');
+			if (!newAccessToken) {
+				const navigate = useNavigate();
+				navigate('/signin');
+				return Promise.reject(error);
+			}
 			return instance(originalRequest);
 		}
 

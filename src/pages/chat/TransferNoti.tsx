@@ -1,18 +1,23 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { productDataState } from '../../recoil/atom';
+import {
+	chatRoomIdState,
+	productDataState,
+	productIdState,
+	sendMessage,
+	userIdState,
+} from '../../recoil/atom';
 import dayjs from 'dayjs';
+import instance from '../../apis/axios';
 
 interface TransferNotiProps {
 	setTransferNoti: (value: boolean) => void;
 	transfer: () => void;
-	transferReject: () => void;
 }
 
 const TransferNoti: React.FC<TransferNotiProps> = ({
 	setTransferNoti,
 	transfer,
-	transferReject,
 }) => {
 	const productData = useRecoilValue(productDataState);
 	const productName = `${productData?.accommodationName} ${productData?.roomName}`;
@@ -21,6 +26,51 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 	const endDate = productData?.checkOutDate;
 	const checkInDate = dayjs(startDate).format('YYYY년 MM월 DD일');
 	const checkOutDate = dayjs(endDate).format('DD일');
+	const productId = useRecoilValue(productIdState);
+	const chatRoomId = useRecoilValue(chatRoomIdState);
+	const userId = useRecoilValue(userIdState);
+
+	const sendTransferReject = async () => {
+		try {
+			const response = await instance.patch(
+				`/nego/denyhandoverProduct/${productId}`,
+			);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const transferReject = async () => {
+		const sendMessages = async () => {
+			const data1 = {
+				chatRoomId,
+				senderType: 'SELLER',
+				userId: userId,
+				content: '죄송합니다. 판매가 어렵습니다.',
+			};
+			const data2 = {
+				chatRoomId,
+				senderType: 'SYSTEM',
+				userId: userId,
+				content:
+					'양도가 취소되었습니다. 구매자에게 결제금액이 100% 환불됩니다.',
+			};
+
+			try {
+				const result1 = await sendMessage(data1);
+				console.log('첫 번째 메시지 전송 결과:', result1);
+
+				const result2 = await sendMessage(data2);
+				console.log('두 번째 메시지 전송 결과:', result2);
+			} catch (error) {
+				console.error('메시지 전송 중 오류 발생:', error);
+			}
+		};
+
+		sendTransferReject();
+		sendMessages();
+	};
 
 	console.log('트랜스퍼 노티', productData);
 	return (
