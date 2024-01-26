@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { formatDate } from '../../../../utils/b';
+import { useNavigate } from 'react-router-dom';
+import { deleteWish } from '../../../../apis/wish';
 export interface WishItemProps {
 	accommodationImage: string;
 	accommodationName: string;
@@ -17,9 +19,18 @@ export interface WishItemProps {
 	yanoljaPrice: number;
 }
 export const WishItem = ({ product }: { product: WishItemProps }) => {
+	const navigate = useNavigate();
+	const [isWished, setIsWished] = useState(true);
+	const handleClickProduct = () => {
+		navigate(`/product/${product.productId}`);
+	};
+	const handleClickDeleteWish = () => {
+		deleteWish(product.productId as number);
+		setIsWished(false);
+	};
 	return (
-		<div className="flex h-[95px]">
-			<div className="relative mb-2 h-full">
+		<div className="flex h-[95px] cursor-pointer">
+			<div className="relative mb-2 ml-2 h-full">
 				<img
 					className="w-[120px] h-[95px] rounded-[5px]"
 					src={product.accommodationImage}
@@ -35,11 +46,20 @@ export const WishItem = ({ product }: { product: WishItemProps }) => {
 						D-{product.dDay}
 					</p>
 				</div>
-				<button className="absolute bottom-[10px] left-[10px]">
-					<img src={`/assets/images/fillheart_white.svg`} alt="heartIcon" />
+				<button
+					className="absolute bottom-[8px] left-[6px]"
+					onClick={handleClickDeleteWish}
+				>
+					<img
+						src={`/assets/images/${isWished ? 'Fill' : ''}heart_xl.svg`}
+						alt="heartIcon"
+					/>
 				</button>
 			</div>
-			<div className="flex flex-col w-[60%] justify-between ml-4">
+			<div
+				className="flex flex-col w-[60%] justify-between ml-3 cursor-pointer"
+				onClick={handleClickProduct}
+			>
 				<div className="flex-col w-full">
 					<div>
 						<p className="text-fontBlack font-pre text-lg font-normal">

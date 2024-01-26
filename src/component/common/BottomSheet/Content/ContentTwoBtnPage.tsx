@@ -23,8 +23,8 @@ const ContentTwoBtnPage = ({
 }: ContentTwoBtnProps) => {
 	return (
 		<div className="items-center mt-16 text-center">
-			<p className="text-body">{title}</p>
-			<div className="flex flex-row gap-2 mt-11">
+			<p className="text-body text-center">{title}</p>
+			<div className="flex flex-row gap-2 mt-11 justify-center">
 				<button
 					className="bg-borderGray w-40 h-11 rounded-xl text-white"
 					onClick={leftBtnFunc}

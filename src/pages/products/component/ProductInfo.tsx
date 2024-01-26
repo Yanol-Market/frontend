@@ -14,6 +14,7 @@ import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/Con
 import { patchAccounts } from '../../../apis/patchAccounts';
 import { p } from 'msw/lib/core/GraphQLHandler-907fc607';
 import instance from '../../../apis/axios';
+import { getCookie } from '../../../apis/cookie';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -143,10 +144,6 @@ export const ProductInfo = () => {
 		}
 	};
 	const handleClickPayMentsButton = async (link: string) => {
-		const isLogin = false;
-		if (isLogin) {
-			navigate('/login');
-		}
 		try {
 			const payData = await getPaymentsDetail(param?.productId);
 			console.log(payData);

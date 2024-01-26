@@ -26,7 +26,7 @@ interface PgDataProps {
 	userName: string;
 }
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
-	const redirectURL = 'https://golden-ticket.site/reservation/complete';
+	const redirectURL = 'https://golden-ticket.site/payments/mobile/result';
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
 		term2: false,
@@ -93,7 +93,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				buyer_name: paymentData?.userName,
 				buyer_tel: paymentData?.phoneNumber || '',
 				buyer_email: paymentData?.email || '',
-				m_redirect_url: redirectURL, // 수정 예정
+				m_redirect_url: redirectURL,
 			};
 
 			try {
@@ -156,14 +156,23 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					};
 					sendMessages();
 					console.log('사후검증 후 응답받는 값: ', res.data.data);
-					navigate(
-						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
-					);
+					if (res.data.data.result === 'SUCCESS') {
+						navigate(
+							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
+						);
+					} else if (res.data.data.result === 'TIME_OVER') {
+						navigate('/reservation/timeout');
+					} else {
+						navigate('/reservation/failure');
+					}
 				}
 			} catch (err) {
 				console.error(err);
 				throw new Error('사후검증 실패');
 			}
+		} else {
+			console.log('결제 실패');
+			navigate('/reservation/failure');
 		}
 	};
 

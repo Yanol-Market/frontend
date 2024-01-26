@@ -20,6 +20,7 @@ const ProfileEdit = () => {
 	const myProfile = JSON.parse(myProfileJSON as string);
 	const [myNicknameAvailable, setMyNickNameAvailable] = useState(null);
 	const currentNickName = watch('currentNickName');
+	const isButtonDisabled = !myNicknameAvailable;
 	useEffect(() => {
 		setValue('currentNickName', myProfile.data.nickname);
 	}, [myProfile.data.nickname, setValue]);
@@ -35,7 +36,6 @@ const ProfileEdit = () => {
 	const handleCheckNickName = async () => {
 		const res = await getNickName(currentNickName);
 		setMyNickNameAvailable(res.data);
-		console.log(res.data);
 	};
 
 	const handleProfileEdit = () => {
@@ -48,7 +48,6 @@ const ProfileEdit = () => {
 			setMyNickNameAvailable(null);
 		}
 	}, [currentNickName]);
-	console.log(myNicknameAvailable);
 	return (
 		<div>
 			<Header title="프로필 수정" />
@@ -126,7 +125,7 @@ const ProfileEdit = () => {
 						<MyPageClickBtn
 							content="변경사항 저장하기"
 							onClick={handleProfileEdit}
-							isDisabled={!myNicknameAvailable}
+							isDisabled={!isButtonDisabled}
 						/>
 					</form>
 				</div>

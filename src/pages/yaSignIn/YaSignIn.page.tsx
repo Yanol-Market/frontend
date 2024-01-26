@@ -43,6 +43,9 @@ const YaSignIn = () => {
 		const data = { email: yaUserId, password: yaUserPassword };
 		mutation.mutate(data);
 	};
+	const handleForgotPassword = () => {
+		window.location.href = 'https://www.yanolja.com/emaillogin';
+	};
 
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
@@ -86,7 +89,10 @@ const YaSignIn = () => {
 						</span>
 					</button>
 
-					<p className="text-sm text-left text-gray mt-1 cursor-pointer">
+					<p
+						className="text-sm text-left text-gray mt-1 cursor-pointer"
+						onClick={handleForgotPassword}
+					>
 						비밀번호를 잊으셨나요?
 					</p>
 				</div>

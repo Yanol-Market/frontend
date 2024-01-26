@@ -38,6 +38,7 @@ const InterestRegion = () => {
 		onSuccess() {
 			alert('관심 지역 등록 성공');
 			closeBottomSheet();
+			window.location.reload();
 		},
 	});
 
