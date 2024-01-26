@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import instance from '../../apis/axios';
 import {
 	chatRoomIdState,
@@ -21,16 +21,21 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 		productPriceState,
 	);
 	const [nego, setNego] = useRecoilState(negoState);
+
 	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
 	const chatRoomId = useRecoilValue(chatRoomIdState);
 
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setProductPrice(event.target.value);
+	};
+
 	const priceUp = () => {
-		setProductPrice((prev) => (prev ?? 0) + 5000);
+		setProductPrice((prev) => String((Number(prev) ?? 0) + 5000));
 	};
 
 	const priceDown = () => {
-		if (productPrice !== null && productPrice > 5000) {
-			setProductPrice((prev) => (prev !== null ? prev - 5000 : 0));
+		if (productPrice !== null && Number(productPrice) > 5000) {
+			setProductPrice((prev) => String(Number(prev) - 5000));
 		}
 	};
 
@@ -103,7 +108,8 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 								<div className="flex-1 text-body flex justify-center items-center bg-[#fafafa]">
 									<input
 										type="text"
-										value={`${productPrice?.toLocaleString('ko-KR')}원` ?? ''}
+										onChange={(event) => handleChange(event)}
+										value={productPrice ?? ''}
 										className="w-[166px] text-center text-gray-800 bg-white p-2.5 rounded"
 									/>
 									<style>{`

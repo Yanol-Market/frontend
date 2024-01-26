@@ -51,9 +51,9 @@ export const negoState = atom<boolean>({
 	default: false,
 });
 
-export const productPriceState = atom<number | null>({
+export const productPriceState = atom<string | null>({
 	key: 'productPrice',
-	default: 0,
+	default: '',
 });
 
 export const negoIdState = atom<number | null>({

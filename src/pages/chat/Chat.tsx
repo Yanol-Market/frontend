@@ -5,6 +5,7 @@ import ChatItem from './ChatItem';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
+	buyerIdState,
 	chatStatusState,
 	negoState,
 	paymentsState,
@@ -33,6 +34,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const endDate = productData?.checkOutDate;
 	const checkInDate = dayjs(startDate).format('YYYY년 MM월 DD일');
 	const checkOutDate = dayjs(endDate).format('DD일');
+	const buyerId = useRecoilValue(buyerIdState);
 
 	console.log('productId', productId);
 
@@ -119,6 +121,15 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 				</div>
 			)}
 
+			{chatStatus === 'PAYMENT_PENDING' ||
+				('TRANSFER_PENDING' && buyerId !== userId && (
+					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
+						<div className="w-[90%] bottom-[25px] text-lg m-[20px] h-[42px] bg-[#E5E5E5] rounded-[12px] text-white flex items-center justify-center">
+							현재 다른 사용자가 예약중인 상품입니다.
+						</div>
+					</div>
+				))}
+
 			{productStatus === 'RESERVED' && chatStatus !== 'PAYMENT_PENDING' && (
 				<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
 					<div className="w-[90%] bottom-[25px] text-lg m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center">
@@ -137,7 +148,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 						<div className="flex items-center flex-col">
 							<div className="bg-[#FAFAFA] items-center rounded-[12px] h-[95px] w-[90%] p-[10px]">
 								<p className="text-sm ml-[10px]">
-									골든티켓 등록번호 202401230001
+									골든티켓 등록번호 {productId}
 								</p>
 								<div className="flex">
 									<img
