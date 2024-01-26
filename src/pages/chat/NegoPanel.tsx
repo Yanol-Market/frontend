@@ -17,7 +17,7 @@ interface NegoPanelProps {
 const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	const userId = useRecoilValue(userIdState);
 	const productId = useRecoilValue(productIdState);
-	const [productPrice, setProductPrice] = useRecoilState<number | null>(
+	const [productPrice, setProductPrice] = useRecoilState<string | null>(
 		productPriceState,
 	);
 	const [nego, setNego] = useRecoilState(negoState);
