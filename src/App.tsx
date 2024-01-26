@@ -40,6 +40,8 @@ import ExpiredProdDetail from './pages/mypage/component/salesHistory/ExpiredProd
 import { NotFoundPage } from './component/common/NotFound';
 import { Splash } from './pages/splash';
 import { FindPassword } from './pages/findPassword';
+import ServicePolicies from './pages/mypage/component/service/ServicePolicies';
+import ProfilePolicies from './pages/mypage/component/service/ProfilePolicies';
 
 function App() {
 	return (
@@ -93,15 +95,8 @@ function App() {
 							/>
 						}
 					/>
-					<Route
-						path="/mypage/guide"
-						element={
-							<NotFoundContent
-								title="개인정보 처리방침"
-								content="페이지 준비중입니다."
-							/>
-						}
-					/>
+					<Route path="/mypage/profilepolicies" element={<ProfilePolicies />} />
+					<Route path="/mypage/service" element={<ServicePolicies />} />
 					<Route path="/mypage/editprofile" element={<ProfileEdit />} />
 					<Route path="/mypage/wishes" element={<WishList />} />
 					<Route path="/mypage/mylocations" element={<InterestRegion />} />
@@ -135,6 +130,7 @@ function App() {
 							/>
 						}
 					/>
+
 					<Route path="/*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>

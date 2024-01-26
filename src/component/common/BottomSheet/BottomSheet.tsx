@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -12,7 +12,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface BottomSheetProps {
 	isOpen: boolean;
 	onClose: () => void;
-	viewHeight: number | string;
+	viewHeight?: number | string;
+	autoHeight?: string;
 	children?: React.ReactNode;
 }
 

@@ -116,8 +116,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					orderId: payPreData?.orderId,
 				});
 				console.log(res);
-
-				alert('결제 성공');
 				if (res) {
 					const sendMessages = async () => {
 						const data1 = {
