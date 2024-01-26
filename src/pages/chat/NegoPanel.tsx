@@ -3,6 +3,7 @@ import instance from '../../apis/axios';
 import {
 	chatRoomIdState,
 	negoIdState,
+	negoState,
 	productIdState,
 	productPriceState,
 	userIdState,
@@ -10,21 +11,16 @@ import {
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface NegoPanelProps {
-	setNego: (value: boolean) => void;
 	setOffered: (value: boolean) => void;
-	setNegoStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NegoPanel: React.FC<NegoPanelProps> = ({
-	setNego,
-	setOffered,
-	setNegoStatus,
-}) => {
+const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	const userId = useRecoilValue(userIdState);
 	const productId = useRecoilValue(productIdState);
 	const [productPrice, setProductPrice] = useRecoilState<number | null>(
 		productPriceState,
 	);
+	const [nego, setNego] = useRecoilState(negoState);
 	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
 	const chatRoomId = useRecoilValue(chatRoomIdState);
 
@@ -59,13 +55,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 				data,
 			);
 			console.log(response.data);
-
-			if (response && response.data) {
-				const responseStatus = response.data.status;
-				if (responseStatus === 'SUCCESS') {
-					setNegoStatus('negotiated');
-				}
-			}
 		} catch (error) {
 			console.error(error);
 		}

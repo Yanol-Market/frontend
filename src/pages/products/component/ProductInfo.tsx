@@ -97,7 +97,7 @@ export const ProductInfo = () => {
 		negoAvailable: boolean;
 	}> => {
 		try {
-			const response = await instance(
+			const response = await instance.get(
 				`/nego/available?productId=${param?.productId}`,
 			);
 			const data = response?.data.data || {};
@@ -325,8 +325,12 @@ export const ProductInfo = () => {
 							</p>
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
-						<p className={`${product.content ? 'text-black' : 'text-descGray'} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}>
-							{product.content ? product.content : '판매자 한마디가 없습니다.' }
+						<p
+							className={`${
+								product.content ? 'text-black' : 'text-descGray'
+							} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}
+						>
+							{product.content ? product.content : '판매자 한마디가 없습니다.'}
 						</p>
 					</div>
 					<div className="mb-[25px]">
