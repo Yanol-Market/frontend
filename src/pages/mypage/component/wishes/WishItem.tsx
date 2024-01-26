@@ -39,11 +39,11 @@ export const WishItem = ({ product }: { product: WishItemProps }) => {
 				{!(product.status === 'SELLING') && (
 					<div className="w-full h-full bg-black opacity-[80%] absolute bottom-[0px] flex flex-col justify-center items-center">
 						<img
-							className="mb-2 w-8 y-8"
+							className="mb-1 w-4 y-4"
 							src={`/assets/images/ic_${product.status}.svg`}
 							alt="ic_calendar"
 						/>
-						<pre className="text-[7px] text-center text-white font-semibold">
+						<pre className="text-[5px] text-center text-white">
 							{/* {productStatusAlertTitle(product.status as string)} */}
 						</pre>
 					</div>
