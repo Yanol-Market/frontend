@@ -161,7 +161,9 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
 						);
 					} else if (res.data.data.result === 'TIME_OVER') {
-						navigate('/reservation/timeout');
+						navigate(
+							`/reservation/timeout?chatRoomId=${res.data.data.chatRoomId}`,
+						);
 					} else {
 						navigate('/reservation/failure');
 					}
