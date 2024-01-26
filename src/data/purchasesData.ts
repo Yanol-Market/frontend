@@ -72,7 +72,7 @@ export interface BoughtProd {
 	roomName: string;
 	standardNumber: number;
 	maximumNumber: number;
-	goldenPrice: number;
+	price: number;
 	completedAt: string;
 	orderId: number;
 }
@@ -184,7 +184,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			roomName: '객실명',
 			standardNumber: 2,
 			maximumNumber: 4,
-			goldenPrice: 100000,
+			price: 100000,
 			completedAt: '2024-01-22T03:00:00',
 			orderId: 5,
 		},
@@ -195,7 +195,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			roomName: '객실명2',
 			standardNumber: 2,
 			maximumNumber: 4,
-			goldenPrice: 100000,
+			price: 100000,
 			completedAt: '2023-12-10T14:00:00',
 			orderId: 7,
 		},
@@ -206,7 +206,7 @@ export const BoughtListRes: ApiBoughtProd = {
 			roomName: '객실명3',
 			standardNumber: 2,
 			maximumNumber: 4,
-			goldenPrice: 100000,
+			price: 100000,
 			completedAt: '2022-01-10T14:00:00',
 			orderId: 8,
 		},

@@ -17,35 +17,39 @@ const CardProd = (props: CardProdProps) => {
 		<>
 			<div>
 				<div className="flex justify-between ">
-					<div className="flex">
+					<div className="flex w-[90%]">
 						<img
 							src={props.accommodationImage}
 							alt="image"
 							className="w-[80px] h-[80px] rounded-md"
 						/>
-						<div className=" px-[10px]">
-							<p className="text-lg font-bold">{props.accommodationName}</p>
-							<div className="flex">
-								<p className="text-lg pr-[8px]">{props.roomName}</p>
-								<div className="flex items-center">
-									<div className="border-r-2 border-borderGray h-[12px]"></div>
+						<div className=" px-[10px] w-[90%]  flex flex-col  justify-between h-[80px] ">
+							<div>
+								<p className="text-lg font-bold">{props.accommodationName}</p>
+								<div className="flex  items-center  w-[90%] ">
+									<p className="text-lg pr-[8px]  w-[60%] ">{props.roomName}</p>
+									<div className="flex items-center">
+										<div className="border-r-2 border-borderGray h-[12px]"></div>
+									</div>
+									<p className="text-lg pl-[8px] ">
+										{props.standardNumber}인/최대 {props.maximumNumber}인
+										<div role="status">
+											<span className="sr-only">로딩중</span>
+										</div>
+									</p>
 								</div>
-								<p className="text-lg pl-[8px]">
-									{props.standardNumber}인/최대 {props.maximumNumber}인
-								</p>
 							</div>
-							{props.goldenPrice ? (
-								<p className="text-lg font-bold pt-[15px]">
-									{formatNumber(props.goldenPrice)}원
-								</p>
-							) : null}
+							<div>
+								{props.goldenPrice ? (
+									<p className="text-lg font-bold ">
+										{formatNumber(props.goldenPrice)}원
+									</p>
+								) : null}
+							</div>
 						</div>
 					</div>
-
-					<div className="text-sm">
-						<div className="flex flex-col justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center ">
-							<p className="">{reservationTypeTrans(props.reservationType)}</p>
-						</div>
+					<div className="flex w-[40px] text-sm justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center w-9">
+						<p>{reservationTypeTrans(props.reservationType)}</p>
 					</div>
 				</div>
 				<div className="mt-[20px] mb-[10px] flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px]">

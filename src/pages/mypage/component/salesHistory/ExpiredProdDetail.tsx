@@ -5,6 +5,7 @@ import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { delSoldProd } from '../../../../apis/sales';
+import SoldSkeleton from './skeleton/SoldSkeleton';
 
 const ExpiredProdDetail = () => {
 	const { productId } = useParams();
@@ -30,6 +31,7 @@ const ExpiredProdDetail = () => {
 	};
 
 	console.log('상품만료', data);
+
 	// 판매완료 상세 - 판매완료 삭제 API
 	const dltProduct = async (productId: number) => {
 		try {
@@ -44,7 +46,12 @@ const ExpiredProdDetail = () => {
 	};
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<SoldSkeleton />{' '}
+			</div>
+		);
 	}
 
 	if (data) {
