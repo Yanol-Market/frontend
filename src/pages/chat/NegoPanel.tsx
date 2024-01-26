@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import instance from '../../apis/axios';
 import {
 	chatRoomIdState,
 	negoIdState,
+	negoState,
 	productIdState,
 	productPriceState,
 	userIdState,
@@ -10,31 +11,31 @@ import {
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface NegoPanelProps {
-	setNego: (value: boolean) => void;
 	setOffered: (value: boolean) => void;
-	setNegoStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NegoPanel: React.FC<NegoPanelProps> = ({
-	setNego,
-	setOffered,
-	setNegoStatus,
-}) => {
+const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	const userId = useRecoilValue(userIdState);
 	const productId = useRecoilValue(productIdState);
-	const [productPrice, setProductPrice] = useRecoilState<number | null>(
+	const [productPrice, setProductPrice] = useRecoilState<string | null>(
 		productPriceState,
 	);
+	const [nego, setNego] = useRecoilState(negoState);
+
 	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
 	const chatRoomId = useRecoilValue(chatRoomIdState);
 
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setProductPrice(event.target.value);
+	};
+
 	const priceUp = () => {
-		setProductPrice((prev) => (prev ?? 0) + 5000);
+		setProductPrice((prev) => String((Number(prev) ?? 0) + 5000));
 	};
 
 	const priceDown = () => {
-		if (productPrice !== null && productPrice > 5000) {
-			setProductPrice((prev) => (prev !== null ? prev - 5000 : 0));
+		if (productPrice !== null && Number(productPrice) > 5000) {
+			setProductPrice((prev) => String(Number(prev) - 5000));
 		}
 	};
 
@@ -59,13 +60,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 				data,
 			);
 			console.log(response.data);
-
-			if (response && response.data) {
-				const responseStatus = response.data.status;
-				if (responseStatus === 'SUCCESS') {
-					setNegoStatus('negotiated');
-				}
-			}
 		} catch (error) {
 			console.error(error);
 		}
@@ -114,7 +108,8 @@ const NegoPanel: React.FC<NegoPanelProps> = ({
 								<div className="flex-1 text-body flex justify-center items-center bg-[#fafafa]">
 									<input
 										type="text"
-										value={`${productPrice?.toLocaleString('ko-KR')}원` ?? ''}
+										onChange={(event) => handleChange(event)}
+										value={productPrice ?? ''}
 										className="w-[166px] text-center text-gray-800 bg-white p-2.5 rounded"
 									/>
 									<style>{`

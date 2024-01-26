@@ -7,6 +7,7 @@ import { formatDateTime, formatNumber } from '../../../../utils/formate';
 import Chat from './Chat';
 import { delSoldProd } from '../../../../apis/sales';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import SoldSkeleton from './skeleton/SoldSkeleton';
 
 const SoldDetail = () => {
 	const { productId } = useParams();
@@ -14,11 +15,15 @@ const SoldDetail = () => {
 	const navigate = useNavigate();
 	const status = searchParams.get('status');
 
-	// 테스트 못해봄
-	const { data, isLoading } = useQuerySoldDetail(`${productId}`, `${status}`);
+	const { data, isLoading, error } = useQuerySoldDetail(
+		`${productId}`,
+		`${status}`,
+	);
 	const [bottom, setBottom] = useState(false);
 
 	console.log('판매완료 상세 ', data);
+	console.log('판매완료 상세 오류', error);
+	console.log(productId, 'status', status);
 	const openBottom = () => {
 		setBottom(true);
 	};
@@ -28,7 +33,6 @@ const SoldDetail = () => {
 	};
 
 	// 판매완료 상세 - 판매완료 삭제 API
-	// 테스트 못해봄
 	const dltProduct = async (productId: number) => {
 		try {
 			const res = await delSoldProd(productId);
@@ -42,7 +46,16 @@ const SoldDetail = () => {
 	};
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<SoldSkeleton />{' '}
+			</div>
+		);
+	}
+
+	if (error) {
+		return <div> error </div>;
 	}
 
 	if (data) {
@@ -57,7 +70,7 @@ const SoldDetail = () => {
 						rightBtnFunc={() => dltProduct(data.productId)}
 					/>
 				</BottomSheet>
-				<div className="pb-5 flex justify-between items-center">
+				<div className="pb-4 flex justify-between items-center">
 					<p className="text-sm ">골든티켓 등록번호 {data.productId}</p>
 					<div>
 						<img
@@ -120,7 +133,7 @@ const SoldDetail = () => {
 			</div>
 		);
 	}
-	return <div> 오류오류</div>;
+	return <div> d아무것도 아닌거 </div>;
 };
 
 export default SoldDetail;

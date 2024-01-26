@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQueryBoughtList } from '../../../../hooks/useQueryPurchases';
 import { BoughtProd } from '../../../../data/purchasesData';
 import { formatNumber, formatTimeAgo } from '../../../../utils/formate';
 import { delBoughtProd } from '../../../../apis/purchases';
 import { useQueryClient } from '@tanstack/react-query';
+import ListSkeleton from '../salesHistory/skeleton/ListSkeleton';
 
-// 테스트 ㄴㄴ
 const BoughtListProd = () => {
 	const queryClient = useQueryClient();
 
@@ -30,9 +29,10 @@ const BoughtListProd = () => {
 	};
 
 	// 구매 완료 - 구매완료 상품 삭제 API
-	// 테스트 ㄴㄴ
+
 	const delPurchaseProd = async (orderId: number) => {
 		try {
+			console.log('orderId', orderId);
 			const res = await delBoughtProd(orderId);
 			console.log('구매 완료 리스트 삭제 완료', res);
 			alert(res.message);
@@ -49,7 +49,13 @@ const BoughtListProd = () => {
 	};
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{[...Array(5)].map((_, index) => (
+					<ListSkeleton key={index} />
+				))}
+			</div>
+		);
 	}
 
 	if (error) {
@@ -60,9 +66,11 @@ const BoughtListProd = () => {
 		return (
 			<>
 				{data.length === 0 ? (
-					<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
-						구매완료된 상품이 없습니다.
-					</div>
+					<>
+						<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
+							구매완료된 상품이 없습니다.
+						</div>
+					</>
 				) : (
 					<div className="pb-[80px]">
 						{data.map((item: BoughtProd) => (
@@ -70,7 +78,7 @@ const BoughtListProd = () => {
 								key={item.productId}
 								className="p-5 pb-8 border-borderWhite border-b-[1px]"
 							>
-								<div className="pb-5 flex justify-between items-center ">
+								<div className="pb-4 flex justify-between items-center ">
 									<p className="text-sm ">골든티켓 등록번호 {item.productId}</p>
 									<div>
 										<img
@@ -86,7 +94,7 @@ const BoughtListProd = () => {
 										<img
 											src={item.accommodationImage}
 											alt="image"
-											className="w-[80px] h-[80px]"
+											className="w-[80px] h-[80px] rounded-lg "
 										/>
 										<div className="px-[10px]">
 											<div className="flex items-center ">
@@ -109,7 +117,7 @@ const BoughtListProd = () => {
 												</p>
 											</div>
 											<p className="text-lg font-bold pt-[15px]">
-												{formatNumber(item.goldenPrice)}원
+												{formatNumber(item.price)}원
 											</p>
 										</div>
 									</div>
@@ -143,7 +151,7 @@ const BoughtListProd = () => {
 		);
 	}
 
-	return <div> 아무것도 없는 페이지 </div>;
+	return <> </>;
 };
 
 export default BoughtListProd;

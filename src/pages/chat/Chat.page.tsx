@@ -13,6 +13,7 @@ import {
 	chatStatusState,
 	messageState,
 	negoIdState,
+	negoState,
 	offeredPriceState,
 	productDataState,
 	productIdState,
@@ -29,7 +30,6 @@ const ChatPage = () => {
 	const [userId, setUserId] = useRecoilState<number>(userIdState);
 	const [productData, setProductData] = useRecoilState(productDataState);
 	const [chatList, setChatList] = useState<ChatItemType[] | null>([]);
-	const [negoStatus, setNegoStatus] = useState<string>('negotiated');
 	const [message, setMessage] = useRecoilState(messageState);
 	const [productPrice, setProductPrice] = useRecoilState(productPriceState);
 	const [receiverName, setReceiverName] = useRecoilState(receiverNicknameState);
@@ -45,6 +45,7 @@ const ChatPage = () => {
 	const [chatRoomId, setChatRoomId] = useRecoilState(chatRoomIdState);
 	const [negoId, setNegoId] = useRecoilState(negoIdState);
 	const [productStatus, setProductStatus] = useRecoilState(productStatusState);
+	const [nego, setNego] = useRecoilState(negoState);
 
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
@@ -119,6 +120,10 @@ const ChatPage = () => {
 			setChatRoomId(chatRoomId);
 			setNegoId(negoId);
 			setProductStatus(productStatus);
+
+			if (chatStatus === '' && productStatus !== 'RESERVED') {
+				setNego(true);
+			}
 		}
 
 		fetchChatData();
@@ -136,9 +141,9 @@ const ChatPage = () => {
 			</div>
 			<div className="h-[calc(100%-160px)]">
 				{userId === buyerId ? (
-					<Chat chatList={chatList} setNegoStatus={setNegoStatus} />
+					<Chat chatList={chatList} />
 				) : (
-					<SellerChat chatList={chatList} setNegoStatus={setNegoStatus} />
+					<SellerChat chatList={chatList} />
 				)}
 			</div>
 		</div>

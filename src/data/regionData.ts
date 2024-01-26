@@ -36,7 +36,7 @@ export const regionData = [
 	},
 	{
 		id: 8,
-		region: '충남',
+		region: '충남/세종',
 		areaCode: 'CHUNGNAM',
 	},
 	{
@@ -76,7 +76,7 @@ export const regionData = [
 	},
 	{
 		id: 16,
-		region: '전북',
+		region: '전주/전북',
 		areaCode: 'JEONBUK',
 	},
 ];

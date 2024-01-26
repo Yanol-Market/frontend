@@ -36,6 +36,7 @@ const Chat = (props: BuyerProps) => {
 						<ArrowForwardIosIcon
 							sx={{ width: '15px' }}
 							className="cursor-pointer  text-gray "
+							onClick={() => handleClick(props.chatRoomId)}
 						/>
 					</div>{' '}
 				</div>

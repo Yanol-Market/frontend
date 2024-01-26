@@ -46,14 +46,14 @@ export const messageState = atom<messageType | null>({
 	default: null,
 });
 
-export const negoState = atom<string>({
+export const negoState = atom<boolean>({
 	key: 'negoState',
-	default: 'false',
+	default: false,
 });
 
-export const productPriceState = atom<number | null>({
+export const productPriceState = atom<string | null>({
 	key: 'productPrice',
-	default: 0,
+	default: '',
 });
 
 export const negoIdState = atom<number | null>({
@@ -68,10 +68,7 @@ export const negoSuccessState = atom<boolean | null>({
 
 export const sendMessage = async (data: messageType) => {
 	try {
-		const response = await instance.post(
-			'https://golden-ticket.site/chats/test',
-			data,
-		);
+		const response = await instance.post('/chats/test', data);
 		console.log(response.data);
 		return response.data;
 	} catch (error) {

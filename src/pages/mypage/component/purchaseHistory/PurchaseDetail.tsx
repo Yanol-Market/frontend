@@ -10,6 +10,8 @@ import {
 } from '../../../../utils/formate';
 import { reservationTypeTrans } from '../../../../utils/translate';
 import { useSearchParams } from 'react-router-dom';
+import { Loading } from '../../../../component/common/Loading';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const PurchaseDetail = () => {
 	const [searchParams] = useSearchParams();
@@ -20,18 +22,27 @@ const PurchaseDetail = () => {
 	console.log('구매왕료 상세 ', data);
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				<Loading />{' '}
+			</div>
+		);
 	}
 
 	if (error) {
-		return <div> error </div>;
+		return (
+			<div>
+				{' '}
+				<NotFoundPage />{' '}
+			</div>
+		);
 	}
 
 	if (data) {
 		return (
 			<div className="pb-[80px] pt-4 flex items-center justify-center">
 				<div
-					className="h-[672px] w-[375PX] bg-cover bg-center mr-1"
+					className="h-[672px] w-[375PX] bg-cover bg-center mr-1 b"
 					style={{
 						backgroundImage: `url('/assets/images/ticket_1.svg')`,
 					}}
@@ -46,24 +57,30 @@ const PurchaseDetail = () => {
 								alt="image"
 								className="w-[80px] h-[80px] rounded-md"
 							/>
-							<div className="px-[10px]">
-								<p className="text-lg font-bold">{data.accommodationName}</p>
-								<div className="flex">
-									<p className="text-lg pr-[8px]">{data.roomName}</p>
-									<div className="flex items-center">
-										<div className="border-r-2 border-borderGray h-[12px]"></div>
+							<div className="px-[10px] flex flex-col justify-between ">
+								<div>
+									<div className="text-lg font-bold">
+										{data.accommodationName}
 									</div>
-									<p className="text-lg pl-[8px]">
-										{data.standardNumber}인/최대 {data.maximumNumber}인
-									</p>
+									<div className="flex items-center">
+										<div className="text-lg flex pr-[8px] w-[50%]">
+											{data.roomName}
+										</div>
+
+										<div className="border-r-2 border-borderGray h-[12px]"></div>
+
+										<p className="text-lg pl-[8px] ">
+											{data.standardNumber}인/최대 {data.maximumNumber}인
+										</p>
+									</div>
 								</div>
-								<p className="text-lg font-bold pt-[15px]">
-									{formatNumber(data.price)}원
-								</p>
-							</div>
-							<div className="flex justify-end h-[80px] items-end">
-								<div className="text-sm border-[1px] border-[#e0e0e0] flex flex-col justify-center items-center rounded-[10px] w-[35px] h-[20px] p-[5px] text-center">
-									<p>{reservationTypeTrans(data.reservationType)}</p>
+								<div className="flex justify-between">
+									<div className="text-lg font-bold ">
+										{formatNumber(data.price)}원
+									</div>
+									<div className="text-sm border-[1px] border-[#e0e0e0] flex justify-center items-center rounded-[10px] w-[35px] h-[20px] p-[5px] ">
+										<p>{reservationTypeTrans(data.reservationType)}</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -109,7 +126,7 @@ const PurchaseDetail = () => {
 							</div>
 						</div>
 						{/* 채팅ui */}
-						<div className="border-borderGray border px-5 py-3 mt-2 flex items-center  justify-between rounded-lg">
+						<div className="border-borderGray border px-5 py-2 mt-2 flex items-center  justify-between rounded-lg">
 							<div className="flex items-center justify-center">
 								<div>
 									<img src="/assets/images/userDefault.svg" alt="userDefault" />

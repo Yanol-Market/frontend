@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface BottomSheetProps {
 	isOpen: boolean;
 	onClose: () => void;
-	viewHeight: string;
+	viewHeight: number | string;
 	children?: React.ReactNode;
 }
 

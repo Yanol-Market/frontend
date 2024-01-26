@@ -20,7 +20,7 @@ const AddProductHeader = ({ title, handleArrowBackClick }: propsType) => {
 
 	return (
 		<div className="fixed bg-white top-0 w-[430px] h-[70px] z-20 m-auto">
-			<div className=" w-[430px] h-[70px]  flex">
+			<div className=" w-[430px] h-[90px]  flex">
 				<div className="my-auto cursor-pointer pl-5">
 					<ArrowBackIosNewOutlinedIcon
 						sx={{ width: '14px', cursor: 'pointer' }}

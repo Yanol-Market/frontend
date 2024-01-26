@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import StatusBar from './StatusBar';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
-import SellingBottom from './SellingBottom';
 import { useQuerySales } from '../../../../hooks/useQuerySales';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import Chat from './Chat';
 import { useNavigate } from 'react-router';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { editProdState } from '../../../../recoil/prodEditAtom';
 import SellingSkeleton from './skeleton/SellingSkeleton';
 

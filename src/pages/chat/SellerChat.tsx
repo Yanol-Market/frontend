@@ -281,6 +281,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 									</div>
 								</div>
 							))}
+						{chatStatus === 'NEGO_TIMEOUT' && <div></div>}
 					</>
 				)}
 			</div>
