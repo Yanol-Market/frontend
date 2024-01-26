@@ -15,7 +15,7 @@ const Withdrawl = () => {
 	const selectReason = useRecoilValue(withDrawlState);
 	const [isBottomSheetOpenWithDrawl, setIsBottomSheetWithDrawlOpen] =
 		useState(false);
-
+	const isButtonDisabled = !selectReason;
 	const mutation = useMutation({
 		mutationFn: deleteMember,
 		onSuccess() {
@@ -66,7 +66,11 @@ const Withdrawl = () => {
 						<img src="/assets/images/dropdownArrow.svg" alt="아래로 이동" />
 					</div>
 				</div>
-				<MyPageClickBtn content="탈퇴하기" onClick={withdrawlConfirmBtn} />
+				<MyPageClickBtn
+					content="탈퇴하기"
+					onClick={withdrawlConfirmBtn}
+					isDisabled={isButtonDisabled}
+				/>
 			</div>
 		</div>
 	);

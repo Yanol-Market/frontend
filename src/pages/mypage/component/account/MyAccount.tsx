@@ -23,7 +23,7 @@ const MyAccount = () => {
 	const mutation = useMutation({
 		mutationFn: deleteAccounts,
 		onSuccess() {
-			navigate('/myaccount');
+			navigate('/mypage');
 		},
 	});
 
@@ -47,6 +47,7 @@ const MyAccount = () => {
 			bankName: data?.data?.bankName || '',
 			accountNumber: data?.data?.accountNumber || '',
 		});
+		setIsBottomSheetAccountOpen(false);
 	};
 
 	return (

@@ -13,6 +13,7 @@ import { BottomSheet } from '../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
 import instance from '../../../apis/axios';
 import ContentFailBtn from '../../../component/common/BottomSheet/Content/ContentFailBtnPage';
+import { getCookie } from '../../../apis/cookie';
 
 type ProductDetailType = {
 	isWished: boolean;
@@ -98,7 +99,7 @@ export const ProductInfo = () => {
 		negoAvailable: boolean;
 	}> => {
 		try {
-			const response = await instance(
+			const response = await instance.get(
 				`/nego/available?productId=${param?.productId}`,
 			);
 			const data = response?.data.data || {};
@@ -177,10 +178,6 @@ export const ProductInfo = () => {
 		}
 	};
 	const handleClickPayMentsButton = async (link: string) => {
-		const isLogin = false;
-		if (isLogin) {
-			navigate('/login');
-		}
 		try {
 			const payData = await getPaymentsDetail(param?.productId);
 			setPayData(payData.data);
@@ -425,8 +422,13 @@ export const ProductInfo = () => {
 							disabled={product.productStatus === 'SELLING' ? false : true}
 							onClick={async () => {
 								const response = await createChat();
+								console.log(response);
 								if (response?.negoAvailable === false) {
-									openBottomAlertSecond();
+									if (response?.chatRoomId !== -1) {
+										handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
+									} else {
+										alert('더이상 네고를 진행할 수 없습니다.');
+									}
 								} else if (response?.chatRoomId !== -1) {
 									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
 								}

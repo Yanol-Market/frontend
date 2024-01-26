@@ -166,14 +166,14 @@ const SignUp = () => {
 							isNickNameAvailable === null || isNickNameAvailable
 								? 'border border-main bg-main text-white'
 								: 'bg-borderGray'
-						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckNickName}
 					>
 						중복 확인
 					</button>
 				</div>
 
-				{isNickNameAvailable === null ? (
+				{isNickNameAvailable === null || errors.userNickName ? (
 					<div className="text-sm mb-4 text-start text-red">
 						{errors?.userNickName?.message as string}
 					</div>
@@ -214,13 +214,13 @@ const SignUp = () => {
 							isEmailAvailable === null || isEmailAvailable
 								? 'border border-main bg-main text-white'
 								: 'bg-borderGray'
-						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm`}
+						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckEmail}
 					>
 						중복 확인
 					</button>
 				</div>
-				{isEmailAvailable === null ? (
+				{isEmailAvailable === null || errors.email ? (
 					<div className="text-sm mb-4 text-start text-red">
 						{errors?.email?.message as string}
 					</div>

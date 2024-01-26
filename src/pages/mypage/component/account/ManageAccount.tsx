@@ -54,7 +54,7 @@ const ManageAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetSignOutOpen}
 				onClose={closeBottomSheetSignOut}
-				viewHeight="calc(100vh * 0.25)"
+				viewHeight="calc(100vh *0.29)"
 			>
 				<ContentTwoBtnPage
 					title="로그아웃 하시겠습니까?"

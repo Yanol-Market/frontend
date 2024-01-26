@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
 import { useRecoilValue } from 'recoil';
 import {
+	buyerIdState,
 	chatRoomIdState,
 	paymentsState,
 	sellerIdState,
@@ -25,7 +26,7 @@ interface PgDataProps {
 	userName: string;
 }
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
-	const redirectURL = 'https://golden-ticket.site/reservation/complete';
+	const redirectURL = 'https://golden-ticket.site/payments/mobile/result';
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
 		term2: false,
@@ -35,7 +36,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
 	const userId = useRecoilValue(userIdState);
-	const sellerId = useRecoilValue(sellerIdState);
+	const buyerId = useRecoilValue(buyerIdState);
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
@@ -92,7 +93,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				buyer_name: paymentData?.userName,
 				buyer_tel: paymentData?.phoneNumber || '',
 				buyer_email: paymentData?.email || '',
-				m_redirect_url: redirectURL, // 수정 예정
+				m_redirect_url: redirectURL,
 			};
 
 			try {
@@ -129,14 +130,14 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 						const data2 = {
 							chatRoomId: res.data.data.chatRoomId,
 							senderType: 'SYSTEM',
-							userId: sellerId,
+							userId: userId,
 							content: `구매자가 결제를 완료했습니다. 20분 이내 양도 미신청 시, 자동 양도됩니다.`,
 						};
 
 						const data3 = {
 							chatRoomId: res.data.data.chatRoomId,
 							senderType: 'SYSTEM',
-							userId: userId,
+							userId: buyerId,
 							content: `결제가 완료되었습니다. 판매자가 20분 이내 양도 신청 후 거래가 완료됩니다. 20분 이후에는 양도가 자동 신청됩니다. 판매자가 양도 취소 시에는 결제금액이 100% 환불됩니다.`,
 						};
 
@@ -155,14 +156,23 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					};
 					sendMessages();
 					console.log('사후검증 후 응답받는 값: ', res.data.data);
-					navigate(
-						`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
-					);
+					if (res.data.data.result === 'SUCCESS') {
+						navigate(
+							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
+						);
+					} else if (res.data.data.result === 'TIME_OVER') {
+						navigate('/reservation/timeout');
+					} else {
+						navigate('/reservation/failure');
+					}
 				}
 			} catch (err) {
 				console.error(err);
 				throw new Error('사후검증 실패');
 			}
+		} else {
+			console.log('결제 실패');
+			navigate('/reservation/failure');
 		}
 	};
 
