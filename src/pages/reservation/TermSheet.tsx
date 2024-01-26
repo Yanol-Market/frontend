@@ -25,7 +25,7 @@ interface PgDataProps {
 	userName: string;
 }
 const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
-	const redirectURL = 'https://golden-ticket.site/reservation/complete';
+	const redirectURL = 'https://golden-ticket.site/payments/mobile/result';
 	const [checkboxes, setCheckboxes] = useState<{ [key: string]: boolean }>({
 		term1: false,
 		term2: false,
