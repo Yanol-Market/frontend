@@ -6,7 +6,7 @@ import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/
 import { getCookie } from '../../../../apis/cookie';
 import { useMutation } from '@tanstack/react-query';
 import { getSignOut } from '../../../../apis/signout';
-import Swal from 'sweetalert2';
+
 const ManageAccount = () => {
 	const navigate = useNavigate();
 	const [isBottomSheetSignOutOpen, setIsBottomSheetSignOutOpen] =
@@ -54,7 +54,7 @@ const ManageAccount = () => {
 			<BottomSheet
 				isOpen={isBottomSheetSignOutOpen}
 				onClose={closeBottomSheetSignOut}
-				viewHeight="calc(100vh *0.29)
+				viewHeight="calc(100vh *0.29)"
 			>
 				<ContentTwoBtnPage
 					title="로그아웃 하시겠습니까?"

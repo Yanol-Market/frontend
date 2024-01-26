@@ -110,7 +110,7 @@ export const ProductItemSpecial = ({
 									{product.goldenPrice.toLocaleString()}
 								</p>
 								<p className="text-fontBlack font-pre text-m font-semibold">
-									{`원(${product.days}박)`}
+									{`원(${product.nights}박)`}
 								</p>
 							</div>
 						</div>
