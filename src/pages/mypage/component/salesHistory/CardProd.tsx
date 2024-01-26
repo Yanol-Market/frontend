@@ -17,22 +17,25 @@ const CardProd = (props: CardProdProps) => {
 		<>
 			<div>
 				<div className="flex justify-between ">
-					<div className="flex">
+					<div className="flex w-[90%]">
 						<img
 							src={props.accommodationImage}
 							alt="image"
 							className="w-[80px] h-[80px] rounded-md"
 						/>
-						<div className=" px-[10px] w-[80%]  flex flex-col  justify-between h-[80px]">
+						<div className=" px-[10px] w-[90%]  flex flex-col  justify-between h-[80px] ">
 							<div>
 								<p className="text-lg font-bold">{props.accommodationName}</p>
-								<div className="flex">
-									<p className="text-lg pr-[8px]">{props.roomName}</p>
+								<div className="flex  items-center  w-[90%] ">
+									<p className="text-lg pr-[8px]  w-[60%] ">{props.roomName}</p>
 									<div className="flex items-center">
 										<div className="border-r-2 border-borderGray h-[12px]"></div>
 									</div>
-									<p className="text-lg pl-[8px]">
+									<p className="text-lg pl-[8px] ">
 										{props.standardNumber}인/최대 {props.maximumNumber}인
+										<div role="status">
+											<span className="sr-only">로딩중</span>
+										</div>
 									</p>
 								</div>
 							</div>
@@ -45,7 +48,7 @@ const CardProd = (props: CardProdProps) => {
 							</div>
 						</div>
 					</div>
-					<div className="flex text-sm justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center w-9">
+					<div className="flex w-[40px] text-sm justify-center items-center rounded-[10px] bg-lightGray border-[1px] border-[#e0e0e0] h-[20px] p-[5px] text-center w-9">
 						<p>{reservationTypeTrans(props.reservationType)}</p>
 					</div>
 				</div>

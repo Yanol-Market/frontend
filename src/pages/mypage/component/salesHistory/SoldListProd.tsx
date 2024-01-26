@@ -17,7 +17,6 @@ const SoldListProd = () => {
 	console.log('판매완료 리스투', data);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const currentPath = location.pathname;
 	const queryClient = useQueryClient();
 	const [bottom, setBottom] = useState(false);
 	console.log('판매완료 리스으 ', error);
@@ -55,8 +54,9 @@ const SoldListProd = () => {
 	if (isLoading) {
 		return (
 			<div>
-				{' '}
-				<ListSkeleton />{' '}
+				{[...Array(5)].map((_, index) => (
+					<ListSkeleton key={index} />
+				))}
 			</div>
 		);
 	}
@@ -66,11 +66,9 @@ const SoldListProd = () => {
 			<>
 				{data.length === 0 ? (
 					<>
-						{' '}
 						<div className="h-screen flex items-center justify-center text-lg text-descGray pb-36">
 							판매완료된 상품이 없습니다.
 						</div>
-						{/* <ListSkeleton /> */}
 					</>
 				) : (
 					<div className="pb-[80px]">

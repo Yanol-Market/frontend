@@ -10,6 +10,8 @@ import {
 } from '../../../../utils/formate';
 import { reservationTypeTrans } from '../../../../utils/translate';
 import { useSearchParams } from 'react-router-dom';
+import { Loading } from '../../../../component/common/Loading';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const PurchaseDetail = () => {
 	const [searchParams] = useSearchParams();
@@ -20,18 +22,27 @@ const PurchaseDetail = () => {
 	console.log('구매왕료 상세 ', data);
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				<Loading />{' '}
+			</div>
+		);
 	}
 
 	if (error) {
-		return <div> error </div>;
+		return (
+			<div>
+				{' '}
+				<NotFoundPage />{' '}
+			</div>
+		);
 	}
 
 	if (data) {
 		return (
 			<div className="pb-[80px] pt-4 flex items-center justify-center">
 				<div
-					className="h-[672px] w-[375PX] bg-cover bg-center mr-1"
+					className="h-[672px] w-[375PX] bg-cover bg-center mr-1 b"
 					style={{
 						backgroundImage: `url('/assets/images/ticket_1.svg')`,
 					}}

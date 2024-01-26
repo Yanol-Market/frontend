@@ -7,6 +7,7 @@ import { formatDateTime, formatNumber } from '../../../../utils/formate';
 import Chat from './Chat';
 import { delSoldProd } from '../../../../apis/sales';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import SoldSkeleton from './skeleton/SoldSkeleton';
 
 const SoldDetail = () => {
 	const { productId } = useParams();
@@ -14,7 +15,6 @@ const SoldDetail = () => {
 	const navigate = useNavigate();
 	const status = searchParams.get('status');
 
-	// 테스트 못해봄
 	const { data, isLoading, error } = useQuerySoldDetail(
 		`${productId}`,
 		`${status}`,
@@ -22,7 +22,6 @@ const SoldDetail = () => {
 	const [bottom, setBottom] = useState(false);
 
 	console.log('판매완료 상세 ', data);
-	console.log('판매완료 상세 오류', error?.message);
 	console.log('판매완료 상세 오류', error);
 	console.log(productId, 'status', status);
 	const openBottom = () => {
@@ -34,7 +33,6 @@ const SoldDetail = () => {
 	};
 
 	// 판매완료 상세 - 판매완료 삭제 API
-	// 테스트 못해봄
 	const dltProduct = async (productId: number) => {
 		try {
 			const res = await delSoldProd(productId);
@@ -48,7 +46,12 @@ const SoldDetail = () => {
 	};
 
 	if (isLoading) {
-		return <div> isLoading </div>;
+		return (
+			<div>
+				{' '}
+				<SoldSkeleton />{' '}
+			</div>
+		);
 	}
 
 	if (error) {
