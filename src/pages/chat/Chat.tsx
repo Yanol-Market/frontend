@@ -7,19 +7,19 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
 	buyerIdState,
 	chatStatusState,
+	negoState,
 	paymentsState,
 	productDataState,
 	productIdState,
 	productStatusState,
 	userIdState,
-	userNameState,
 } from '../../recoil/atom';
 import { getPaymentsDetail } from '../../apis/paymentsDetail';
 
-const Chat: React.FC<ChatProps> = ({ chatList, setNegoStatus }) => {
+const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const date = dayjs();
 	const now = date.format('YYYY.MM.DD');
-	const [nego, setNego] = useState(true);
+	const [nego, setNego] = useRecoilState(negoState);
 	const [offered, setOffered] = useState(false);
 	const userId = useRecoilValue(userIdState);
 	const chatStatus = useRecoilValue(chatStatusState);
@@ -57,11 +57,7 @@ const Chat: React.FC<ChatProps> = ({ chatList, setNegoStatus }) => {
 			{chatStatus === '' &&
 				productStatus !== 'RESERVED' &&
 				(nego ? (
-					<NegoPanel
-						setNegoStatus={setNegoStatus}
-						setNego={setNego}
-						setOffered={setOffered}
-					/>
+					<NegoPanel setOffered={setOffered} />
 				) : offered ? (
 					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
 						<button
@@ -189,7 +185,6 @@ export default Chat;
 
 export interface ChatProps {
 	chatList: ChatItemType[] | null;
-	setNegoStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface ChatItemType {

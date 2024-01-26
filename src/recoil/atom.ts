@@ -46,9 +46,9 @@ export const messageState = atom<messageType | null>({
 	default: null,
 });
 
-export const negoState = atom<string>({
+export const negoState = atom<boolean>({
 	key: 'negoState',
-	default: 'false',
+	default: false,
 });
 
 export const productPriceState = atom<string | null>({
