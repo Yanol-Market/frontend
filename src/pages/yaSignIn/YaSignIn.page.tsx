@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { getCookie, setCookie } from '../../apis/cookie';
 import { getYaSignIn } from '../../apis/yaSignIn';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
 
 const YaSignIn = () => {
 	const {
@@ -47,8 +48,18 @@ const YaSignIn = () => {
 		window.location.href = 'https://www.yanolja.com/emaillogin';
 	};
 
+	const handleBackBtn = () => {
+		navigate(-1);
+	};
+
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
+			<div className="flex flex-row w-full items-start mt-[2.1rem] cursor-pointer">
+				<ArrowBackIosNewOutlinedIcon
+					sx={{ width: '14px' }}
+					onClick={handleBackBtn}
+				/>
+			</div>
 			<img className="mt-24" src="/assets/images/yanoljaLogo.svg" alt="logo" />
 			<form
 				className="mt-[3.75rem] w-full"

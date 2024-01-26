@@ -35,7 +35,7 @@ const CompletionScreen = ({ onComplete, productId }: Props) => {
 	}, []);
 
 	const handleProductCheckClick = () => {
-		navigate(`/product/${productId}`);
+		navigate(`/product/${productId}`, { replace: true });
 	};
 
 	return (
