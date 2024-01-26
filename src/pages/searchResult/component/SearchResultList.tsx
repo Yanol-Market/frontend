@@ -5,6 +5,7 @@ import { getProducts } from '../../../apis/home';
 import { getSearchProducts } from '../../../apis/searchResult';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
+import { Diversity1 } from '@mui/icons-material';
 
 export type ProductSpecialType = {
 	productId: number;
@@ -73,6 +74,7 @@ export const SearchResultList = () => {
 			<p className="pb-[13px] flex justify-end text-m text-descGray ">
 				총{totalCount}건
 			</p>
+			{!totalCount && <p className='text-descGray text-center'>해당 조건에 맞는 상품이 없습니다.</p>}
 			<div className="flex flex-col gap-4 mb-5">
 				{visibleProducts.map((item) => (
 					<SearchResultProduct key={item.productId} product={item} />
