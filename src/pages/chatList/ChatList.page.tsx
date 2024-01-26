@@ -16,7 +16,7 @@ const ChatList = () => {
 	useEffect(() => {
 		const accessToken = getCookie('accessToken');
 		if (!accessToken) {
-			navigate('/signin');
+			navigate('/signin', { replace: true }); // replace 옵션 추가
 			return;
 		}
 
