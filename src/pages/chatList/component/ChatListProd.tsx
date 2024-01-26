@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { formatTimeAgo } from '../../../utils/formate';
 
 export interface Chat {
@@ -32,17 +33,19 @@ const ChatListProd = ({ chatRoomShortList, userType }: ChatListProps) => {
 				</p>
 			) : (
 				chatRoomShortList.map((chatRoomShortList) => (
-					<div
+					<Link
+						to={`/chat?chatId=${chatRoomShortList.chatRoomId}`} // ChatRoomId를 파라미터로 전달하여 해당 경로로 이동
 						key={chatRoomShortList.chatRoomId}
 						className={`py-1 flex items-center ${
 							chatRoomShortList.viewed ? 'text-descGray' : ''
 						}`}
 					>
-						<img
-							className="w-14 mr-6"
-							src="./assets/images/profileImage.svg"
-							alt="Default Profile"
-						/>
+						<div className="w-14 mr-6">
+							<img
+								src="./assets/images/profileImage.svg"
+								alt="Default Profile"
+							/>
+						</div>
 						<div className="flex flex-col">
 							{/* 빨간색 작은 원 */}
 
@@ -84,7 +87,7 @@ const ChatListProd = ({ chatRoomShortList, userType }: ChatListProps) => {
 								{chatRoomShortList.lastMessage}
 							</p>
 						</div>
-					</div>
+					</Link>
 				))
 			)}
 		</div>
