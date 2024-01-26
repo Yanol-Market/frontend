@@ -51,11 +51,7 @@ instance.interceptors.response.use(
 			const newAccessToken = await refreshCookie(refreshToken);
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 			console.log('토큰 재발급 완료');
-			if (!newAccessToken) {
-				const navigate = useNavigate();
-				navigate('/signin');
-				return Promise.reject(error);
-			}
+
 			return instance(originalRequest);
 		}
 
