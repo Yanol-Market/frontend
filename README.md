@@ -1,4 +1,4 @@
-# 🎫 골든티켓 🎫
+# ![최종 로고](https://github.com/Yanol-Market/frontend/assets/51106050/552ff865-e2b3-4127-b0c8-88e8741eca24)
 
 - 📅 기간: 2023.12.06 ~ 2024.1.30
 - 🧭 주제: 취소 수수료 없는 숙소 양도 거래 서비스
@@ -7,13 +7,35 @@
 ## 🌐 배포 주소
 
 - 🎫 배포 주소 : https://golden-ticket6.netlify.app/
-- 테스트 계정 :
+- 🧩 테스트 계정 :
 
 ## 👭 참여 인원 및 담당 기능
 
 ### PM 팀
 
-### UI/UI 팀
+<table>
+  <thead>
+    <tr>
+      <th align="center"> 팀장 | 이예은 </th>
+      <th align="center"> 팀원 | 김나우 </th>
+      <th align="center"> 팀원 | 박경은 </th>
+      <th align="center"> 팀원 | 안호정 
+      </th>
+      <th align="center"> 팀원 | 정유경 </th>
+    </tr>
+
+  </thead>
+</table>
+
+### UX/UI 팀
+
+<table>
+  <thead>
+    <tr>
+      <th align="center"> 팀장 | 최효준 </th>
+    </tr>
+  </thead>
+</table>
 
 ### FE 팀
 
@@ -114,9 +136,23 @@
 
 ### BE 팀
 
+<table>
+  <thead>
+    <tr>
+      <th align="center"> 팀장 | 박찬영 </th>
+      <th align="center"> 팀원 | 김수빈 </th>
+      <th align="center"> 팀원 | 서은 </th>
+      <th align="center"> 팀원 | 이의인 </th>
+      <th align="center"> 팀원 | 전유림 </th>
+  </thead>
+</table>
+
 [📃 API 명세서](https://www.notion.so/API-1aa144a86fb8406ab3a4d16415cb4c75)
 
 ## ✒ 기획 및 디자인
+
+[🎨 골든티켓 GUI](https://www.figma.com/file/Q2Enp3xLkgeIZ1iuEVRRD4/%EA%B3%A8%EB%93%A0%ED%8B%B0%EC%BC%93-gui%EC%9E%91%EC%97%85?type=design&node-id=125-345&mode=design&t=XrsSoY0XgsUPfkUP-0) <br/>
+[🪟 골든티켓 와이어프레임](<https://www.figma.com/file/mAkEo5jHXpP0TNedW0XcjE/%EA%B3%A8%EB%93%A0%ED%8B%B0%EC%BC%93-%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84_(%EC%A3%BC)%EC%95%BC%EB%86%80%EC%9E%A5%ED%84%B0?type=design&mode=design&t=dAwVOsPk6aPYDzTn-0>)
 
 ## 🔍️ 기술 스택
 
@@ -136,6 +172,8 @@
 </div>
 
 ### 배포
+
+ <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white" />
 
 ## 👨‍👨‍👦‍👦 협업 프로세스
 
