@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { paymentPrePare } from '../../apis/paymentPrepare';
 import { useRecoilValue } from 'recoil';
 import {
+	buyerIdState,
 	chatRoomIdState,
 	paymentsState,
 	sellerIdState,
@@ -35,7 +36,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const impCode = process.env.REACT_APP_PG_CLASSIFIER_CODE;
 	const payPreData = useRecoilValue(paymentsState);
 	const userId = useRecoilValue(userIdState);
-	const sellerId = useRecoilValue(sellerIdState);
+	const buyerId = useRecoilValue(buyerIdState);
 
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
@@ -129,14 +130,14 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 						const data2 = {
 							chatRoomId: res.data.data.chatRoomId,
 							senderType: 'SYSTEM',
-							userId: sellerId,
+							userId: userId,
 							content: `구매자가 결제를 완료했습니다. 20분 이내 양도 미신청 시, 자동 양도됩니다.`,
 						};
 
 						const data3 = {
 							chatRoomId: res.data.data.chatRoomId,
 							senderType: 'SYSTEM',
-							userId: userId,
+							userId: buyerId,
 							content: `결제가 완료되었습니다. 판매자가 20분 이내 양도 신청 후 거래가 완료됩니다. 20분 이후에는 양도가 자동 신청됩니다. 판매자가 양도 취소 시에는 결제금액이 100% 환불됩니다.`,
 						};
 

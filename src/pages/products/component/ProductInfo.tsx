@@ -97,7 +97,7 @@ export const ProductInfo = () => {
 		negoAvailable: boolean;
 	}> => {
 		try {
-			const response = await instance(
+			const response = await instance.get(
 				`/nego/available?productId=${param?.productId}`,
 			);
 			const data = response?.data.data || {};
@@ -129,45 +129,6 @@ export const ProductInfo = () => {
 			return { chatRoomId, negoAvailable };
 		} catch (error) {
 			console.error('Error in createChat:', error);
-		}
-	};
-
-	console.log('chatRoomId', chatRoomId);
-
-	// 채팅방 생성 함수
-
-	const makeChatRoom = async () => {
-		const data = {
-			userId,
-			productId: param.productId,
-		};
-		try {
-			const response = await instance.post('/chats/test/chat-room', data);
-			console.log(response.data);
-			setChatRoomId(response.data.id);
-			return response.data.id;
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	// 메시지 보내기 함수
-
-	const initialMessageSend = async () => {
-		const data = {
-			chatRoomId,
-			senderType: 'SELLER',
-			userId,
-			content: `${product?.accommodationName} ${product?.roomName} ${product?.checkInDate} ~ ${product?.checkOutDate} ${product?.goldenPrice.toLocaleString(
-				'ko-KR',
-			)} 원에 팝니다. 가격 협의 가능합니다.`,
-		};
-
-		try {
-			const result = await sendMessage(data);
-			console.log(' 메시지 전송 결과:', result);
-		} catch (error) {
-			console.error('메시지 전송 중 오류 발생:', error);
 		}
 	};
 
@@ -325,8 +286,12 @@ export const ProductInfo = () => {
 							</p>
 							<img src="/assets/images/chat.svg" alt="chatIcon" />
 						</div>
-						<p className={`${product.content ? 'text-black' : 'text-descGray'} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}>
-							{product.content ? product.content : '판매자 한마디가 없습니다.' }
+						<p
+							className={`${
+								product.content ? 'text-black' : 'text-descGray'
+							} p-5 bg-white border-[1px] border-solid border-borderGray rounded-[12px] text-m min-h-[105px]`}
+						>
+							{product.content ? product.content : '판매자 한마디가 없습니다.'}
 						</p>
 					</div>
 					<div className="mb-[25px]">
@@ -393,8 +358,13 @@ export const ProductInfo = () => {
 						<button
 							onClick={async () => {
 								const response = await createChat();
+								console.log(response);
 								if (response?.negoAvailable === false) {
-									alert('더이상 네고를 진행할 수 없습니다.');
+									if (response?.chatRoomId !== -1) {
+										handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
+									} else {
+										alert('더이상 네고를 진행할 수 없습니다.');
+									}
 								} else if (response?.chatRoomId !== -1) {
 									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
 								}
