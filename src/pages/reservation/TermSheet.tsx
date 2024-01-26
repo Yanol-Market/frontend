@@ -92,7 +92,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				buyer_name: paymentData?.userName,
 				buyer_tel: paymentData?.phoneNumber || '',
 				buyer_email: paymentData?.email || '',
-				m_redirect_url: redirectURL, // 수정 예정
+				m_redirect_url: redirectURL,
 			};
 
 			try {
