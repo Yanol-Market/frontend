@@ -21,6 +21,7 @@ import {
 	userIdState,
 } from '../../recoil/atom';
 import TransferNoti from './TransferNoti';
+import { useNavigate } from 'react-router-dom';
 
 const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const now = dayjs().format('YYYY.MM.DD');
@@ -40,6 +41,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const productStatus = useRecoilValue(productStatusState);
 	const sellerId = useRecoilValue(sellerIdState);
 	const productId = useRecoilValue(productIdState);
+	const navigate = useNavigate();
 
 	console.log('productStatus', productStatus);
 
@@ -166,7 +168,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 				chatRoomId,
 				senderType: 'SYSTEM',
 				userId: userId,
-				content: `영업일 1일 이내 등록한 계좌 정보로 정산 금액이 입금됩니다. 원활한 정산을 위해 '마이 페이지 > 내 계좌' 정보를 다시 한 번 확인해주세요.`,
+				content: `영업일 9일 이내 등록한 계좌 정보로 정산 금액이 입금됩니다. 원활한 정산을 위해 '마이 페이지 > 내 계좌' 정보를 다시 한 번 확인해주세요.`,
 			};
 
 			try {
@@ -282,6 +284,18 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 								</div>
 							))}
 						{chatStatus === 'NEGO_TIMEOUT' && <div></div>}
+
+						{productStatus === 'SOLD_OUT' &&
+							chatStatus === 'TRANSFER_COMPLETED' && (
+								<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
+									<button
+										onClick={() => navigate('/sales')}
+										className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+									>
+										판매내역 확인하기
+									</button>
+								</div>
+							)}
 					</>
 				)}
 			</div>

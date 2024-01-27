@@ -116,8 +116,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 					orderId: payPreData?.orderId,
 				});
 				console.log(res);
-
-				alert('결제 성공');
 				if (res) {
 					const sendMessages = async () => {
 						const data1 = {
@@ -161,7 +159,9 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
 						);
 					} else if (res.data.data.result === 'TIME_OVER') {
-						navigate('/reservation/timeout');
+						navigate(
+							`/reservation/timeout?chatRoomId=${res.data.data.chatRoomId}`,
+						);
 					} else {
 						navigate('/reservation/failure');
 					}

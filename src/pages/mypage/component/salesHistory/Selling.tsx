@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+/**
+ * @description useEffect 로 스크롤 이벤트 등록 할 때 newHeight 계산하고 스크롤 멈추면 이벤트 제거
+ * @param newHeight window.scrollY 를 원하시는 높이로 수정해주셔도 될 것 같아요!
+ * @param currentHeight  현재 높이값 저장
+ */
+import React, { useEffect, useState } from 'react';
 import StatusBar from './StatusBar';
 import CardProd from './CardProd';
 import BottomSheet from '../../../../component/common/BottomSheet/BottomSheet';
@@ -15,8 +20,20 @@ import SellingSkeleton from './skeleton/SellingSkeleton';
 const Selling = () => {
 	const [Bottom, setBottom] = useState(false);
 	const [click, setClick] = useState(false);
+	const [currentHeight, setCurrentHeight] = useState(window.innerHeight);
 	const { data, isLoading, error } = useQuerySales();
 
+	const handleScroll = () => {
+		const newHeight = window.innerHeight - window.scrollY;
+		setCurrentHeight(newHeight > 0 ? newHeight : 0);
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, []);
 	const navigate = useNavigate();
 
 	const editData = useSetRecoilState(editProdState);
@@ -88,13 +105,13 @@ const Selling = () => {
 										{' '}
 									</div>
 								)}
-								<div className="p-5 ">
+								<div className="p-5">
 									<BottomSheet
 										isOpen={Bottom}
 										onClose={closeBottom}
-										viewHeight="calc(100vh*0.2)"
+										viewHeight={`${currentHeight}px`}
 									>
-										<div className="w-full h-full flex flex-col justify-center items-center">
+										<div className="w-full mt-20 flex flex-col justify-center items-center">
 											<div className="text-body">
 												거래 진행 중인 경우 상품을 수정할 수 없습니다.
 											</div>

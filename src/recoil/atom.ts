@@ -175,3 +175,8 @@ export const productDataState = atom<ProductData>({
 		productId: 0,
 	},
 });
+
+export const negoAvailableState = atom<boolean>({
+	key: 'negoAvailableState',
+	default: false,
+});
