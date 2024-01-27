@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
 	buyerIdState,
 	chatStatusState,
+	negoAvailableState,
 	negoState,
 	paymentsState,
 	productDataState,
@@ -35,6 +36,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const checkInDate = dayjs(startDate).format('YYYY년 MM월 DD일');
 	const checkOutDate = dayjs(endDate).format('DD일');
 	const buyerId = useRecoilValue(buyerIdState);
+	const negoAvailable = useRecoilValue(negoAvailableState);
 
 	console.log('productId', productId);
 
@@ -56,6 +58,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 
 			{chatStatus === '' &&
 				productStatus !== 'RESERVED' &&
+				negoAvailable === true &&
 				(nego ? (
 					<NegoPanel setOffered={setOffered} />
 				) : offered ? (
@@ -103,7 +106,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 						}}
 						className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
 					>
-						원래 가격으로 결제하기
+						재결제하기
 					</button>
 				</div>
 			)}
@@ -145,8 +148,8 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 			{productStatus === 'SOLD_OUT' && chatStatus === 'TRANSFER_COMPLETED' && (
 				<>
 					<div>
-						<div className="flex items-center flex-col">
-							<div className="bg-[#FAFAFA] items-center rounded-[12px] h-[95px] w-[90%] p-[10px]">
+						<div className="flex items-center flex-col m-[10px]">
+							<div className="bg-[#f0f0f0] items-center rounded-[12px] h-[95px] w-[90%] p-[5px]">
 								<p className="text-sm ml-[10px]">
 									골든티켓 등록번호 {productId}
 								</p>
@@ -156,7 +159,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 										className="h-[56px] w-[56px] rounded-[12px] m-[5px]"
 										alt=""
 									/>
-									<div className="p-[10px]">
+									<div className="p-[5px]">
 										<p className="text-lg mb-[2px]">{product}</p>
 										<p className="text-m mb-[2px]">
 											{checkInDate}~{checkOutDate}
@@ -168,10 +171,15 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 								</div>
 							</div>
 						</div>
-						<p className="text-m font-semibold">양도가 완료되었습니다!</p>
+						<p className="text-m font-semibold text-center m-[20px]">
+							양도가 완료되었습니다!
+						</p>
 					</div>
 					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
-						<button className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center">
+						<button
+							onClick={() => navigate('/purchase')}
+							className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
+						>
 							구매내역 확인하기
 						</button>
 					</div>

@@ -48,7 +48,7 @@ const SignIn = () => {
 	};
 	return (
 		<div className="flex flex-col items-center w-full h-screen text-center px-5">
-			<div className="flex flex-row w-full items-start mt-3 cursor-pointer">
+			<div className="flex flex-row w-full items-start mt-[2.1rem] cursor-pointer">
 				<ArrowBackIosNewOutlinedIcon
 					sx={{ width: '14px' }}
 					onClick={handleBackBtn}

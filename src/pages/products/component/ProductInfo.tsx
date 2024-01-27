@@ -428,15 +428,8 @@ export const ProductInfo = () => {
 							onClick={async () => {
 								const response = await createChat();
 								console.log(response);
-								if (response?.negoAvailable === false) {
-									if (response?.chatRoomId !== -1) {
-										handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
-									} else {
-										alert('더이상 네고를 진행할 수 없습니다.');
-									}
-								} else if (response?.chatRoomId !== -1) {
+								if (response?.chatRoomId)
 									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
-								}
 							}}
 							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
 						>

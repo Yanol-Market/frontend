@@ -175,6 +175,7 @@ export const productDataState = atom<ProductData>({
 		productId: 0,
 	},
 });
+
 export const isShowState = atom<boolean>({
 	key: 'isShow',
 	default: false,
@@ -183,3 +184,9 @@ export const dateRefState = atom({
 	key: 'dateRefState',
 	default: null
 });
+
+export const negoAvailableState = atom<boolean>({
+	key: 'negoAvailableState',
+	default: false,
+});
+

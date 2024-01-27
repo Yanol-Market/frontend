@@ -12,14 +12,14 @@ const MyPageClickBtn = ({
 	isDisabled,
 }: MyPageClickBtnProps) => {
 	return (
-		<div className="w-[340px] fixed bottom-11">
+		<div className="w-[380px] fixed bottom-11">
 			<button
 				type="button"
 				className={`${
 					isDisabled
 						? 'border-borderGray bg-borderGray'
 						: 'border-borderGray bg-main text-white'
-				} flex items-center text-center mx-auto w-full h-11 rounded-xl text-gray text-m`}
+				} flex items-center text-center mx-auto w-full h-11 rounded-xl text-gray text-lg`}
 				onClick={onClick}
 				disabled={isDisabled}
 			>

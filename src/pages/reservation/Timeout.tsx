@@ -1,7 +1,13 @@
 import React from 'react';
 import { Header } from '../../component/common/Header';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Timeout = () => {
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const chatRoomId = searchParams.get('chatRoomId');
+	const navigate = useNavigate();
+
 	return (
 		<div className="h-screen ">
 			<Header title={'결제하기'} />
@@ -18,7 +24,10 @@ const Timeout = () => {
 				</p>
 			</div>
 			<div className="m-[20px]">
-				<button className="w-[100%] h-[50px] bg-main rounded-[12px] text-white text-lg">
+				<button
+					onClick={() => navigate(`/chat/?chatId=${chatRoomId}`)}
+					className="w-[100%] h-[50px] bg-main rounded-[12px] text-white text-lg"
+				>
 					채팅창 이동
 				</button>
 			</div>
