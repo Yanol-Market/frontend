@@ -16,7 +16,7 @@ const AddMyAccount = () => {
 		register,
 		handleSubmit,
 		watch,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
 	const myProfileJSON = localStorage.getItem('userProfileInfo');
 	const myProfile = JSON.parse(myProfileJSON as string);

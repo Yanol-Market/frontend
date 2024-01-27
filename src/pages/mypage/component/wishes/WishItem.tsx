@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { formatDate } from '../../../../utils/b';
 import { useNavigate } from 'react-router-dom';
 import { deleteWish } from '../../../../apis/wish';
+import { productStatusAlertTitle } from '../../../products/component/ProductInfo';
 export interface WishItemProps {
 	accommodationImage: string;
 	accommodationName: string;
@@ -44,7 +45,7 @@ export const WishItem = ({ product }: { product: WishItemProps }) => {
 							alt="ic_calendar"
 						/>
 						<pre className="text-[5px] text-center text-white">
-							{/* {productStatusAlertTitle(product.status as string)} */}
+							{productStatusAlertTitle(product.status as string)}
 						</pre>
 					</div>
 				)}
