@@ -3,6 +3,7 @@ import { ProductSpecialType } from '../../main/component/Product/ProductListSpec
 import { formatDate } from '../../../utils/b';
 import { Link } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../apis/wish';
+import { productStatusAlertTitle } from '../../products/component/ProductInfo';
 
 export const SearchResultProduct = ({
 	product,
@@ -29,6 +30,23 @@ export const SearchResultProduct = ({
 						src={product.accommodationImage}
 						alt="productImg"
 					/>
+					{product.reservationType === 'DAY_USE' && (
+						<div className="bg-dateBlue px-[6px] py-[4px] absolute bottom-0 right-0 rounded-br-[5px] rounded-tl-[5px]">
+							<p className="text-white font-pre text-sm font-semibold">대실</p>
+						</div>
+					)}
+					{!(product.productStatus === 'SELLING') && (
+						<div className="w-full h-full bg-black opacity-[80%] absolute bottom-[0px] flex flex-col justify-center items-center">
+							<img
+								className="mb-2 w-10 y-10"
+								src={`/assets/images/ic_${product.productStatus}.svg`}
+								alt="ic_calendar"
+							/>
+							<pre className="text-[12px] text-center text-white font-semibold">
+								{productStatusAlertTitle(product.productStatus as string)}
+							</pre>
+						</div>
+					)}
 					<div className="flex bg-dateBlue px-[8px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">
 						<p className="text-white font-pre text-[12px] font-semibold mr-1">
 							{`${formatDate(product.checkInDate)} ~ ${formatDate(
@@ -69,11 +87,7 @@ export const SearchResultProduct = ({
 							</p>
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
-									{(
-										(1 - product.goldenPrice / product.yanoljaPrice) *
-										100
-									).toFixed(0)}
-									%
+									{product.marketPriceRatio}%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
 									{product.yanoljaPrice.toLocaleString()}
@@ -86,11 +100,7 @@ export const SearchResultProduct = ({
 							<div className="flex">
 								<p className="text-descGray font-pre text-m mr-1">
 									{' '}
-									{(
-										(1 - product.goldenPrice / product.originPrice) *
-										100
-									).toFixed(0)}
-									%
+									{product.originPriceRatio}%
 								</p>
 								<p className="text-descGray font-pre text-m line-through">
 									{product.originPrice.toLocaleString()}
@@ -106,9 +116,15 @@ export const SearchResultProduct = ({
 								<p className="text-fontBlack font-pre text-m font-semibold">
 									{product.goldenPrice.toLocaleString()}
 								</p>
-								<p className="text-fontBlack font-pre text-m font-semibold">
-								{`원(${product.days}박)`}
-								</p>
+								{product.reservationType === 'DAY_USE' ? (
+									<p className="text-fontBlack font-pre text-m font-semibold">
+										원
+									</p>
+								) : (
+									<p className="text-fontBlack font-pre text-m font-semibold">
+										{`원(${product.nights}박)`}
+									</p>
+								)}
 							</div>
 						</div>
 					</div>

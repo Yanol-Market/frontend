@@ -12,6 +12,7 @@ import {
 	chatRoomIdState,
 	chatStatusState,
 	messageState,
+	negoAvailableState,
 	negoIdState,
 	negoState,
 	offeredPriceState,
@@ -46,6 +47,7 @@ const ChatPage = () => {
 	const [negoId, setNegoId] = useRecoilState(negoIdState);
 	const [productStatus, setProductStatus] = useRecoilState(productStatusState);
 	const [nego, setNego] = useRecoilState(negoState);
+	const [negoAvailable, setNegoAvailable] = useRecoilState(negoAvailableState);
 
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
@@ -107,6 +109,7 @@ const ChatPage = () => {
 				chatStatus,
 				negoId,
 				productStatus,
+				negoAvailable,
 			} = chatRoomInfoResponse;
 
 			setReceiverName(receiverNickname);
@@ -120,6 +123,7 @@ const ChatPage = () => {
 			setChatRoomId(chatRoomId);
 			setNegoId(negoId);
 			setProductStatus(productStatus);
+			setNegoAvailable(negoAvailable);
 
 			if (chatStatus === '' && productStatus !== 'RESERVED') {
 				setNego(true);

@@ -90,9 +90,7 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 
 					<div className="flex items-center flex-col">
 						<div className="bg-[#FAFAFA] items-center rounded-[12px] h-[95px] w-[90%] p-[10px]">
-							<p className="text-sm ml-[10px]">
-								골든티켓 등록번호 202401230001
-							</p>
+							<p className="text-sm ml-[10px]">골든티켓 등록번호 {productId}</p>
 							<div className="flex">
 								<img
 									src={productData.accommodationImage}
