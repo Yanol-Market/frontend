@@ -6,12 +6,16 @@ export const getSearchProducts = async (
 	checkInDate: string,
 	checkOutDate: string,
 	priceRange: string,
+	cursorId?: number,
+	cursorCheckInDate?: string,
 ) => {
-	console.log(`/products?areaCode=${areaCode}&keyword=${keyword}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&priceRange=${priceRange}`,)
 	try {
-		
 		const res = await instance.get(
-			`/products?areaCode=${areaCode}&keyword=${keyword}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&priceRange=${priceRange}`,
+			`/products?areaCode=${areaCode}&keyword=${keyword}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&priceRange=${priceRange}${
+				cursorId
+					? `&cursorId=${cursorId}&cursorCheckInDate=${cursorCheckInDate}`
+					: ''
+			}`,
 		);
 		return res.data;
 	} catch (error) {

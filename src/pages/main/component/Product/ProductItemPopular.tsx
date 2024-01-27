@@ -3,6 +3,7 @@ import { ProductSpecialType } from './ProductListSpecial';
 import { formatDate } from '../../../../utils/b';
 import { Link, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../../apis/wish';
+import { productStatusAlertTitle } from '../../../products/component/ProductInfo';
 
 export const ProductItemPopular = ({
 	product,
@@ -39,6 +40,25 @@ export const ProductItemPopular = ({
 							src={product.accommodationImage}
 							alt="productImg"
 						/>
+						{!(product.productStatus === 'SELLING') && (
+							<div className="w-full h-full bg-black opacity-[80%] absolute bottom-[0px] flex flex-col justify-center items-center">
+								<img
+									className="mb-2 w-8 y-8"
+									src={`/assets/images/ic_${product.productStatus}.svg`}
+									alt="ic_calendar"
+								/>
+								<pre className="text-[7px] text-center text-white font-semibold">
+									{productStatusAlertTitle(product.productStatus as string)}
+								</pre>
+							</div>
+						)}
+						{product.reservationType === 'DAY_USE' && (
+							<div className="bg-dateBlue px-[6px] py-[4px] absolute bottom-0 right-0 rounded-br-[5px] rounded-tl-[5px]">
+								<p className="text-white font-pre text-sm font-semibold">
+									대실
+								</p>
+							</div>
+						)}
 						<div className="flex bg-dateBlue px-[6px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">
 							<p className="text-white font-pre text-[8px] font-semibold mr-1">
 								{`${formatDate(product.checkInDate)} ~ ${formatDate(
@@ -57,10 +77,10 @@ export const ProductItemPopular = ({
 							}}
 							className="absolute bottom-[10px] left-[10px]"
 						>
-						<img
-							src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
-							alt="heartIcon"
-						/>
+							<img
+								src={`/assets/images/${isWished ? 'fill' : ''}heart_white.svg`}
+								alt="heartIcon"
+							/>
 						</button>
 					</div>
 					<div className="mb-[10px]">
@@ -78,7 +98,13 @@ export const ProductItemPopular = ({
 						<p className="font-pre text-m text-fontBlack font-semibold">
 							{product.goldenPrice.toLocaleString()}
 						</p>
-						<p className="font-pre text-m text-fontBlack font-semibold">원</p>
+						{product.reservationType === 'DAY_USE' ? (
+							<p className="text-fontBlack font-pre text-m font-semibold">원</p>
+						) : (
+							<p className="text-fontBlack font-pre text-m font-semibold">
+								{`원(${product.nights}박)`}
+							</p>
+						)}
 					</div>
 				</div>
 			</div>

@@ -228,6 +228,11 @@ export const ProductInfo = () => {
 					src={product.accommodationImage}
 					alt="productImg"
 				/>
+				{product.reservationType === 'DAY_USE' && (
+					<div className="bg-dateBlue px-[6px] py-[4px] absolute bottom-0 right-0 rounded-br-[5px] rounded-tl-[5px]">
+						<p className="text-white font-pre text-sm font-semibold">대실</p>
+					</div>
+				)}
 				<p className="absolute top-0 rounded-br-[5px] text-m font-semibold text-white bg-subBtn px-2 py-1">
 					D-{product.days}
 				</p>
@@ -285,12 +290,12 @@ export const ProductInfo = () => {
 			<div className="flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px] mx-5 mb-[25px]">
 				<div>
 					<p className="font-bold mb-[5px]">체크인</p>
-					<p>{`${checkInDate} ${product.checkInTime}`}</p>
+					<p>{`${checkInDate} ${product.checkInTime.slice(0,-3)}`}</p>
 				</div>
 				<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
 				<div>
 					<p className="font-bold mb-[5px]">체크아웃</p>
-					<p>{`${checkOutDate} ${product.checkOutTime}`}</p>
+					<p>{`${checkOutDate} ${product.checkOutTime.slice(0,-3)}`}</p>
 				</div>
 			</div>
 			<div className="w-full px-5 mb-5">
@@ -326,7 +331,7 @@ export const ProductInfo = () => {
 						<p className="text-subBtn font-pre text-lg font-semibold">
 							{product.goldenPrice.toLocaleString()}
 						</p>
-						<p className="text-subBtn font-pre text-lg font-semibold">원</p>
+						<p className="text-subBtn font-pre text-lg font-semibold">{`원(${product.nights}박)`}</p>
 					</div>
 				</div>
 			</div>
@@ -498,7 +503,7 @@ export const ProductInfo = () => {
 	);
 };
 
-const productStatusAlertTitle = (productStatus: string) => {
+export const productStatusAlertTitle = (productStatus: string) => {
 	let title;
 	switch (productStatus) {
 		case 'RESERVED':

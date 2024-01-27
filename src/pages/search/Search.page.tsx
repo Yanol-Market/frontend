@@ -5,10 +5,13 @@ import { SearchDate } from './component/SearchDate';
 import { WishPriceContent } from './component/WishPriceContent';
 import { FormSubmit } from './component/FormSubmit';
 import { SearchFooter } from './component/SearchFooter';
+import { isShowState } from '../../recoil/atom';
+import { useRecoilState } from 'recoil';
+import { getCookie } from '../../apis/cookie';
 
 export const Search = () => {
 	const userProfile = localStorage.getItem('userProfileInfo');
-
+	const accessToken = getCookie('accessToken');
 	return (
 		<div className="h-[100vh]">
 			<Header title={'어떤 숙소를 찾으시나요?'} />
@@ -24,11 +27,11 @@ export const Search = () => {
 			<div className="mb-[45px]">
 				<FormSubmit />
 			</div>
-			{userProfile && (
+			{/* {accessToken && (
 				<div>
 					<SearchFooter />
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 };

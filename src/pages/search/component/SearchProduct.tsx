@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useRecoilState } from 'recoil';
 import { searchInputState, selectOptionState } from '../../../recoil/atom';
@@ -12,7 +12,7 @@ const options = [
 	{ label: '제주', value: 5 },
 	{ label: '대전', value: 6 },
 	{ label: '충북', value: 7 },
-	{ label: '충남/세종', value:8 },
+	{ label: '충남/세종', value: 8 },
 	{ label: '부산', value: 9 },
 	{ label: '울산', value: 10 },
 	{ label: '경남', value: 11 },
@@ -34,7 +34,6 @@ export const SearchProduct = () => {
 	});
 
 	const [inputValue, setInputValue] = useRecoilState(searchInputState);
-
 	const handleInputValue = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInputValue(event.target.value);
 	};
@@ -62,6 +61,7 @@ export const SearchProduct = () => {
 			fontSize: '14px',
 		}),
 	};
+
 	return (
 		<div className="flex relative w-[335px] h-[45px] bg-lightGray rounded-[12px] px-[15px] py-2">
 			<div className="relative bottom-1">
