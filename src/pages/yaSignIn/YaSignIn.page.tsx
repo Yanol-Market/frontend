@@ -12,7 +12,7 @@ const YaSignIn = () => {
 		handleSubmit,
 		watch,
 		setError,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
 	const yaUserId = watch('yauserid');
 	const yaUserPassword = watch('yauserpassword');

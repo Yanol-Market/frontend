@@ -10,6 +10,7 @@ import MyPageClickBtn from '../btn/MyPageClickBtn';
 import { useMutation } from '@tanstack/react-query';
 import { patchAccounts } from '../../../../apis/patchAccounts';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AddMyAccount = () => {
 	const {
@@ -42,7 +43,10 @@ const AddMyAccount = () => {
 	const mutation = useMutation({
 		mutationFn: patchAccounts,
 		onSuccess(data) {
-			alert('계좌 등록 성공');
+			Swal.fire({
+				title: '계좌 등록 성공',
+				icon: 'success',
+			});
 			navigate(-1);
 		},
 	});

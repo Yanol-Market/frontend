@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { putNickName } from '../../../../apis/putNickname';
 import { useNavigate } from 'react-router';
 import { getNickName } from '../../../../apis/nickname';
+import Swal from 'sweetalert2';
 
 const ProfileEdit = () => {
 	const {
@@ -28,7 +29,10 @@ const ProfileEdit = () => {
 	const mutation = useMutation({
 		mutationFn: putNickName,
 		onSuccess() {
-			alert('프로필 수정 성공');
+			Swal.fire({
+				title: '프로필 수정 성공',
+				icon: 'success',
+			});
 			navigate('/');
 		},
 	});

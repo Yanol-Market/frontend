@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import instance from './axios';
 import { deleteCookie } from './cookie';
 
@@ -16,7 +17,10 @@ export const getSignOut = async (data: SignOutProps) => {
 		});
 		if (res.status === 200) {
 			deleteCookie();
-			alert('로그아웃 완료');
+			Swal.fire({
+				title: '로그아웃 성공',
+				icon: 'success',
+			});
 		} else {
 			console.error('로그아웃 실패');
 		}

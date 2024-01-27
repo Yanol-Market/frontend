@@ -41,11 +41,8 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	const mutation = useMutation({
 		mutationFn: paymentPrePare,
 		onSuccess(data) {
-			console.log('paymentPrePare 함수 호출 후 데이터 :', data.data);
-			console.log('결제 준비 완료');
 			if (data.data) {
 				handlePayment(data.data);
-				console.log('handlePayment 함수 실행 완료');
 			}
 		},
 		onError(err) {
@@ -55,7 +52,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	});
 
 	const onClickPayment = () => {
-		console.log('payPreData: ', payPreData);
 		if (payPreData) {
 			mutation.mutate(payPreData.orderId);
 		}
@@ -82,7 +78,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 		if (!window.IMP) return;
 
 		if (impCode) {
-			console.log(impCode);
 			window.IMP.init(impCode);
 			const data: RequestPayParams = {
 				pg: 'html5_inicis.INIBillTst',
@@ -97,9 +92,7 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 			};
 
 			try {
-				console.log('Payment data:', data);
 				window.IMP.request_pay(data, callback);
-				console.log('KG결제창 완료');
 			} catch (error) {
 				console.error('결제 중 발생한 에러:', error);
 				navigate('/reservation/failure');
@@ -108,14 +101,12 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 	};
 
 	const callback = async (response: RequestPayResponse) => {
-		console.log(response);
 		if (response.success) {
 			try {
 				const res = await instance.post('/payments/result', {
 					impUid: response.imp_uid,
 					orderId: payPreData?.orderId,
 				});
-				console.log(res);
 				if (res) {
 					const sendMessages = async () => {
 						const data1 = {
@@ -141,19 +132,13 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 
 						try {
 							const result1 = await sendMessage(data1);
-							console.log('첫 번째 메시지 전송 결과:', result1);
-
 							const result2 = await sendMessage(data2);
-							console.log('두 번째 메시지 전송 결과:', result2);
-
 							const result3 = await sendMessage(data3);
-							console.log('세 번째 메시지 전송 결과:', result3);
 						} catch (error) {
 							console.error('메시지 전송 중 오류 발생:', error);
 						}
 					};
 					sendMessages();
-					console.log('사후검증 후 응답받는 값: ', res.data.data);
 					if (res.data.data.result === 'SUCCESS') {
 						navigate(
 							`/reservation/complete?chatRoomId=${res.data.data.chatRoomId}`,
@@ -171,7 +156,6 @@ const TermSheet: React.FC<TermSheetProps> = ({ setTermSheet }) => {
 				throw new Error('사후검증 실패');
 			}
 		} else {
-			console.log('결제 실패');
 			navigate('/reservation/failure');
 		}
 	};

@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { regionData } from '../../../../data/regionData';
 import { useRecoilState } from 'recoil';
 import { checkedListState } from '../../../../recoil/atom';
+import Swal from 'sweetalert2';
 
 interface BottomSheetRegionContentProps {
 	onClick: () => void;
@@ -17,7 +18,10 @@ const BottomSheetRegionContent = ({
 			} else if (checkedList.length < 3) {
 				setCheckedList((prev) => [...prev, item]);
 			} else {
-				console.log('3개 이상 추가할 수 없습니다');
+				Swal.fire({
+					title: '3개 이상 등록 할 수 없습니다.',
+					icon: 'warning',
+				});
 			}
 		},
 		[checkedList, setCheckedList],

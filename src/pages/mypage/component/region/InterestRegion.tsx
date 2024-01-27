@@ -10,6 +10,7 @@ import { postInterestRegion } from '../../../../apis/postInterestRegion';
 import { getInterestRegions } from '../../../../apis/getInterestRegions';
 import { convertRegionCode } from '../../../../utils/convertRegionCode';
 import { getCookie, refreshCookie } from '../../../../apis/cookie';
+import { Loading } from '../../../../component/common/Loading';
 
 interface WishRegionProps {
 	id: number;
@@ -42,11 +43,10 @@ const InterestRegion = () => {
 		},
 	});
 
-	const { data, isError } = useQuery<InterestRegionProps>({
+	const { data, isLoading } = useQuery<InterestRegionProps>({
 		queryKey: ['getInterestRegions'],
 		queryFn: getInterestRegions,
 	});
-	console.log(data?.data);
 	const convertedWishRegions = data?.data?.wishRegions.map(
 		(region: WishRegionProps) => {
 			return {
@@ -63,6 +63,7 @@ const InterestRegion = () => {
 	};
 	return (
 		<div>
+			{isLoading && <Loading />}
 			<Header title="관심 지역" />
 			<div className="flex flex-col items-center">
 				<BottomSheet
