@@ -43,7 +43,7 @@ const AddMyAccount = () => {
 		mutationFn: patchAccounts,
 		onSuccess(data) {
 			alert('계좌 등록 성공');
-			navigate('/myaccount');
+			navigate(-1);
 		},
 	});
 
