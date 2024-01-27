@@ -36,6 +36,23 @@ export const WishItem = ({ product }: { product: WishItemProps }) => {
 					src={product.accommodationImage}
 					alt="productImg"
 				/>
+				{!(product.status === 'SELLING') && (
+					<div className="w-full h-full bg-black opacity-[80%] absolute bottom-[0px] flex flex-col justify-center items-center">
+						<img
+							className="mb-1 w-4 y-4"
+							src={`/assets/images/ic_${product.status}.svg`}
+							alt="ic_calendar"
+						/>
+						<pre className="text-[5px] text-center text-white">
+							{/* {productStatusAlertTitle(product.status as string)} */}
+						</pre>
+					</div>
+				)}
+				{product.type === 'DAY_USE' && (
+					<div className="bg-dateBlue px-[6px] py-[4px] absolute bottom-0 right-0 rounded-br-[5px] rounded-tl-[5px]">
+						<p className="text-white font-pre text-sm font-semibold">대실</p>
+					</div>
+				)}
 				<div className="flex bg-dateBlue px-[6px] py-[4px] absolute top-0 rounded-tl-[5px] rounded-br-[5px]">
 					<p className="text-white font-pre text-[8px] font-semibold mr-1">
 						{`${formatDate(product.checkInDate)} ~ ${formatDate(

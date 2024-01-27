@@ -52,7 +52,7 @@ const AddProductPage = () => {
 	useEffect(() => {
 		const accessToken = getCookie('accessToken');
 		if (!accessToken) {
-			navigate('/signin');
+			navigate('/signin', { replace: true }); // replace 옵션 추가
 		} else {
 			const fetchAccountData = async () => {
 				try {
@@ -167,7 +167,7 @@ const AddProductPage = () => {
 						<div className="m-[20px]">
 							<button
 								onClick={() => navigate('/myaccount')}
-								className="w-[100%] h-[50px] bg-main rounded-[12px] text-white text-lg"
+								className="w-[100%] h-11 bg-main rounded-[12px] text-white text-lg"
 							>
 								내 계좌 등록하러 가기
 							</button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
 	checkedState,
 	endState,
@@ -12,8 +12,8 @@ import moment from 'moment';
 import { formatDate } from '../../../utils/b';
 
 export const FormSubmit = () => {
-	const selectOption = useRecoilValue(selectOptionState);
-	const inputValue = useRecoilValue(searchInputState);
+	const [selectOption,setselectOption] = useRecoilState(selectOptionState);
+	const [inputValue, setInputValue] = useRecoilState(searchInputState);
 	const checkInDate = useRecoilValue(startState);
 	const checkOutDate = useRecoilValue(endState);
 	const checkedValue = useRecoilValue(checkedState);
@@ -22,6 +22,10 @@ export const FormSubmit = () => {
 
 	return (
 		<Link
+			onClick={() => {
+				setInputValue('');
+        setselectOption('ALL');
+			}}
 			to={`/searchResult?selectOption=${selectOption}&inputValue=${inputValue}&checkIndate=${checkInFormatString}&checkOutDate=${checkOutFormatString}&priceRange=${checkedValue}`}
 			className="mx-5 rounded-[12px] p-2 text-lg text-white bg-main flex justify-center item-center cursor-pointer"
 		>

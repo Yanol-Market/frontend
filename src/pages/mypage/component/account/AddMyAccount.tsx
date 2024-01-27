@@ -43,7 +43,7 @@ const AddMyAccount = () => {
 		mutationFn: patchAccounts,
 		onSuccess(data) {
 			alert('계좌 등록 성공');
-			navigate('/myaccount');
+			navigate(-1);
 		},
 	});
 
@@ -128,9 +128,7 @@ const AddMyAccount = () => {
 							<p className="text-lg">예금주</p>
 						</div>
 						<div className="w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none">
-							<p className="pt-2 text-start text-gray">
-								{myProfile.data.nickname}
-							</p>
+							<p className="pt-2 text-start text-gray">{myProfile.data.name}</p>
 						</div>
 					</div>
 

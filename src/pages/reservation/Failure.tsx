@@ -1,7 +1,10 @@
 import React from 'react';
 import { Header } from '../../component/common/Header';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Failure = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div className="h-screen ">
 			<Header title={'결제하기'} />
@@ -14,11 +17,11 @@ const Failure = () => {
 				</p>
 			</div>
 			<div className="flex gap-[15px] m-[20px]">
-				<button className="w-[100%] h-[50px] bg-[#004EAF] rounded-[12px] text-white text-lg">
-					등록된 상품 확인하기
-				</button>
-				<button className="w-[100%] h-[50px] bg-main rounded-[12px] text-white text-lg">
-					내 계좌 등록하기
+				<button
+					onClick={() => navigate('/')}
+					className="w-[90%] h-[50px] bg-[#004EAF] rounded-[12px] text-white text-lg"
+				>
+					확인
 				</button>
 			</div>
 		</div>
