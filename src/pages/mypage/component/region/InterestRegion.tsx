@@ -11,6 +11,7 @@ import { getInterestRegions } from '../../../../apis/getInterestRegions';
 import { convertRegionCode } from '../../../../utils/convertRegionCode';
 import { getCookie, refreshCookie } from '../../../../apis/cookie';
 import { Loading } from '../../../../component/common/Loading';
+import Swal from 'sweetalert2';
 
 interface WishRegionProps {
 	id: number;
@@ -37,7 +38,10 @@ const InterestRegion = () => {
 	const mutation = useMutation({
 		mutationFn: postInterestRegion,
 		onSuccess() {
-			alert('관심 지역 등록 성공');
+			Swal.fire({
+				title: '관심지역 등록 성공',
+				icon: 'success',
+			});
 			closeBottomSheet();
 			window.location.reload();
 		},

@@ -4,14 +4,13 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { findEmail } from '../../apis/findEmail';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const FindPassword = () => {
 	const {
 		register,
-		handleSubmit,
 		watch,
-		setValue,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const findEmailText = watch('findEmail');
@@ -19,11 +18,18 @@ const FindPassword = () => {
 	const mutation = useMutation({
 		mutationFn: findEmail,
 		onSuccess() {
-			alert('임시 비밀번호가 발급되었습니다. 이메일을 확인해주세요');
+			Swal.fire({
+				title: '임시 비밀번호가 발급되었습니다. 이메일을 확인해주세요',
+				icon: 'success',
+			});
 			navigate('/signin');
 		},
 		onError() {
 			alert('유저 정보가 존재하지 않습니다.');
+			Swal.fire({
+				title: '유저 정보가 존재하지 않습니다.',
+				icon: 'error',
+			});
 		},
 	});
 
