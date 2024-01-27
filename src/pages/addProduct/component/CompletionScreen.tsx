@@ -35,7 +35,7 @@ const CompletionScreen = ({ onComplete, productId }: Props) => {
 	}, []);
 
 	const handleProductCheckClick = () => {
-		navigate(`/product/${productId}`, { replace: true });
+		navigate(`/sales`);
 	};
 
 	return (
@@ -57,7 +57,7 @@ const CompletionScreen = ({ onComplete, productId }: Props) => {
 							className={`mx-auto w-[23rem] h-[3.125rem] rounded-xl text-lg text-white bg-main cursor-pointer`}
 							onClick={handleProductCheckClick}
 						>
-							등록된 상품 확인하기
+							판매 중인 상품 확인하기
 						</button>
 					</div>
 				</div>
