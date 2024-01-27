@@ -12,7 +12,7 @@ const MyPageClickBtn = ({
 	isDisabled,
 }: MyPageClickBtnProps) => {
 	return (
-		<div className="w-[340px] fixed bottom-11">
+		<div className="w-[375px] fixed bottom-11">
 			<button
 				type="button"
 				className={`${

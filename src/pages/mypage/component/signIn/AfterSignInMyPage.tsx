@@ -116,7 +116,7 @@ const AfterSignInMyPage = () => {
 						/>
 					</div>
 				</Link>
-				<Link to="/mypage/guide">
+				<Link to="/mypage/profilepolicies">
 					<div className="flex flex-row justify-between mb-5">
 						<span>개인정보 처리방침</span>
 
@@ -127,7 +127,7 @@ const AfterSignInMyPage = () => {
 						/>
 					</div>
 				</Link>
-				<Link to="/mypage/guide">
+				<Link to="/mypage/service">
 					<div className="flex flex-row justify-between">
 						<span>서비스 이용약관 및 정책</span>
 
