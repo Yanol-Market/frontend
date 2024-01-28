@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProductData } from './Chat.page';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 const ProductInfo: React.FC<{ productData: ProductData | null }> = ({
 	productData,
@@ -11,9 +12,13 @@ const ProductInfo: React.FC<{ productData: ProductData | null }> = ({
 	const endDate = productData?.checkOutDate;
 	const checkInDate = dayjs(startDate).format('YYYY년 MM월 DD일');
 	const checkOutDate = dayjs(endDate).format('DD일');
+	const navigate = useNavigate();
 
 	return (
-		<div className="h-[80px] flex justify-between px-[20px]">
+		<div
+			onClick={() => navigate(`/product/${productData?.productId}`)}
+			className="h-[80px] cursor-pointer flex justify-between px-[20px]"
+		>
 			<img
 				src={productData?.accommodationImage}
 				alt="image"
