@@ -53,8 +53,6 @@ const ChatPage = () => {
 	const searchParams = new URLSearchParams(location.search);
 	const chatId = searchParams.get('chatId');
 
-	// 로그인 유저 아이디 가져오기
-
 	useEffect(() => {
 		async function getUser() {
 			try {
@@ -67,7 +65,6 @@ const ChatPage = () => {
 		getUser();
 	}, []);
 
-	// 채팅 대화 목록 조회
 	const fetchChatData = async () => {
 		const response = await instance.get(`/chats/${chatId}`);
 		return response.data.data;
@@ -80,7 +77,7 @@ const ChatPage = () => {
 	} = useQuery({
 		queryKey: ['chatData'],
 		queryFn: fetchChatData,
-		refetchInterval: 1000, // Refetch data every 1 second
+		refetchInterval: 1000,
 	});
 
 	useEffect(() => {
