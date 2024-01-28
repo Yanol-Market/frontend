@@ -39,7 +39,8 @@ const SignUp = () => {
 		!userEmail ||
 		!userPassword ||
 		!userpasswordChecked;
-
+ const isNickNameCheckDisabled = (userNickName && errors.userNickName);
+ const isEmailCheckDisabled = (userEmail && errors.userEmail);
 	const userInfoData = localStorage.getItem('userInfo');
 	const navigate = useNavigate();
 	const mutation = useMutation({
@@ -169,6 +170,7 @@ const SignUp = () => {
 								: 'bg-borderGray'
 						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckNickName}
+						disabled={isNickNameCheckDisabled}
 					>
 						중복 확인
 					</button>
@@ -217,6 +219,7 @@ const SignUp = () => {
 								: 'bg-borderGray'
 						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckEmail}
+						disabled={isEmailCheckDisabled}
 					>
 						중복 확인
 					</button>

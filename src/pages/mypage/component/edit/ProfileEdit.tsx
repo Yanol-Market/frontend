@@ -22,6 +22,7 @@ const ProfileEdit = () => {
 	const [myNicknameAvailable, setMyNickNameAvailable] = useState(null);
 	const currentNickName = watch('currentNickName');
 	const isButtonDisabled = myNicknameAvailable === null || myNicknameAvailable === true || !currentNickName
+	const isNickNameCheckDisabled = (currentNickName && errors.currentNickName)
 	useEffect(() => {
 		setValue('currentNickName', myProfile.data.nickname);
 	}, [myProfile.data.nickname, setValue]);
@@ -66,6 +67,7 @@ const ProfileEdit = () => {
 									className={`border border-borderGray absolute cursor-pointer ${myNicknameAvailable === null || myNicknameAvailable ? 'border border-main bg-main text-white' : 'bg-borderGray' } right-2 top-[2.5rem] w-14 h-6 bg-borderGray text-sm text-descGray rounded-md`}
 									type="button"
 									onClick={handleCheckNickName}
+									disabled={isNickNameCheckDisabled}
 								>
 									중복 확인
 								</button>
