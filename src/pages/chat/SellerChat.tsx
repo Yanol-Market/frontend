@@ -131,8 +131,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		sendMessages();
 	};
 
-	// transfer
-
 	const sendTransferConsent = async () => {
 		try {
 			const response = await instance.post(
@@ -178,8 +176,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		sendTransferConsent();
 		sendMessages();
 	};
-
-	// 양도 거절
 
 	const sendTransferReject = async () => {
 		try {
