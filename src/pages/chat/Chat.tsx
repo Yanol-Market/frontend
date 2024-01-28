@@ -43,7 +43,6 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const handleClickPayMentsButton = async (link: string) => {
 		try {
 			const payData = await getPaymentsDetail(`${productId}`);
-			console.log('payData', payData);
 			setPayData(payData.data);
 			navigate(link);
 		} catch (error) {
@@ -176,7 +175,6 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 						</p>
 					</div>
 					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
-						{/* 구매완료된 상품을 보여주게 랜딩되도록  */}
 						<button
 							onClick={() => navigate('/purchase')}
 							className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"

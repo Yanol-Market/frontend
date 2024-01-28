@@ -60,7 +60,6 @@ const ChatPage = () => {
 			try {
 				const response = await instance.get('/users/me');
 				setUserId(response.data.data.id);
-				console.log('user', response.data.data.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -87,7 +86,6 @@ const ChatPage = () => {
 	useEffect(() => {
 		if (chatRoomData) {
 			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
-			console.log(chatRoomData);
 			setProductData(chatRoomInfoResponse);
 			setChatList(chatResponseList);
 
