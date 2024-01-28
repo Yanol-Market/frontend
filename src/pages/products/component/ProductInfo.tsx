@@ -168,6 +168,11 @@ export const ProductInfo = () => {
 	};
 
 	const handleClickHeart = async (productId: number) => {
+		const accessToken = getCookie('accessToken');
+		if (!accessToken) {
+			navigate('/signin');
+			return;
+		}
 		if (!isWished) {
 			addWish(productId);
 			setIsWished(true);
@@ -290,12 +295,12 @@ export const ProductInfo = () => {
 			<div className="flex justify-around text-center text-m bg-lightGray p-[10px] rounded-[10px] mx-5 mb-[25px]">
 				<div>
 					<p className="font-bold mb-[5px]">체크인</p>
-					<p>{`${checkInDate} ${product.checkInTime.slice(0,-3)}`}</p>
+					<p>{`${checkInDate} ${product.checkInTime.slice(0, -3)}`}</p>
 				</div>
 				<div className="p-10px border-r-[1px] border-[#e0e0e0] h-[40px]"></div>
 				<div>
 					<p className="font-bold mb-[5px]">체크아웃</p>
-					<p>{`${checkOutDate} ${product.checkOutTime.slice(0,-3)}`}</p>
+					<p>{`${checkOutDate} ${product.checkOutTime.slice(0, -3)}`}</p>
 				</div>
 			</div>
 			<div className="w-full px-5 mb-5">
@@ -331,7 +336,7 @@ export const ProductInfo = () => {
 						<p className="text-subBtn font-pre text-lg font-semibold">
 							{product.goldenPrice.toLocaleString()}
 						</p>
-						<p className="text-subBtn font-pre text-lg font-semibold">{`원(${product.nights}박)`}</p>
+						<p className="text-subBtn font-pre text-lg font-semibold">{`원${(product.reservationType === 'DAY_USE') ? '' : `(${product.nights}박)`}`}</p>
 					</div>
 				</div>
 			</div>
@@ -426,6 +431,12 @@ export const ProductInfo = () => {
 						<button
 							disabled={product.productStatus === 'SELLING' ? false : true}
 							onClick={async () => {
+								const accessToken = getCookie('accessToken');
+								if (!accessToken) {
+									navigate('/signin');
+									return;
+								}
+
 								const response = await createChat();
 								console.log(response);
 								if (response?.chatRoomId)
@@ -455,6 +466,11 @@ export const ProductInfo = () => {
 						<button
 							disabled={product.productStatus === 'SELLING' ? false : true}
 							onClick={() => {
+								const accessToken = getCookie('accessToken');
+								if (!accessToken) {
+									navigate('/signin');
+									return;
+								}
 								handleClickPayMentsButton(
 									`/reservation?productId=${param.productId}`,
 								);
