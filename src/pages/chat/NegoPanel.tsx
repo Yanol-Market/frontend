@@ -78,12 +78,18 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	const makeOffer = () => {
 		if (confirm('상품당 2회의 네고 제안이 가능합니다.')) {
 			negoSend();
+
 			const data = {
 				chatRoomId,
 				senderType: 'BUYER',
 				userId: userId,
 				content: `${productPrice?.toLocaleString()} 원에 구매 가능할까요?`,
 			};
+
+			if ((productPrice ?? 0) > (limitPrice ?? 0)) {
+				alert('네고 가격은 판매가보다 높게 제시할 수 없습니다.');
+				return;
+			}
 
 			sendMessage(data);
 			setOffered(true);

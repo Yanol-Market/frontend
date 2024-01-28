@@ -140,9 +140,9 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 				</div>
 			)}
 
-			{productStatus === 'RESERVED' && chatStatus === 'TRANSFER_PENDING' && (
-				<div></div>
-			)}
+			{productStatus === 'RESERVED' &&
+				chatStatus === 'TRANSFER_PENDING' &&
+				buyerId === userId && <div></div>}
 
 			{productStatus === 'SOLD_OUT' && chatStatus === 'TRANSFER_COMPLETED' && (
 				<>
