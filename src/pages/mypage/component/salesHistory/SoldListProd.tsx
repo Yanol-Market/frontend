@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQuerySoldList } from '../../../../hooks/useQuerySales';
 import { productStatusTrans } from '../../../../utils/translate';
@@ -11,6 +10,8 @@ import { delSoldProd } from '../../../../apis/sales';
 import { useQueryClient } from '@tanstack/react-query';
 import ListSkeleton from './skeleton/ListSkeleton';
 import { NotFoundPage } from '../../../../component/common/NotFound';
+import Swal from 'sweetalert2';
+
 // 판매완료 리스트
 const SoldListProd = () => {
 	const { isLoading, error, data } = useQuerySoldList();
@@ -19,9 +20,14 @@ const SoldListProd = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const [bottom, setBottom] = useState(false);
+	const [productId, setProductId] = useState<number>(0);
+
 	console.log('판매완료 리스으 ', error);
-	const openBottom = () => {
+
+	const openBottom = (productId: number) => {
 		setBottom(true);
+		setProductId(productId);
+		console.log('open', productId);
 	};
 
 	const closeBottom = () => {
@@ -29,11 +35,16 @@ const SoldListProd = () => {
 	};
 
 	// 판매 완료 - 판매완료 상품 삭제 API
-	const delSalesProd = async (productId: number) => {
+	const delSalesProd = async () => {
 		try {
 			const res = await delSoldProd(productId);
 			console.log('판매 완료 리스트 삭제 완료', res);
-			alert(res.message);
+			Swal.fire({
+				icon: 'success',
+				text: res.message,
+				showConfirmButton: false,
+				timer: 1700,
+			});
 			queryClient.invalidateQueries({ queryKey: ['soldList'] });
 			closeBottom();
 		} catch (error) {
@@ -84,7 +95,7 @@ const SoldListProd = () => {
 										leftBtn="취소"
 										rightBtn="삭제"
 										leftBtnFunc={closeBottom}
-										rightBtnFunc={() => delSalesProd(item.productId)}
+										rightBtnFunc={delSalesProd}
 									/>
 								</BottomSheet>
 
@@ -98,7 +109,7 @@ const SoldListProd = () => {
 												src="/assets/images/delete.svg"
 												alt="삭제하기"
 												className="cursor-pointer"
-												onClick={openBottom}
+												onClick={() => openBottom(item.productId)}
 											/>
 										</div>
 									</div>

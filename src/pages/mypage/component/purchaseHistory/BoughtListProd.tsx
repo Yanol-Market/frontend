@@ -10,6 +10,7 @@ import { delBoughtProd } from '../../../../apis/purchases';
 import { useQueryClient } from '@tanstack/react-query';
 import ListSkeleton from '../salesHistory/skeleton/ListSkeleton';
 import Swal from 'sweetalert2';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const BoughtListProd = () => {
 	const queryClient = useQueryClient();
@@ -33,21 +34,21 @@ const BoughtListProd = () => {
 	};
 
 	// 구매 완료 - 구매완료 상품 삭제 API
-
 	const delPurchaseProd = async () => {
 		try {
 			const res = await delBoughtProd(orderId);
 			console.log('구매 완료 리스트 삭제 완료', res);
 			Swal.fire({
 				icon: 'success',
-				title: res.message,
+				text: res.message,
 				showConfirmButton: false,
-				timer: 1500,
+				timer: 1700,
 			});
 			queryClient.invalidateQueries({ queryKey: ['BoughtList'] });
 			closeBottom();
 		} catch (error) {
 			console.error('에러 발생:', error);
+			<NotFoundPage />;
 		}
 	};
 
