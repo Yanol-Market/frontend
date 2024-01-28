@@ -1,4 +1,4 @@
-![닉네임변경](https://github.com/Yanol-Market/frontend/assets/78890707/7fdd077f-402c-4aaf-9c72-e89e42839ea4)# ![최종 로고](https://github.com/Yanol-Market/frontend/assets/51106050/552ff865-e2b3-4127-b0c8-88e8741eca24)
+# ![최종 로고](https://github.com/Yanol-Market/frontend/assets/51106050/552ff865-e2b3-4127-b0c8-88e8741eca24)
 
 - 📅 기간: 2023.12.06 ~ 2024.1.30
 - 🧭 주제: 취소 수수료 없는 숙소 양도 거래 서비스
