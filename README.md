@@ -124,9 +124,12 @@
       </td>
       <td>
         <ul>
-          <li>초기 개발 환경 세팅</li>
+          <li>MSW 및 jest 셋팅</li>
           <li>로그인 / 회원가입 페이지</li>
           <li>마이페이지</li>
+          <li>결제 기능 구현</li>
+          <li>404 NotFound 페이지 </li>
+          <li>스플래시 페이지</li>
         </ul>
       </td>
     </tr>
