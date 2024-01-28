@@ -7,7 +7,7 @@ import { SalesRes } from '../data/salesData';
 
 const mock = new MockAdapter(axios);
 
-test('판매중 조회 API 테스트', async () => {
+test('판매중 조회 렌더링 테스트', async () => {
 	// 모의 API 응답 설정
 	const mockResponse = { data: SalesRes };
 	mock.onGet('/api/purchase-history').reply(200, mockResponse);
@@ -20,7 +20,7 @@ test('판매중 조회 API 테스트', async () => {
 	});
 });
 
-test('API 호출 테스트', async () => {
+test('판매중 조회 API 호출 테스트', async () => {
 	const mockResponse = { data: SalesRes };
 	mock.onGet('/api/purchase-history').reply(200, mockResponse);
 

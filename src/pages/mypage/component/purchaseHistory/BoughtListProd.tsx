@@ -9,6 +9,7 @@ import { formatNumber, formatTimeAgo } from '../../../../utils/formate';
 import { delBoughtProd } from '../../../../apis/purchases';
 import { useQueryClient } from '@tanstack/react-query';
 import ListSkeleton from '../salesHistory/skeleton/ListSkeleton';
+import Swal from 'sweetalert2';
 
 const BoughtListProd = () => {
 	const queryClient = useQueryClient();
@@ -18,10 +19,13 @@ const BoughtListProd = () => {
 	console.log('구매완료 실패 ', error);
 
 	const [bottom, setBottom] = useState(false);
+	const [orderId, setOrderId] = useState<number>(0);
 	const navigate = useNavigate();
 
-	const openBottom = () => {
+	const openBottom = (orderId: number) => {
 		setBottom(true);
+		setOrderId(orderId);
+		console.log(orderId);
 	};
 
 	const closeBottom = () => {
@@ -30,12 +34,16 @@ const BoughtListProd = () => {
 
 	// 구매 완료 - 구매완료 상품 삭제 API
 
-	const delPurchaseProd = async (orderId: number) => {
+	const delPurchaseProd = async () => {
 		try {
-			console.log('orderId', orderId);
 			const res = await delBoughtProd(orderId);
 			console.log('구매 완료 리스트 삭제 완료', res);
-			alert(res.message);
+			Swal.fire({
+				icon: 'success',
+				title: res.message,
+				showConfirmButton: false,
+				timer: 1500,
+			});
 			queryClient.invalidateQueries({ queryKey: ['BoughtList'] });
 			closeBottom();
 		} catch (error) {
@@ -85,8 +93,21 @@ const BoughtListProd = () => {
 											src="/assets/images/delete.svg"
 											alt="삭제하기"
 											className="cursor-pointer "
-											onClick={openBottom}
+											onClick={() => openBottom(item.orderId)}
 										/>
+										<BottomSheet
+											isOpen={bottom}
+											onClose={closeBottom}
+											viewHeight="220px"
+										>
+											<ContentTwoBtnPage
+												title="구매 정보를 삭제하시겠습니까?"
+												leftBtn="취소"
+												rightBtn="삭제"
+												leftBtnFunc={closeBottom}
+												rightBtnFunc={delPurchaseProd}
+											/>
+										</BottomSheet>
 									</div>
 								</div>
 								<div className="flex justify-between">
@@ -129,19 +150,6 @@ const BoughtListProd = () => {
 											onClick={() => detailClick(item.productId, item.orderId)}
 										/>
 									</div>
-									<BottomSheet
-										isOpen={bottom}
-										onClose={closeBottom}
-										viewHeight="220px"
-									>
-										<ContentTwoBtnPage
-											title="구매 정보를 삭제하시겠습니까?"
-											leftBtn="취소"
-											rightBtn="삭제"
-											leftBtnFunc={closeBottom}
-											rightBtnFunc={() => delPurchaseProd(item.orderId)}
-										/>
-									</BottomSheet>
 								</div>
 							</div>
 						))}
