@@ -141,7 +141,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 				</div>
 			)}
 
-			{productStatus === 'RESERVED' && chatStatus !== 'TRANSFER_PENDING' && (
+			{productStatus === 'RESERVED' && chatStatus === 'TRANSFER_PENDING' && (
 				<div></div>
 			)}
 
@@ -176,6 +176,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 						</p>
 					</div>
 					<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
+						{/* 구매완료된 상품을 보여주게 랜딩되도록  */}
 						<button
 							onClick={() => navigate('/purchase')}
 							className="w-[90%] bottom-[25px] text-lg cursor-pointer m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center"
