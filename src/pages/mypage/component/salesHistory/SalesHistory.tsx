@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 const SalesHistory = () => {
 	const [currentTab, setCurrentTab] = useState('selling');
 	const navigate = useNavigate();
+
 	const sellingClick = () => {
 		setCurrentTab('selling');
 		navigate(`/sales`);

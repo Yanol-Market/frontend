@@ -37,7 +37,7 @@ const BottomSheet = ({
 						animate={isOpen ? { height: viewHeight } : { height: 0 }}
 						exit={{ height: 0 }}
 						transition={{ type: 'anticipate', stiffness: 200, damping: 20 }}
-						className="fixed bottom-0 left-0 right-0 bg-white p-4 w-full max-w-[430px] sm:w-[430px]  mx-auto rounded-t-3xl z-50 overflow-hidden "
+						className=" bottom-0 left-0 right-0 bg-white p-4 w-full max-w-[430px] sm:w-[430px]  mx-auto rounded-t-3xl z-50 fixed"
 					>
 						<img
 							src="/assets/images/closeModal.svg"
