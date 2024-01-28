@@ -19,7 +19,7 @@ const Failure = () => {
 			<div className="flex gap-[15px] m-[20px]">
 				<button
 					onClick={() => navigate('/')}
-					className="w-[90%] h-[50px] bg-[#004EAF] rounded-[12px] text-white text-lg"
+					className="w-full h-[50px] bg-[#004EAF] rounded-[12px] text-white text-lg"
 				>
 					확인
 				</button>

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import instance, { instanceNoToken } from './axios';
 
 export interface SignUpProps {
@@ -14,7 +15,10 @@ export interface SignUpProps {
 export const getSignUp = async (data: SignUpProps) => {
 	try {
 		const res = await instanceNoToken.post('/users', data);
-		alert('회원가입 성공');
+		Swal.fire({
+			title: '회원가입 성공',
+			icon: 'success',
+		});
 		return res.data;
 	} catch (err) {
 		console.error('회원가입 실패', err);

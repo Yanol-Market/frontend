@@ -5,7 +5,6 @@ import { ServiceTextData } from '../../../../data/ServiceTextData';
 import { profileServiceData } from '../../../../data/profileServiceData';
 
 const ProfilePolicies = () => {
-	const textlines = ServiceTextData.split('\n');
 	return (
 		<div>
 			<Header title="개인정보 처리방침" />

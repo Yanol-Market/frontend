@@ -13,7 +13,7 @@ const SignIn = () => {
 		handleSubmit,
 		watch,
 		setError,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
 
 	const userId = watch('userid');
