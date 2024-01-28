@@ -48,7 +48,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const sendConsent = async () => {
 		try {
 			const response = await instance.patch(`nego/confirm/${negoId}`);
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -57,7 +56,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const sendReject = async () => {
 		try {
 			const response = await instance.patch(`nego/deny/${negoId}`);
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -95,13 +93,10 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 
 			try {
 				const result1 = await sendMessage(data1);
-				console.log('첫 번째 메시지 전송 결과:', result1);
 
 				const result2 = await sendMessage(data2);
-				console.log('두 번째 메시지 전송 결과:', result2);
 
 				const result3 = await sendMessage(data3);
-				console.log('세 번째 메시지 전송 결과:', result3);
 			} catch (error) {
 				console.error('메시지 전송 중 오류 발생:', error);
 			}
@@ -127,7 +122,6 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 
 			try {
 				const result = await sendMessage(data);
-				console.log('메시지 전송 결과:', result);
 			} catch (error) {
 				console.log(error);
 			}
@@ -137,14 +131,11 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		sendMessages();
 	};
 
-	// transfer
-
 	const sendTransferConsent = async () => {
 		try {
 			const response = await instance.post(
 				`/nego/handoverProduct/${productId}`,
 			);
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -173,13 +164,10 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 
 			try {
 				const result1 = await sendMessage(data1);
-				console.log('첫 번째 메시지 전송 결과:', result1);
 
 				const result2 = await sendMessage(data2);
-				console.log('두 번째 메시지 전송 결과:', result2);
 
 				const result3 = await sendMessage(data3);
-				console.log('세 번째 메시지 전송 결과:', result3);
 			} catch (error) {
 				console.error('메시지 전송 중 오류 발생:', error);
 			}
@@ -189,14 +177,11 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		sendMessages();
 	};
 
-	// 양도 거절
-
 	const sendTransferReject = async () => {
 		try {
 			const response = await instance.patch(
 				`/nego/denyhandoverProduct/${productId}`,
 			);
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -220,10 +205,8 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 
 			try {
 				const result1 = await sendMessage(data1);
-				console.log('첫 번째 메시지 전송 결과:', result1);
 
 				const result2 = await sendMessage(data2);
-				console.log('두 번째 메시지 전송 결과:', result2);
 			} catch (error) {
 				console.error('메시지 전송 중 오류 발생:', error);
 			}

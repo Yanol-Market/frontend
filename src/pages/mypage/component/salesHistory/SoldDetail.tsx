@@ -8,6 +8,7 @@ import Chat from './Chat';
 import { delSoldProd } from '../../../../apis/sales';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import SoldSkeleton from './skeleton/SoldSkeleton';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const SoldDetail = () => {
 	const { productId } = useParams();
@@ -21,9 +22,6 @@ const SoldDetail = () => {
 	);
 	const [bottom, setBottom] = useState(false);
 
-	console.log('판매완료 상세 ', data);
-	console.log('판매완료 상세 오류', error);
-	console.log(productId, 'status', status);
 	const openBottom = () => {
 		setBottom(true);
 	};
@@ -55,7 +53,7 @@ const SoldDetail = () => {
 	}
 
 	if (error) {
-		return <div> error </div>;
+		return <NotFoundPage />;
 	}
 
 	if (data) {
@@ -105,10 +103,6 @@ const SoldDetail = () => {
 						<div> 거래일시</div>
 						<div>{formatDateTime(data.completedDate)}</div>
 					</div>
-					{/* <div className="flex justify-between items-center text-lg  pb-2">
-						<div> 정산일시</div>
-						<div>{formatDateTime(data.calculatedDate)}</div>
-					</div> */}
 					<div className="flex justify-between items-center text-lg  pb-2">
 						<div className="flex items-center">
 							<div>수수료</div>
@@ -133,7 +127,7 @@ const SoldDetail = () => {
 			</div>
 		);
 	}
-	return <div> d아무것도 아닌거 </div>;
+	return <div></div>;
 };
 
 export default SoldDetail;

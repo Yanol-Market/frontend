@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { BottomSheet } from '../../../../component/common/BottomSheet';
 import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/ContentTwoBtnPage';
-import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { useQuerySoldList } from '../../../../hooks/useQuerySales';
 import { productStatusTrans } from '../../../../utils/translate';
@@ -10,18 +9,25 @@ import { formatNumber } from '../../../../utils/formate';
 import { delSoldProd } from '../../../../apis/sales';
 import { useQueryClient } from '@tanstack/react-query';
 import ListSkeleton from './skeleton/ListSkeleton';
+import { NotFoundPage } from '../../../../component/common/NotFound';
+import Swal from 'sweetalert2';
+
 // 판매완료 리스트
 const SoldListProd = () => {
 	const { isLoading, error, data } = useQuerySoldList();
 
 	console.log('판매완료 리스투', data);
 	const navigate = useNavigate();
-	const location = useLocation();
 	const queryClient = useQueryClient();
 	const [bottom, setBottom] = useState(false);
+	const [productId, setProductId] = useState<number>(0);
+
 	console.log('판매완료 리스으 ', error);
-	const openBottom = () => {
+
+	const openBottom = (productId: number) => {
 		setBottom(true);
+		setProductId(productId);
+		console.log('open', productId);
 	};
 
 	const closeBottom = () => {
@@ -29,11 +35,16 @@ const SoldListProd = () => {
 	};
 
 	// 판매 완료 - 판매완료 상품 삭제 API
-	const delSalesProd = async (productId: number) => {
+	const delSalesProd = async () => {
 		try {
 			const res = await delSoldProd(productId);
 			console.log('판매 완료 리스트 삭제 완료', res);
-			alert(res.message);
+			Swal.fire({
+				icon: 'success',
+				text: res.message,
+				showConfirmButton: false,
+				timer: 1700,
+			});
 			queryClient.invalidateQueries({ queryKey: ['soldList'] });
 			closeBottom();
 		} catch (error) {
@@ -84,12 +95,12 @@ const SoldListProd = () => {
 										leftBtn="취소"
 										rightBtn="삭제"
 										leftBtnFunc={closeBottom}
-										rightBtnFunc={() => delSalesProd(item.productId)}
+										rightBtnFunc={delSalesProd}
 									/>
 								</BottomSheet>
 
 								<div className="p-5">
-									<div className="pb-5 flex justify-between items-center ">
+									<div className="pb-4 flex justify-between items-center ">
 										<p className="text-sm ">
 											골든티켓 등록번호 {item.productId}
 										</p>
@@ -98,36 +109,40 @@ const SoldListProd = () => {
 												src="/assets/images/delete.svg"
 												alt="삭제하기"
 												className="cursor-pointer"
-												onClick={openBottom}
+												onClick={() => openBottom(item.productId)}
 											/>
 										</div>
 									</div>
-									<div className="flex">
-										<img
-											src={item.accommodationImage}
-											alt="image"
-											className="w-[80px] h-[80px] rounded-md"
-										/>
-										<div className="w-[60%] px-[10px] flex flex-col justify-between">
-											<div>
-												<p className="text-lg font-bold">
-													{item.accommodationName}
-												</p>
-												<div className="flex">
-													<p className="text-lg pr-[8px]">{item.roomName}</p>
-													<div className="flex items-center">
-														<div className="border-r-2 border-borderGray h-[12px]"></div>
-													</div>
-													<p className="text-lg pl-[8px]">
-														{item.standardNumber}인/최대 {item.maximumNumber}인
+									<div className="flex justify-between">
+										<div className="flex">
+											<img
+												src={item.accommodationImage}
+												alt="image"
+												className="w-[80px] h-[80px] rounded-md"
+											/>
+											<div className=" px-[10px] flex flex-col justify-between">
+												<div>
+													<p className="text-lg font-bold">
+														{item.accommodationName}
 													</p>
+													<div className="flex">
+														<p className="text-lg pr-[8px]">{item.roomName}</p>
+														<div className="flex items-center">
+															<div className="border-r-2 border-borderGray h-[12px]"></div>
+														</div>
+														<p className="text-lg pl-[8px]">
+															{item.standardNumber}인/최대 {item.maximumNumber}
+															인
+														</p>
+													</div>
+												</div>
+
+												<div className="text-lg font-bold ">
+													{formatNumber(item.goldenPrice)}원
 												</div>
 											</div>
-
-											<div className="text-lg font-bold ">
-												{formatNumber(item.goldenPrice)}원
-											</div>
 										</div>
+
 										<div className="">
 											<div className=" text-sm flex flex-col items-centertext-center justify-between h-[80px]">
 												{item.productStatus === 'SOLD_OUT' ? (
@@ -165,7 +180,7 @@ const SoldListProd = () => {
 		);
 	}
 
-	return <div> {error && <div>오륭류 </div>} </div>;
+	return <div> {error && <NotFoundPage />} </div>;
 };
 
 export default SoldListProd;

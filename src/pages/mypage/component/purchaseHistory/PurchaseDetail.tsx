@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useQueryBoughtDetail } from '../../../../hooks/useQueryPurchases';
 import {
@@ -12,14 +12,18 @@ import { reservationTypeTrans } from '../../../../utils/translate';
 import { useSearchParams } from 'react-router-dom';
 import { Loading } from '../../../../component/common/Loading';
 import { NotFoundPage } from '../../../../component/common/NotFound';
+import { useNavigate } from 'react-router';
 
 const PurchaseDetail = () => {
+	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 	const orderId = searchParams.get('order');
 
 	const { data, isLoading, error } = useQueryBoughtDetail(`${orderId}`);
 
-	console.log('구매왕료 상세 ', data);
+	const handleClick = (chatRoomId: number) => {
+		navigate(`/chat?chatId=${chatRoomId}`);
+	};
 
 	if (isLoading) {
 		return (
@@ -147,6 +151,7 @@ const PurchaseDetail = () => {
 									<ArrowForwardIosIcon
 										sx={{ width: '15px' }}
 										className="cursor-pointer text-descGray"
+										onClick={() => handleClick(data.chatRoomId)}
 									/>
 								</div>
 							</div>

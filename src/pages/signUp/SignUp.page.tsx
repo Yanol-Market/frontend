@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getNickName } from '../../apis/nickname';
 import { getEmail } from '../../apis/email';
 import { Header } from '../../component/common/Header';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
 	const {
@@ -38,20 +39,25 @@ const SignUp = () => {
 		!userEmail ||
 		!userPassword ||
 		!userpasswordChecked;
-
+ const isNickNameCheckDisabled = (userNickName && errors.userNickName);
+ const isEmailCheckDisabled = (userEmail && errors.userEmail);
 	const userInfoData = localStorage.getItem('userInfo');
 	const navigate = useNavigate();
 	const mutation = useMutation({
 		mutationFn: getSignUp,
 		onSuccess(data) {
 			if (userInfoData) {
-				navigate('/yasignin');
+				navigate('/');
+			}else{
+				navigate('/signin');
 			}
-			navigate('/signin');
 		},
 		onError(err) {
 			console.error(err);
-			alert('이미 가입된 계정입니다. 로그인을 해주세요.');
+			Swal.fire({
+				title: '이미 가입된 계정입니다. 로그인을 해주세요.',
+				icon: 'error',
+			});
 			navigate('/signin');
 			throw new Error('회원가입 실패');
 		},
@@ -70,9 +76,7 @@ const SignUp = () => {
 			return;
 		}
 		const res = await getNickName(userNickName);
-		console.log(res.data);
 		setIsNickNameAvailable(res.data);
-		console.log(isNickNameAvailable);
 	};
 
 	const handleCheckEmail = async () => {
@@ -80,9 +84,7 @@ const SignUp = () => {
 			return;
 		}
 		const res = await getEmail(userEmail);
-		console.log(res);
 		setIsEmailAvailable(res.data);
-		console.log(isEmailAvailable);
 	};
 	const handleSignUp = () => {
 		const userInfoData = localStorage.getItem('userInfo');
@@ -168,6 +170,7 @@ const SignUp = () => {
 								: 'bg-borderGray'
 						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckNickName}
+						disabled={isNickNameCheckDisabled}
 					>
 						중복 확인
 					</button>
@@ -216,6 +219,7 @@ const SignUp = () => {
 								: 'bg-borderGray'
 						} border border-borderGray bg-borderGray w-1/4 h-6 rounded-md text-sm focus:outline-none`}
 						onClick={handleCheckEmail}
+						disabled={isEmailCheckDisabled}
 					>
 						중복 확인
 					</button>

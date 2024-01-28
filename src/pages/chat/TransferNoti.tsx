@@ -35,7 +35,6 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 			const response = await instance.patch(
 				`/nego/denyhandoverProduct/${productId}`,
 			);
-			console.log(response.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -59,10 +58,8 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 
 			try {
 				const result1 = await sendMessage(data1);
-				console.log('첫 번째 메시지 전송 결과:', result1);
 
 				const result2 = await sendMessage(data2);
-				console.log('두 번째 메시지 전송 결과:', result2);
 			} catch (error) {
 				console.error('메시지 전송 중 오류 발생:', error);
 			}

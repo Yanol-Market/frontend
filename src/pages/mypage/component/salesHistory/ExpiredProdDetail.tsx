@@ -93,7 +93,7 @@ const ExpiredProdDetail = () => {
 			</div>
 		);
 	}
-	return <div> 오류오류</div>;
+	return <div> </div>;
 };
 
 export default ExpiredProdDetail;

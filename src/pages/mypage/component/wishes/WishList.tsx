@@ -5,6 +5,7 @@ import { getWishes } from '../../../../apis/wishes';
 import { ProductSpecialType } from '../../../main/component/Product/ProductListSpecial';
 import { Header } from '../../../../component/common/Header';
 import { WishItem, WishItemProps } from './WishItem';
+import { Loading } from '../../../../component/common/Loading';
 
 export interface WishListProps {
 	accommodationImage: string;
@@ -23,12 +24,13 @@ export interface WishListProps {
 	yanoljaPrice: number;
 }
 const WishList = () => {
-	const { data } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ['wishes'],
 		queryFn: getWishes,
 	});
 	return (
 		<div>
+			{isLoading && <Loading />}
 			<Header title="찜한 상품" />
 			{data?.data?.wishProducts &&
 				data?.data?.wishProducts.map((item: WishItemProps) => (

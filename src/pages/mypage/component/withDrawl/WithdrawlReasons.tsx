@@ -11,11 +11,8 @@ const WithdrawlReasons = ({ closeFunc }: CloseFuncProps) => {
 		setSelectReason(reason);
 		closeFunc();
 	};
-	useEffect(() => {
-		console.log(selectReason);
-	}, [selectReason]);
 	return (
-		<div className="overflow-y-auto max-h-[100vh] scrollbar-hide">
+		<div className="overflow-y-auto h-full scrollbar-hide">
 			<p className="text-center mb-7">탈퇴 사유 선택</p>
 			{withdrawlReasonsData.map((reason) => (
 				<div

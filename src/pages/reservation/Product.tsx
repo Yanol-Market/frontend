@@ -28,7 +28,6 @@ export interface PaymentProps {
 
 const Product = () => {
 	const payData = useRecoilValue(paymentsState);
-	console.log(payData);
 	return (
 		<>
 			<div className="p-[20px]">

@@ -7,6 +7,7 @@ import MyPageClickBtn from '../btn/MyPageClickBtn';
 import { useMutation } from '@tanstack/react-query';
 import { patchPassword } from '../../../../apis/patchPassword';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const EditPassword = () => {
 	const {
@@ -40,7 +41,10 @@ const EditPassword = () => {
 	const mutation = useMutation({
 		mutationFn: patchPassword,
 		onSuccess() {
-			alert('비밀번호 변경 성공');
+			Swal.fire({
+				title: '비밀번호 변경 성공',
+				icon: 'success',
+			});
 			navigate('/member/editpassword/confirm');
 		},
 		onError() {

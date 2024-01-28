@@ -10,9 +10,6 @@ const ReservationPage = () => {
 	const [payment, setPayment] = useState('');
 	const [termSheet, setTermSheet] = useState(false);
 	const isDisabled = !!payment;
-
-	console.log(payment, isDisabled, termSheet);
-
 	return (
 		<div className="relative">
 			<Header title="결제하기" />

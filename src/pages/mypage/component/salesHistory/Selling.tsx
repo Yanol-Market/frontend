@@ -18,34 +18,12 @@ import SellingSkeleton from './skeleton/SellingSkeleton';
 
 // 판매중
 const Selling = () => {
-	const [Bottom, setBottom] = useState(false);
-	const [click, setClick] = useState(false);
-	const [currentHeight, setCurrentHeight] = useState(window.innerHeight);
-	const { data, isLoading, error } = useQuerySales();
-
-	const handleScroll = () => {
-		const newHeight = window.innerHeight - window.scrollY;
-		setCurrentHeight(newHeight > 0 ? newHeight : 0);
-	};
-
-	useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
 	const navigate = useNavigate();
-
 	const editData = useSetRecoilState(editProdState);
 
-	console.log('판매중 성꽁', data);
-	console.log('판매중 에러', error);
-	console.log('판매중 메세지', error?.message);
-
-	const openBottom = () => {
-		setBottom(true);
-		console.log('오픈');
-	};
+	const [Bottom, setBottom] = useState(false);
+	const [click, setClick] = useState(false);
+	const { data, isLoading, error } = useQuerySales();
 
 	const closeBottom = () => {
 		setBottom(false);
@@ -80,8 +58,7 @@ const Selling = () => {
 	if (isLoading) {
 		return (
 			<div>
-				{' '}
-				<SellingSkeleton />{' '}
+				<SellingSkeleton />
 			</div>
 		);
 	}
@@ -109,9 +86,9 @@ const Selling = () => {
 									<BottomSheet
 										isOpen={Bottom}
 										onClose={closeBottom}
-										viewHeight={`${currentHeight}px`}
+										viewHeight="170px"
 									>
-										<div className="w-full mt-20 flex flex-col justify-center items-center">
+										<div className="w-full  flex flex-col justify-center items-center h-[170px] ">
 											<div className="text-body">
 												거래 진행 중인 경우 상품을 수정할 수 없습니다.
 											</div>

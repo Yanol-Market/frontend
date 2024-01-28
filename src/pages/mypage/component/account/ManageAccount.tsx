@@ -6,6 +6,7 @@ import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/
 import { getCookie } from '../../../../apis/cookie';
 import { useMutation } from '@tanstack/react-query';
 import { getSignOut } from '../../../../apis/signout';
+import Swal from 'sweetalert2';
 
 const ManageAccount = () => {
 	const navigate = useNavigate();
@@ -16,13 +17,20 @@ const ManageAccount = () => {
 		mutationFn: getSignOut,
 		onSuccess() {
 			const userProfileInfo = localStorage.getItem('userProfileInfo');
+			const userInfo = localStorage.getItem('userInfo');
 			if (userProfileInfo) {
 				localStorage.removeItem('userProfileInfo');
+			}
+			if (userInfo){
+				localStorage.removeItem('userInfo');
 			}
 			navigate('/signin');
 		},
 		onError(err) {
-			alert('로그아웃 실패');
+			Swal.fire({
+				title: '로그아웃 실패',
+				icon: 'error',
+			});
 		},
 	});
 

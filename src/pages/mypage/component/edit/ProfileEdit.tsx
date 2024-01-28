@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { putNickName } from '../../../../apis/putNickname';
 import { useNavigate } from 'react-router';
 import { getNickName } from '../../../../apis/nickname';
+import Swal from 'sweetalert2';
 
 const ProfileEdit = () => {
 	const {
@@ -13,14 +14,15 @@ const ProfileEdit = () => {
 		handleSubmit,
 		watch,
 		setValue,
-		formState: { errors }, // isSubmitting, isDirty, isValid
+		formState: { errors },
 	} = useForm({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const myProfileJSON = localStorage.getItem('userProfileInfo');
 	const myProfile = JSON.parse(myProfileJSON as string);
 	const [myNicknameAvailable, setMyNickNameAvailable] = useState(null);
 	const currentNickName = watch('currentNickName');
-	const isButtonDisabled = !myNicknameAvailable;
+	const isButtonDisabled = myNicknameAvailable === null || myNicknameAvailable === true || !currentNickName
+	const isNickNameCheckDisabled = (currentNickName && errors.currentNickName)
 	useEffect(() => {
 		setValue('currentNickName', myProfile.data.nickname);
 	}, [myProfile.data.nickname, setValue]);
@@ -28,7 +30,10 @@ const ProfileEdit = () => {
 	const mutation = useMutation({
 		mutationFn: putNickName,
 		onSuccess() {
-			alert('프로필 수정 성공');
+			Swal.fire({
+				title: '프로필 수정 성공',
+				icon: 'success',
+			});
 			navigate('/');
 		},
 	});
@@ -56,12 +61,13 @@ const ProfileEdit = () => {
 				<div className="w-[90%] mt-14">
 					<form>
 						<div className="relative">
-							<div className="flex flex-row justify-between font-bold">
+							<div className="flex flex-row justify-between">
 								<p className="text-lg">닉네임</p>
 								<button
-									className="border border-borderGray absolute cursor-pointer right-2 top-[2.5rem] w-14 h-6 bg-borderGray text-sm text-[#828282] rounded-md"
+									className={`border border-borderGray absolute cursor-pointer ${myNicknameAvailable === null || myNicknameAvailable ? 'border border-main bg-main text-white' : 'bg-borderGray' } right-2 top-[2.5rem] w-14 h-6 bg-borderGray text-sm text-descGray rounded-md`}
 									type="button"
 									onClick={handleCheckNickName}
+									disabled={isNickNameCheckDisabled}
 								>
 									중복 확인
 								</button>
@@ -74,7 +80,7 @@ const ProfileEdit = () => {
 										? 'border-green'
 										: 'border-borderGray'
 								} w-full h-11 rounded-xl text-botton mt-2 bg-lightGray pl-4 focus:outline-none ${
-									(currentNickName && errors.email) || myNicknameAvailable
+									(currentNickName && errors.currentNickName) || myNicknameAvailable
 										? 'border border-red'
 										: ''
 								}`}
@@ -125,7 +131,7 @@ const ProfileEdit = () => {
 						<MyPageClickBtn
 							content="변경사항 저장하기"
 							onClick={handleProfileEdit}
-							isDisabled={!isButtonDisabled}
+							isDisabled={isButtonDisabled}
 						/>
 					</form>
 				</div>
