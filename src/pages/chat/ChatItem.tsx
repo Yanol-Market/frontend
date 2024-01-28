@@ -1,7 +1,5 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 import SystemMessage from './SystemMessage';
 import { useRecoilValue } from 'recoil';
 import { userIdState } from '../../recoil/atom';
@@ -26,8 +24,7 @@ interface ChatMessageProps {
 
 const ChatItem: React.FC<ChatItemProps> = ({ chatList }) => {
 	const userId = useRecoilValue(userIdState);
-	dayjs.extend(utc);
-	dayjs.extend(timezone);
+
 	return (
 		<div>
 			{chatList &&
@@ -69,9 +66,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ chatItem }) => {
 			>
 				{chatItem.content}
 			</p>
-			<p className="text-sm">
-				{dayjs(chatItem.createdAt).tz('Asia/Seoul').format('HH:mm')}
-			</p>
+			<p className="text-sm">{dayjs(chatItem.createdAt).format('HH:mm')}</p>
 		</div>
 	);
 };
