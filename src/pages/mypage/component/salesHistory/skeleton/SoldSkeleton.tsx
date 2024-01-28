@@ -2,10 +2,7 @@ import React from 'react';
 
 const SoldSkeleton = () => {
 	return (
-		<div
-			role="status"
-			className="p-5 animate-pulse w-full h-full flex justify-center items-center"
-		>
+		<div role="status" className="p-5 animate-pulse w-full h-full ">
 			<div className="h-2 bg-skel rounded-full dark:bg-skel w-40 mb-4"></div>
 			<div className="flex justify-between pb-10">
 				<div className="flex ">
