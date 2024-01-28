@@ -24,6 +24,7 @@ interface ChatMessageProps {
 
 const ChatItem: React.FC<ChatItemProps> = ({ chatList }) => {
 	const userId = useRecoilValue(userIdState);
+
 	return (
 		<div>
 			{chatList &&

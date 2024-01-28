@@ -53,14 +53,11 @@ const ChatPage = () => {
 	const searchParams = new URLSearchParams(location.search);
 	const chatId = searchParams.get('chatId');
 
-	// 로그인 유저 아이디 가져오기
-
 	useEffect(() => {
 		async function getUser() {
 			try {
 				const response = await instance.get('/users/me');
 				setUserId(response.data.data.id);
-				console.log('user', response.data.data.id);
 			} catch (error) {
 				console.error(error);
 			}
@@ -68,7 +65,6 @@ const ChatPage = () => {
 		getUser();
 	}, []);
 
-	// 채팅 대화 목록 조회
 	const fetchChatData = async () => {
 		const response = await instance.get(`/chats/${chatId}`);
 		return response.data.data;
@@ -81,13 +77,12 @@ const ChatPage = () => {
 	} = useQuery({
 		queryKey: ['chatData'],
 		queryFn: fetchChatData,
-		refetchInterval: 1000, // Refetch data every 1 second
+		refetchInterval: 1000,
 	});
 
 	useEffect(() => {
 		if (chatRoomData) {
 			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
-			console.log(chatRoomData);
 			setProductData(chatRoomInfoResponse);
 			setChatList(chatResponseList);
 
@@ -200,55 +195,3 @@ export interface ChatResponse {
 	userId: number;
 	viewed: boolean;
 }
-
-// useEffect(() => {
-// 	const fetchChatData = async () => {
-// 		try {
-// 			const response = await instance.get(`/chats/${chatId}`);
-// 			const chatRoomData = response.data.data;
-
-// 			console.log(chatRoomData);
-
-// 			const { chatRoomInfoResponse, chatResponseList } = chatRoomData;
-
-// 			setProductData(chatRoomInfoResponse);
-// 			setChatList(chatResponseList);
-
-// 			const offerChatData = [...chatResponseList]
-// 				.reverse()
-// 				.find((item) => item.senderType === 'BUYER');
-
-// 			const offer = offerChatData ? offerChatData.content : null;
-// 			const regex = /[\d,]+ 원/;
-// 			const offerPrice = offer?.match(regex);
-
-// 			const {
-// 				receiverNickname,
-// 				price,
-// 				productId,
-// 				buyerId,
-// 				sellerId,
-// 				chatRoomId,
-// 				chatStatus,
-// 				negoId,
-// 				productStatus,
-// 			} = chatRoomInfoResponse;
-
-// 			setReceiverName(receiverNickname);
-// 			setProductPrice(price);
-// 			setUserName(receiverNickname);
-// 			setProductId(productId);
-// 			setBuyerId(buyerId);
-// 			setSellerId(sellerId);
-// 			setOfferPrice(offerPrice);
-// 			setChatStatus(chatStatus);
-// 			setChatRoomId(chatRoomId);
-// 			setNegoId(negoId);
-// 			setProductStatus(productStatus);
-// 		} catch (error) {
-// 			console.error('Error fetching chat data:', error);
-// 		}
-// 	};
-
-// 	fetchChatData();
-// }, []);

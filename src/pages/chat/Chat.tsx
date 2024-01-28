@@ -43,7 +43,6 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const handleClickPayMentsButton = async (link: string) => {
 		try {
 			const payData = await getPaymentsDetail(`${productId}`);
-			console.log('payData', payData);
 			setPayData(payData.data);
 			navigate(link);
 		} catch (error) {
@@ -141,7 +140,7 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 				</div>
 			)}
 
-			{productStatus === 'RESERVED' && chatStatus !== 'TRANSFER_PENDING' && (
+			{productStatus === 'RESERVED' && chatStatus === 'TRANSFER_PENDING' && (
 				<div></div>
 			)}
 

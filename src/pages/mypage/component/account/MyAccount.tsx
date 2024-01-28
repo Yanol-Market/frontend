@@ -10,11 +10,12 @@ import { deleteAccounts } from '../../../../apis/deleteAccounts';
 import NotFoundContent from '../content/NotFoundContent';
 import { getAccounts } from '../../../../apis/getAccounts';
 import { getCookie } from '../../../../apis/cookie';
+import { Loading } from '../../../../component/common/Loading';
 
 const MyAccount = () => {
 	const navigate = useNavigate();
 	const accessToken = getCookie('accessToken');
-	const { data } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ['getAccounts'],
 		queryFn: getAccounts,
 		enabled: !!accessToken,
@@ -52,6 +53,7 @@ const MyAccount = () => {
 
 	return (
 		<div>
+			{isLoading && <Loading />}
 			{data?.data.bankName && data?.data.accountNumber ? (
 				<>
 					<Header title="내 계좌" />

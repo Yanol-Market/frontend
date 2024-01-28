@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import instance from '../../apis/axios';
 import {
 	chatRoomIdState,
@@ -11,15 +11,20 @@ import {
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface NegoPanelProps {
-	setOffered: (value: boolean) => void;
+	setOffered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	const userId = useRecoilValue(userIdState);
+	const [productPrice, setProductPrice] = useRecoilState(productPriceState);
+	const [limitPrice, setLimitPrice] = useState(productPrice);
+
+	useEffect(() => {
+		setLimitPrice(productPrice);
+	}, []);
+
 	const productId = useRecoilValue(productIdState);
-	const [productPrice, setProductPrice] = useRecoilState<string | null>(
-		productPriceState,
-	);
+
 	const [nego, setNego] = useRecoilState(negoState);
 
 	const [_, setNegoId] = useRecoilState<number | null>(negoIdState);
@@ -30,7 +35,14 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 	};
 
 	const priceUp = () => {
-		setProductPrice((prev) => String((Number(prev) ?? 0) + 5000));
+		setProductPrice((prev) => {
+			const currentPrice = Number(prev) ?? 0;
+			if (Number(currentPrice) < Number(limitPrice)) {
+				return String(currentPrice + 5000);
+			} else {
+				return prev;
+			}
+		});
 	};
 
 	const priceDown = () => {
@@ -46,7 +58,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 			})
 			.then((response) => {
 				setNegoId(response.data.id);
-				console.log(response.data.id, response.data);
 			})
 			.catch((error) => {
 				console.error(error);
@@ -59,7 +70,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 				'https://golden-ticket.site/chats/test',
 				data,
 			);
-			console.log(response.data);
 		} catch (error) {
 			console.error(error);
 		}
@@ -74,8 +84,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 				userId: userId,
 				content: `${productPrice?.toLocaleString()} 원에 구매 가능할까요?`,
 			};
-
-			console.log(data);
 
 			sendMessage(data);
 			setOffered(true);

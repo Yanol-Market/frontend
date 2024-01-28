@@ -12,9 +12,6 @@ const SelectBanks = ({ closeFunc }: CloseFuncProps) => {
 		setSelectBank(bank);
 		closeFunc();
 	};
-	// useEffect(() => {
-	// 	console.log(selectBank);
-	// }, [selectBank]); // useEffect 안 쓰면 console.log가 두 번 실행됨.
 
 	return (
 		<div className="overflow-scroll h-full scrollbar-hide">
