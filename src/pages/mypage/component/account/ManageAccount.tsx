@@ -17,8 +17,12 @@ const ManageAccount = () => {
 		mutationFn: getSignOut,
 		onSuccess() {
 			const userProfileInfo = localStorage.getItem('userProfileInfo');
+			const userInfo = localStorage.getItem('userInfo');
 			if (userProfileInfo) {
 				localStorage.removeItem('userProfileInfo');
+			}
+			if (userInfo){
+				localStorage.removeItem('userInfo');
 			}
 			navigate('/signin');
 		},

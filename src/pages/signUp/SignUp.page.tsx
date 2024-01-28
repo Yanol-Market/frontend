@@ -46,9 +46,10 @@ const SignUp = () => {
 		mutationFn: getSignUp,
 		onSuccess(data) {
 			if (userInfoData) {
-				navigate('/yasignin');
+				navigate('/');
+			}else{
+				navigate('/signin');
 			}
-			navigate('/signin');
 		},
 		onError(err) {
 			console.error(err);
