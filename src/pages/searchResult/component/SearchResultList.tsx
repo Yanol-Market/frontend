@@ -123,7 +123,7 @@ export const SearchResultList = () => {
 					<SearchResultProduct key={item.productId} product={item} />
 				))}
 			</div>
-			<div ref={ref}>test</div>
+			<div ref={ref}></div>
 			<a
 				className="absolute bottom-[30px] right-[30px] bg-white p-2 rounded-3xl"
 				href="#result"
