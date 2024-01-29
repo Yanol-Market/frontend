@@ -2,15 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { getNewAlarm } from '../../../../apis/alarm';
-import { patchAccounts } from '../../../../apis/patchAccounts';
 import { useQueries } from '@tanstack/react-query';
 import { getProfiles } from '../../../../apis/getProfile';
 import { getAccounts } from '../../../../apis/getAccounts';
 import { getCookie } from '../../../../apis/cookie';
-
-type UserProfile = {
-	nickname: string;
-};
 
 export const HeaderInfo = () => {
 	const accessToken = getCookie('accessToken');
@@ -29,10 +24,8 @@ export const HeaderInfo = () => {
 		],
 	});
 	const navigate = useNavigate();
-	const [isLogin, setIsLogin] = useState(false);
 	const myProfileData = results[0].data;
 	const [alarm, setAlarm] = useState<boolean | null>(null);
-	const [userProfile, setUserProfile] = useState<UserProfile>();
 	const handleClick = () => {
 		navigate('/alarm');
 	};
@@ -43,7 +36,7 @@ export const HeaderInfo = () => {
 				const res = await getNewAlarm();
 				setAlarm(res.data.existsNewAlert);
 			} catch (e) {
-				console.log('에러에러', e);
+				// console.log('에러에러', e);
 			}
 		};
 		fetchData();

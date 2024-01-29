@@ -50,8 +50,6 @@ const AddProductYaSignInPage: React.FC = () => {
 						'userProfileInfo',
 						JSON.stringify(updatedUserProfileInfo),
 					);
-
-					console.log('로컬 스토리지 업데이트 완료:', updatedUserProfileInfo);
 					navigate(`/addproduct`);
 				}
 			}

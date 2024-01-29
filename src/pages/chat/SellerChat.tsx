@@ -181,7 +181,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 				`/nego/denyhandoverProduct/${productId}`,
 			);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

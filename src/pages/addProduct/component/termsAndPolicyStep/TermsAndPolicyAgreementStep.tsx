@@ -29,13 +29,12 @@ const TermsAndPolicyAgreementStep = ({ onComplete, selectedItem }: Props) => {
 				});
 				setIsCompleted(true);
 				// 서버 응답 처리
-				console.log('상품 등록 성공:', response);
 
 				const productId = response.data.productId;
-				console.log('상품 등록 성공:', productId);
+
 				setProductId(productId);
 			} catch (error) {
-				console.error('상품 등록 오류:', error);
+				// console.error('상품 등록 오류:', error);
 				// 오류 처리
 			}
 		} else {

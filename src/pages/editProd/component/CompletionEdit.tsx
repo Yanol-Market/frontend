@@ -5,17 +5,13 @@ import CloseIcon from '@mui/icons-material/Close';
 const CompletionEdit = () => {
 	const navigate = useNavigate();
 
-	const onComplete = () => {
-		console.log('x');
-	};
-
 	const handleClick = () => {
 		navigate('/purchase');
 	};
 	return (
 		<div className="flex flex-col justify-between h-lvh ">
 			<div className="  w-full h-[70px] bg-white  flex justify-end items-center">
-				<div className="cursor-pointer pr-5" onClick={onComplete}>
+				<div className="cursor-pointer pr-5">
 					<CloseIcon sx={{ width: '20px' }} />
 				</div>
 			</div>
