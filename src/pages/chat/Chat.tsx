@@ -132,17 +132,17 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 					</div>
 				))}
 
-			{productStatus === 'RESERVED' && chatStatus !== 'PAYMENT_PENDING' && (
+			{/* {productStatus === 'RESERVED' && chatStatus !== 'PAYMENT_PENDING' && (
 				<div className="absolute bottom-0 h-[110px] w-[430px] bg-[#fafafa]">
 					<div className="w-[90%] bottom-[25px] text-lg m-[20px] h-[42px] bg-main rounded-[12px] text-white flex items-center justify-center">
 						상품이 이미 예약중입니다.
 					</div>
 				</div>
-			)}
+			)} */}
 
-			{productStatus === 'RESERVED' && chatStatus === 'TRANSFER_PENDING' && (
-				<div></div>
-			)}
+			{productStatus === 'RESERVED' &&
+				chatStatus === 'TRANSFER_PENDING' &&
+				buyerId === userId && <div></div>}
 
 			{productStatus === 'SOLD_OUT' && chatStatus === 'TRANSFER_COMPLETED' && (
 				<>
