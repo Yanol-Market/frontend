@@ -223,8 +223,6 @@ export const ProductInfo = () => {
 	if (!product) {
 		return <div>Loading...</div>;
 	}
-
-	console.log(product);
 	return (
 		<div className="">
 			<div className="relative mb-5">
@@ -446,11 +444,10 @@ export const ProductInfo = () => {
 									return;
 								}
 								const response = await createChat();
-								console.log(response);
 								if (response?.chatRoomId)
 									handleClickButton(`/chat?chatId=${response?.chatRoomId}`);
 							}}
-							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-subBtn"
+							className={`p-2 w-[160px] h-[50px] rounded-[12px] ${product.productStatus == 'SELLING' ? 'text-white bg-subBtn' : 'bg-borderWhite text-gray'} text-lg font-[500]`}
 						>
 							네고하기
 						</button>
@@ -483,7 +480,7 @@ export const ProductInfo = () => {
 									`/reservation?productId=${param.productId}`,
 								);
 							}}
-							className="p-2 w-[160px] h-[50px] rounded-[12px] text-white text-lg font-[500] bg-main"
+							className={`p-2 w-[160px] h-[50px] rounded-[12px] ${product.productStatus == 'SELLING' ? 'text-white bg-main' : 'bg-borderWhite text-gray'} text-lg font-[500]`}
 						>
 							예약하기
 						</button>
