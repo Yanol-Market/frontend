@@ -2,7 +2,6 @@
 
 - 📅 기간: 2023.12.06 ~ 2024.1.30
 - 🧭 주제: 취소 수수료 없는 숙소 양도 거래 서비스
-  ![image](https://github.com/Yanol-Market/frontend/assets/51106050/0742ac22-c6a8-47a2-9e1f-e2f7a73da05a)
 
 ## 🌐 배포 주소
 
@@ -10,32 +9,6 @@
 - 🧩 테스트 계정 :
 
 ## 👭 참여 인원 및 담당 기능
-
-### PM 팀
-
-<table>
-  <thead>
-    <tr>
-      <th align="center"> 팀장 | 이예은 </th>
-      <th align="center"> 팀원 | 김나우 </th>
-      <th align="center"> 팀원 | 박경은 </th>
-      <th align="center"> 팀원 | 안호정 
-      </th>
-      <th align="center"> 팀원 | 정유경 </th>
-    </tr>
-
-  </thead>
-</table>
-
-### UX/UI 팀
-
-<table>
-  <thead>
-    <tr>
-      <th align="center"> 팀장 | 최효준 </th>
-    </tr>
-  </thead>
-</table>
 
 ### FE 팀
 
@@ -98,7 +71,7 @@
       <td>
         <ul>
           <li>초기 개발 세팅</li>
-          <li>거래 내역 페이지(판매 내역, 구매 내역)</li>
+          <li>판매, 구매 내역 페이지</li>
           <li>상품 수정 페이지</li>
           <li>알림 내역 페이지</li>
           <li>CI/CD</li>
