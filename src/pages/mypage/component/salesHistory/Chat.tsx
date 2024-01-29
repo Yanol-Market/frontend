@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router';
 const Chat = (props: BuyerProps) => {
 	const status = props.status;
 	const navigate = useNavigate();
-	console.log(status);
 
 	const handleClick = (chatRoomId: number) => {
 		navigate(`/chat?chatId=${chatRoomId}`);

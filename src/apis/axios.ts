@@ -50,7 +50,6 @@ instance.interceptors.response.use(
 			originalRequest._retry = true;
 			const newAccessToken = await refreshCookie(refreshToken);
 			originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-			console.log('토큰 재발급 완료');
 
 			return instance(originalRequest);
 		}

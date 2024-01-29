@@ -1,13 +1,14 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
 const CompletionEdit = () => {
 	const navigate = useNavigate();
-	// const { productId } = useParams();
+
 	const onComplete = () => {
 		console.log('x');
 	};
+
 	const handleClick = () => {
 		navigate('/purchase');
 	};

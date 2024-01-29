@@ -28,9 +28,7 @@ const BottomSheetRegionContent = ({
 		},
 		[checkedList, setCheckedList],
 	);
-	useEffect(() => {
-		console.log(checkedList);
-	}, [checkedList]);
+
 	return (
 		<div className="flex flex-col justify-center h-full overflow-scroll scrollbar-hide">
 			<p className="text-center mb-7">관심지역 선택</p>

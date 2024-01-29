@@ -16,7 +16,6 @@ export const ProductItemNew = ({
 		if (!isWished) {
 			const isSuccess = await addWish(productId);
 			setIsWished(true);
-			console.log(isSuccess);
 			if (isSuccess.response && isSuccess.response.status === 401) {
 				navigate('/signin');
 			}

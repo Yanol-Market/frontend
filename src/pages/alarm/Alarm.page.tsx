@@ -4,13 +4,19 @@ import { useQueryAlarm } from '../../hooks/useQuertAlarm';
 import { AlertRes } from '../../type/alarm';
 import { formatTimeAgo } from '../../utils/formate';
 import useSignInChecked from '../../utils/useSignInChecked';
+import { NotFoundPage } from '../../component/common/NotFound';
 
 const Alarm = () => {
 	useSignInChecked();
 	const { data, error } = useQueryAlarm();
-	console.log(data);
+
 	if (error) {
-		return <div> 에러에러 </div>;
+		return (
+			<div>
+				{' '}
+				<NotFoundPage />{' '}
+			</div>
+		);
 	}
 	return (
 		<div>

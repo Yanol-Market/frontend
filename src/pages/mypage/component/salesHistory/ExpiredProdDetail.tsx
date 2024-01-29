@@ -6,6 +6,7 @@ import ContentTwoBtnPage from '../../../../component/common/BottomSheet/Content/
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { delSoldProd } from '../../../../apis/sales';
 import SoldSkeleton from './skeleton/SoldSkeleton';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const ExpiredProdDetail = () => {
 	const { productId } = useParams();
@@ -18,9 +19,6 @@ const ExpiredProdDetail = () => {
 		`${status}`,
 	);
 	const [bottom, setBottom] = useState(false);
-	console.log('판매완료 status ', status);
-	console.log('아이딛값', productId);
-	console.log('판매완료 상세 ', data);
 
 	const openBottom = () => {
 		setBottom(true);
@@ -30,18 +28,15 @@ const ExpiredProdDetail = () => {
 		setBottom(false);
 	};
 
-	console.log('상품만료', data);
-
 	// 판매완료 상세 - 판매완료 삭제 API
 	const dltProduct = async (productId: number) => {
 		try {
 			const res = await delSoldProd(productId);
-			console.log('판매 완료 상품 삭제 완료', res);
 			alert(res.message);
 			closeBottom();
 			navigate(-1);
 		} catch (error) {
-			console.error('에러 발생:', error);
+			<NotFoundPage />;
 		}
 	};
 

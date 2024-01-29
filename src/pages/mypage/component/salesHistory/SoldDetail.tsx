@@ -34,7 +34,6 @@ const SoldDetail = () => {
 	const dltProduct = async (productId: number) => {
 		try {
 			const res = await delSoldProd(productId);
-			console.log('판매 완료 상품 삭제 완료', res);
 			alert(res.message);
 			closeBottom();
 			navigate(-1);

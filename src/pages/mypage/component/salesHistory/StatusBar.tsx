@@ -4,7 +4,6 @@ import { StatusBarProps } from '../../../../data/purchasesData';
 
 const StatusBar = ({ status }: StatusBarProps) => {
 	const data = status;
-	console.log(data, 'ddd');
 
 	return (
 		<>
