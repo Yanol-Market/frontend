@@ -10,8 +10,6 @@
 
 ## 👭 참여 인원 및 담당 기능
 
-### FE 팀
-
 <table>
   <thead>
     <tr>
@@ -112,20 +110,45 @@
   </tbody>
 </table>
 
-### BE 팀
+백엔드는 [이곳](https://github.com/Yanol-Market/backend)을 클릭해주세요 !
 
-<table>
-  <thead>
-    <tr>
-      <th align="center"> 팀장 | 박찬영 </th>
-      <th align="center"> 팀원 | 김수빈 </th>
-      <th align="center"> 팀원 | 서은 </th>
-      <th align="center"> 팀원 | 이의인 </th>
-      <th align="center"> 팀원 | 전유림 </th>
-  </thead>
-</table>
+## 🔍️ 기술 스택
 
-[📃 API 명세서](https://www.notion.so/API-1aa144a86fb8406ab3a4d16415cb4c75)
+### Environment
+
+<div>
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+<img src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white" />
+ <img src="https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black&style=for-the-badge"/>
+ <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
+</div>
+
+### Development
+
+<div style="display: flex;">
+  <img src="https://img.shields.io/badge/react-%2320232a?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+  <img src="https://img.shields.io/badge/recoil-007AF4?style=for-the-badge&logo=recoil&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=black" />
+</div>
+
+### Communication
+
+<div>
+ <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
+ <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white" />
+ <img src="https://img.shields.io/badge/notion-9266CC?style=for-the-badge&logo=notion&logoColor=white" />
+<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
+
+</div>
+
+### CI/CD
+
+ <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white" />
+
 
 ## 🎨 화면 구성
 
@@ -198,7 +221,7 @@
     </tr>
     <tr>
       <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/853c4343-f833-46f4-b8fc-e7a6a7fde73a" alt="판매중"></td>
-      <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/cea90f0c-8d44-4090-9816-ea6dea664388" alt="판매완료"></td>
+      <td><img height="230" width="196" src="https://github.com/Yanol-Market/frontend/assets/102405617/cea90f0c-8d44-4090-9816-ea6dea664388" alt="판매완료"></td>
       <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/8ff5e554-4fcc-4a02-9704-4fbf379f95e9" alt="판매완료 상세"></td>
     </tr>
      <tr align="center">
@@ -207,50 +230,14 @@
       <th>구매완료 상세</th>
     </tr>
     <tr>
-      <td><img height="210" src="https://github.com/Yanol-Market/frontend/assets/102405617/47034122-7ba7-4967-8578-6e961a237d0f" alt="구매중"></td>
-      <td><img height="210" src="https://github.com/Yanol-Market/frontend/assets/102405617/244428e2-eb68-4a6c-986c-1ed3551ee545" alt="구매완료"></td>
-      <td><img height="210" src="https://github.com/Yanol-Market/frontend/assets/102405617/40951cf8-4f67-469e-b35d-6cb34f8e377b" alt="구매완료 상세"></td>
+      <td><img  src="https://github.com/Yanol-Market/frontend/assets/102405617/47034122-7ba7-4967-8578-6e961a237d0f" alt="구매중"></td>
+      <td><img width="196" height="230" src="https://github.com/Yanol-Market/frontend/assets/102405617/244428e2-eb68-4a6c-986c-1ed3551ee545" alt="구매완료"></td>
+      <td><img  src="https://github.com/Yanol-Market/frontend/assets/102405617/40951cf8-4f67-469e-b35d-6cb34f8e377b" alt="구매완료 상세"></td>
     </tr>
   </table>
 </div>
 <br>
 
-## 🔍️ 기술 스택
-
-### Environment
-
-<div>
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" />
-<img src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white" />
- <img src="https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black&style=for-the-badge"/>
- <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
-</div>
-
-### Development
-
-<div style="display: flex;">
-  <img src="https://img.shields.io/badge/react-%2320232a?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
-  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
-  <img src="https://img.shields.io/badge/recoil-007AF4?style=for-the-badge&logo=recoil&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
-<img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=black" />
-</div>
-
-### Communication
-
-<div>
- <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
- <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white" />
- <img src="https://img.shields.io/badge/notion-9266CC?style=for-the-badge&logo=notion&logoColor=white" />
-<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
-
-</div>
-
-### CI/CD
-
- <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white" />
 
 ## ✒ 기획 및 디자인
 
