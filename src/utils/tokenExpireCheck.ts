@@ -6,7 +6,6 @@ export const isTokenExpired = (token: string) => {
 		const payload = JSON.parse(atob(token.split('.')[1]));
 		const expirationTime = payload.exp * 1000;
 		const currentTime = new Date().getTime();
-		console.log(expirationTime);
 
 		return currentTime > expirationTime;
 	} catch (err) {

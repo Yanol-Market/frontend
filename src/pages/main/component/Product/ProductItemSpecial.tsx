@@ -10,14 +10,12 @@ export const ProductItemSpecial = ({
 }: {
 	product: ProductSpecialType;
 }) => {
-	console.log(product);
 	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
 		if (!isWished) {
 			const isSuccess = await addWish(productId);
 			setIsWished(true);
-			console.log(isSuccess);
 			if (isSuccess.response && isSuccess.response.status === 401) {
 				navigate('/signin');
 			}

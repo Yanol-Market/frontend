@@ -24,7 +24,6 @@ const CompletionScreen = ({ onComplete, productId }: Props) => {
 				const response = await getAccounts();
 				if (response.status === 'SUCCESS' && response.data) {
 					setAccountData(response.data);
-					console.log('계좌 목록:', response.data);
 				}
 			} catch (error) {
 				console.error('계좌 정보를 불러오는 중 오류 발생:', error);

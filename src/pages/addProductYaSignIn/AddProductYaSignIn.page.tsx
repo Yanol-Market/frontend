@@ -56,7 +56,7 @@ const AddProductYaSignInPage: React.FC = () => {
 				}
 			}
 			// 응답값 콘솔에 출력
-			console.log('응답값:', response);
+			// console.log('응답값:', response);
 		} catch (error) {
 			setLoginError('이메일 또는 비밀번호를 확인해주세요.'); // 서버 오류 시 메시지 설정
 		}

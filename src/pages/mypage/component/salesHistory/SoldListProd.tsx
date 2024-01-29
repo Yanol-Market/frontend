@@ -16,18 +16,14 @@ import Swal from 'sweetalert2';
 const SoldListProd = () => {
 	const { isLoading, error, data } = useQuerySoldList();
 
-	console.log('판매완료 리스투', data);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const [bottom, setBottom] = useState(false);
 	const [productId, setProductId] = useState<number>(0);
 
-	console.log('판매완료 리스으 ', error);
-
 	const openBottom = (productId: number) => {
 		setBottom(true);
 		setProductId(productId);
-		console.log('open', productId);
 	};
 
 	const closeBottom = () => {
@@ -38,7 +34,6 @@ const SoldListProd = () => {
 	const delSalesProd = async () => {
 		try {
 			const res = await delSoldProd(productId);
-			console.log('판매 완료 리스트 삭제 완료', res);
 			Swal.fire({
 				icon: 'success',
 				text: res.message,
@@ -55,7 +50,6 @@ const SoldListProd = () => {
 	// 판매 완료 상세 클릭 (만료, 완료 나누기)
 	const detailClick = (productId: string, status: string) => {
 		if (status === 'SOLD_OUT') {
-			console.log('클릭');
 			navigate(`/sales/detail/${productId}?status=${status}`);
 		} else {
 			navigate(`/sales/expired/detail/${productId}?status=${status}`);

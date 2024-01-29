@@ -5,7 +5,10 @@ import { recoilPersist } from 'recoil-persist';
 import { PaymentProps } from '../pages/reservation/Product';
 import { ProductData } from '../pages/chat/Chat.page';
 
-const { persistAtom } = recoilPersist();
+const { persistAtom } = recoilPersist({
+	key: 'localStorageRecoil',
+	storage: localStorage,
+});
 const toDay = new Date();
 const sevenDaysLater = new Date();
 sevenDaysLater.setDate(toDay.getDate() + 6);
@@ -26,6 +29,7 @@ export const checkedState = atom({
 export const checkedListState = atom({
 	key: 'checkedListState',
 	default: [] as string[],
+	effects_UNSTABLE: [persistAtom],
 });
 
 export interface SelectBanksProps {
@@ -69,7 +73,6 @@ export const negoSuccessState = atom<boolean | null>({
 export const sendMessage = async (data: messageType) => {
 	try {
 		const response = await instance.post('/chats/test', data);
-		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -182,11 +185,10 @@ export const isShowState = atom<boolean>({
 });
 export const dateRefState = atom({
 	key: 'dateRefState',
-	default: null
+	default: null,
 });
 
 export const negoAvailableState = atom<boolean>({
 	key: 'negoAvailableState',
 	default: false,
 });
-

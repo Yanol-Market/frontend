@@ -19,6 +19,14 @@ const Withdrawl = () => {
 	const mutation = useMutation({
 		mutationFn: deleteMember,
 		onSuccess() {
+			const userProfileInfo = localStorage.getItem('userProfileInfo');
+			const userInfo = localStorage.getItem('userInfo');
+			if (userProfileInfo) {
+				localStorage.removeItem('userProfileInfo');
+			}
+			if (userInfo) {
+				localStorage.removeItem('userInfo');
+			}
 			deleteCookie();
 			navigate('/member/withdrawl/confirm');
 		},

@@ -14,10 +14,7 @@ import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const BoughtListProd = () => {
 	const queryClient = useQueryClient();
-
 	const { isLoading, error, data } = useQueryBoughtList();
-	console.log('구매완료 ', data);
-	console.log('구매완료 실패 ', error);
 
 	const [bottom, setBottom] = useState(false);
 	const [orderId, setOrderId] = useState<number>(0);
@@ -26,7 +23,6 @@ const BoughtListProd = () => {
 	const openBottom = (orderId: number) => {
 		setBottom(true);
 		setOrderId(orderId);
-		console.log(orderId);
 	};
 
 	const closeBottom = () => {
@@ -37,7 +33,6 @@ const BoughtListProd = () => {
 	const delPurchaseProd = async () => {
 		try {
 			const res = await delBoughtProd(orderId);
-			console.log('구매 완료 리스트 삭제 완료', res);
 			Swal.fire({
 				icon: 'success',
 				text: res.message,
@@ -53,7 +48,6 @@ const BoughtListProd = () => {
 	};
 
 	const detailClick = (productId: number, orderId: number) => {
-		console.log('클릭');
 		navigate(`/purchase/detail/${productId}?order=${orderId}`);
 	};
 

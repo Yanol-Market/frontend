@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { CardProdProps } from '../../../../data/purchasesData';
 import { reservationTypeTrans } from '../../../../utils/translate';
 import {
@@ -9,10 +8,6 @@ import {
 } from '../../../../utils/formate';
 
 const CardProd = (props: CardProdProps) => {
-	const location = useLocation();
-	const currentPath = location.pathname;
-
-	console.log(currentPath);
 	return (
 		<>
 			<div>

@@ -26,7 +26,6 @@ const ChatList = () => {
 	const fetchChatList = async (type: string) => {
 		try {
 			const response = await getChatList(type);
-			console.log('Response:', response);
 
 			if (response.status === 'SUCCESS') {
 				setChatList(response.data.chatRoomShortList);

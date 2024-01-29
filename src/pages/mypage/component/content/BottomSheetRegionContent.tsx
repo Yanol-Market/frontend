@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { regionData } from '../../../../data/regionData';
 import { useRecoilState } from 'recoil';
 import { checkedListState } from '../../../../recoil/atom';
@@ -14,9 +14,11 @@ const BottomSheetRegionContent = ({
 	const onCheckedItem = useCallback(
 		(item: string) => {
 			if (checkedList.includes(item)) {
-				setCheckedList((prev) => prev.filter((el) => el !== item));
+				setCheckedList((prev: string[]) =>
+					prev.filter((el: string) => el !== item),
+				);
 			} else if (checkedList.length < 3) {
-				setCheckedList((prev) => [...prev, item]);
+				setCheckedList((prev: string[]) => [...prev, item]);
 			} else {
 				Swal.fire({
 					title: '3개 이상 등록 할 수 없습니다.',
@@ -26,6 +28,7 @@ const BottomSheetRegionContent = ({
 		},
 		[checkedList, setCheckedList],
 	);
+
 	return (
 		<div className="flex flex-col justify-center h-full overflow-scroll scrollbar-hide">
 			<p className="text-center mb-7">관심지역 선택</p>
