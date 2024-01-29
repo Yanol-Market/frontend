@@ -268,16 +268,19 @@
 #### 1-3. 약관 동의
 
 - 약관에 동의하고 완료를 하면 앞서 입력한 정보로 선택한 상품이 등록됩니다.
-- 이미 등록된 상품은 비활성화 처리됩니다.
   ![상품등록03](https://github.com/Yanol-Market/frontend/assets/51106050/27374217-fbb6-49bd-97c1-351d0715bb86)
+
+- 이미 등록된 상품은 비활성화 처리됩니다.
   ![비활성화처리](https://github.com/Yanol-Market/frontend/assets/51106050/9ab7e2c1-62d0-4f2e-854e-652f010a7964)
 
 ### 2. 나의 거래 페이지
 
 - 로그인 상태이면 채팅 목록이 표시됩니다.
-- 상대방 닉네임, 최근 메시지, 최근 메시지 시간, 호텔 이름 등이 표시되고 확인 유무에 따라 다른 UI를 구현하였습니다.
+- 상대방 닉네임, 최근 메시지, 최근 메시지 시간, 호텔 이름 등이 표시됩니다.
 - dropdown으로 전체 내역, 구매 내역, 판매 내역을 선택해서 확인할 수 있습니다.
   ![나의거래01](https://github.com/Yanol-Market/frontend/assets/51106050/1fa37846-85b5-42d5-bb69-a50b32efa19f)
+
+- 확인 유무에 따라 다른 UI를 구현하였습니다.
   ![나의거래03](https://github.com/Yanol-Market/frontend/assets/51106050/dac5c932-2ca6-449a-be21-37aaba4c32cb)
 
 </details>
