@@ -77,8 +77,6 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 
 	const makeOffer = () => {
 		if (confirm('상품당 2회의 네고 제안이 가능합니다.')) {
-			negoSend();
-
 			const data = {
 				chatRoomId,
 				senderType: 'BUYER',
@@ -91,6 +89,7 @@ const NegoPanel: React.FC<NegoPanelProps> = ({ setOffered }) => {
 				return;
 			}
 
+			negoSend();
 			sendMessage(data);
 			setOffered(true);
 			setNego(false);
