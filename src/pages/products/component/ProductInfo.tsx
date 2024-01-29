@@ -144,7 +144,7 @@ export const ProductInfo = () => {
 			setChatRoomId(response.data.id);
 			return response.data.id;
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -223,6 +223,8 @@ export const ProductInfo = () => {
 	if (!product) {
 		return <div>Loading...</div>;
 	}
+
+	console.log(product);
 	return (
 		<div className="">
 			<div className="relative mb-5">

@@ -44,10 +44,8 @@ const Selling = () => {
 			});
 			//  수정 페이지로 이동
 			navigate(`/edit/${productId}`);
-			console.log('이동');
 		} else {
 			setBottom(true);
-			console.log('오픈');
 		}
 	};
 

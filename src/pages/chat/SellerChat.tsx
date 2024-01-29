@@ -43,13 +43,11 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 	const productId = useRecoilValue(productIdState);
 	const navigate = useNavigate();
 
-	console.log('productStatus', productStatus);
-
 	const sendConsent = async () => {
 		try {
 			const response = await instance.patch(`nego/confirm/${negoId}`);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -57,7 +55,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 		try {
 			const response = await instance.patch(`nego/deny/${negoId}`);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -123,7 +121,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 			try {
 				const result = await sendMessage(data);
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 			}
 		};
 
@@ -137,7 +135,7 @@ const SellerChat: React.FC<ChatProps> = ({ chatList }) => {
 				`/nego/handoverProduct/${productId}`,
 			);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

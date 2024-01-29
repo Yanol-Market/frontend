@@ -38,8 +38,6 @@ const Chat: React.FC<ChatProps> = ({ chatList }) => {
 	const buyerId = useRecoilValue(buyerIdState);
 	const negoAvailable = useRecoilValue(negoAvailableState);
 
-	console.log('productId', productId);
-
 	const handleClickPayMentsButton = async (link: string) => {
 		try {
 			const payData = await getPaymentsDetail(`${productId}`);

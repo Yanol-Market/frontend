@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from '../../component/common/Header';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import GoldenPriceInfo from './component/GoldenPriceInfo';
 import SellerMessage from './component/SellerMessage';
 import FeeInfo from './component/FeeInfo';
@@ -12,7 +12,6 @@ const EditProd = () => {
 	const { productId } = useParams();
 	const navigate = useNavigate();
 	const price = useRecoilValue(editProdState);
-	console.log(price.golden);
 
 	// 희망판매가 = 골든특가
 	const [goldenPrice, setGoldenPrice] = useState<number>(price.golden);
@@ -24,10 +23,8 @@ const EditProd = () => {
 		if (productId) {
 			try {
 				const res = await putEditProd(productId, goldenPrice, content);
-				console.log('상품 수정 성공', res);
 				alert('상품 수정에 성공했습니다 !');
 			} catch (e) {
-				console.log('상품 수정 실패', e);
 				alert('상품 수정에 실패했습니다. 전 페이지로 돌아가주세요.');
 			}
 		}

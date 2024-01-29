@@ -18,7 +18,6 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 		localStorage.getItem('userProfileInfo') || '{"data": {}}',
 	);
 	const yanoljaId = userProfileInfo.data.yanoljaId;
-	console.log('yanoljaId:', userProfileInfo.data.yanoljaId);
 
 	const yanoljaIdExists = yanoljaId !== null;
 
@@ -49,7 +48,6 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 
 	const handleReservationItemClick = (index: number) => {
 		setSelectedReservationIndex(index);
-		console.log('Selected Reservation Index:', index);
 	};
 
 	const handleNextStep = () => {
@@ -63,11 +61,6 @@ const AddProductSelectionStep = ({ onNextStep }: Props) => {
 			const { originPrice, yanoljaPrice, reservationId } = selectedReservation;
 
 			// 선택된 상품의 정보 출력
-			console.log('Selected Product Info:', {
-				originPrice,
-				yanoljaPrice,
-				reservationId,
-			});
 
 			onNextStep({
 				originPrice,

@@ -6,11 +6,9 @@
 ## 🌐 배포 주소
 
 - 🎫 배포 주소 : https://golden-ticket6.netlify.app/
-- 🧩 테스트 계정 :
+- 🧩 야놀자 **소셜** 로그인 테스트 계정 : 아이디 : yanolja31@email.com, 비밀번호 : yanolja31
 
 ## 👭 참여 인원 및 담당 기능
-
-### FE 팀
 
 <table>
   <thead>
@@ -71,9 +69,9 @@
       <td>
         <ul>
           <li>초기 개발 세팅</li>
-          <li>판매, 구매 내역 페이지</li>
+          <li>판매/구매 내역 페이지</li>
           <li>상품 수정 페이지</li>
-          <li>알림 내역 페이지</li>
+          <li>알림 조회 페이지</li>
           <li>CI/CD</li>
         </ul>
       </td>
@@ -93,15 +91,18 @@
       </td>
       <td>
         <ul>
-          <li>상품 등록 페이지</li>
-          <li>나의 거래 페이지</li>
+          <li>상품 등록 페이지 <br/>(상품 선택, 상품 정보 입력, 약관 동의)</li>
+          <li>나의 거래 페이지 (채팅 목록)</li>
         </ul>
       </td>
       <td>
         <ul>
-          <li>초기 개발 환경 세팅</li>
+          <li>MSW 및 jest 셋팅</li>
           <li>로그인 / 회원가입 페이지</li>
           <li>마이페이지</li>
+          <li>결제 기능 구현</li>
+          <li>404 NotFound 페이지 </li>
+          <li>스플래시 페이지</li>
         </ul>
       </td>
     </tr>
@@ -109,117 +110,136 @@
   </tbody>
 </table>
 
-### BE 팀
+백엔드는 [이곳](https://github.com/Yanol-Market/backend)을 클릭해주세요 !
 
-<table>
-  <thead>
+## 🔍️ 기술 스택
+
+### Environment
+
+<div>
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+<img src="https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white" />
+ <img src="https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black&style=for-the-badge"/>
+ <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" />
+</div>
+
+### Development
+
+<div style="display: flex;">
+  <img src="https://img.shields.io/badge/react-%2320232a?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+  <img src="https://img.shields.io/badge/recoil-007AF4?style=for-the-badge&logo=recoil&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
+<img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=black" />
+</div>
+
+### Communication
+
+<div>
+ <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
+ <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white" />
+ <img src="https://img.shields.io/badge/notion-9266CC?style=for-the-badge&logo=notion&logoColor=white" />
+<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />
+
+</div>
+
+### CI/CD
+
+ <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white" />
+
+
+## 🎨 화면 구성
+
+<div style="text-align: center">
+  
+  <h4> - 메인 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/6fbdcff9-f222-476c-9fed-d398a26bfbb9" alt="메인 페이지">
+
+  <h4> - 상품등록 페이지</h4> <img height="502" alt="image" src="https://github.com/Yanol-Market/frontend/assets/51106050/a5a06637-09fe-4c86-a466-32a0fba26a15">
+  
+  <h4> - 숙소 검색 결과 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/5c0912e7-71d0-45a2-9827-c4cf395ef098">
+  
+  <h4> - 객실 상세 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/436c512c-454c-4f70-be39-92237958b380" alt="장바구니 페이지">
+  
+  <h4>- 네고 채팅 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/69275487-99fb-401f-a334-e019e3d29b27">
+
+<h4> - 알림페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/352ad39c-6346-4387-bb24-26f0893f8d50">
+
+  <h4> - 마이페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/7015290b-b396-4e3c-ab62-b6f350463587">
+</div>
+
+## 📚 주요 기능
+
+### 👥 회원관리
+
+<div align="center">
+  <table>
+    <tr align="center">
+      <th>로그인</th>
+      <th>회원가입</th>
+      <th>계정관리</th>
+    </tr>
     <tr>
-      <th align="center"> 팀장 | 박찬영 </th>
-      <th align="center"> 팀원 | 김수빈 </th>
-      <th align="center"> 팀원 | 서은 </th>
-      <th align="center"> 팀원 | 이의인 </th>
-      <th align="center"> 팀원 | 전유림 </th>
-  </thead>
-</table>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/05d819b6-cc1b-4788-aced-f0017f81380b" alt="회원가입 유효성 검사"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/cf71a2c4-b0fe-4790-a0cc-d5facdf0c4ed"alt="signup2"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/19337234-20ca-4291-9a6c-68e045799af6"alt="signup3"></td>
+    </tr>
+    <tr align="center">
+      <th>마이페이지 - 찜한 상품</th>
+      <th>마이페이지 - 관심지역</th>
+      <th>마이페이지 - 계좌등록</th>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/75cbc38f-67aa-4ca9-a263-831896f20f5d" alt="찜한 상품"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/d3eb2746-8db1-4ba8-9a89-ff5523e31806" alt=" 관심 지역"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/b683e6d7-649d-4439-b26e-5de81b5f74b2" alt=" 계좌등록"></td>
+    </tr>
+  </table>
 
-[📃 API 명세서](https://www.notion.so/API-1aa144a86fb8406ab3a4d16415cb4c75)
+### 💰 상품 구매하기
+
+  <table>
+        <tr align="center">
+      <th>네고하기</th>
+      <th>PG사를 통한 결제</th>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/e0457eac-d916-42a8-b323-a540c76bef48" alt="판매중"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/78890707/35796dd0-8701-432b-a03b-4fda1a9cfdd2" alt="PG사를 통한 결제"></td>
+    </tr>
+
+  </table>
+
+### 📖 거래내역
+
+  <table>
+        <tr align="center">
+      <th>판매중</th>
+      <th>판매완료</th>
+      <th>판매완료 상세</th>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/853c4343-f833-46f4-b8fc-e7a6a7fde73a" alt="판매중"></td>
+      <td><img height="230" width="196" src="https://github.com/Yanol-Market/frontend/assets/102405617/cea90f0c-8d44-4090-9816-ea6dea664388" alt="판매완료"></td>
+      <td><img src="https://github.com/Yanol-Market/frontend/assets/102405617/8ff5e554-4fcc-4a02-9704-4fbf379f95e9" alt="판매완료 상세"></td>
+    </tr>
+     <tr align="center">
+      <th>구매중</th>
+      <th>구매완료</th>
+      <th>구매완료 상세</th>
+    </tr>
+    <tr>
+      <td><img  src="https://github.com/Yanol-Market/frontend/assets/102405617/47034122-7ba7-4967-8578-6e961a237d0f" alt="구매중"></td>
+      <td><img width="196" height="230" src="https://github.com/Yanol-Market/frontend/assets/102405617/244428e2-eb68-4a6c-986c-1ed3551ee545" alt="구매완료"></td>
+      <td><img  src="https://github.com/Yanol-Market/frontend/assets/102405617/40951cf8-4f67-469e-b35d-6cb34f8e377b" alt="구매완료 상세"></td>
+    </tr>
+  </table>
+</div>
+<br>
+
 
 ## ✒ 기획 및 디자인
 
 [🎨 골든티켓 GUI](https://www.figma.com/file/Q2Enp3xLkgeIZ1iuEVRRD4/%EA%B3%A8%EB%93%A0%ED%8B%B0%EC%BC%93-gui%EC%9E%91%EC%97%85?type=design&node-id=125-345&mode=design&t=XrsSoY0XgsUPfkUP-0) <br/>
 [🪟 골든티켓 와이어프레임](<https://www.figma.com/file/mAkEo5jHXpP0TNedW0XcjE/%EA%B3%A8%EB%93%A0%ED%8B%B0%EC%BC%93-%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84_(%EC%A3%BC)%EC%95%BC%EB%86%80%EC%9E%A5%ED%84%B0?type=design&mode=design&t=dAwVOsPk6aPYDzTn-0>)
-
-## 🔍️ 기술 스택
-
-### FE 개발
-
-<div style="display: flex;">
-  <img src="https://img.shields.io/badge/react-%2320232a?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
-  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Recoil-3578E5?style=for-the-badge&logo=Recoil&logoColor=white" />
-</div>
-
-### 협업 툴
-
-<div>
- <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white" />
- <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white" />
-</div>
-
-### 배포
-
- <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white" />
-
-## 👨‍👨‍👦‍👦 협업 프로세스
-
-커밋 컨벤션, 코딩 컨벤션, 깃허브 규칙 등의 내용은 아래의 노션 페이지를 참고해주세요! </br>
-
-### [🔗 노션 페이지](https://www.notion.so/FE-34c0feed0c03472894f45fc1bdccf37b?pvs=4) </br>
-
-## 💻 팀원별 구현 기능 및 회고
-
-<details>
-<summary style="font-size: 16px">정효주</summary>
-
-## 작업 내용
-
-## 트러블 슈팅
-
-## 회고
-
-</details>
-<details>
-
-<summary style="font-size: 16px">김소정</summary>
-
-## 작업 내용
-
-### 네고 채팅 구현
-- 상품 상세 페이지에서 네고하기 버튼을 누르면 채팅방이 생성되고 생성된 채팅방으로 이동합니다.
-- 네고가 2번 거절 당한 사용자를 제외한 사용자에게는 네고가를 제시할 수 있는 네고 제시 창을 띄워줍니다.
-- 구매자가 네고를 제시하면 네고 생성 api를 요청하고 네고 제시 유저 메시지와 시스템 메시지를 서버로 보냅니다.
-- useQuery 폴링 방식을 적용하여 1초마다 채팅방을 상세 조회하고, 조회된 데이터를 바탕으로 사용자에게는 실시간으로 전송된 메시지와 상품 판매 상태를 노출시킵니다.
-- 구매자가 결제를 진행하고 이때 결제가 성공하면 유저 메시지와 시스템 메시지를 서버로 보내며, 구매자를 채팅방으로 이동시킵니다. 직후 채팅방에서는 상품의 양도 가능 상태를 조회하여 판매자에게 양도 신청 창을 띄워줍니다.
-- 양도가 완료되면 양도가 완료된 상태값을 조회해 채팅방 유저에게 양도가 완료되었음을 알려줍니다.
-- 기본적으로 네고와 결제, 양도 과정에서 사용자의 액션에 따라 발생할 수 있는 모든 시나리오에 적합한 채팅방 UI를 구현하고 시스템 메시지와 유저 메시지를 전송하는 기능을 구현했습니다.
-
-### 결제 페이지 퍼블리싱
-- 약관 동의 바텀 시트에서 약관 중 하나라도 동의하지 않으면 전체 동의가 해제됩니다.
-- 결제 20분 타임 아웃 시에 채팅방으로 다시 이동합니다. 
-
-## 회고
-- 마지막까지 기획이 변경되고 백엔드의 로직이 바뀌며 받아와야 하는 데이터의 값이 바뀌는 상황에서 프론트 작업을 빠르게 쳐내야 하는 경험을 할 수 있었습니다.
-- 실시간으로 계속 코드와 로직을 바꿔야 했기 때문에 재사용가능한 코드를 작성하는 데에는 미흡했지만 백엔드와 어떻게 협업해야 하는지에 대한 이해도가 높아진 것 같습니다.
-- 함께 끝까지 애써준 채팅 담당 BE팀원분과 FE팀원들 전체에게 정말 감사합니다.
-
-</details>
-<details>
-<summary style="font-size: 16px">배경규</summary>
-
-## 작업 내용
-
-## 트러블 슈팅
-
-## 회고
-
-</details>
-<details>
-<summary style="font-size: 16px">장문용</summary>
-
-## 작업 내용
-
-## 트러블 슈팅
-
-## 회고
-
-</details>
-<details>
-<summary style="font-size: 16px">진종수</summary>
-
-## 작업 내용
-
-## 트러블 슈팅
-
-## 회고
-
-</details>

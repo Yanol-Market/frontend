@@ -6,12 +6,11 @@ import { useQueryPurchases } from '../../../../hooks/useQueryPurchases';
 import Chat from '../salesHistory/Chat';
 import { useNavigate } from 'react-router';
 import SellingSkeleton from '../salesHistory/skeleton/SellingSkeleton';
+import { NotFoundPage } from '../../../../component/common/NotFound';
 
 const Buying = () => {
 	const navigate = useNavigate();
 	const { isLoading, error, data } = useQueryPurchases();
-	console.log('구매중', data);
-	console.log('구매중 에러', error);
 
 	const navigateToDetailPage = (productId: number) => {
 		navigate(`/product/${productId}`);
@@ -27,7 +26,12 @@ const Buying = () => {
 	}
 
 	if (error) {
-		return <div> 에러녜녜ㅖ </div>;
+		return (
+			<div>
+				{' '}
+				<NotFoundPage />{' '}
+			</div>
+		);
 	}
 
 	if (data) {
