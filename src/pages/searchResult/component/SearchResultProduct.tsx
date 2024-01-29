@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { ProductSpecialType } from '../../main/component/Product/ProductListSpecial';
 import { formatDate } from '../../../utils/b';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { addWish, deleteWish } from '../../../apis/wish';
 import { productStatusAlertTitle } from '../../products/component/ProductInfo';
+import { getCookie } from '../../../apis/cookie';
 
 export const SearchResultProduct = ({
 	product,
 }: {
 	product: ProductSpecialType;
 }) => {
+	const navigate = useNavigate();
 	const [isWished, setIsWished] = useState(product.isWished);
 	const handleClickHeart = async (productId: number) => {
+		const accessToken = getCookie('accessToken');
+		if (!accessToken) {
+			navigate('/signin');
+			return;
+		}
 		if (!isWished) {
 			addWish(productId);
 			setIsWished(true);
