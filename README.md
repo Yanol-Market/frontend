@@ -154,19 +154,19 @@
 
 <div style="text-align: center">
   
-  <h4>메인 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/6fbdcff9-f222-476c-9fed-d398a26bfbb9" alt="메인 페이지">
+  <h4> - 메인 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/6fbdcff9-f222-476c-9fed-d398a26bfbb9" alt="메인 페이지">
 
-  <h4>상품등록 페이지</h4> <img height="502" alt="image" src="https://github.com/Yanol-Market/frontend/assets/51106050/a5a06637-09fe-4c86-a466-32a0fba26a15">
+  <h4> - 상품등록 페이지</h4> <img height="502" alt="image" src="https://github.com/Yanol-Market/frontend/assets/51106050/a5a06637-09fe-4c86-a466-32a0fba26a15">
   
-  <h4>숙소 검색 결과 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/5c0912e7-71d0-45a2-9827-c4cf395ef098">
+  <h4> - 숙소 검색 결과 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/5c0912e7-71d0-45a2-9827-c4cf395ef098">
   
-  <h4>객실 상세 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/436c512c-454c-4f70-be39-92237958b380" alt="장바구니 페이지">
+  <h4> - 객실 상세 페이지</h4> <img width="602" src="https://github.com/Yanol-Market/frontend/assets/102405617/436c512c-454c-4f70-be39-92237958b380" alt="장바구니 페이지">
   
-  <h4>네고 채팅 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/69275487-99fb-401f-a334-e019e3d29b27">
+  <h4>- 네고 채팅 페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/69275487-99fb-401f-a334-e019e3d29b27">
 
-<h4>알림페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/352ad39c-6346-4387-bb24-26f0893f8d50">
+<h4> - 알림페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/352ad39c-6346-4387-bb24-26f0893f8d50">
 
-  <h4>마이페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/7015290b-b396-4e3c-ab62-b6f350463587">
+  <h4> - 마이페이지</h4> <img width="602" alt="image" src="https://github.com/Yanol-Market/frontend/assets/102405617/7015290b-b396-4e3c-ab62-b6f350463587">
 </div>
 
 ## 📚 주요 기능
