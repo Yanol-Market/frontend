@@ -6,7 +6,7 @@
 ## 🌐 배포 주소
 
 - 🎫 배포 주소 : https://golden-ticket6.netlify.app/
-- 🧩 테스트 계정 :
+- 🧩 야놀자 **소셜** 로그인 테스트 계정 : 아이디 : yanolja31@email.com, 비밀번호 : yanolja31
 
 ## 👭 참여 인원 및 담당 기능
 
