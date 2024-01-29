@@ -336,7 +336,11 @@ export const ProductInfo = () => {
 						<p className="text-subBtn font-pre text-lg font-semibold">
 							{product.goldenPrice.toLocaleString()}
 						</p>
-						<p className="text-subBtn font-pre text-lg font-semibold">{`원${(product.reservationType === 'DAY_USE') ? '' : `(${product.nights}박)`}`}</p>
+						<p className="text-subBtn font-pre text-lg font-semibold">{`원${
+							product.reservationType === 'DAY_USE'
+								? ''
+								: `(${product.nights}박)`
+						}`}</p>
 					</div>
 				</div>
 			</div>
@@ -436,7 +440,11 @@ export const ProductInfo = () => {
 									navigate('/signin');
 									return;
 								}
-
+								if (product.negoProductStatus === 'NEGOTIATION_CANCELLED') {
+									
+									openBottomAlertSecond();
+									return;
+								}
 								const response = await createChat();
 								console.log(response);
 								if (response?.chatRoomId)
