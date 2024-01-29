@@ -36,7 +36,7 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 				`/nego/denyhandoverProduct/${productId}`,
 			);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 
@@ -69,7 +69,6 @@ const TransferNoti: React.FC<TransferNotiProps> = ({
 		sendMessages();
 	};
 
-	console.log('트랜스퍼 노티', productData);
 	return (
 		<div>
 			<div className="text-lg">
